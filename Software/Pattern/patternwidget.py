@@ -7,34 +7,23 @@ class PatternWidget(QWidget):
     def __init__(self, parent=None):
         super(PatternWidget, self).__init__()
 
-    def paintEvent(self, event):
+    def paintEvent(self, e):
         qp = QPainter()
         qp.begin(self)
-        self.drawLines(qp)
+        self.drawRectangles(qp)
         qp.end()
 
-    def drawLines(self, qp):
-        pen = QPen(Qt.black, 2, Qt.SolidLine)
-        qp.setPen(pen)
-        qp.drawLine(20, 40, 250, 40)
+    def drawRectangles(self, qp):
 
-        pen.setStyle(Qt.DashLine)
-        qp.setPen(pen)
-        qp.drawLine(20, 80, 250, 80)
+        color = QColor(0, 0, 0)
+        color.setNamedColor('#d4d4d4')
+        qp.setPen(color)
 
-        pen.setStyle(Qt.DashDotLine)
-        qp.setPen(pen)
-        qp.drawLine(20, 120, 250, 120)
+        qp.setBrush(QColor(200, 0, 0))
+        qp.drawRect(10, 15, 90, 60)
 
-        pen.setStyle(Qt.DotLine)
-        qp.setPen(pen)
-        qp.drawLine(20, 160, 250, 160)
+        qp.setBrush(QColor(255, 80, 0, 160))
+        qp.drawRect(130, 15, 90, 60)
 
-        pen.setStyle(Qt.DashDotDotLine)
-        qp.setPen(pen)
-        qp.drawLine(20, 200, 250, 200)
-
-        pen.setStyle(Qt.CustomDashLine)
-        pen.setDashPattern([1, 4, 5, 4])
-        qp.setPen(pen)
-        qp.drawLine(20, 240, 250, 240)
+        qp.setBrush(QColor(25, 0, 90, 200))
+        qp.drawRect(250, 15, 90, 60)
