@@ -16,30 +16,29 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
-     <widget class="QGroupBox" name="groupBox_2">
+     <widget class="QGroupBox" name="connectionbox">
       <property name="title">
        <string>Verbindung</string>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
-        <widget class="QComboBox" name="port"/>
-       </item>
        <item row="1" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
+          <widget class="QComboBox" name="port"/>
+         </item>
+         <item>
           <widget class="QPushButton" name="refresh">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
-            <string>Neu laden</string>
+            <string>R</string>
            </property>
            <property name="checkable">
             <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="connect">
-           <property name="text">
-            <string>Verbinden</string>
            </property>
           </widget>
          </item>
@@ -49,7 +48,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QGroupBox" name="groupBox">
+     <widget class="QGroupBox" name="appbox">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="title">
        <string>Apps</string>
       </property>
