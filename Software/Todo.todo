@@ -1,0 +1,30 @@
+QlockTwo remake project
+
+Apps
+    ☐ Patterns
+    ☐ Marquee
+    ☐ Snake
+    ☐ Tic Tac Toe
+    ☐ 4 in a row
+    ☐ Learn infrared commands
+
+Settings
+    ☐ Marquee
+        ☐ Create Fonts
+
+    ☐ Time
+        ☐ DCF77 / Manual / Internet-time
+
+    ☐ Brightness
+        ☐ Manual / Automatic
+
+    ☐ Infrared
+        ☐ Learn Infrared remote commands
+
+    ☐ Software Update
+
+Firmware
+    ☐ Show time words
+    ☐ Show seconds
+    ☐ Sync with DCF77
+    ☐ Streaming
