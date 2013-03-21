@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'qlocktwo.ui'
+# Form implementation generated from reading ui file 'ui_qlocktwo.ui'
 #
-# Created: Wed Mar 20 22:17:44 2013
+# Created: Thu Mar 21 14:13:29 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.1.2
 #
 # WARNING! All changes made in this file will be lost!
 
 from PySide import QtCore, QtGui
 
-class Ui_QlockTwo(object):
-    def setupUi(self, QlockTwo):
-        QlockTwo.setObjectName("QlockTwo")
-        QlockTwo.resize(269, 436)
-        self.centralwidget = QtGui.QWidget(QlockTwo)
+class Ui_qlocktwo(object):
+    def setupUi(self, qlocktwo):
+        qlocktwo.setObjectName("qlocktwo")
+        qlocktwo.resize(269, 436)
+        self.centralwidget = QtGui.QWidget(qlocktwo)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.centralwidget)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
@@ -63,14 +63,14 @@ class Ui_QlockTwo(object):
         self.snake.setSizePolicy(sizePolicy)
         self.snake.setObjectName("snake")
         self.gridLayout_2.addWidget(self.snake, 2, 0, 1, 1)
-        self.draw = QtGui.QPushButton(self.groupBox)
+        self.pattern = QtGui.QPushButton(self.groupBox)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.draw.sizePolicy().hasHeightForWidth())
-        self.draw.setSizePolicy(sizePolicy)
-        self.draw.setObjectName("draw")
-        self.gridLayout_2.addWidget(self.draw, 6, 0, 1, 1)
+        sizePolicy.setHeightForWidth(self.pattern.sizePolicy().hasHeightForWidth())
+        self.pattern.setSizePolicy(sizePolicy)
+        self.pattern.setObjectName("pattern")
+        self.gridLayout_2.addWidget(self.pattern, 6, 0, 1, 1)
         self.console = QtGui.QPushButton(self.groupBox)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -99,33 +99,33 @@ class Ui_QlockTwo(object):
         self.update = QtGui.QCommandLinkButton(self.centralwidget)
         self.update.setObjectName("update")
         self.verticalLayout_3.addWidget(self.update)
-        QlockTwo.setCentralWidget(self.centralwidget)
+        qlocktwo.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(QlockTwo)
-        QtCore.QMetaObject.connectSlotsByName(QlockTwo)
+        self.retranslateUi(qlocktwo)
+        QtCore.QMetaObject.connectSlotsByName(qlocktwo)
 
-    def retranslateUi(self, QlockTwo):
-        QlockTwo.setWindowTitle(QtGui.QApplication.translate("QlockTwo", "QlockTwo", None, QtGui.QApplication.UnicodeUTF8))
-        self.groupBox_2.setTitle(QtGui.QApplication.translate("QlockTwo", "Verbindung", None, QtGui.QApplication.UnicodeUTF8))
-        self.refresh.setText(QtGui.QApplication.translate("QlockTwo", "Neu laden", None, QtGui.QApplication.UnicodeUTF8))
-        self.connect.setText(QtGui.QApplication.translate("QlockTwo", "Verbinden", None, QtGui.QApplication.UnicodeUTF8))
-        self.groupBox.setTitle(QtGui.QApplication.translate("QlockTwo", "Apps", None, QtGui.QApplication.UnicodeUTF8))
-        self.brightness.setText(QtGui.QApplication.translate("QlockTwo", "Helligkeit", None, QtGui.QApplication.UnicodeUTF8))
-        self.time.setText(QtGui.QApplication.translate("QlockTwo", "Zeit", None, QtGui.QApplication.UnicodeUTF8))
-        self.snake.setText(QtGui.QApplication.translate("QlockTwo", "Snake", None, QtGui.QApplication.UnicodeUTF8))
-        self.draw.setText(QtGui.QApplication.translate("QlockTwo", "Zeichnen", None, QtGui.QApplication.UnicodeUTF8))
-        self.console.setText(QtGui.QApplication.translate("QlockTwo", "Konsole", None, QtGui.QApplication.UnicodeUTF8))
-        self.marquee.setText(QtGui.QApplication.translate("QlockTwo", "Laufschrift", None, QtGui.QApplication.UnicodeUTF8))
-        self.infrared.setText(QtGui.QApplication.translate("QlockTwo", "Infrarot", None, QtGui.QApplication.UnicodeUTF8))
-        self.update.setText(QtGui.QApplication.translate("QlockTwo", "Nach Updates suchen...", None, QtGui.QApplication.UnicodeUTF8))
+    def retranslateUi(self, qlocktwo):
+        qlocktwo.setWindowTitle(QtGui.QApplication.translate("qlocktwo", "QlockTwo", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox_2.setTitle(QtGui.QApplication.translate("qlocktwo", "Verbindung", None, QtGui.QApplication.UnicodeUTF8))
+        self.refresh.setText(QtGui.QApplication.translate("qlocktwo", "Neu laden", None, QtGui.QApplication.UnicodeUTF8))
+        self.connect.setText(QtGui.QApplication.translate("qlocktwo", "Verbinden", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("qlocktwo", "Apps", None, QtGui.QApplication.UnicodeUTF8))
+        self.brightness.setText(QtGui.QApplication.translate("qlocktwo", "Helligkeit", None, QtGui.QApplication.UnicodeUTF8))
+        self.time.setText(QtGui.QApplication.translate("qlocktwo", "Zeit", None, QtGui.QApplication.UnicodeUTF8))
+        self.snake.setText(QtGui.QApplication.translate("qlocktwo", "Snake", None, QtGui.QApplication.UnicodeUTF8))
+        self.pattern.setText(QtGui.QApplication.translate("qlocktwo", "Zeichnen", None, QtGui.QApplication.UnicodeUTF8))
+        self.console.setText(QtGui.QApplication.translate("qlocktwo", "Konsole", None, QtGui.QApplication.UnicodeUTF8))
+        self.marquee.setText(QtGui.QApplication.translate("qlocktwo", "Laufschrift", None, QtGui.QApplication.UnicodeUTF8))
+        self.infrared.setText(QtGui.QApplication.translate("qlocktwo", "Infrarot", None, QtGui.QApplication.UnicodeUTF8))
+        self.update.setText(QtGui.QApplication.translate("qlocktwo", "Nach Updates suchen...", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":
     import sys
     app = QtGui.QApplication(sys.argv)
-    QlockTwo = QtGui.QMainWindow()
-    ui = Ui_QlockTwo()
-    ui.setupUi(QlockTwo)
-    QlockTwo.show()
+    qlocktwo = QtGui.QMainWindow()
+    ui = Ui_qlocktwo()
+    ui.setupUi(qlocktwo)
+    qlocktwo.show()
     sys.exit(app.exec_())
 
