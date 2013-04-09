@@ -8,9 +8,13 @@ Software for controlling our self-built QlockTwo remake
 
 from PySide.QtGui import *
 from PySide.QtCore import *
-from ui_qlocktwo import Ui_qlocktwo
-from Pattern.app import PatternApp
-from Console.app import ConsoleApp
+from pattern import PatternApp
+from console import ConsoleApp
+from simulator import Simulator
+from device import Device
+from serialconnection import SerialConnection
+from ui_qlocktwo import Ui_qlocktwo as Ui
+
 
 class QlockTwo(QMainWindow):
     def __init__(self):
@@ -28,16 +32,17 @@ class QlockTwo(QMainWindow):
 
     def refresh_ports(self):
         " Refreshed the port list "
+    def startPattern(self):
+        " Starts the pattern app "
+        app = PatternApp(device=self.device)
+
+    def startConsole(self):
+        " Start the console app "
+        app = ConsoleApp(device=self.device)
+
         self.ui.port.clear()
         self.ui.port.addItem('Getrennt')
 
-    def pattern_app(self):
-        " Start pattern app "
-        app = PatternApp(self)
-
-    def console_app(self):
-        " Start the console app "
-        app = ConsoleApp(self)
 
     def port_select(self, index):
         # disconnect

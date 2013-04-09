@@ -10,8 +10,8 @@ from PySide.QtCore import *
 from ui_pattern import Ui_pattern
 
 class PatternApp(QDialog):
-    def __init__(self, parent=None):
-        super(PatternApp, self).__init__(parent)
+    def __init__(self, device):
+        super(PatternApp, self).__init__()
         self.ui = Ui_pattern()
         self.ui.setupUi(self)
-        self.show()
+        self.exec_()

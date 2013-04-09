@@ -23,7 +23,11 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QLineEdit" name="command"/>
+      <widget class="QLineEdit" name="command">
+       <property name="placeholderText">
+        <string>Befehl</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QTextEdit" name="log">
