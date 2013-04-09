@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_qlocktwo.ui'
 #
-# Created: Thu Mar 21 14:29:17 2013
+# Created: Tue Apr  9 15:18:40 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.1.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -25,6 +25,7 @@ class Ui_qlocktwo(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.port = QtGui.QComboBox(self.connectionbox)
         self.port.setObjectName("port")
+        self.port.addItem("")
         self.horizontalLayout.addWidget(self.port)
         self.refresh = QtGui.QPushButton(self.connectionbox)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Fixed)
@@ -98,10 +99,15 @@ class Ui_qlocktwo(object):
         self.infrared.setSizePolicy(sizePolicy)
         self.infrared.setObjectName("infrared")
         self.gridLayout_2.addWidget(self.infrared, 4, 1, 1, 1)
+        self.demo = QtGui.QPushButton(self.appbox)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.demo.sizePolicy().hasHeightForWidth())
+        self.demo.setSizePolicy(sizePolicy)
+        self.demo.setObjectName("demo")
+        self.gridLayout_2.addWidget(self.demo, 6, 1, 1, 1)
         self.verticalLayout_3.addWidget(self.appbox)
-        self.update = QtGui.QCommandLinkButton(self.centralwidget)
-        self.update.setObjectName("update")
-        self.verticalLayout_3.addWidget(self.update)
         qlocktwo.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(qlocktwo)
@@ -110,6 +116,7 @@ class Ui_qlocktwo(object):
     def retranslateUi(self, qlocktwo):
         qlocktwo.setWindowTitle(QtGui.QApplication.translate("qlocktwo", "QlockTwo", None, QtGui.QApplication.UnicodeUTF8))
         self.connectionbox.setTitle(QtGui.QApplication.translate("qlocktwo", "Verbindung", None, QtGui.QApplication.UnicodeUTF8))
+        self.port.setItemText(0, QtGui.QApplication.translate("qlocktwo", "Getrennt", None, QtGui.QApplication.UnicodeUTF8))
         self.refresh.setText(QtGui.QApplication.translate("qlocktwo", "R", None, QtGui.QApplication.UnicodeUTF8))
         self.appbox.setTitle(QtGui.QApplication.translate("qlocktwo", "Apps", None, QtGui.QApplication.UnicodeUTF8))
         self.brightness.setText(QtGui.QApplication.translate("qlocktwo", "Helligkeit", None, QtGui.QApplication.UnicodeUTF8))
@@ -119,7 +126,7 @@ class Ui_qlocktwo(object):
         self.console.setText(QtGui.QApplication.translate("qlocktwo", "Konsole", None, QtGui.QApplication.UnicodeUTF8))
         self.marquee.setText(QtGui.QApplication.translate("qlocktwo", "Laufschrift", None, QtGui.QApplication.UnicodeUTF8))
         self.infrared.setText(QtGui.QApplication.translate("qlocktwo", "Infrarot", None, QtGui.QApplication.UnicodeUTF8))
-        self.update.setText(QtGui.QApplication.translate("qlocktwo", "Nach Updates suchen...", None, QtGui.QApplication.UnicodeUTF8))
+        self.demo.setText(QtGui.QApplication.translate("qlocktwo", "Demo", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":
