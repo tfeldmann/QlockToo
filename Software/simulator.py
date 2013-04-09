@@ -47,7 +47,8 @@ class Simulator(QWidget):
             for x, cell in enumerate(row):
                 brightness = 255 * cell
                 qp.setPen(QColor(*[brightness]*3))
-                qp.drawText(x*letter_width, y*letter_height, letter_width, letter_height,
+                qp.drawText(x*letter_width, y*letter_height,
+                    letter_width, letter_height,
                     Qt.AlignCenter, self.letters[y][x])
         qp.end()
 
