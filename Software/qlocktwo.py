@@ -10,6 +10,7 @@ from PySide.QtGui import *
 from PySide.QtCore import *
 from pattern import PatternApp
 from console import ConsoleApp
+from demo import DemoApp
 from simulator import Simulator
 from device import Device
 from serialconnection import SerialConnection
@@ -35,6 +36,7 @@ class QlockTwo(QMainWindow):
         self.ui.refresh.clicked.connect(self.refreshPorts)
         self.ui.pattern.clicked.connect(self.startPattern)
         self.ui.console.clicked.connect(self.startConsole)
+        self.ui.demo.clicked.connect(self.startDemo)
         self.ui.port.currentIndexChanged.connect(self.portSelect)
 
     def startPattern(self):
@@ -44,6 +46,10 @@ class QlockTwo(QMainWindow):
     def startConsole(self):
         " Start the console app "
         app = ConsoleApp(device=self.device)
+
+    def startDemo(self):
+        " Start the demo app "
+        app = DemoApp(device=self.device)
 
     def refreshPorts(self):
         " refreshes the port list "
