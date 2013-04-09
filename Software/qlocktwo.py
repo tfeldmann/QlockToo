@@ -83,6 +83,7 @@ class QlockTwo(QMainWindow):
                 self.ui.appbox.setEnabled(True)
             except Exception, e:
                 QMessageBox.warning(self, "Error: ", e.message)
+                self.ui.port.setCurrentIndex(0)
 
 
 if __name__ == "__main__":
