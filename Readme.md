@@ -1,12 +1,22 @@
 QlockTwo Remake
 ===============
 
-In this repository you find the software, firmware and hardware design for a QlockTwo Remake built by four master students of the "Westfälische Hochschule".
+In this repository you find the software, firmware and hardware design for a QlockTwo Remake built by four mechatronic master students of the "Westfälische Hochschule".
 
-We use an Arduino Micro as the central microcontroller. The software is written in PySide.
+Software
+--------
+The QlockTwo Software Suite is written in PySide (a Python binding for Qt) and features the following apps:
 
-We have just started with this project, so don't expect to find much here.
+- Konsole (Console)
+- Snake
+- Laufschrift (Marquee)
+- Zeichnen (Pattern)
+- Einstellungen (Settings)
+- Demo
 
+Firmware
+--------
+We use an Arduino Micro as the central microcontroller.
 
 Authors:
 - Thomas Feldmann
