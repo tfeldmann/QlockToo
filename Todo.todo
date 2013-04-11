@@ -1,27 +1,26 @@
 Apps:
-    ☐ Patterns
-    ☐ Marquee
-    ☐ Snake
-    ☐ Tic Tac Toe
-    ☐ 4 in a row
+ ☐ Patterns
+ ☐ Marquee -> Null?
+ ☐ Snake
+ ☐ Tic Tac Toe
+ ☐ 4 in a row
+
+Simulator:
+ ☐ Show Corners
 
 Settings:
-    ☐ Marquee
-
-    ☐ Time
-        ☐ DCF77 / Manual / Internet-time
-
-    ☐ Brightness
-        ☐ Manual / Automatic
+ ☐ Marquee
+ ☐ DCF77 / Manual / Internet-time
+ ☐ Manual / Automatic Brightness
 
 Firmware:
-    ☐ Show time words
-    ☐ Show seconds
-    ☐ Sync with DCF77
-    ☐ Streaming
+ ☐ Show time words
+ ☐ Show seconds
+ ☐ Sync with DCF77
+ ☐ Streaming
 
 
-＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
  ✘ Learn infrared commands @cancelled (13-04-09 16:25)
  ✔ Create Fonts @done (13-04-09 16:25)
