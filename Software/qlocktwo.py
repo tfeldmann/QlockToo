@@ -10,6 +10,7 @@ from PySide.QtGui import *
 from PySide.QtCore import *
 from pattern import PatternApp
 from console import ConsoleApp
+from marquee import MarqueeApp
 from demo import DemoApp
 from simulator import Simulator
 from device import Device
@@ -33,19 +34,24 @@ class QlockTwo(QMainWindow):
 
         self.refreshPorts()
 
-        self.ui.refresh.clicked.connect(self.refreshPorts)
-        self.ui.pattern.clicked.connect(self.startPattern)
         self.ui.console.clicked.connect(self.startConsole)
+        self.ui.marquee.clicked.connect(self.startMarquee)
+        self.ui.pattern.clicked.connect(self.startPattern)
         self.ui.demo.clicked.connect(self.startDemo)
+        self.ui.refresh.clicked.connect(self.refreshPorts)
         self.ui.port.currentIndexChanged.connect(self.portSelect)
-
-    def startPattern(self):
-        " Starts the pattern app "
-        app = PatternApp(device=self.device)
 
     def startConsole(self):
         " Start the console app "
         app = ConsoleApp(device=self.device)
+
+    def startMarquee(self):
+        " Start the marquee app "
+        app = MarqueeApp(device=self.device)
+
+    def startPattern(self):
+        " Starts the pattern app "
+        app = PatternApp(device=self.device)
 
     def startDemo(self):
         " Start the demo app "
