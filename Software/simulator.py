@@ -33,6 +33,8 @@ class Simulator(QWidget):
     def setMatrix(self, m):
         self.matrix = m
         self.update()
+        if not self.isVisible():
+            self.show()
 
     def paintEvent(self, e):
         size = self.size()
