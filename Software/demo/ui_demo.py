@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_demo.ui'
 #
-# Created: Tue Apr  9 21:28:19 2013
+# Created: Thu Apr 11 23:15:20 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.1.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,34 +13,58 @@ class Ui_demoapp(object):
     def setupUi(self, demoapp):
         demoapp.setObjectName("demoapp")
         demoapp.setWindowModality(QtCore.Qt.ApplicationModal)
-        demoapp.resize(134, 194)
+        demoapp.resize(220, 192)
         demoapp.setSizeGripEnabled(False)
-        self.verticalLayout = QtGui.QVBoxLayout(demoapp)
-        self.verticalLayout.setObjectName("verticalLayout")
+        self.gridLayout = QtGui.QGridLayout(demoapp)
+        self.gridLayout.setObjectName("gridLayout")
         self.black = QtGui.QPushButton(demoapp)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.black.sizePolicy().hasHeightForWidth())
+        self.black.setSizePolicy(sizePolicy)
         self.black.setFocusPolicy(QtCore.Qt.ClickFocus)
+        self.black.setIconSize(QtCore.QSize(30, 30))
         self.black.setAutoDefault(False)
         self.black.setFlat(False)
         self.black.setObjectName("black")
-        self.verticalLayout.addWidget(self.black)
-        self.white = QtGui.QPushButton(demoapp)
-        self.white.setFocusPolicy(QtCore.Qt.ClickFocus)
-        self.white.setAutoDefault(False)
-        self.white.setFlat(False)
-        self.white.setObjectName("white")
-        self.verticalLayout.addWidget(self.white)
+        self.gridLayout.addWidget(self.black, 0, 0, 1, 1)
         self.fade = QtGui.QPushButton(demoapp)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.fade.sizePolicy().hasHeightForWidth())
+        self.fade.setSizePolicy(sizePolicy)
         self.fade.setFocusPolicy(QtCore.Qt.ClickFocus)
+        self.fade.setIconSize(QtCore.QSize(30, 30))
         self.fade.setAutoDefault(False)
         self.fade.setFlat(False)
         self.fade.setObjectName("fade")
-        self.verticalLayout.addWidget(self.fade)
+        self.gridLayout.addWidget(self.fade, 2, 0, 1, 1)
+        self.white = QtGui.QPushButton(demoapp)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.white.sizePolicy().hasHeightForWidth())
+        self.white.setSizePolicy(sizePolicy)
+        self.white.setFocusPolicy(QtCore.Qt.ClickFocus)
+        self.white.setIconSize(QtCore.QSize(30, 30))
+        self.white.setAutoDefault(False)
+        self.white.setFlat(False)
+        self.white.setObjectName("white")
+        self.gridLayout.addWidget(self.white, 0, 1, 1, 1)
         self.wave = QtGui.QPushButton(demoapp)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.wave.sizePolicy().hasHeightForWidth())
+        self.wave.setSizePolicy(sizePolicy)
         self.wave.setFocusPolicy(QtCore.Qt.ClickFocus)
+        self.wave.setIconSize(QtCore.QSize(30, 30))
         self.wave.setAutoDefault(False)
         self.wave.setFlat(False)
         self.wave.setObjectName("wave")
-        self.verticalLayout.addWidget(self.wave)
+        self.gridLayout.addWidget(self.wave, 2, 1, 1, 1)
 
         self.retranslateUi(demoapp)
         QtCore.QMetaObject.connectSlotsByName(demoapp)
@@ -48,7 +72,17 @@ class Ui_demoapp(object):
     def retranslateUi(self, demoapp):
         demoapp.setWindowTitle(QtGui.QApplication.translate("demoapp", "Demo", None, QtGui.QApplication.UnicodeUTF8))
         self.black.setText(QtGui.QApplication.translate("demoapp", "Schwarz", None, QtGui.QApplication.UnicodeUTF8))
-        self.white.setText(QtGui.QApplication.translate("demoapp", "Weiß", None, QtGui.QApplication.UnicodeUTF8))
         self.fade.setText(QtGui.QApplication.translate("demoapp", "Puls", None, QtGui.QApplication.UnicodeUTF8))
+        self.white.setText(QtGui.QApplication.translate("demoapp", "Weiß", None, QtGui.QApplication.UnicodeUTF8))
         self.wave.setText(QtGui.QApplication.translate("demoapp", "Welle", None, QtGui.QApplication.UnicodeUTF8))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    demoapp = QtGui.QDialog()
+    ui = Ui_demoapp()
+    ui.setupUi(demoapp)
+    demoapp.show()
+    sys.exit(app.exec_())
 
