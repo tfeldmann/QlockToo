@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-QlockTwo
+QlockToo
 
-Software for controlling our self-built QlockTwo remake
+Software suite for controlling the QlockToo hardware.
 Author: Thomas Feldmann
 """
 
@@ -15,12 +15,12 @@ from demo import DemoApp
 from simulator import Simulator
 from device import Device
 from serialconnection import SerialConnection
-from ui_qlocktwo import Ui_qlocktwo as Ui
+from ui_main import Ui_qlocktoo as Ui
 
 
-class QlockTwo(QMainWindow):
+class QlockToo(QMainWindow):
     """
-    The QlockTwo software suite
+    The QlockToo software suite
 
     Provides links to the available apps and manages the serial devices and
     simulator.
@@ -28,7 +28,7 @@ class QlockTwo(QMainWindow):
 
     def __init__(self):
         " Initializes the application's UI "
-        super(QlockTwo, self).__init__()
+        super(QlockToo, self).__init__()
         self.ui = Ui()
         self.ui.setupUi(self)
 
@@ -82,7 +82,7 @@ class QlockTwo(QMainWindow):
             self.ui.appbox.setEnabled(True)
 
         if index > 1:
-            # connect to actual QlockTwo remake
+            # connect to actual QlockToo device
             try:
                 port = self.ui.port.currentText()
                 self.device = Device(port=port, baudrate=57600)
@@ -95,6 +95,6 @@ class QlockTwo(QMainWindow):
 if __name__ == "__main__":
     import sys
     application = QApplication(sys.argv)
-    qlocktwo = QlockTwo()
-    qlocktwo.show()
+    qlocktoo = QlockToo()
+    qlocktoo.show()
     application.exec_()

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-QlockTwo Simulator
+QlockToo Simulator
 """
 
 import sys, random

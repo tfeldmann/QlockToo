@@ -1,11 +1,11 @@
-QlockTwo Remake
-===============
+QlockToo
+========
 
-In this repository you find the software, firmware and hardware design for a QlockTwo Remake built by four mechatronic master students of the "Westfälische Hochschule".
+In this repository you find the software, firmware and hardware design for the "QlockToo", a open-source remake of the QlockTwo. It is built by four mechatronic master students of the "Westfälische Hochschule".
 
 Software
 --------
-The QlockTwo Software Suite is written in PySide (a Python binding for Qt) and features the following apps:
+The QlockToo Software Suite is written in PySide (a Python binding for Qt) and features the following apps:
 
 - Konsole (Console)
 - Snake

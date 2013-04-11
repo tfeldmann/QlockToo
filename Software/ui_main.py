@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui_qlocktwo.ui'
+# Form implementation generated from reading ui file 'ui_main.ui'
 #
 # Created: Tue Apr  9 20:39:21 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.1.2
@@ -9,11 +9,11 @@
 
 from PySide import QtCore, QtGui
 
-class Ui_qlocktwo(object):
-    def setupUi(self, qlocktwo):
-        qlocktwo.setObjectName("qlocktwo")
-        qlocktwo.resize(333, 351)
-        self.centralwidget = QtGui.QWidget(qlocktwo)
+class Ui_qlocktoo(object):
+    def setupUi(self, qlocktoo):
+        qlocktoo.setObjectName("qlocktoo")
+        qlocktoo.resize(333, 351)
+        self.centralwidget = QtGui.QWidget(qlocktoo)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.centralwidget)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
@@ -125,31 +125,31 @@ class Ui_qlocktwo(object):
         self.brightness.setObjectName("brightness")
         self.gridLayout_2.addWidget(self.brightness, 3, 0, 1, 1)
         self.verticalLayout_3.addWidget(self.appbox)
-        qlocktwo.setCentralWidget(self.centralwidget)
+        qlocktoo.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(qlocktwo)
-        QtCore.QMetaObject.connectSlotsByName(qlocktwo)
+        self.retranslateUi(qlocktoo)
+        QtCore.QMetaObject.connectSlotsByName(qlocktoo)
 
-    def retranslateUi(self, qlocktwo):
-        qlocktwo.setWindowTitle(QtGui.QApplication.translate("qlocktwo", "QlockTwo", None, QtGui.QApplication.UnicodeUTF8))
-        self.connectionbox.setTitle(QtGui.QApplication.translate("qlocktwo", "Verbindung", None, QtGui.QApplication.UnicodeUTF8))
-        self.port.setItemText(0, QtGui.QApplication.translate("qlocktwo", "Getrennt", None, QtGui.QApplication.UnicodeUTF8))
-        self.port.setItemText(1, QtGui.QApplication.translate("qlocktwo", "Simulator", None, QtGui.QApplication.UnicodeUTF8))
-        self.appbox.setTitle(QtGui.QApplication.translate("qlocktwo", "Apps", None, QtGui.QApplication.UnicodeUTF8))
-        self.pattern.setText(QtGui.QApplication.translate("qlocktwo", "Zeichnen", None, QtGui.QApplication.UnicodeUTF8))
-        self.demo.setText(QtGui.QApplication.translate("qlocktwo", "Demo", None, QtGui.QApplication.UnicodeUTF8))
-        self.snake.setText(QtGui.QApplication.translate("qlocktwo", "Snake", None, QtGui.QApplication.UnicodeUTF8))
-        self.console.setText(QtGui.QApplication.translate("qlocktwo", "Konsole", None, QtGui.QApplication.UnicodeUTF8))
-        self.marquee.setText(QtGui.QApplication.translate("qlocktwo", "Laufschrift", None, QtGui.QApplication.UnicodeUTF8))
-        self.brightness.setText(QtGui.QApplication.translate("qlocktwo", "Einstellungen", None, QtGui.QApplication.UnicodeUTF8))
+    def retranslateUi(self, qlocktoo):
+        qlocktoo.setWindowTitle(QtGui.QApplication.translate("qlocktoo", "QlockToo", None, QtGui.QApplication.UnicodeUTF8))
+        self.connectionbox.setTitle(QtGui.QApplication.translate("qlocktoo", "Verbindung", None, QtGui.QApplication.UnicodeUTF8))
+        self.port.setItemText(0, QtGui.QApplication.translate("qlocktoo", "Getrennt", None, QtGui.QApplication.UnicodeUTF8))
+        self.port.setItemText(1, QtGui.QApplication.translate("qlocktoo", "Simulator", None, QtGui.QApplication.UnicodeUTF8))
+        self.appbox.setTitle(QtGui.QApplication.translate("qlocktoo", "Apps", None, QtGui.QApplication.UnicodeUTF8))
+        self.pattern.setText(QtGui.QApplication.translate("qlocktoo", "Zeichnen", None, QtGui.QApplication.UnicodeUTF8))
+        self.demo.setText(QtGui.QApplication.translate("qlocktoo", "Demo", None, QtGui.QApplication.UnicodeUTF8))
+        self.snake.setText(QtGui.QApplication.translate("qlocktoo", "Snake", None, QtGui.QApplication.UnicodeUTF8))
+        self.console.setText(QtGui.QApplication.translate("qlocktoo", "Konsole", None, QtGui.QApplication.UnicodeUTF8))
+        self.marquee.setText(QtGui.QApplication.translate("qlocktoo", "Laufschrift", None, QtGui.QApplication.UnicodeUTF8))
+        self.brightness.setText(QtGui.QApplication.translate("qlocktoo", "Einstellungen", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":
     import sys
     app = QtGui.QApplication(sys.argv)
-    qlocktwo = QtGui.QMainWindow()
-    ui = Ui_qlocktwo()
-    ui.setupUi(qlocktwo)
-    qlocktwo.show()
+    qlocktoo = QtGui.QMainWindow()
+    ui = Ui_qlocktoo()
+    ui.setupUi(qlocktoo)
+    qlocktoo.show()
     sys.exit(app.exec_())
 

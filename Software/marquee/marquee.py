@@ -2,7 +2,7 @@
 """
 Marquee App
 
-Shows scrolling texts on the QlockTwo. You can modify the animation's
+Shows scrolling texts on the QlockToo. You can modify the animation's
 direction, speed and style.
 """
 
