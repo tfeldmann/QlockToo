@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_marquee.ui'
 #
-# Created: Fri Apr 12 17:02:19 2013
+# Created: Fri Apr 12 17:11:39 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.1.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -50,8 +50,9 @@ class Ui_marquee(object):
         self.speed.setMinimum(-100)
         self.speed.setMaximum(100)
         self.speed.setSingleStep(20)
+        self.speed.setPageStep(20)
         self.speed.setProperty("value", 50)
-        self.speed.setTracking(True)
+        self.speed.setTracking(False)
         self.speed.setOrientation(QtCore.Qt.Horizontal)
         self.speed.setWrapping(False)
         self.speed.setNotchesVisible(True)
