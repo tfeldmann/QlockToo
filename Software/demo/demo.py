@@ -26,10 +26,12 @@ class DemoApp(QDialog):
     def black(self):
         self.demo = None
         self.device.setMatrix([[0]*11]*10)
+        self.device.setCorners([0]*4)
 
     def white(self):
         self.demo = None
         self.device.setMatrix([[1]*11]*10)
+        self.device.setCorners([1]*4)
 
     def fade(self):
         self.demo = FadeDemo(self.device)
@@ -64,11 +66,13 @@ class FadeDemo(Demo):
             self.b = 0
             self.inc *= -1
         self.device.setMatrix([[self.b]*11]*10)
+        self.device.setCorners([1-self.b]*4)
 
 
 class WaveDemo(Demo):
     def __init__(self, device, framerate=50):
         Demo.__init__(self, device, framerate)
+        self.device.setCorners([0]*4)
         self.matrix = [[0]*11]*10
         self.b = 0
 
