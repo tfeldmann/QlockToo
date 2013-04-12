@@ -18,14 +18,19 @@ class MarqueeApp(QDialog):
         self.device = device
         self.ui = Ui()
         self.ui.setupUi(self)
-        # self.ui.text.textChanged.connect(self.textChanged)
-        self.ui.text.returnPressed.connect(self.returnPressed)
         self.ui.text.cursorPositionChanged.connect(self.cursorPositionChanged)
+        self.ui.play.stateChanged.connect(self.playToggled)
+
+        # update timer
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.update)
 
         # load default font
         self.font = self.loadFont('fonts/default.json')
+
         # show empty matrix
         self.device.setMatrix([[0]*11]*10)
+
         self.exec_()
 
     def loadFont(self, filepath):
@@ -36,30 +41,35 @@ class MarqueeApp(QDialog):
                 QMessageBox.warning(self, 'Error: ', e.message)
 
     def cursorPositionChanged(self, old, new):
-        x = (new - 1) * 6
-        marquee = self.renderText(text=self.ui.text.text(), font=self.font)
-        extract = self.matrixExtract(marquee, x)
+        font = self.font
+        self.x = (new - 1) * (font['letter_width'] + 1)
+        self.marquee = self.renderText(text=self.ui.text.text(), font=font)
+        extract = self.matrixExtract(self.marquee, self.x)
         self.device.setMatrix(extract)
 
-    def textChanged(self, text):
-        x = (self.ui.text.cursorPosition() - 1) * 6
-        marquee = self.renderText(text=text, font=self.font)
-        extract = self.matrixExtract(marquee, x)
-        self.device.setMatrix(extract)
+    def playToggled(self, state):
+        if state == Qt.Checked:
+            text = self.ui.text.text()
+            font = self.font
+            self.x = 0
+            self.marquee = self.renderText(text=text, font=font)
+            self.timer.start(100)
+        else:
+            self.timer.stop()
 
-    def returnPressed(self):
-        text = self.ui.text.text()
-        self.marquee = self.marqueeMatrix(text)
-        self.showMarquee()
+    def update(self):
+        self.x += 1
+        if self.x > len(self.marquee[0]):
+            self.x = -2 * (self.font['letter_width'] + 1)
+        self.device.setMatrix(self.matrixExtract(self.marquee, self.x))
 
     def renderText(self, text, font):
         " Returns a matrix representation of the rendered text "
 
-        # gather data
+        # font settings
         letter_height = font['letter_height']
         letter_width = font['letter_width']
         spacing = 1
-        offset = 1
 
         # build a empty 2d-array of desired size
         height = 10  # display height
@@ -73,12 +83,19 @@ class MarqueeApp(QDialog):
             c = font[_c]
             x = _x * (letter_width + spacing)
             for y, line in enumerate(c):
-                matrix[y+offset][x:x+letter_width] = line
+                matrix[y][x:x+letter_width] = line
         return matrix
 
     def matrixExtract(self, matrix, x=0):
-        if x < 0:
-            x = 0
-        extract = [line[x:x+11] for line in matrix]
-        result = [line + [0]*(11 - len(line)) for line in extract]
+        if -11 < x < 0:
+            # area before text
+            extract = [line[0:x+11] for line in matrix]
+            result = [[0]*abs(x) + line for line in extract]
+        elif x < -11:
+            # screen is completely empty
+            result = [[0]*11 for _ in range(10)]
+        else:
+            # middle or end of marquee
+            extract = [line[x:x+11] for line in matrix]
+            result = [line + [0]*(11 - len(line)) for line in extract]
         return result
