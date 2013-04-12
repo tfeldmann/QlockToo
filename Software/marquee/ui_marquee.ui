@@ -70,7 +70,7 @@
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="toolTip">
-         <string>&lt;-- 50%</string>
+         <string/>
         </property>
         <property name="statusTip">
          <string/>
@@ -85,7 +85,10 @@
          <number>20</number>
         </property>
         <property name="value">
-         <number>-50</number>
+         <number>50</number>
+        </property>
+        <property name="tracking">
+         <bool>true</bool>
         </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_marquee.ui'
 #
-# Created: Thu Apr 11 23:05:27 2013
+# Created: Fri Apr 12 17:02:19 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.1.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -45,11 +45,13 @@ class Ui_marquee(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.speed = QtGui.QDial(self.groupBox_3)
         self.speed.setCursor(QtCore.Qt.PointingHandCursor)
+        self.speed.setToolTip("")
         self.speed.setStatusTip("")
         self.speed.setMinimum(-100)
         self.speed.setMaximum(100)
         self.speed.setSingleStep(20)
-        self.speed.setProperty("value", -50)
+        self.speed.setProperty("value", 50)
+        self.speed.setTracking(True)
         self.speed.setOrientation(QtCore.Qt.Horizontal)
         self.speed.setWrapping(False)
         self.speed.setNotchesVisible(True)
@@ -67,15 +69,4 @@ class Ui_marquee(object):
         self.text.setPlaceholderText(QtGui.QApplication.translate("marquee", "Text eingeben...", None, QtGui.QApplication.UnicodeUTF8))
         self.play.setText(QtGui.QApplication.translate("marquee", "Abspielen", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_3.setTitle(QtGui.QApplication.translate("marquee", "Geschwindigkeit", None, QtGui.QApplication.UnicodeUTF8))
-        self.speed.setToolTip(QtGui.QApplication.translate("marquee", "<-- 50%", None, QtGui.QApplication.UnicodeUTF8))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    marquee = QtGui.QDialog()
-    ui = Ui_marquee()
-    ui.setupUi(marquee)
-    marquee.show()
-    sys.exit(app.exec_())
 
