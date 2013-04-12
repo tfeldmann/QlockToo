@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Marquee App
-
-Shows scrolling texts on the QlockToo. You can modify the animation's
-direction, speed and style.
-"""
 
 from PySide.QtGui import *
 from PySide.QtCore import *
@@ -13,6 +7,11 @@ import json
 
 
 class MarqueeApp(QDialog):
+    """ Marquee App
+
+    Shows scrolling texts on the QlockToo. You can modify the animation's
+    direction, speed and style.
+    """
     def __init__(self, device):
         super(MarqueeApp, self).__init__()
         self.device = device
@@ -29,7 +28,7 @@ class MarqueeApp(QDialog):
         # font and settings
         self.font = self.loadFont('fonts/default.json')
         self.startposition = -2 * (self.font['letter_width'] + 1)
-        self.speed = -0.5
+        self.speed = 50
 
         # init device
         self.device.setMatrix([[0]*11]*10)
@@ -38,6 +37,11 @@ class MarqueeApp(QDialog):
         self.exec_()
 
     def loadFont(self, filepath):
+        """ Loads a QlockToo Font File
+
+        These font files are JSON-files with a json-dict. See the file
+        font/default.json as an example.
+        """
         with open(filepath, 'rb') as fontfile:
             try:
                 return json.loads(fontfile.read())
@@ -45,6 +49,7 @@ class MarqueeApp(QDialog):
                 QMessageBox.warning(self, 'Error: ', e.message)
 
     def cursorPositionChanged(self, old, new):
+        " Shows the chars around the current cursor position on the device."
         text = self.ui.text.text()
         font = self.font
         self.x = (new - 1) * (font['letter_width'] + 1)
@@ -63,16 +68,20 @@ class MarqueeApp(QDialog):
             self.timer.stop()
 
     def speedChanged(self):
+        " Gets called from the speed dial and sets the new speed. "
         self.speed = self.ui.speed.value()
         if self.ui.play.isChecked():
             self.timer.start(200-170*abs(self.speed / 100.0))
 
     def move(self):
-        if self.speed > 0:
+        " Moves the marquee one step and shows in on the device. "
+        # move forwards
+        if self.speed >= 0:
             self.x += 1
             if self.x > len(self.marquee[0]):
                 self.x = self.startposition
         else:
+        # move backwards
             self.x -= 1
             if self.x < self.startposition:
                 self.x = len(self.marquee[0])
