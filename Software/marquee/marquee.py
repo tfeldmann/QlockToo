@@ -27,9 +27,11 @@ class MarqueeApp(QDialog):
 
         # load default font
         self.font = self.loadFont('fonts/default.json')
+        self.startposition = -2 * (self.font['letter_width'] + 1)
 
         # show empty matrix
         self.device.setMatrix([[0]*11]*10)
+        self.device.setCorners([0]*4)
 
         self.exec_()
 
@@ -51,7 +53,7 @@ class MarqueeApp(QDialog):
         if state == Qt.Checked:
             text = self.ui.text.text()
             font = self.font
-            self.x = 0
+            self.x = self.startposition
             self.marquee = self.renderText(text=text, font=font)
             self.timer.start(100)
         else:
@@ -60,7 +62,7 @@ class MarqueeApp(QDialog):
     def update(self):
         self.x += 1
         if self.x > len(self.marquee[0]):
-            self.x = -2 * (self.font['letter_width'] + 1)
+            self.x = self.startposition
         self.device.setMatrix(self.matrixExtract(self.marquee, self.x))
 
     def renderText(self, text, font):
