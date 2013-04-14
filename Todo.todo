@@ -1,15 +1,13 @@
 Apps:
  ☐ Patterns
- ☐ Marquee -> Null?
+ ☐ Marquee
+   ☐ variable Font width
+   ☐ extract matrix class
  ☐ Snake
- ☐ Tic Tac Toe
- ☐ 4 in a row
 
 Simulator:
- ☐ Show Corners
 
 Settings:
- ☐ Marquee
  ☐ DCF77 / Manual / Internet-time
  ☐ Manual / Automatic Brightness
 
@@ -18,10 +16,16 @@ Firmware:
  ☐ Show seconds
  ☐ Sync with DCF77
  ☐ Streaming
-
+ ☐ automatically adjust brightness
+ ☐ (?) Sleep-mode: Disable at night
+ ☐ What will the buttons do?
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ Show Corners @done (13-04-14 23:10)
+ ✘ Tic Tac Toe @cancelled (13-04-14 23:10)
+ ✘ 4 in a row @cancelled (13-04-14 23:10)
+ ✘ Marquee @cancelled (13-04-14 23:08)
  ✘ Learn infrared commands @cancelled (13-04-09 16:25)
  ✔ Create Fonts @done (13-04-09 16:25)
  ✘ Infrared @cancelled (13-04-09 16:25)
