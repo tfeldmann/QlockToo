@@ -27,10 +27,10 @@ class MarqueeApp(QDialog):
 
         # font and settings
         self.font = self.loadFont('fonts/default.json')
-        self.startposition = -2 * (self.font['letter_width'] + 1)
-        self.speed = 50
+        self.startposition = -11  # display width
+        self.speed = 50  # this is the initial dial position
 
-        # init device
+        # init device with a black screen
         self.device.setMatrix([[0]*11]*10)
         self.device.setCorners([0]*4)
 
@@ -40,7 +40,7 @@ class MarqueeApp(QDialog):
         """ Loads a QlockToo Font File
 
         These font files are JSON-files with a json-dict. See the file
-        font/default.json as an example.
+        font/default.json as an example of how to create your own font.
         """
         with open(filepath, 'rb') as fontfile:
             try:
@@ -57,13 +57,21 @@ class MarqueeApp(QDialog):
         extract = self.matrixExtract(self.marquee, self.x)
         self.device.setMatrix(extract)
 
+    def _frequency(self, speed):
+        """" Calculates the step frequency for the marquee from a given speed
+
+        0 <= speed <= 100
+        200 >= frequency >= 30
+        """
+        return 200 - 170 * abs(speed / 100.0)
+
     def playToggled(self, state):
         if state == Qt.Checked:
             text = self.ui.text.text()
             font = self.font
             self.x = self.startposition
             self.marquee = self.renderText(text=text, font=font)
-            self.timer.start(100)
+            self.timer.start(self._frequency(self.speed))
         else:
             self.timer.stop()
 
@@ -71,7 +79,7 @@ class MarqueeApp(QDialog):
         " Gets called from the speed dial and sets the new speed. "
         self.speed = self.ui.speed.value()
         if self.ui.play.isChecked():
-            self.timer.start(200-170*abs(self.speed / 100.0))
+            self.timer.start(self._frequency(self.speed))
 
     def move(self):
         " Moves the marquee one step and shows in on the device. "
