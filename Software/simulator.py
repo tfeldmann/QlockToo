@@ -10,9 +10,11 @@ from PySide.QtCore import Qt
 class Simulator(QWidget):
     def __init__(self):
         super(Simulator, self).__init__()
-        self.matrix = [[1]*11]*10
+        self.width = 11
+        self.height = 10
+        self.matrix = [[1]*self.width]*self.height
         self.corners = [1]*4
-        # why must the umlaute be unicode?!?
+        # why must the german umlaute be unicode?!?
         self.letters = [
             ['E', 'S', 'K', 'I', 'S', 'T', 'A', 'F', u'Ü', 'N', 'F'],
             ['Z', 'E', 'H', 'N', 'Z', 'W', 'A', 'N', 'Z', 'I', 'G'],
@@ -27,23 +29,25 @@ class Simulator(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(300, 300, 330, 300)
+        self.setGeometry(120, 200, 330, 300)
         self.setWindowTitle('Simulator')
         self.show()
 
     def setMatrix(self, matrix):
         self.matrix = matrix
         self.update()
-        if not self.isVisible():
-            self.show()
 
     def setCorners(self, corners):
         self.corners = corners
         self.update()
+
+    def update(self):
         if not self.isVisible():
             self.show()
+        super(Simulator, self).update()
 
     def paintEvent(self, e):
+        " The widget paints itself when self.update is called "
         size = self.size()
         ratio = 0.75
         letter_width = size.width()*ratio / 11
