@@ -3,7 +3,7 @@
 from PySide.QtGui import *
 from PySide.QtCore import *
 from ui_marquee import Ui_marquee as Ui
-import json
+from font import default as font
 
 
 class MarqueeApp(QDialog):
@@ -26,7 +26,6 @@ class MarqueeApp(QDialog):
         self.timer.timeout.connect(self.move)
 
         # font and settings
-        self.font = self.loadFont('fonts/default.json')
         self.startposition = -11  # display width
         self.speed = 50  # this is the initial dial position
 
@@ -36,22 +35,9 @@ class MarqueeApp(QDialog):
 
         self.exec_()
 
-    def loadFont(self, filepath):
-        """ Loads a QlockToo Font File
-
-        These font files are JSON-files with a json-dict. See the file
-        font/default.json as an example of how to create your own font.
-        """
-        with open(filepath, 'rb') as fontfile:
-            try:
-                return json.loads(fontfile.read())
-            except Exception, e:
-                QMessageBox.warning(self, 'Error: ', e.message)
-
     def cursorPositionChanged(self, old, new):
         " Shows the chars around the current cursor position on the device."
         text = self.ui.text.text()
-        font = self.font
         self.x = (new - 1) * (font['letter_width'] + 1)
         self.marquee = self.renderText(text=text, font=font)
         extract = self.matrixExtract(self.marquee, self.x)
@@ -68,7 +54,6 @@ class MarqueeApp(QDialog):
     def playToggled(self, state):
         if state == Qt.Checked:
             text = self.ui.text.text()
-            font = self.font
             self.x = self.startposition
             self.marquee = self.renderText(text=text, font=font)
             self.timer.start(self._frequency(self.speed))

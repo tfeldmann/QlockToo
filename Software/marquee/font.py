@@ -1,4 +1,5 @@
-{
+# -*- coding: utf-8 -*-
+default = {
     "name": "Default QlockToo Font",
     "creator": "Marlene Feldmann, Thomas Feldmann",
     "license": "",
