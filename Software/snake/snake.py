@@ -3,19 +3,7 @@
 from PySide.QtGui import *
 from PySide.QtCore import *
 from ui_snake import Ui_snake as Ui
-
-
-class Snake(object):
-    def __init__(self, x=0, y=0):
-        self.head = [x, y]
-        self.tail = []
-
-    def move(self, dx, dy):
-        x, y = self.head
-        self.head = [x+dx, y+dy]
-
-    def addElement(self):
-        pass
+from snake_model import SnakeModel
 
 
 class SnakeApp(QDialog):
@@ -24,12 +12,9 @@ class SnakeApp(QDialog):
         self.device = device
         self.ui = Ui()
         self.ui.setupUi(self)
+        self.setAttribute(Qt.WA_DeleteOnClose)
 
-        # create the update timer
-        self.timer = QTimer()
-        self.timer.timeout.connect(self.move)
-
-        # init device with welcome screen
+        # initial welcome screen
         welcomeScreen = [
             [0.0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.0],
             [0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0],
@@ -45,37 +30,72 @@ class SnakeApp(QDialog):
         self.device.setMatrix(welcomeScreen)
         self.device.setCorners([0]*4)
 
-        # snake start position
-        self.snake = Snake(4, 4)
-        self.dir = [1, 0]
+        # init the game model
+        self.snake = SnakeModel(
+            width=self.device.width,
+            height=self.device.height,
+            gameOverCallback=self.gameOver,
+            ateFoodCallback=self.ateFood)
 
-        self.timer.start(1000)
+        # create the timers
+        self.drawTimer = QTimer()
+        self.drawTimer.timeout.connect(self.draw)
+        self.stepTimer = QTimer()
+        self.stepTimer.timeout.connect(self.step)
         self.exec_()
 
     def keyPressEvent(self, event):
         key = event.key()
+
         if key == Qt.Key_Return:
-            print "Pressed Return"
-        if key == Qt.Key_Left:
-            self.dir = [-1, 0]
+            self.stepTimer.start(200)
+            self.drawTimer.start(40)
+
+        elif key == Qt.Key_P:
+            print "Pressed P"
+
+        elif key == Qt.Key_Left:
+            self.snake.setSnakeDirection(-1, 0)
         elif key == Qt.Key_Right:
-            self.dir = [1, 0]
+            self.snake.setSnakeDirection(1, 0)
         elif key == Qt.Key_Down:
-            self.dir = [0, 1]
+            self.snake.setSnakeDirection(0, 1)
         elif key == Qt.Key_Up:
-            self.dir = [0, -1]
-        elif key == Qt.Key_Space:
-            self.dropDown()
+            self.snake.setSnakeDirection(0, -1)
+
         else:
             QDialog.keyPressEvent(self, event)
 
-    def move(self):
-        self.timer.start(100)
-        self.snake.move(self.dir[0], self.dir[1])
+    def gameOver(self, score):
+        print score
 
-        m = [[0]*11 for _ in range(10)]
-        m[self.snake.head[1]][self.snake.head[0]] = 1
-        self.device.setMatrix(m)
+    def ateFood(self, score):
+        print "Fressen"
+        print score
+
+    def step(self):
+        self.snake.step()
+
+    def draw(self):
+        head = self.snake.head
+        tail = self.snake.tail
+        food = self.snake.food
+        matrix = self._empty_matrix()
+
+        # draw food
+        self._set_matrix_element(matrix, *food, value=0.8)
+        # draw snake
+        for pos, element in enumerate(tail):
+            self._set_matrix_element(matrix, *element,
+                value=0.7 - 0.4 * pos/len(tail))
+        self._set_matrix_element(matrix, *head, value=1)
+        self.device.setMatrix(matrix)
+
+    def _set_matrix_element(self, matrix, x, y, value):
+        matrix[y][x] = value
+
+    def _empty_matrix(self):
+        return [[0.1]*self.device.width for _ in range(self.device.height)]
 
 
 if __name__ == "__main__":

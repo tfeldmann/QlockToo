@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_snake.ui'
 #
-# Created: Mon Apr 15 17:15:52 2013
+# Created: Mon Apr 15 22:35:40 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.1.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -15,6 +15,7 @@ class Ui_snake(object):
         snake.setWindowModality(QtCore.Qt.ApplicationModal)
         snake.resize(256, 254)
         snake.setSizeGripEnabled(False)
+        snake.setModal(True)
         self.gridLayout = QtGui.QGridLayout(snake)
         self.gridLayout.setObjectName("gridLayout")
         self.label = QtGui.QLabel(snake)
