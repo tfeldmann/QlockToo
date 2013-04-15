@@ -34,7 +34,6 @@ class QlockToo(QMainWindow):
         self.ui.setupUi(self)
 
         self.refreshPorts()
-
         self.ui.console.clicked.connect(self.startConsole)
         self.ui.snake.clicked.connect(self.startSnake)
         self.ui.marquee.clicked.connect(self.startMarquee)
@@ -45,23 +44,23 @@ class QlockToo(QMainWindow):
 
     def startConsole(self):
         " Start the console app "
-        app = ConsoleApp(device=self.device)
+        ConsoleApp(device=self.device)
 
     def startSnake(self):
         " Start Snake"
-        app = SnakeApp(device=self.device)
+        SnakeApp(device=self.device)
 
     def startMarquee(self):
         " Start the marquee app "
-        app = MarqueeApp(device=self.device)
+        MarqueeApp(device=self.device)
 
     def startPattern(self):
         " Starts the pattern app "
-        app = PatternApp(device=self.device)
+        PatternApp(device=self.device)
 
     def startDemo(self):
         " Start the demo app "
-        app = DemoApp(device=self.device)
+        DemoApp(device=self.device)
 
     def refreshPorts(self):
         " refreshes the port list "

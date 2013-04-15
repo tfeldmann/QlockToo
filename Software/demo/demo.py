@@ -17,6 +17,7 @@ class DemoApp(QDialog):
         self.demo = None
         self.ui = Ui()
         self.ui.setupUi(self)
+        self.setAttribute(Qt.WA_DeleteOnClose)
         self.ui.black.clicked.connect(self.black)
         self.ui.white.clicked.connect(self.white)
         self.ui.fade.clicked.connect(self.fade)

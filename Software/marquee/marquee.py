@@ -17,6 +17,7 @@ class MarqueeApp(QDialog):
         self.device = device
         self.ui = Ui()
         self.ui.setupUi(self)
+        self.setAttribute(Qt.WA_DeleteOnClose)
         self.ui.text.cursorPositionChanged.connect(self.cursorPositionChanged)
         self.ui.play.stateChanged.connect(self.playToggled)
         self.ui.speed.valueChanged.connect(self.speedChanged)

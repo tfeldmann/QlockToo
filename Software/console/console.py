@@ -15,6 +15,7 @@ class ConsoleApp(QDialog):
         self.device = device
         self.ui = Ui()
         self.ui.setupUi(self)
+        self.setAttribute(Qt.WA_DeleteOnClose)
         self.ui.command.returnPressed.connect(self.sendCommand)
         self.exec_()
 
