@@ -49,8 +49,8 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>assets/refresh.png</normaloff>assets/refresh.png</iconset>
+            <iconset resource="assets.qrc">
+             <normaloff>:/icons/assets/refresh.png</normaloff>:/icons/assets/refresh.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -92,8 +92,8 @@
           <string>Zeichnen</string>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>assets/pencil.png</normaloff>assets/pencil.png</iconset>
+          <iconset resource="assets.qrc">
+           <normaloff>:/icons/assets/pencil.png</normaloff>:/icons/assets/pencil.png</iconset>
          </property>
         </widget>
        </item>
@@ -112,8 +112,8 @@
           <string>Demo</string>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>assets/star.png</normaloff>assets/star.png</iconset>
+          <iconset resource="assets.qrc">
+           <normaloff>:/icons/assets/star.png</normaloff>:/icons/assets/star.png</iconset>
          </property>
         </widget>
        </item>
@@ -135,8 +135,8 @@
           <string>Snake</string>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>assets/circle-blank.png</normaloff>assets/circle-blank.png</iconset>
+          <iconset resource="assets.qrc">
+           <normaloff>:/icons/assets/circle-blank.png</normaloff>:/icons/assets/circle-blank.png</iconset>
          </property>
          <property name="default">
           <bool>false</bool>
@@ -161,8 +161,8 @@
           <string>Konsole</string>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>assets/coffee.png</normaloff>assets/coffee.png</iconset>
+          <iconset resource="assets.qrc">
+           <normaloff>:/icons/assets/coffee.png</normaloff>:/icons/assets/coffee.png</iconset>
          </property>
         </widget>
        </item>
@@ -181,8 +181,8 @@
           <string>Laufschrift</string>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>assets/text-width.png</normaloff>assets/text-width.png</iconset>
+          <iconset resource="assets.qrc">
+           <normaloff>:/icons/assets/text-width.png</normaloff>:/icons/assets/text-width.png</iconset>
          </property>
         </widget>
        </item>
@@ -201,8 +201,8 @@
           <string>Einstellungen</string>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>assets/cogs.png</normaloff>assets/cogs.png</iconset>
+          <iconset resource="assets.qrc">
+           <normaloff>:/icons/assets/cogs.png</normaloff>:/icons/assets/cogs.png</iconset>
          </property>
         </widget>
        </item>
@@ -212,6 +212,8 @@
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="assets.qrc"/>
+ </resources>
  <connections/>
 </ui>

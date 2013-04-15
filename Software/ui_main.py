@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_main.ui'
 #
-# Created: Tue Apr  9 20:39:21 2013
+# Created: Mon Apr 15 16:04:18 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.1.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -36,7 +36,7 @@ class Ui_qlocktoo(object):
         self.refresh.setSizePolicy(sizePolicy)
         self.refresh.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("assets/refresh.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/icons/assets/refresh.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.refresh.setIcon(icon)
         self.refresh.setIconSize(QtCore.QSize(12, 12))
         self.refresh.setCheckable(False)
@@ -57,7 +57,7 @@ class Ui_qlocktoo(object):
         self.pattern.setSizePolicy(sizePolicy)
         self.pattern.setCursor(QtCore.Qt.PointingHandCursor)
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("assets/pencil.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap(":/icons/assets/pencil.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pattern.setIcon(icon1)
         self.pattern.setObjectName("pattern")
         self.gridLayout_2.addWidget(self.pattern, 2, 1, 1, 1)
@@ -69,7 +69,7 @@ class Ui_qlocktoo(object):
         self.demo.setSizePolicy(sizePolicy)
         self.demo.setCursor(QtCore.Qt.PointingHandCursor)
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("assets/star.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap(":/icons/assets/star.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.demo.setIcon(icon2)
         self.demo.setObjectName("demo")
         self.gridLayout_2.addWidget(self.demo, 3, 1, 1, 1)
@@ -82,7 +82,7 @@ class Ui_qlocktoo(object):
         self.snake.setCursor(QtCore.Qt.PointingHandCursor)
         self.snake.setStatusTip("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("assets/circle-blank.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap(":/icons/assets/circle-blank.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.snake.setIcon(icon3)
         self.snake.setDefault(False)
         self.snake.setFlat(False)
@@ -96,7 +96,7 @@ class Ui_qlocktoo(object):
         self.console.setSizePolicy(sizePolicy)
         self.console.setCursor(QtCore.Qt.PointingHandCursor)
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("assets/coffee.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon4.addPixmap(QtGui.QPixmap(":/icons/assets/coffee.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.console.setIcon(icon4)
         self.console.setObjectName("console")
         self.gridLayout_2.addWidget(self.console, 0, 0, 1, 1)
@@ -108,7 +108,7 @@ class Ui_qlocktoo(object):
         self.marquee.setSizePolicy(sizePolicy)
         self.marquee.setCursor(QtCore.Qt.PointingHandCursor)
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("assets/text-width.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon5.addPixmap(QtGui.QPixmap(":/icons/assets/text-width.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.marquee.setIcon(icon5)
         self.marquee.setObjectName("marquee")
         self.gridLayout_2.addWidget(self.marquee, 2, 0, 1, 1)
@@ -120,7 +120,7 @@ class Ui_qlocktoo(object):
         self.brightness.setSizePolicy(sizePolicy)
         self.brightness.setCursor(QtCore.Qt.PointingHandCursor)
         icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap("assets/cogs.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon6.addPixmap(QtGui.QPixmap(":/icons/assets/cogs.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.brightness.setIcon(icon6)
         self.brightness.setObjectName("brightness")
         self.gridLayout_2.addWidget(self.brightness, 3, 0, 1, 1)
@@ -143,6 +143,7 @@ class Ui_qlocktoo(object):
         self.marquee.setText(QtGui.QApplication.translate("qlocktoo", "Laufschrift", None, QtGui.QApplication.UnicodeUTF8))
         self.brightness.setText(QtGui.QApplication.translate("qlocktoo", "Einstellungen", None, QtGui.QApplication.UnicodeUTF8))
 
+import assets_rc
 
 if __name__ == "__main__":
     import sys
