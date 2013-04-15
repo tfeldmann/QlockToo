@@ -135,3 +135,15 @@ class MarqueeApp(QDialog):
             extract = [line[x:x+11] for line in matrix]
             result = [line + [0]*(11 - len(line)) for line in extract]
         return result
+
+
+if __name__ == "__main__":
+    # test environment in simulator
+    import sys
+    sys.path.append("..")
+    from simulator import Simulator
+    application = QApplication(sys.argv)
+    device = Simulator()
+    MarqueeApp(device)
+    application.exec_()
+

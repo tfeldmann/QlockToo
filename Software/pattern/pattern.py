@@ -15,3 +15,14 @@ class PatternApp(QDialog):
         self.ui = Ui_pattern()
         self.ui.setupUi(self)
         self.exec_()
+
+
+if __name__ == "__main__":
+    # test environment in simulator
+    import sys
+    sys.path.append("..")
+    from simulator import Simulator
+    application = QApplication(sys.argv)
+    device = Simulator()
+    PatternApp(device)
+    application.exec_()

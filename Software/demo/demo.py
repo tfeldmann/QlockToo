@@ -82,3 +82,13 @@ class WaveDemo(Demo):
         self.device.setMatrix(self.matrix)
 
 
+if __name__ == "__main__":
+    # test environment in simulator
+    import sys
+    sys.path.append("..")
+    from simulator import Simulator
+    application = QApplication(sys.argv)
+    device = Simulator()
+    DemoApp(device)
+    application.exec_()
+
