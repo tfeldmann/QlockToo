@@ -10,6 +10,7 @@ from PySide.QtGui import *
 from PySide.QtCore import *
 from pattern import PatternApp
 from console import ConsoleApp
+from snake import SnakeApp
 from marquee import MarqueeApp
 from demo import DemoApp
 from simulator import Simulator
@@ -35,6 +36,7 @@ class QlockToo(QMainWindow):
         self.refreshPorts()
 
         self.ui.console.clicked.connect(self.startConsole)
+        self.ui.snake.clicked.connect(self.startSnake)
         self.ui.marquee.clicked.connect(self.startMarquee)
         self.ui.pattern.clicked.connect(self.startPattern)
         self.ui.demo.clicked.connect(self.startDemo)
@@ -44,6 +46,10 @@ class QlockToo(QMainWindow):
     def startConsole(self):
         " Start the console app "
         app = ConsoleApp(device=self.device)
+
+    def startSnake(self):
+        " Start Snake"
+        app = SnakeApp(device=self.device)
 
     def startMarquee(self):
         " Start the marquee app "
