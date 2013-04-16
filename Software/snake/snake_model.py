@@ -13,6 +13,7 @@ class SnakeModel(object):
         self.reset()
 
     def reset(self):
+        " Sets all game elements to initial position "
         self._dir = (0, -1)
 
         # You can access head, tail and food directly for drawing

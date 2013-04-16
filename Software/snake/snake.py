@@ -47,8 +47,7 @@ class SnakeApp(QDialog):
 
     def keyPressEvent(self, event):
         key = event.key()
-
-        if key == Qt.Key_Return:
+        if key == Qt.Key_Return or key == Qt.Key_Enter:
             self.snake.reset()
             self.stepTimer.start(1000 / self.stepFrequency)
         elif key == Qt.Key_Left:
@@ -59,7 +58,6 @@ class SnakeApp(QDialog):
             self.snake.setSnakeDirection(0, 1)
         elif key == Qt.Key_Up:
             self.snake.setSnakeDirection(0, -1)
-
         else:
             QDialog.keyPressEvent(self, event)
 
