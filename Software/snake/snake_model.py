@@ -8,15 +8,17 @@ class SnakeModel(object):
         gameOverCallback, ateFoodCallback):
         self._width = width
         self._height = height
-        self._dir = (0, -1)
         self._gameover = gameOverCallback
         self._ateFood = ateFoodCallback
+        self.reset()
 
-        # all the game elements -
-        # You can access these directly for drawing.
-        self.head = (width / 2, height-1)
-        self.tail = [self.head]
-        self.food = (width / 2, height / 3)
+    def reset(self):
+        self._dir = (0, -1)
+
+        # You can access head, tail and food directly for drawing
+        self.head = (self._width / 2, self._height - 2)
+        self.tail = [(self._width / 2, self._height - 1)]
+        self.food = (self._width / 2, self._height / 3)
 
     def step(self):
         # check for collisions

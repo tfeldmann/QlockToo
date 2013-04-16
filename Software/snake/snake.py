@@ -36,6 +36,7 @@ class SnakeApp(QDialog):
             height=self.device.height,
             gameOverCallback=self.gameOver,
             ateFoodCallback=self.ateFood)
+        self.highscore = 0
 
         # create the timers
         self.drawTimer = QTimer()
@@ -48,6 +49,7 @@ class SnakeApp(QDialog):
         key = event.key()
 
         if key == Qt.Key_Return:
+            self.snake.reset()
             self.stepTimer.start(200)
             self.drawTimer.start(40)
 
@@ -67,11 +69,15 @@ class SnakeApp(QDialog):
             QDialog.keyPressEvent(self, event)
 
     def gameOver(self, score):
-        print score
+        QMessageBox.warning(self, "Game Over",
+            "Game Over.\nDeine Punktzahl: " + str(score))
+        self.stepTimer.stop()
 
     def ateFood(self, score):
-        print "Fressen"
-        print score
+        self.ui.score.setText("Punkte: " + str(score))
+        if score > self.highscore:
+            self.highscore = score
+            self.ui.highscore.setText("Highscore: " + str(self.highscore))
 
     def step(self):
         self.snake.step()
@@ -87,7 +93,7 @@ class SnakeApp(QDialog):
         # draw snake
         for pos, element in enumerate(tail):
             self._set_matrix_element(matrix, *element,
-                value=0.7 - 0.4 * pos/len(tail))
+                value=0.7 - 0.4 * pos / len(tail))
         self._set_matrix_element(matrix, *head, value=1)
         self.device.setMatrix(matrix)
 
