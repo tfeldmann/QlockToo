@@ -18,17 +18,18 @@ class SnakeApp(QDialog):
         welcomeScreen = [
             [0.0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.0],
             [0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0],
-            [0.0, 0.5, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.5, 0.0],
+            [0.0, 0.5, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.5, 0.0],
             [0.0, 0.5, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0],
-            [0.0, 0.5, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.5, 0.0],
+            [0.0, 0.5, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.5, 0.0],
             [0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.5, 0.0],
-            [0.0, 0.5, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.5, 0.0],
+            [0.0, 0.5, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.5, 0.0],
             [0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0],
             [0.0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.0],
             [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         ]
         self.device.setMatrix(welcomeScreen)
         self.device.setCorners([0]*4)
+        self.stepFrequency = 5
 
         # init the game model
         self.snake = SnakeModel(
@@ -37,10 +38,9 @@ class SnakeApp(QDialog):
             gameOverCallback=self.gameOver,
             ateFoodCallback=self.ateFood)
         self.highscore = 0
+        self.pause = False
 
-        # create the timers
-        self.drawTimer = QTimer()
-        self.drawTimer.timeout.connect(self.draw)
+        # create the timer
         self.stepTimer = QTimer()
         self.stepTimer.timeout.connect(self.step)
         self.exec_()
@@ -50,12 +50,7 @@ class SnakeApp(QDialog):
 
         if key == Qt.Key_Return:
             self.snake.reset()
-            self.stepTimer.start(200)
-            self.drawTimer.start(40)
-
-        elif key == Qt.Key_P:
-            print "Pressed P"
-
+            self.stepTimer.start(1000 / self.stepFrequency)
         elif key == Qt.Key_Left:
             self.snake.setSnakeDirection(-1, 0)
         elif key == Qt.Key_Right:
@@ -81,6 +76,7 @@ class SnakeApp(QDialog):
 
     def step(self):
         self.snake.step()
+        self.draw()
 
     def draw(self):
         head = self.snake.head
@@ -98,7 +94,8 @@ class SnakeApp(QDialog):
         self.device.setMatrix(matrix)
 
     def _set_matrix_element(self, matrix, x, y, value):
-        matrix[y][x] = value
+        if 0 <= y < len(matrix) and 0 <= x < len(matrix[0]):
+            matrix[y][x] = value
 
     def _empty_matrix(self):
         return [[0.1]*self.device.width for _ in range(self.device.height)]

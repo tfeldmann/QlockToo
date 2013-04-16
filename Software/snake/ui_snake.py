@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_snake.ui'
 #
-# Created: Tue Apr 16 12:25:56 2013
+# Created: Tue Apr 16 13:21:46 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.1.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -30,8 +30,17 @@ class Ui_snake(object):
         self.highscore.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.highscore.setObjectName("highscore")
         self.gridLayout.addWidget(self.highscore, 0, 1, 1, 1)
-        self.label = QtGui.QLabel(snake)
+        self.label_2 = QtGui.QLabel(snake)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
+        self.label_2.setSizePolicy(sizePolicy)
+        self.label_2.setTextFormat(QtCore.Qt.RichText)
+        self.label_2.setObjectName("label_2")
+        self.gridLayout.addWidget(self.label_2, 1, 0, 1, 2)
+        self.label = QtGui.QLabel(snake)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
@@ -49,7 +58,8 @@ class Ui_snake(object):
         snake.setWindowTitle(QtGui.QApplication.translate("snake", "Snake", None, QtGui.QApplication.UnicodeUTF8))
         self.score.setText(QtGui.QApplication.translate("snake", "Punkte: 0", None, QtGui.QApplication.UnicodeUTF8))
         self.highscore.setText(QtGui.QApplication.translate("snake", "Highscore: 0", None, QtGui.QApplication.UnicodeUTF8))
-        self.label.setText(QtGui.QApplication.translate("snake", "<html><head/><body><p align=\"center\"><span style=\" font-size:24pt; font-weight:600;\">SNAKE</span></p><p align=\"center\"><br/></p><p align=\"center\"><span style=\" color:#ff0000;\">ENTER drücken um zu starten</span></p><p align=\"center\">Steuern: Pfeiltasten<br/>Pause: P</p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("snake", "<html><head/><body><p align=\"center\"><span style=\" font-size:24pt; font-weight:600;\">SNAKE</span><br/></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("snake", "<html><head/><body><p align=\"center\"><span style=\" color:#ff0000;\">ENTER drücken um zu starten</span></p><p align=\"center\">Steuerung mit den Pfeiltasten</p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":
