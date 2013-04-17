@@ -16,7 +16,7 @@ class SnakeModel(object):
         " Sets all game elements to initial position "
         self._dir = (0, -1)
 
-        # You can access head, tail and food directly for drawing
+        # You can read head, tail and food directly for drawing
         self.head = (self._width / 2, self._height - 2)
         self.tail = [(self._width / 2, self._height - 1)]
         self.food = (self._width / 2, self._height / 3)

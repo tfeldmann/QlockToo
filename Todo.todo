@@ -2,9 +2,6 @@ Apps:
  ☐ Patterns
  ☐ Marquee
    ☐ variable Font width
-   ☐ extract matrix class
- ☐ Snake
-   ☐ Show SNAKE as welcome screen
  ☐ Binary Clock
 
 Simulator:
@@ -12,6 +9,7 @@ Simulator:
 Settings:
  ☐ DCF77 / Manual / Internet-time
  ☐ Manual / Automatic Brightness
+ ☐ "ES IST" ausschalten
 
 Firmware:
  ☐ Show time words
@@ -24,6 +22,9 @@ Firmware:
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ extract matrix class @done (13-04-17 13:09)
+ ✔ Snake @done (13-04-16 14:11)
+ ✔ Show SNAKE as welcome screen @done (13-04-16 14:11)
  ✔ Show Corners @done (13-04-14 23:10)
  ✘ Tic Tac Toe @cancelled (13-04-14 23:10)
  ✘ 4 in a row @cancelled (13-04-14 23:10)
