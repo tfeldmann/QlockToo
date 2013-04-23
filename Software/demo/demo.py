@@ -158,22 +158,32 @@ class PongDemo(Demo):
 
 
 class HelixDemo(Demo):
-    def __init__(self, device, framerate=50):
+    def __init__(self, device, framerate=100):
         Demo.__init__(self, device, framerate)
         self.device.setCorners([0]*4)
+        self.matrix = [[0]*11 for _ in range(10)]
+        self.matrix[0] = [1]*11
         self.t = 0
 
     def update(self):
-        def f(x, y, t):
-            px = self.device.width / 2
-            py = self.device.height / 2
-            buckling = 1.3
-            result = math.sin(buckling * ((x-px)**2 + (y-py)**2)**0.5 - t)
-            return result * 0.5 + 0.5  # scale result to 0 < values < 1
+        def helix(t):
+            return [(math.sin(0.5*t) * 0.5 + 0.5) * self.device.width,
+                math.cos(0.5*t)*0.3+0.7]
 
-        self.t += 0.25
-        matrix = [[f(x, y, self.t) for x in xrange(11)] for y in xrange(10)]
-        self.device.setMatrix(matrix)
+        self.t += 1
+        line = [0]*11
+
+        # 1
+        pos, brightness = helix(self.t)
+        line[int(pos)] = brightness
+
+        # 2
+        pos, brightness = helix(self.t + 4)
+        line[int(pos)] = brightness
+
+        self.matrix.pop()
+        self.matrix.insert(0, line)
+        self.device.setMatrix(self.matrix)
 
 
 if __name__ == "__main__":
@@ -185,4 +195,3 @@ if __name__ == "__main__":
     device = Simulator()
     DemoApp(device)
     application.exec_()
-
