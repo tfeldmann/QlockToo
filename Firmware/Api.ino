@@ -6,35 +6,35 @@
 
 SerialCommand serialCommand;
 
-void scmd_update()
+void api_update()
 {
     serialCommand.readSerial();
 }
 
-void scmd_unknown(const char *command)
+void api_unknown(const char *command)
 {
     Serial.print("#Unknown command: ");
     Serial.println(command);
 }
 
-void scmd_init()
+void api_init()
 {
-    serialCommand.addCommand("about", scmd_about);
-    serialCommand.setDefaultHandler(scmd_unknown);
+    serialCommand.addCommand("about", api_about);
+    serialCommand.setDefaultHandler(api_unknown);
 }
 
 
 // ============================================================================
 // custom functions:
 
-void scmd_about()
+void api_about()
 {
     Serial.println("#QlockToo");
     Serial.println("#   - an open-source remake of the QlockTwo.");
     Serial.println("#============================================");
     Serial.println("#Firmware Version:");
     Serial.print("#    "); Serial.println(VERSION);
-    Serial.print("#    Compiled on "); Serial.println(__DATE__);
+    Serial.print("#    Compiled on "); Serial.println(__TIMESTAMP__);
     Serial.println("#");
     Serial.println("#Creators:");
     Serial.println("#    Thomas Feldmann");

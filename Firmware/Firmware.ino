@@ -13,10 +13,10 @@
 void setup()
 {
     Serial.begin(BAUDRATE);
-    scmd_init();
+    api_init();
 }
 
 void loop()
 {
-    scmd_update();
+    api_update();
 }
