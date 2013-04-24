@@ -14,9 +14,11 @@ void setup()
 {
     Serial.begin(BAUDRATE);
     api_init();
+    matrix_init();
 }
 
 void loop()
 {
     api_update();
+    matrix_update();
 }
