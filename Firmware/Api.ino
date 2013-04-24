@@ -31,15 +31,17 @@ void api_about()
 {
     Serial.println("#QlockToo");
     Serial.println("#   - an open-source remake of the QlockTwo.");
-    Serial.println("#============================================");
+    Serial.println("#===========================================");
     Serial.println("#Firmware Version:");
     Serial.print("#    "); Serial.println(VERSION);
-    Serial.print("#    Compiled on "); Serial.println(__TIMESTAMP__);
+    Serial.println("#");
+    Serial.println("#Compiled on:");
+    Serial.print("#    "); Serial.println(__TIMESTAMP__);
     Serial.println("#");
     Serial.println("#Creators:");
     Serial.println("#    Thomas Feldmann");
     Serial.println("#    Marlene Feldmann");
     Serial.println("#    Manuel Fehmer");
     Serial.println("#    Carsten Hußmann");
-    Serial.println("#============================================");
+    Serial.println("#===========================================");
 }
