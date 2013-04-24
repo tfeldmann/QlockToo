@@ -3,6 +3,9 @@ Apps:
  ☐ Marquee
    ☐ variable Font width
  ☐ Binary Clock
+ ☐ Helix Demo
+ ☐ Pong Demo
+ ☐ Tetris
 
 Simulator:
 
@@ -12,16 +15,16 @@ Settings:
  ☐ "ES IST" ausschalten
 
 Firmware:
- ☐ Show time words
+ ☐ Show time
  ☐ Show seconds
  ☐ Sync with DCF77
  ☐ Streaming
  ☐ automatically adjust brightness
  ☐ (?) Sleep-mode: Disable at night
- ☐ What will the buttons do?
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ What will the buttons do? @done (13-04-24 21:28)
  ✔ extract matrix class @done (13-04-17 13:09)
  ✔ Snake @done (13-04-16 14:11)
  ✔ Show SNAKE as welcome screen @done (13-04-16 14:11)
