@@ -13,7 +13,7 @@ void api_update()
 
 void api_unknown(const char *command)
 {
-    Serial.print("#Unknown command: ");
+    Serial.print("!Unknown command: ");
     Serial.println(command);
 }
 
@@ -42,6 +42,6 @@ void api_about()
     Serial.println("#    Thomas Feldmann");
     Serial.println("#    Marlene Feldmann");
     Serial.println("#    Manuel Fehmer");
-    Serial.println("#    Carsten Hußmann");
+    Serial.println("#    Carsten Hussmann");
     Serial.println("#===========================================");
 }
