@@ -3,60 +3,44 @@
 //
 
 #include <Wire.h>
+#include "globals.h"
 
-enum LedbarPinMode {
-    LPM_OFF,
-    LPM_ON,
-    LPM_PWM,
-    LPM_GRPPWM,
-};
+unsigned char leddriver_address;
+unsigned char leddriver_rawPinModes[4];
 
-class Ledbar {
-    public:
-    void begin(unsigned char address);  // 7-bit TLC address
-    // pin is 0 .. 15
-    void setPinMode(int pin, enum LedbarPinMode pinMode);
-    void setPinPWM(int pin, unsigned char dutyCycle);
-    void setAllPinPWM(unsigned char dutyCycles[16]);
-    void reset();
-    private:
-    unsigned char address;
-    unsigned char rawPinModes[4];
-} Ledbar;
-
-void Ledbar::begin(unsigned char address_)
+void leddriver_begin(unsigned char address_)
 {
-    address = address_;
-    memset(&rawPinModes, 0, sizeof(rawPinModes));
+    leddriver_address = address_;
+    memset(&leddriver_rawPinModes, 0, sizeof(leddriver_rawPinModes));
 
     Wire.begin();
-    Wire.beginTransmission(address);
+    Wire.beginTransmission(leddriver_address);
     Wire.write(0x00); // reg 0
     Wire.write(0x01); // broadcast on, [5bit]=0 turns on oscillator
     Wire.endTransmission();
 }
 
-void Ledbar::setPinMode(int pin, enum LedbarPinMode pinMode)
+void leddriver_setPinMode(int pin, int pinMode)
 {
-    Wire.beginTransmission(address);
-    rawPinModes[pin / 4] &= ~(0x3     << (pin % 4 * 2));
-    rawPinModes[pin / 4] |=  (pinMode << (pin % 4 * 2));
+    Wire.beginTransmission(leddriver_address);
+    leddriver_rawPinModes[pin / 4] &= ~(0x3     << (pin % 4 * 2));
+    leddriver_rawPinModes[pin / 4] |=  (pinMode << (pin % 4 * 2));
     Wire.write(0x14 + pin / 4);
-    Wire.write(rawPinModes[pin / 4]);
+    Wire.write(leddriver_rawPinModes[pin / 4]);
     Wire.endTransmission();
 }
 
-void Ledbar::setPinPWM(int pin, unsigned char dutyCycle)
+void leddriver_setPinPWM(int pin, unsigned char dutyCycle)
 {
-    Wire.beginTransmission(address);
+    Wire.beginTransmission(leddriver_address);
     Wire.write(0x2 + pin);
     Wire.write(dutyCycle);
     Wire.endTransmission();
 }
 
-void Ledbar::setAllPinPWM(unsigned char dutyCycles[16])
+void leddriver_setAllPinPWM(unsigned char dutyCycles[16])
 {
-    Wire.beginTransmission(address);
+    Wire.beginTransmission(leddriver_address);
     Wire.write(0b10100000 | 0x2); // autoincrement
     for (int i = 0; i < 16; i++)
         Wire.write(dutyCycles[i]);
