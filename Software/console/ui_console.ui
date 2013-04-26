@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>464</width>
-    <height>337</height>
+    <width>455</width>
+    <height>415</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,19 +23,22 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QLineEdit" name="command">
-       <property name="placeholderText">
-        <string>Befehl</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QTextEdit" name="log">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="undoRedoEnabled">
         <bool>false</bool>
        </property>
        <property name="readOnly">
         <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="command">
+       <property name="placeholderText">
+        <string>Befehl</string>
        </property>
       </widget>
      </item>

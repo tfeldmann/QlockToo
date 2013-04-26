@@ -32,6 +32,7 @@ class QlockToo(QMainWindow):
         super(QlockToo, self).__init__()
         self.ui = Ui()
         self.ui.setupUi(self)
+        self.device = None
 
         self.refreshPorts()
         self.ui.console.clicked.connect(self.startConsole)
@@ -78,7 +79,9 @@ class QlockToo(QMainWindow):
         combo box. The Device can be either the simulator or a serial device.
         """
         # disconnect device / stop simulator
-        self.device = None
+        if self.device:
+            self.device.shutDown()
+            self.device = None
         self.ui.appbox.setEnabled(False)
 
         if index == 1:
@@ -90,7 +93,7 @@ class QlockToo(QMainWindow):
             # connect to actual QlockToo device
             try:
                 port = self.ui.port.currentText()
-                self.device = Device(port=port, baudrate=57600)
+                self.device = Device(port=port)
                 self.ui.appbox.setEnabled(True)
             except Exception, e:
                 QMessageBox.warning(self, "Error: ", e.message)

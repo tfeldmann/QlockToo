@@ -51,4 +51,5 @@ class SnakeModel(object):
     def _newFoodLocation(self):
         possible = set([(x, y) for x in range(self._width)
             for y in range(self._height)]) - set(self.tail) - set([self.head])
-        return random.choice(list(possible))
+        newPosition = random.choice(list(possible))
+        return newPosition

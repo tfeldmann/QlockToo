@@ -12,10 +12,12 @@ class Simulator(QWidget):
         super(Simulator, self).__init__()
         self.width = 11
         self.height = 10
-        self.matrix = [[1]*self.width]*self.height
-        self.corners = [1]*4
+        self.callback = None
+
+        self._matrix = [[1]*self.width]*self.height
+        self._corners = [1]*4
         # why must the german umlaute be unicode?!?
-        self.letters = [
+        self._letters = [
             ['E', 'S', 'K', 'I', 'S', 'T', 'A', 'F', u'Ü', 'N', 'F'],
             ['Z', 'E', 'H', 'N', 'Z', 'W', 'A', 'N', 'Z', 'I', 'G'],
             ['D', 'R', 'E', 'I', 'V', 'I', 'E', 'R', 'T', 'E', 'L'],
@@ -26,22 +28,29 @@ class Simulator(QWidget):
             ['S', 'E', 'C', 'H', 'S', 'N', 'L', 'A', 'C', 'H', 'T'],
             ['S', 'I', 'E', 'B', 'E', 'N', 'Z', 'W', u'Ö', 'L', 'F'],
             ['Z', 'E', 'H', 'N', 'E', 'U', 'N', 'K', 'U', 'H', 'R']]
-        self.initUI()
+        self._initUI()
 
-    def initUI(self):
+    def _initUI(self):
         self.setGeometry(120, 200, 330, 300)
         self.setWindowTitle('Simulator')
         self.show()
 
     def setMatrix(self, matrix):
-        self.matrix = matrix
-        self.update()
+        self._matrix = matrix
+        self._update()
 
     def setCorners(self, corners):
-        self.corners = corners
-        self.update()
+        self._corners = corners
+        self._update()
 
-    def update(self):
+    def send(self, message):
+        if self.callback:
+            self.callback('!Serial communication is not available in simulator')
+
+    def shutDown(self):
+        self.callback = None
+
+    def _update(self):
         if not self.isVisible():
             self.show()
         super(Simulator, self).update()
@@ -59,7 +68,7 @@ class Simulator(QWidget):
 
         # letters
         qp.setFont(QFont('Helvetica', letter_width*0.5))
-        for y, row in enumerate(self.matrix):
+        for y, row in enumerate(self._matrix):
             for x, cell in enumerate(row):
                 color = QColor(*[255 * cell] * 3)
                 qp.setPen(color)
@@ -68,10 +77,10 @@ class Simulator(QWidget):
                     size.height()*(1-ratio)/2 + y*letter_height,
                     letter_width, letter_height,
                     Qt.AlignCenter,
-                    self.letters[y][x])
+                    self._letters[y][x])
 
         # corners
-        colors = [QColor(*[255 * b]*3) for b in self.corners]
+        colors = [QColor(*[255 * b]*3) for b in self._corners]
         pos_top = (1 - ratio) * size.height() / 4
         pos_left = (1 - ratio) * size.width() / 4
         pos_bottom = size.height() - pos_top
@@ -80,7 +89,6 @@ class Simulator(QWidget):
         qp.fillRect(pos_right, pos_top, 2, 2, colors[1])
         qp.fillRect(pos_left, pos_bottom, 2, 2, colors[2])
         qp.fillRect(pos_right, pos_bottom, 2, 2, colors[3])
-
         qp.end()
 
 
