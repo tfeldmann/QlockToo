@@ -47,7 +47,7 @@ class Simulator(QWidget):
         if self.callback:
             self.callback('!Serial communication is not available in simulator')
 
-    def shutDown(self):
+    def close(self):
         self.callback = None
 
     def _update(self):

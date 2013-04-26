@@ -31,7 +31,7 @@ class Device(object):
     def setCorners(self, corners):
         print "not yet implemented"
 
-    def shutDown(self):
+    def close(self):
         self._serial.stop()
         self.callback = None
 

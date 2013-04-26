@@ -80,7 +80,7 @@ class QlockToo(QMainWindow):
         """
         # disconnect device / stop simulator
         if self.device:
-            self.device.shutDown()
+            self.device.close()
             self.device = None
         self.ui.appbox.setEnabled(False)
 
