@@ -166,23 +166,20 @@ class HelixDemo(Demo):
         self.t = 0
 
     def update(self):
-        def helix(t):
-            return [(math.sin(0.5*t) * 0.5 + 0.5) * self.device.width,
-                math.cos(0.5*t)*0.3+0.7]
+        def helix(x, t):
+            k = 0.6
+            y = math.sin(k * x - t)
+            brightness = math.cos(k * x - t) * 0.3 + 0.7
+            return [self.device.width * (y*0.5+0.5), brightness]
 
-        self.t += 1
-        line = [0]*11
+        self.t += 0.2
+        self.matrix = [[0]*11 for _ in range(10)]
+        # helix 1
+        for x, line in enumerate(self.matrix):
+            for r in range(-2, 2):
+                pos, brightness = helix(x, self.t + r / 10.0)
+                line[int(pos)] = brightness
 
-        # 1
-        pos, brightness = helix(self.t)
-        line[int(pos)] = brightness
-
-        # 2
-        pos, brightness = helix(self.t + 4)
-        line[int(pos)] = brightness
-
-        self.matrix.pop()
-        self.matrix.insert(0, line)
         self.device.setMatrix(self.matrix)
 
 
