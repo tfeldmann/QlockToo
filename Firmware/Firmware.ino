@@ -20,5 +20,4 @@ void setup()
 void loop()
 {
     api_update();
-    display_init();
 }
