@@ -32,7 +32,7 @@ void time_addSecond()
     }
 };
 
-void time_dumpToSerial()
+void time_dump()
 {
     Serial.print("#Time: ");
     Serial.print(hours, DEC);
@@ -64,5 +64,5 @@ void time_startTimer()
 ISR(TIMER1_OVF_vect)
 {
     time_addSecond();
-    time_dumpToSerial();
+    time_dump();
 }

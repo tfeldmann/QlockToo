@@ -72,7 +72,6 @@ void dcf77_interrupt()
         unsigned long thisFlankTime = millis();
         if (thisFlankTime - previousFlankTime > DCF_SYNC_MILLIS)
         {
-            Serial.println("#DCF77: new minute");
             dcf77_parseBuffer();
         }
         previousFlankTime = thisFlankTime;

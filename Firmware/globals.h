@@ -21,3 +21,6 @@ volatile unsigned int year;
 #define LPM_ON     1
 #define LPM_PWM    2
 #define LPM_GRPPWM 3
+
+// Led Pin
+#define LED_PIN 13
