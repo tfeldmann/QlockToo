@@ -8,13 +8,14 @@
 // Author: Thomas Feldmann
 
 #define VERSION "0.1"
-#define BAUDRATE 57600
+#define BAUDRATE 115200
 
 void setup()
 {
     Serial.begin(BAUDRATE);
     api_init();
-    display_init();
+    //display_init();
+    time_init();
 }
 
 void loop()
