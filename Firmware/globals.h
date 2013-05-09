@@ -2,6 +2,12 @@
 // globals.h
 //
 
+#pragma once
+
+// Clock time
+volatile unsigned char seconds, minutes, hours, day, month;
+volatile unsigned int year;
+
 // Display dimensions
 #define ROWS 10
 #define COLS 11
