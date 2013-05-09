@@ -16,18 +16,20 @@ class Simulator(QWidget):
 
         self._matrix = [[1]*self.width]*self.height
         self._corners = [1]*4
-        # why must the german umlaute be unicode?!?
-        self._letters = [
-            ['E', 'S', 'K', 'I', 'S', 'T', 'A', 'F', u'Ü', 'N', 'F'],
-            ['Z', 'E', 'H', 'N', 'Z', 'W', 'A', 'N', 'Z', 'I', 'G'],
-            ['D', 'R', 'E', 'I', 'V', 'I', 'E', 'R', 'T', 'E', 'L'],
-            ['V', 'O', 'R', 'F', 'U', 'N', 'K', 'N', 'A', 'C', 'H'],
-            ['H', 'A', 'L', 'B', 'A', 'E', 'L', 'F', u'Ü', 'N', 'F'],
-            ['E', 'I', 'N', 'S', 'X', u'Ä', 'M', 'Z', 'W', 'E', 'I'],
-            ['D', 'R', 'E', 'I', 'A', 'U', 'J', 'V', 'I', 'E', 'R'],
-            ['S', 'E', 'C', 'H', 'S', 'N', 'L', 'A', 'C', 'H', 'T'],
-            ['S', 'I', 'E', 'B', 'E', 'N', 'Z', 'W', u'Ö', 'L', 'F'],
-            ['Z', 'E', 'H', 'N', 'E', 'U', 'N', 'K', 'U', 'H', 'R']]
+        letterstring = u"""
+            E S K I S T A F Ü N F
+            Z E H N Z W A N Z I G
+            D R E I V I E R T E L
+            V O R F U N K N A C H
+            H A L B A E L F Ü N F
+            E I N S X Ä M Z W E I
+            D R E I A U J V I E R
+            S E C H S N L A C H T
+            S I E B E N Z W Ö L F
+            Z E H N E U N K U H R"""
+        self._letters = [row.split()
+            for row in letterstring.split("\n") if row]
+
         self._initUI()
 
     def _initUI(self):
