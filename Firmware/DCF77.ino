@@ -4,26 +4,11 @@
 
 #include "globals.h"
 
-/**
- * The pin the DCF77-module is connected to
- */
-#define DCF77PIN 2
+#define DCF77PIN 2  // The pin the DCF77-module is connected to
+#define DCF_SPLIT_MILLIS 140  // length of signal before we assume a "1"
+#define DCF_SYNC_MILLIS 1200  // pause to detect a new minute
 
-/**
- * Number of milliseconds to elapse before we assume a "1",
- * if we receive a falling flank before - its a 0.
- */
-#define DCF_SPLIT_MILLIS 140
 
-/**
- * There is no signal in second 59 - detect the beginning of
- * a new minute.
- */
-#define DCF_SYNC_MILLIS 1200
-
-/**
- * DCF time format struct
- */
 struct DCF77Buffer
 {
     unsigned long long prefix: 21;
@@ -46,11 +31,9 @@ struct
     unsigned char parity_date: 1;
 } flags;
 
-/**
- * Buffer variables
- */
 int bufferPosition;
 unsigned long long dcf_rx_buffer;
+
 
 void dcf77_init()
 {
@@ -60,9 +43,6 @@ void dcf77_init()
     attachInterrupt(1, dcf77_interrupt, CHANGE);
 }
 
-/**
- * Interrupthandler called when the signal on DCF77PIN changes.
- */
 void dcf77_interrupt()
 {
     static unsigned long previousFlankTime = 0;
@@ -83,7 +63,6 @@ void dcf77_interrupt()
         dcf77_bufferSignal(difference > DCF_SPLIT_MILLIS);
     }
 }
-
 
 /**
  * Append a signal to the dcf_rx_buffer. Argument can be 1 or 0. An internal
