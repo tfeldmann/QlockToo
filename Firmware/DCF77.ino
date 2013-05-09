@@ -47,18 +47,11 @@ struct
 } flags;
 
 /**
- * Clock variables
+ * Buffer variables
  */
-volatile unsigned char DCFSignalState = 0;
-unsigned char previousSignalState;
-int previousFlankTime;
 int bufferPosition;
 unsigned long long dcf_rx_buffer;
 
-/**
- * Initialize the DCF77 routines: initialize the variables,
- * configure the interrupt behaviour.
- */
 void dcf77_init()
 {
     bufferPosition = 0;
@@ -68,36 +61,65 @@ void dcf77_init()
 }
 
 /**
+ * Interrupthandler called when the signal on DCF77PIN changes.
+ */
+void dcf77_interrupt()
+{
+    static unsigned long previousFlankTime = 0;
+
+    if (digitalRead(DCF77PIN))
+    {
+        unsigned long thisFlankTime = millis();
+        if (thisFlankTime - previousFlankTime > DCF_SYNC_MILLIS)
+        {
+            Serial.println("#DCF77: new minute");
+            dcf77_parseBuffer();
+        }
+        previousFlankTime = thisFlankTime;
+    }
+    else
+    {
+        // falling flank
+        int difference = millis() - previousFlankTime;
+        dcf77_bufferSignal(difference > DCF_SPLIT_MILLIS);
+    }
+}
+
+
+/**
  * Append a signal to the dcf_rx_buffer. Argument can be 1 or 0. An internal
  * counter shifts the writing position within the buffer. If position > 59,
  * a new minute begins -> time to call dcf77_parseBuffer().
  */
 void dcf77_bufferSignal(unsigned char signal)
 {
-    Serial.println(signal);
-    dcf_rx_buffer = dcf_rx_buffer | ((unsigned long long)signal << bufferPosition);
+    dcf_rx_buffer =
+        dcf_rx_buffer | ((unsigned long long)signal << bufferPosition);
+
     // Update the parity bits. First: Reset when minute, hour or date starts.
-    if (bufferPosition ==  21 || bufferPosition ==  29 || bufferPosition ==  36)
+    if (bufferPosition == 21 || bufferPosition == 29 || bufferPosition == 36)
     {
         flags.parity_flag = 0;
     }
+
     // save the parity when the corresponding segment ends
-    if (bufferPosition ==  28)
+    if (bufferPosition == 28)
     {
         flags.parity_min = flags.parity_flag;
     };
-    if (bufferPosition ==  35)
+    if (bufferPosition == 35)
     {
         flags.parity_hour = flags.parity_flag;
     };
-    if (bufferPosition ==  58)
+    if (bufferPosition == 58)
     {
         flags.parity_date = flags.parity_flag;
     };
+
     // When we received a 1, toggle the parity flag
     if (signal == 1)
     {
-        flags.parity_flag = flags.parity_flag ^ 1;
+        flags.parity_flag = flags.parity_flag^1;
     }
 
     bufferPosition++;
@@ -117,75 +139,26 @@ void dcf77_parseBuffer(void)
     {
         struct DCF77Buffer *rx_buffer;
         rx_buffer = (struct DCF77Buffer *)(unsigned long long)&dcf_rx_buffer;
-        if (flags.parity_min == rx_buffer->P1  &&
-            flags.parity_hour == rx_buffer->P2  &&
-            flags.parity_date == rx_buffer->P3)
+        if (flags.parity_min == rx_buffer->P1
+            && flags.parity_hour == rx_buffer->P2
+            && flags.parity_date == rx_buffer->P3)
         {
             // parity check is ok
             // convert the received bits from BCD
             minutes = rx_buffer->Min - ((rx_buffer->Min / 16) * 6);
             hours = rx_buffer->Hour - ((rx_buffer->Hour / 16) * 6);
-            day= rx_buffer->Day - ((rx_buffer->Day / 16) * 6);
-            month= rx_buffer->Month - ((rx_buffer->Month / 16) * 6);
-            year= 2000 + rx_buffer->Year - ((rx_buffer->Year / 16) * 6);
-            Serial.println("Parity check okay -> setting time");
+            day = rx_buffer->Day - ((rx_buffer->Day / 16) * 6);
+            month = rx_buffer->Month - ((rx_buffer->Month / 16) * 6);
+            year = 2000 + rx_buffer->Year - ((rx_buffer->Year / 16) * 6);
+            Serial.println("#Parity check okay -> setting time");
         }
         else
         {
-            Serial.println("Parity is not okay.");
+            Serial.println("#Parity is not okay.");
         }
     }
-    // reset stuff
-    seconds = 0;
+
+    // reset buffer
     bufferPosition = 0;
     dcf_rx_buffer = 0;
 }
-
-/**
- * Evaluates the signal as it is received. Decides whether we received
- * a "1" or a "0" based on the
- */
-void scanSignal(void){
-    if (DCFSignalState == 1) {
-        int thisFlankTime=millis();
-        if (thisFlankTime - previousFlankTime > DCF_SYNC_MILLIS) {
-            time_dumpToSerial();
-            Serial.println("####");
-            Serial.println("#### Begin of new Minute!");
-            Serial.println("####");
-            dcf77_parseBuffer();
-        }
-        previousFlankTime=thisFlankTime;
-        Serial.print(previousFlankTime);
-        Serial.print(": DCF77 Signal detected, ");
-    }
-    else {
-        /* or a falling flank */
-        int difference=millis() - previousFlankTime;
-        Serial.print("duration: ");
-        Serial.print(difference);
-        if (difference < DCF_SPLIT_MILLIS) {
-            dcf77_bufferSignal(0);
-        }
-        else {
-            dcf77_bufferSignal(1);
-        }
-    }
-}
-
-/**
- * Interrupthandler called when the signal on DCF77PIN changes.
- */
-void dcf77_interrupt()
-{
-    // check the value again - since it takes some time to
-    // activate the interrupt routine, we get a clear signal.
-    DCFSignalState = digitalRead(DCF77PIN);
-
-    if (DCFSignalState != previousSignalState) {
-        scanSignal();
-        previousSignalState = DCFSignalState;
-    }
-}
-
-
