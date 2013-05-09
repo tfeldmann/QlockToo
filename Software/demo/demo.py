@@ -124,11 +124,11 @@ class PongDemo(Demo):
         self.paddles = [device.height / 2, device.height / 2]
 
     def update(self):
-        self._moveBall()
-        self._movePaddles()
-        self._draw()
+        self.moveBall()
+        self.movePaddles()
+        self.draw()
 
-    def _moveBall(self):
+    def moveBall(self):
         self.x += self.dx
         self.y += self.dy
         if self.x == self.device.width - 1:
@@ -141,20 +141,24 @@ class PongDemo(Demo):
         elif self.y == 0:
             self.dy = 1
 
-    def _movePaddles(self):
+    def movePaddles(self):
         if self.dx > 0:
             self.paddles[1] = self.y
         else:
             self.paddles[0] = self.y
 
-    def _draw(self):
+    def draw(self):
         self.matrix = [[0]*11 for _ in range(10)]
-        # paddles
-        self.matrix[self.paddles[0]][0] = 1
-        self.matrix[self.paddles[1]][self.device.width-1] = 1
+
+        self.drawPaddles()
+
         # ball
         self.matrix[self.y][self.x] = 1.0
         self.device.setMatrix(self.matrix)
+
+    def drawPaddles(self):
+        self.matrix[self.paddles[0]][0] = 1
+        self.matrix[self.paddles[1]][self.device.width-1] = 1
 
 
 class HelixDemo(Demo):
