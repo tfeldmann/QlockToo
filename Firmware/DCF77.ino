@@ -64,7 +64,7 @@ void dcf77_interrupt()
     }
 }
 
-/**
+/*
  * Append a signal to the dcf_rx_buffer. Argument can be 1 or 0. An internal
  * counter shifts the writing position within the buffer. If position > 59,
  * a new minute begins -> time to call dcf77_parseBuffer().
@@ -107,7 +107,7 @@ void dcf77_bufferSignal(unsigned char signal)
     }
 }
 
-/**
+/*
  * Evaluates the information stored in the buffer. This is where the DCF77
  * signal is decoded and the internal clock is updated.
  */
@@ -128,11 +128,11 @@ void dcf77_parseBuffer(void)
             day = rx_buffer->Day - ((rx_buffer->Day / 16) * 6);
             month = rx_buffer->Month - ((rx_buffer->Month / 16) * 6);
             year = 2000 + rx_buffer->Year - ((rx_buffer->Year / 16) * 6);
-            Serial.println("#Parity check okay -> setting time");
+            Serial.println("#DCF77 parity check okay");
         }
         else
         {
-            Serial.println("#Parity is not okay.");
+            Serial.println("#DCF77 failed parity check");
         }
     }
 
