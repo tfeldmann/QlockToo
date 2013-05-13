@@ -17,13 +17,14 @@ Settings:
 Firmware:
  ☐ Show time
  ☐ Show seconds
- ☐ Sync with DCF77
  ☐ Streaming
  ☐ automatically adjust brightness
  ☐ (?) Sleep-mode: Disable at night
+ ☐ Sync PC Time
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ Sync with DCF77 @done (13-05-13 15:50)
  ✔ What will the buttons do? @done (13-04-24 21:28)
  ✔ extract matrix class @done (13-04-17 13:09)
  ✔ Snake @done (13-04-16 14:11)

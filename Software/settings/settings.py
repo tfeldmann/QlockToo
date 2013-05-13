@@ -18,7 +18,7 @@ class SettingsApp(QDialog):
         self.exec_()
 
     def syncTime(self):
-        """ @Todo: implement in device """
+        """ Syncs the clock time with the pc time """
         localtime = time.localtime()
         cmd = "@settime %d %d %d %d %d %d" % (localtime.tm_year,
             localtime.tm_mon, localtime.tm_mday, localtime.tm_hour,
