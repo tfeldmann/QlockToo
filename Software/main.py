@@ -9,6 +9,7 @@ Author: Thomas Feldmann
 from PySide.QtGui import *
 from PySide.QtCore import *
 from pattern import PatternApp
+from settings import SettingsApp
 from console import ConsoleApp
 from snake import SnakeApp
 from marquee import MarqueeApp
@@ -39,6 +40,7 @@ class QlockToo(QMainWindow):
         self.ui.snake.clicked.connect(self.startSnake)
         self.ui.marquee.clicked.connect(self.startMarquee)
         self.ui.pattern.clicked.connect(self.startPattern)
+        self.ui.settings.clicked.connect(self.startSettings)
         self.ui.demo.clicked.connect(self.startDemo)
         self.ui.refresh.clicked.connect(self.refreshPorts)
         self.ui.port.currentIndexChanged.connect(self.portSelect)
@@ -58,6 +60,10 @@ class QlockToo(QMainWindow):
     def startPattern(self):
         " Starts the pattern app "
         PatternApp(device=self.device)
+
+    def startSettings(self):
+        " Starts the settings panel "
+        SettingsApp(device=self.device)
 
     def startDemo(self):
         " Start the demo app "

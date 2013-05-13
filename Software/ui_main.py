@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_main.ui'
 #
-# Created: Mon Apr 15 16:04:18 2013
+# Created: Mon May 13 15:07:53 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.1.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -112,18 +112,18 @@ class Ui_qlocktoo(object):
         self.marquee.setIcon(icon5)
         self.marquee.setObjectName("marquee")
         self.gridLayout_2.addWidget(self.marquee, 2, 0, 1, 1)
-        self.brightness = QtGui.QPushButton(self.appbox)
+        self.settings = QtGui.QPushButton(self.appbox)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.brightness.sizePolicy().hasHeightForWidth())
-        self.brightness.setSizePolicy(sizePolicy)
-        self.brightness.setCursor(QtCore.Qt.PointingHandCursor)
+        sizePolicy.setHeightForWidth(self.settings.sizePolicy().hasHeightForWidth())
+        self.settings.setSizePolicy(sizePolicy)
+        self.settings.setCursor(QtCore.Qt.PointingHandCursor)
         icon6 = QtGui.QIcon()
         icon6.addPixmap(QtGui.QPixmap(":/icons/assets/cogs.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.brightness.setIcon(icon6)
-        self.brightness.setObjectName("brightness")
-        self.gridLayout_2.addWidget(self.brightness, 3, 0, 1, 1)
+        self.settings.setIcon(icon6)
+        self.settings.setObjectName("settings")
+        self.gridLayout_2.addWidget(self.settings, 3, 0, 1, 1)
         self.verticalLayout_3.addWidget(self.appbox)
         qlocktoo.setCentralWidget(self.centralwidget)
 
@@ -141,16 +141,6 @@ class Ui_qlocktoo(object):
         self.snake.setText(QtGui.QApplication.translate("qlocktoo", "Snake", None, QtGui.QApplication.UnicodeUTF8))
         self.console.setText(QtGui.QApplication.translate("qlocktoo", "Konsole", None, QtGui.QApplication.UnicodeUTF8))
         self.marquee.setText(QtGui.QApplication.translate("qlocktoo", "Laufschrift", None, QtGui.QApplication.UnicodeUTF8))
-        self.brightness.setText(QtGui.QApplication.translate("qlocktoo", "Einstellungen", None, QtGui.QApplication.UnicodeUTF8))
+        self.settings.setText(QtGui.QApplication.translate("qlocktoo", "Einstellungen", None, QtGui.QApplication.UnicodeUTF8))
 
 import assets_rc
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    qlocktoo = QtGui.QMainWindow()
-    ui = Ui_qlocktoo()
-    ui.setupUi(qlocktoo)
-    qlocktoo.show()
-    sys.exit(app.exec_())
-

@@ -187,7 +187,7 @@
         </widget>
        </item>
        <item row="3" column="0">
-        <widget class="QPushButton" name="brightness">
+        <widget class="QPushButton" name="settings">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
