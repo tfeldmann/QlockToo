@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
+"""
+Default QlockToo Font
+
+A simple 5x10 fixed size font.
+"""
+
 default = {
     "name": "Default QlockToo Font",
-    "creator": "Marlene Feldmann, Thomas Feldmann",
-    "license": "",
+    "author": "Marlene Feldmann, Thomas Feldmann",
     "letter_width": 5,
     "letter_height": 10,
 
