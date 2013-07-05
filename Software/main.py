@@ -6,15 +6,13 @@ Software suite for controlling the QlockToo hardware.
 Author: Thomas Feldmann
 """
 
-from PySide.QtGui import *
-from PySide.QtCore import *
-from pattern import PatternApp
+from PySide.QtGui import QApplication, QMainWindow
+from PySide.QtCore import Slot
 from settings import SettingsApp
 from console import ConsoleApp
 from snake import SnakeApp
-from marquee import MarqueeApp
 from demo import DemoApp
-from simulator import Simulator
+from marquee import MarqueeApp
 from device import Device
 from serialconnection import SerialConnection
 from main_ui import Ui_qlocktoo as Ui
@@ -27,50 +25,54 @@ class QlockToo(QMainWindow):
     Provides links to the available apps and manages the serial devices and
     simulator.
     """
-
     def __init__(self):
-        " Initializes the application's UI "
+        """
+        Initializes the application's UI
+        """
         super(QlockToo, self).__init__()
         self.ui = Ui()
         self.ui.setupUi(self)
-        self.device = None
+        self.device = self.ui.simulator
 
-        self.refreshPorts()
-        self.ui.console.clicked.connect(self.startConsole)
-        self.ui.snake.clicked.connect(self.startSnake)
-        self.ui.marquee.clicked.connect(self.startMarquee)
-        self.ui.pattern.clicked.connect(self.startPattern)
-        self.ui.settings.clicked.connect(self.startSettings)
-        self.ui.demo.clicked.connect(self.startDemo)
-        self.ui.refresh.clicked.connect(self.refreshPorts)
-        self.ui.port.currentIndexChanged.connect(self.portSelect)
-
-    def startConsole(self):
-        " Start the console app "
+    @Slot()
+    def on_actionConsole_triggered(self):
+        """"
+        Start the console app
+        """
         ConsoleApp(device=self.device)
 
-    def startSnake(self):
-        " Start Snake"
+    @Slot()
+    def on_actionSnake_triggered(self):
+        """
+        Start Snake
+        """
         SnakeApp(device=self.device)
 
-    def startMarquee(self):
-        " Start the marquee app "
+    @Slot()
+    def on_actionMarquee_triggered(self):
+        """
+        Start the marquee app
+        """
         MarqueeApp(device=self.device)
 
-    def startPattern(self):
-        " Starts the pattern app "
-        PatternApp(device=self.device)
-
-    def startSettings(self):
-        " Starts the settings panel "
+    @Slot()
+    def on_actionSettings_triggered(self):
+        """
+        Starts the settings panel
+        """
         SettingsApp(device=self.device)
 
-    def startDemo(self):
-        " Start the demo app "
+    @Slot()
+    def on_actionDemo_triggered(self):
+        """
+        Start the demo app
+        """
         DemoApp(device=self.device)
 
     def refreshPorts(self):
-        " refreshes the port list "
+        """
+        Refreshes the port list
+        """
         self.ui.port.clear()
         self.ui.port.addItem('Getrennt')
         self.ui.port.addItem('Simulator')
@@ -111,4 +113,5 @@ if __name__ == "__main__":
     application = QApplication(sys.argv)
     qlocktoo = QlockToo()
     qlocktoo.show()
+    qlocktoo.raise_()
     application.exec_()
