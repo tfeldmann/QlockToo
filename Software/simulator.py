@@ -22,11 +22,11 @@ class Simulator(QWidget):
             S E C H S N L A C H T
             S I E B E N Z W Ö L F
             Z E H N E U N K U H R"""
-        self.columns  = 11
-        self.rows     = 10
-        self.matrix   = [[1]*self.columns]*self.rows
-        self.corners  = [1]*4
-        self.letters  = [row.split() for row in frontpanel.split("\n") if row]
+        self.columns = 11
+        self.rows    = 10
+        self.matrix  = [[1]*self.columns]*self.rows
+        self.corners = [1]*4
+        self.letters = [row.split() for row in frontpanel.split("\n") if row]
 
     @property
     def matrix(self):
