@@ -2,8 +2,9 @@
 import random
 
 class SnakeModel(object):
-    " A simple snake game model "
-
+    """
+    Model for a snake-like game.
+    """
     def __init__(self, width, height,
         gameOverCallback, ateFoodCallback):
         self._width = width
@@ -13,7 +14,9 @@ class SnakeModel(object):
         self.reset()
 
     def reset(self):
-        " Starts a new game "
+        """
+        Starts a new game
+        """
         self._dir = (0, -1)
 
         # You can read head, tail and food directly for drawing
@@ -22,7 +25,9 @@ class SnakeModel(object):
         self.food = (self._width / 2, self._height / 3)
 
     def step(self):
-        " Generates the next game frame "
+        """
+        Generates the next game frame
+        """
         # check for collisions
         if self.head in self.tail:
             self._gameover(len(self.tail))
@@ -37,7 +42,9 @@ class SnakeModel(object):
         self._moveSnake(*self._dir)
 
     def setSnakeDirection(self, dx, dy):
-        " Set the direction the snake will move on the next step "
+        """
+        Sets the direction the snake will move on the next step
+        """
         self._dir = (dx, dy)
 
     def _moveSnake(self, dx, dy):

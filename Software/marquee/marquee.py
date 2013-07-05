@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-
 from PySide.QtGui import *
 from PySide.QtCore import *
 from marquee_ui import Ui_marquee as Ui
 import font
+
 
 class MarqueeMatrix(object):
     def __init__(self, font):
@@ -61,7 +61,8 @@ class MarqueeMatrix(object):
 
 
 class MarqueeApp(QDialog):
-    """ Marquee App
+    """
+    Marquee App
 
     Shows scrolling texts on the QlockToo. You can modify the animation's
     direction, speed and style.
@@ -82,23 +83,26 @@ class MarqueeApp(QDialog):
 
         # marquee
         self.marquee = MarqueeMatrix(font.default)
-        self.startposition = - self.device.width
+        self.startposition = - self.device.columns
         self.speed = 50  # this is the initial dial position
 
         # init device with a black screen
-        self.device.setMatrix([[0]*11]*10)
-        self.device.setCorners([0]*4)
+        self.device.matrix = [[0]*11]*10
+        self.device.corners = [0]*4
 
         self.exec_()
 
     def cursorPositionChanged(self, old, new):
-        " Shows the chars around the current cursor position on the device."
+        """
+        Shows the chars around the current cursor position on the device.
+        """
         text = self.ui.text.text()
         self.marquee.setText(text)
-        self.device.setMatrix(self.marquee.regionFromLetter(new))
+        self.device.matrix = self.marquee.regionFromLetter(new)
 
     def _frequency(self, speed):
-        """" Calculates the step frequency for the marquee from a given speed
+        """
+        Calculates the step frequency for the marquee from a given speed
 
         0 <= speed <= 100
         200 >= frequency >= 30
@@ -114,13 +118,17 @@ class MarqueeApp(QDialog):
             self.timer.stop()
 
     def speedChanged(self):
-        " Gets called from the speed dial and sets the new speed. "
+        """
+        Gets called from the speed dial and sets the new speed.
+        """
         self.speed = self.ui.speed.value()
         if self.ui.play.isChecked():
             self.timer.start(self._frequency(self.speed))
 
     def move(self):
-        " Moves the marquee one step and shows in on the device. "
+        """
+        Moves the marquee one step and shows in on the device.
+        """
         # move forwards
         if self.speed >= 0:
             self.x += 1
@@ -131,16 +139,4 @@ class MarqueeApp(QDialog):
             self.x -= 1
             if self.x < self.startposition:
                 self.x = self.marquee.width
-        self.device.setMatrix(self.marquee.regionFromPosition(self.x))
-
-
-if __name__ == "__main__":
-    # test environment in simulator
-    import sys
-    sys.path.append("..")
-    from simulator import Simulator
-    application = QApplication(sys.argv)
-    device = Simulator()
-    MarqueeApp(device)
-    application.exec_()
-
+        self.device.matrix = self.marquee.regionFromPosition(self.x)

@@ -14,7 +14,6 @@ class PatternWidget(QWidget):
         qp.end()
 
     def drawRectangles(self, qp):
-
         color = QColor(0, 0, 0)
         color.setNamedColor('#d4d4d4')
         qp.setPen(color)

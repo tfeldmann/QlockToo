@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-QlockToo
-
-Software suite for controlling the QlockToo hardware.
-Author: Thomas Feldmann
-"""
-
 from PySide.QtGui import QApplication, QMainWindow
 from PySide.QtCore import Slot
 from settings import SettingsApp
@@ -20,10 +13,10 @@ from main_ui import Ui_qlocktoo as Ui
 
 class QlockToo(QMainWindow):
     """
-    The QlockToo software suite
+    QlockToo
 
-    Provides links to the available apps and manages the serial devices and
-    simulator.
+    The main window that contains the simulator widget. From here you can start
+    all the provided apps.
     """
     def __init__(self):
         """

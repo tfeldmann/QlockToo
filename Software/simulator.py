@@ -1,22 +1,17 @@
 # -*- coding: utf-8 -*-
-"""
-QlockToo Simulator
-"""
-
-import sys, random
-from PySide.QtGui import QApplication, QWidget, QPainter, QColor, QFont
+from PySide.QtGui import QWidget, QPainter, QColor, QFont
 from PySide.QtCore import Qt
 
-class Simulator(QWidget):
-    def __init__(self):
-        super(Simulator, self).__init__()
-        self.width = 11
-        self.height = 10
-        self.callback = None
 
-        self._matrix = [[1]*self.width]*self.height
-        self._corners = [1]*4
-        letterstring = u"""
+class Simulator(QWidget):
+    """
+    QlockToo Simulator
+
+    This widget shows the QlockToo front with letters and corner leds.
+    """
+    def __init__(self, parent):
+        super(Simulator, self).__init__()
+        frontpanel = u"""
             E S K I S T A F Ü N F
             Z E H N Z W A N Z I G
             D R E I V I E R T E L
@@ -27,50 +22,48 @@ class Simulator(QWidget):
             S E C H S N L A C H T
             S I E B E N Z W Ö L F
             Z E H N E U N K U H R"""
-        self._letters = [row.split()
-            for row in letterstring.split("\n") if row]
+        self.columns  = 11
+        self.rows     = 10
+        self.matrix   = [[1]*self.columns]*self.rows
+        self.corners  = [1]*4
+        self.letters  = [row.split() for row in frontpanel.split("\n") if row]
 
-        self._initUI()
+    @property
+    def matrix(self):
+        return self._matrix
 
-    def _initUI(self):
-        self.setGeometry(120, 200, 330, 300)
-        self.setWindowTitle('Simulator')
-        self.show()
+    @matrix.setter
+    def matrix(self, value):
+        self._matrix = value
+        self.update()
 
-    def setMatrix(self, matrix):
-        self._matrix = matrix
-        self._update()
+    @property
+    def corners(self):
+        return self._corners
 
-    def setCorners(self, corners):
-        self._corners = corners
-        self._update()
-
-    def send(self, message):
-        if self.callback:
-            self.callback('!Serial communication is not available in simulator')
-
-    def close(self):
-        self.callback = None
-
-    def _update(self):
-        if not self.isVisible():
-            self.show()
-        super(Simulator, self).update()
+    @corners.setter
+    def corners(self, value):
+        self._corners = value
+        self.update()
 
     def paintEvent(self, e):
-        " The widget paints itself when self.update is called "
+        """
+        QWidget paintEvent implementation
+
+        This method is called on window resizes or when self.update() is called.
+        """
         size = self.size()
         ratio = 0.75
-        letter_width = size.width()*ratio / 11
-        letter_height = size.height()*ratio / 10
+        letter_width = size.width() * ratio / 11
+        letter_height = size.height() * ratio / 10
 
         qp = QPainter()
         qp.begin(self)
         qp.fillRect(0, 0, size.width(), size.height(), Qt.black)
 
-        # letters
+        # draw letters
         qp.setFont(QFont('Helvetica', letter_width*0.5))
-        for y, row in enumerate(self._matrix):
+        for y, row in enumerate(self.matrix):
             for x, cell in enumerate(row):
                 color = QColor(*[255 * cell] * 3)
                 qp.setPen(color)
@@ -79,10 +72,10 @@ class Simulator(QWidget):
                     size.height()*(1-ratio)/2 + y*letter_height,
                     letter_width, letter_height,
                     Qt.AlignCenter,
-                    self._letters[y][x])
+                    self.letters[y][x])
 
-        # corners
-        colors = [QColor(*[255 * b]*3) for b in self._corners]
+        # draw corners
+        colors = [QColor(*[255 * b]*3) for b in self.corners]
         pos_top = (1 - ratio) * size.height() / 4
         pos_left = (1 - ratio) * size.width() / 4
         pos_bottom = size.height() - pos_top
@@ -92,13 +85,3 @@ class Simulator(QWidget):
         qp.fillRect(pos_left, pos_bottom, 2, 2, colors[2])
         qp.fillRect(pos_right, pos_bottom, 2, 2, colors[3])
         qp.end()
-
-
-def main():
-    app = QApplication(sys.argv)
-    ex = Simulator()
-    sys.exit(app.exec_())
-
-
-if __name__ == '__main__':
-    main()

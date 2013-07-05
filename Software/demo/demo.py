@@ -1,23 +1,21 @@
 # -*- coding: utf-8 -*-
-"""
-Demo App
 
-Various demos to show off the QlockToo
-"""
-
-from PySide.QtGui import *
-from PySide.QtCore import *
+from PySide.QtGui import QDialog
+from PySide.QtCore import Qt, Slot, QTimer
 from demo_ui import Ui_demoapp as Ui
 import math
 
+
 class DemoApp(QDialog):
+    """
+    Features various graphical demos to show off the QlockToo
+    """
     def __init__(self, device):
         super(DemoApp, self).__init__()
         self.device = device
         self.demo = None
         self.ui = Ui()
         self.ui.setupUi(self)
-        self.setAttribute(Qt.WA_DeleteOnClose)
         self.ui.black.clicked.connect(self.black)
         self.ui.white.clicked.connect(self.white)
         self.ui.pulse.clicked.connect(self.pulse)
@@ -29,13 +27,13 @@ class DemoApp(QDialog):
 
     def black(self):
         self.demo = None
-        self.device.setMatrix([[0]*11]*10)
-        self.device.setCorners([0]*4)
+        self.device.matrix = [[0]*11]*10
+        self.device.corners = [0]*4
 
     def white(self):
         self.demo = None
-        self.device.setMatrix([[1]*11]*10)
-        self.device.setCorners([1]*4)
+        self.device.matrix = [[1]*11]*10
+        self.device.corners = [1]*4
 
     def pulse(self):
         self.demo = PulseDemo(self.device)
@@ -78,50 +76,50 @@ class PulseDemo(Demo):
         elif self.b < 0:
             self.b = 0
             self.inc *= -1
-        self.device.setMatrix([[self.b]*11]*10)
-        self.device.setCorners([1-self.b]*4)
+        self.device.matrix = [[self.b]*11]*10
+        self.device.corners = [1-self.b]*4
 
 
 class FadeDemo(Demo):
     def __init__(self, device, framerate=50):
         Demo.__init__(self, device, framerate)
-        self.device.setCorners([0]*4)
+        self.device.corners = [0]*4
         self.matrix = [[0]*11]*10
         self.b = 0
 
     def update(self):
         self.b += 0.1
         self.matrix = [[abs(0.5*math.sin(self.b)-x*0.1 + 0.5) for x in range(11)]]*10
-        self.device.setMatrix(self.matrix)
+        self.device.matrix = self.matrix
 
 
 class WaveDemo(Demo):
     def __init__(self, device, framerate=30):
         Demo.__init__(self, device, framerate)
-        self.device.setCorners([0]*4)
+        self.device.corners = [0]*4
         self.t = 0
 
     def update(self):
         def f(x, y, t):
-            px = self.device.width / 2 + 1.7 * math.sin(0.1 * t)
-            py = self.device.height / 2 + 1.7 * math.cos(0.1 * t)
+            px = self.device.columns / 2 + 1.7 * math.sin(0.1 * t)
+            py = self.device.rows / 2 + 1.7 * math.cos(0.1 * t)
             buckling = 1.3
             result = math.sin(buckling * ((x-px)**2 + (y-py)**2)**0.5 - t)
             return result * 0.5 + 0.5  # scale result to 0 < values < 1
 
         self.t += 0.2
         matrix = [[f(x, y, self.t) for x in xrange(11)] for y in xrange(10)]
-        self.device.setMatrix(matrix)
+        self.device.matrix = matrix
 
 
 class PongDemo(Demo):
     def __init__(self, device, framerate=70):
         Demo.__init__(self, device, framerate)
-        self.device.setCorners([0]*4)
+        self.device.corners = [0]*4
 
-        self.x, self.y = device.width / 2, device.height / 2
+        self.x, self.y = device.columns / 2, device.rows / 2
         self.dx, self.dy = 1, 1
-        self.paddles = [device.height / 2, device.height / 2]
+        self.paddles = [device.rows / 2, device.rows / 2]
 
     def update(self):
         self.moveBall()
@@ -131,12 +129,12 @@ class PongDemo(Demo):
     def moveBall(self):
         self.x += self.dx
         self.y += self.dy
-        if self.x == self.device.width - 1:
+        if self.x == self.device.columns - 1:
             self.dx = -1
         elif self.x == 0:
             self.dx = 1
 
-        if self.y == self.device.height - 1:
+        if self.y == self.device.rows - 1:
             self.dy = -1
         elif self.y == 0:
             self.dy = 1
@@ -154,17 +152,17 @@ class PongDemo(Demo):
 
         # ball
         self.matrix[self.y][self.x] = 1.0
-        self.device.setMatrix(self.matrix)
+        self.device.matrix = self.matrix
 
     def drawPaddles(self):
         self.matrix[self.paddles[0]][0] = 1
-        self.matrix[self.paddles[1]][self.device.width-1] = 1
+        self.matrix[self.paddles[1]][self.device.columns-1] = 1
 
 
 class HelixDemo(Demo):
     def __init__(self, device, framerate=100):
         Demo.__init__(self, device, framerate)
-        self.device.setCorners([0]*4)
+        self.device.corners = [0]*4
         self.matrix = [[0]*11 for _ in range(10)]
         self.matrix[0] = [1]*11
         self.t = 0
@@ -174,7 +172,7 @@ class HelixDemo(Demo):
             k = 0.6
             y = math.sin(k * x - t)
             brightness = math.cos(k * x - t) * 0.3 + 0.7
-            return [self.device.width * (y*0.5+0.5), brightness]
+            return [self.device.columns * (y*0.5+0.5), brightness]
 
         self.t += 0.2
         self.matrix = [[0]*11 for _ in range(10)]
@@ -184,15 +182,4 @@ class HelixDemo(Demo):
                 pos, brightness = helix(x, self.t + r / 10.0)
                 line[int(pos)] = brightness
 
-        self.device.setMatrix(self.matrix)
-
-
-if __name__ == "__main__":
-    # test environment in simulator
-    import sys
-    sys.path.append("..")
-    from simulator import Simulator
-    application = QApplication(sys.argv)
-    device = Simulator()
-    DemoApp(device)
-    application.exec_()
+        self.device.matrix = self.matrix

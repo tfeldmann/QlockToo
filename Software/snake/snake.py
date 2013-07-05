@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-
-from PySide.QtGui import *
-from PySide.QtCore import *
+from PySide.QtGui import QDialog, QMessageBox
+from PySide.QtCore import Qt, QTimer
 from snake_ui import Ui_snake as Ui
 from snake_model import SnakeModel
 
@@ -12,7 +11,6 @@ class SnakeApp(QDialog):
         self.device = device
         self.ui = Ui()
         self.ui.setupUi(self)
-        self.setAttribute(Qt.WA_DeleteOnClose)
 
         # initial welcome screen
         welcomeScreen = [
@@ -27,14 +25,14 @@ class SnakeApp(QDialog):
             [0.0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.0],
             [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         ]
-        self.device.setMatrix(welcomeScreen)
-        self.device.setCorners([0]*4)
+        self.device.matrix = welcomeScreen
+        self.device.corners = [0]*4
         self.stepFrequency = 5
 
         # init the game model
         self.snake = SnakeModel(
-            width=self.device.width,
-            height=self.device.height,
+            width=self.device.columns,
+            height=self.device.rows,
             gameOverCallback=self.gameOver,
             ateFoodCallback=self.ateFood)
         self.highscore = 0
@@ -89,21 +87,11 @@ class SnakeApp(QDialog):
             self._set_matrix_element(matrix, *element,
                 value=0.7 - 0.4 * pos / len(tail))
         self._set_matrix_element(matrix, *head, value=1)
-        self.device.setMatrix(matrix)
+        self.device.matrix = matrix
 
     def _set_matrix_element(self, matrix, x, y, value):
         if 0 <= y < len(matrix) and 0 <= x < len(matrix[0]):
             matrix[y][x] = value
 
     def _empty_matrix(self):
-        return [[0.1]*self.device.width for _ in range(self.device.height)]
-
-
-if __name__ == "__main__":
-    import sys
-    sys.path.append("..")
-    from simulator import Simulator
-    application = QApplication(sys.argv)
-    device = Simulator()
-    SnakeApp(device)
-    application.exec_()
+        return [[0.1]*self.device.columns for _ in range(self.device.rows)]
