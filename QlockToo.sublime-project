@@ -3,7 +3,7 @@
 	[
 		{
 			"path": "./",
-			"file_exclude_patterns": ["*.sublime-workspace", "*.sublime-project", ".gitignore"]
+			"file_exclude_patterns": ["*.sublime-workspace", "*.sublime-project", ".gitignore", "*_ui.py", "*_rc.py"]
 		}
 	]
 }
