@@ -2,28 +2,26 @@
 import os
 import pysideuic
 
+
 def _naming_convetion_ui(pydir, pyfile):
     name = os.path.splitext(pyfile)[0]
     return pydir, name + '_ui.py'
 
-def _naming_convetion_rcc(pydir, pyfile):
-    name = os.path.splitext(pyfile)[0]
-    return pydir, name + '_rcc.py'
+def convert_ui(path):
+    pysideuic.compileUiDir(path, recurse=True, map=_naming_convetion_ui)
 
-def convert_ui():
-    pysideuic.compileUiDir('.', recurse=True, map=_naming_convetion_ui)
-    print "Converting ui files done."
-
-def convert_rcc():
-    print "Converting resource files:"
-    assets = [f for f in os.listdir('./') if f.endswith('.qrc')]
-    for asset in assets:
-        asset_path = os.path.abspath(asset)
-        converted_path = asset_path[:-4] + "_rc.py"
-        os.system("pyside-rcc " + asset_path + " > " + converted_path)
-        print asset
+def convert_rcc(args, dirname, filenames):
+    for filename in filenames:
+        path = os.path.join(dirname, filename)
+        if '.qrc' in filename:
+            converted = os.path.splitext(filename)[0] + "_rc.py"
+            os.system("pyside-rcc " + filename + " > " + converted)
 
 
 if __name__ == '__main__':
-    convert_ui()
-    convert_rcc()
+    path = './'
+    print("Converting .qrc files.")
+    os.path.walk(path, convert_rcc, None)
+    print("Converting .ui-files.")
+    convert_ui(path)
+    print('Done.')
