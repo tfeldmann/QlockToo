@@ -1,24 +1,24 @@
 QlockToo
 ========
+In this repository you find the software, firmware and hardware design for the
+"QlockToo", an open-source remake of the QLOCKTWO by BIEGERT & FUNK.
 
-In this repository you find the software, firmware and hardware design for the "QlockToo", a open-source remake of the QlockTwo. It is built by four mechatronic master students of the "Westfälische Hochschule".
+It is built by four students (master mechatronics) of the Westfälische Hochschule.
 
 Software
 --------
-The QlockToo Software Suite is written in PySide (a Python binding for Qt) and features the following apps:
-
-- Konsole (Console)
-- Snake
-- Laufschrift (Marquee)
-- Zeichnen (Pattern)
-- Einstellungen (Settings)
-- Demo
+The QlockToo Software Suite is written in PySide.
 
 Firmware
 --------
 We use an Arduino Micro as the central microcontroller.
 
-Authors:
+License
+-------
+MIT-License - please refer to the License.txt in this repository.
+
+Authors
+-------
 - Thomas Feldmann
 - Marlene Feldmann
 - Manuel Fehmer
