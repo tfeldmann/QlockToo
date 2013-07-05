@@ -2,7 +2,7 @@
 
 from PySide.QtGui import *
 from PySide.QtCore import *
-from ui_snake import Ui_snake as Ui
+from snake_ui import Ui_snake as Ui
 from snake_model import SnakeModel
 
 

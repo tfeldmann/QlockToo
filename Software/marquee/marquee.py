@@ -2,7 +2,7 @@
 
 from PySide.QtGui import *
 from PySide.QtCore import *
-from ui_marquee import Ui_marquee as Ui
+from marquee_ui import Ui_marquee as Ui
 import font
 
 class MarqueeMatrix(object):

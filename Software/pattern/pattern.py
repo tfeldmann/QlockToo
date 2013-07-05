@@ -7,7 +7,7 @@ Lets the user control each LED in the clock individually and create patterns
 
 from PySide.QtGui import *
 from PySide.QtCore import *
-from ui_pattern import Ui_pattern
+from pattern_ui import Ui_pattern
 
 class PatternApp(QDialog):
     def __init__(self, device):

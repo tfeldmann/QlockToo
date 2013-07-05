@@ -7,7 +7,7 @@ Various demos to show off the QlockToo
 
 from PySide.QtGui import *
 from PySide.QtCore import *
-from ui_demo import Ui_demoapp as Ui
+from demo_ui import Ui_demoapp as Ui
 import math
 
 class DemoApp(QDialog):

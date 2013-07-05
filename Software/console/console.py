@@ -7,7 +7,7 @@ Send and read serial data from the clock
 
 from PySide.QtGui import *
 from PySide.QtCore import *
-from ui_console import Ui_console as Ui
+from console_ui import Ui_console as Ui
 
 class ConsoleApp(QDialog):
     def __init__(self, device):

@@ -2,7 +2,7 @@
 
 from PySide.QtGui import *
 from PySide.QtCore import *
-from ui_settings import Ui_settings as Ui
+from settings_ui import Ui_settings as Ui
 import time
 
 class SettingsApp(QDialog):

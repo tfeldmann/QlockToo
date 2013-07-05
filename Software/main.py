@@ -17,7 +17,7 @@ from demo import DemoApp
 from simulator import Simulator
 from device import Device
 from serialconnection import SerialConnection
-from ui_main import Ui_qlocktoo as Ui
+from main_ui import Ui_qlocktoo as Ui
 
 
 class QlockToo(QMainWindow):

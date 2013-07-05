@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>qlocktoo</class>
+ <widget class="QMainWindow" name="qlocktoo">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>548</width>
+    <height>448</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>QlockToo</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="Simulator" name="simulator" native="true"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QToolButton {
+	width: 80px;
+}ss</string>
+   </property>
+   <property name="movable">
+    <bool>true</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::AllToolBarAreas</set>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>LeftToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionConnect"/>
+   <addaction name="separator"/>
+   <addaction name="actionDemo"/>
+   <addaction name="actionSnake"/>
+   <addaction name="actionMarquee"/>
+   <addaction name="actionSettings"/>
+   <addaction name="actionConsole"/>
+  </widget>
+  <action name="actionConsole">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="assets.qrc">
+     <normaloff>:/icons/assets/coffee.png</normaloff>:/icons/assets/coffee.png</iconset>
+   </property>
+   <property name="iconText">
+    <string>Konsole</string>
+   </property>
+  </action>
+  <action name="actionSnake">
+   <property name="icon">
+    <iconset resource="assets.qrc">
+     <normaloff>:/icons/assets/circle-blank.png</normaloff>:/icons/assets/circle-blank.png</iconset>
+   </property>
+   <property name="text">
+    <string>Snake</string>
+   </property>
+  </action>
+  <action name="actionMarquee">
+   <property name="icon">
+    <iconset resource="assets.qrc">
+     <normaloff>:/icons/assets/text-width.png</normaloff>:/icons/assets/text-width.png</iconset>
+   </property>
+   <property name="text">
+    <string>Laufschrift</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="icon">
+    <iconset resource="assets.qrc">
+     <normaloff>:/icons/assets/cog.png</normaloff>:/icons/assets/cog.png</iconset>
+   </property>
+   <property name="text">
+    <string>Einstellungen</string>
+   </property>
+  </action>
+  <action name="actionDemo">
+   <property name="icon">
+    <iconset resource="assets.qrc">
+     <normaloff>:/icons/assets/star.png</normaloff>:/icons/assets/star.png</iconset>
+   </property>
+   <property name="text">
+    <string>Demo</string>
+   </property>
+  </action>
+  <action name="actionConnect">
+   <property name="icon">
+    <iconset resource="assets.qrc">
+     <normaloff>:/icons/assets/exchange.png</normaloff>:/icons/assets/exchange.png</iconset>
+   </property>
+   <property name="text">
+    <string>Verbinden</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Simulator</class>
+   <extends>QWidget</extends>
+   <header>simulator.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="assets.qrc"/>
+ </resources>
+ <connections/>
+</ui>
