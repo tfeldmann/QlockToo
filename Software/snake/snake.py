@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from PySide.QtGui import QDialog, QMessageBox
-from PySide.QtCore import Qt, QTimer
+from PySide.QtCore import Qt, QTimer, Slot
 from snake_ui import Ui_snake as Ui
 from snake_model import SnakeModel
 
@@ -94,3 +94,11 @@ class SnakeApp(QDialog):
 
     def _empty_matrix(self):
         return [[0.1]*self.device.columns for _ in range(self.device.rows)]
+
+    def reject(self):
+        # this fixes a bug where the snake app would not be
+        # correctly deleted by gc and keep running. We have to delete the
+        # snake instance.
+        self.stepTimer = None
+        self.snake = None
+        self.accept()
