@@ -10,6 +10,7 @@ from snake import SnakeApp
 from marquee import MarqueeApp
 from settings import SettingsApp
 from demo import DemoApp
+from timewords import TimeWordsApp
 
 
 class QlockToo(QMainWindow):
@@ -27,6 +28,7 @@ class QlockToo(QMainWindow):
         self.ui = Ui()
         self.ui.setupUi(self)
         self.device = self.ui.simulator
+        self.app = TimeWordsApp(device=self.device)
 
     @Slot()
     def on_actionConsole_triggered(self):
@@ -55,9 +57,12 @@ class QlockToo(QMainWindow):
 
     def startApp(self, App):
         """
+        Given a QlockTooApp Class, this method will instanciate and execute the
+        app. After execution, the standard timewords app is shown.
         """
         self.app = App(device=self.device)
         self.app.exec_()
+        self.app = TimeWordsApp(device=self.device)
 
     def refreshPorts(self):
         """
