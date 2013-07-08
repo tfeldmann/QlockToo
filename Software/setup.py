@@ -6,10 +6,6 @@ Usage:
 """
 
 from setuptools import setup
-import buildtools
-
-buildtools.convert_ui()
-print "Converted .ui files."
 
 setup(
     app=['main.py'],
