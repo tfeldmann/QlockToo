@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 from PySide.QtGui import QApplication, QMainWindow
 from PySide.QtCore import Slot
-from settings import SettingsApp
-from console import ConsoleApp
-from snake import SnakeApp
-from demo import DemoApp
-from marquee import MarqueeApp
 from device import Device
 from serialconnection import SerialConnection
 from main_ui import Ui_qlocktoo as Ui
+
+from console import ConsoleApp
+from snake import SnakeApp
+from marquee import MarqueeApp
+from settings import SettingsApp
+from demo import DemoApp
 
 
 class QlockToo(QMainWindow):
@@ -29,38 +30,34 @@ class QlockToo(QMainWindow):
 
     @Slot()
     def on_actionConsole_triggered(self):
-        """"
-        Start the console app
-        """
-        ConsoleApp(device=self.device)
+        """Start the console app"""
+        self.startApp(ConsoleApp)
 
     @Slot()
     def on_actionSnake_triggered(self):
-        """
-        Start Snake
-        """
-        SnakeApp(device=self.device)
+        """Start Snake"""
+        self.startApp(SnakeApp)
 
     @Slot()
     def on_actionMarquee_triggered(self):
-        """
-        Start the marquee app
-        """
-        MarqueeApp(device=self.device)
+        """Start the marquee app"""
+        self.startApp(MarqueeApp)
 
     @Slot()
     def on_actionSettings_triggered(self):
-        """
-        Starts the settings panel
-        """
-        SettingsApp(device=self.device)
+        """Starts the settings panel"""
+        self.startApp(SettingsApp)
 
     @Slot()
     def on_actionDemo_triggered(self):
+        """Start the demo app"""
+        self.startApp(DemoApp)
+
+    def startApp(self, App):
         """
-        Start the demo app
         """
-        DemoApp(device=self.device)
+        self.app = App(device=self.device)
+        self.app.exec_()
 
     def refreshPorts(self):
         """

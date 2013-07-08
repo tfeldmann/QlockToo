@@ -41,7 +41,6 @@ class SnakeApp(QDialog):
         # create the timer
         self.stepTimer = QTimer()
         self.stepTimer.timeout.connect(self.step)
-        self.exec_()
 
     def keyPressEvent(self, event):
         key = event.key()

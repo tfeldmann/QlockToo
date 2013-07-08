@@ -15,7 +15,6 @@ class ConsoleApp(QDialog):
         self.ui = Ui()
         self.ui.setupUi(self)
         self.ui.command.returnPressed.connect(self.sendCommand)
-        self.exec_()
 
     def sendCommand(self):
         cmd = self.ui.command.text()

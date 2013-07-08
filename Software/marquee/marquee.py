@@ -90,8 +90,6 @@ class MarqueeApp(QDialog):
         self.device.matrix = [[0]*11]*10
         self.device.corners = [0]*4
 
-        self.exec_()
-
     def cursorPositionChanged(self, old, new):
         """
         Shows the chars around the current cursor position on the device.

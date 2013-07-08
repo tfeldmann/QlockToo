@@ -23,7 +23,6 @@ class DemoApp(QDialog):
         self.ui.wave.clicked.connect(self.wave)
         self.ui.pong.clicked.connect(self.pong)
         self.ui.helix.clicked.connect(self.helix)
-        self.exec_()
 
     def black(self):
         self.demo = None

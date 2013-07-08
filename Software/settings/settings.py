@@ -12,7 +12,6 @@ class SettingsApp(QDialog):
         self.ui = Ui()
         self.ui.setupUi(self)
         self.ui.syncTime.clicked.connect(self.syncTime)
-        self.exec_()
 
     def syncTime(self):
         """
