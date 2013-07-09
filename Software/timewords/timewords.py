@@ -30,7 +30,7 @@ class TimeWordsApp(object):
         for start, end in self.litLetters(hour, minute):
             for x in range(end - start + 1):
                 row = start // self.device.columns
-                column = start - start // self.device.columns * self.device.columns
+                column = start - row * self.device.columns
                 matrix[row][column + x] = 1
 
         self.device.corners = self.litCorners(minute)
@@ -93,7 +93,7 @@ class TimeWordsApp(object):
             11: (49, 51),    # ELF
         }
 
-        # Bitmask with columns:
+        # Bitmask with minutes as rows and columns:
         # ES,IST,FÜNF,ZEHN,VIERTEL,ZWANZIG,VOR,NACH,HALB,Stunde,Stunde+1,UHR
         selectors = {
             0:   [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
@@ -127,6 +127,10 @@ class TimeWordsApp(object):
             hour_names[hour % 12],      # hour
             hour_names[(hour+1) % 12],  # hour+1
             (107, 109)]                 # UHR
+
+        # Corner case: "ES IST EINS UHR" -> "ES IST EIN UHR"
+        if hour % 12 == 1 and minute < 5:
+            words[9] = (55, 57)
 
         return itertools.compress(words, selectors[ref_minute])
 
