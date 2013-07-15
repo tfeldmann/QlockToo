@@ -88,7 +88,7 @@ class TimeWordsApp(object):
             6:  (77, 81),    # SECHS
             7:  (88, 93),    # SIEBEN
             8:  (84, 87),    # ACHT
-            9:  (101, 105),  # NEUN
+            9:  (102, 105),  # NEUN
             10: (99, 102),   # ZEHN
             11: (49, 51),    # ELF
         }
