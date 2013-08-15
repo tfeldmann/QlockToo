@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from PySide.QtGui import QDialog
 from console_ui import Ui_console as Ui
 

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from PySide.QtGui import *
 from PySide.QtCore import *
 

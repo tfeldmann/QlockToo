@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 import serial
 from serial.tools import list_ports

@@ -1,10 +1,7 @@
-# -*- coding: utf-8 -*-
 from PySide.QtGui import QMainWindow, QMessageBox
 from PySide.QtCore import Slot
-
 import device
 from connect.serialconnection import SerialConnection
-
 from console import ConsoleApp
 from snake import SnakeApp
 from marquee import MarqueeApp
@@ -12,6 +9,8 @@ from settings import SettingsApp
 from demo import DemoApp
 from timewords import TimeWordsApp
 from app_ui import Ui_qlocktoo as Ui
+
+__version__ = '1.0'
 
 class QlockToo(QMainWindow):
     """
@@ -27,6 +26,7 @@ class QlockToo(QMainWindow):
         super(QlockToo, self).__init__()
         self.ui = Ui()
         self.ui.setupUi(self)
+        self.setWindowTitle('QlockToo v{0}'.format(__version__))
         self.device = self.ui.simulator
         self.app = TimeWordsApp(device=self.device)
 

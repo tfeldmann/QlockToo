@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-
-from PySide.QtGui import *
-from PySide.QtCore import *
+from PySide.QtGui import QDialog
 from pattern_ui import Ui_pattern
 
 

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from PySide.QtCore import QTimer
 from serialconnection import SerialConnection
 

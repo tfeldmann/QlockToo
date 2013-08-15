@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from PySide.QtGui import QDialog, QMessageBox
-from PySide.QtCore import Qt, QTimer, Slot
+from PySide.QtCore import Qt, QTimer
 from snake_ui import Ui_snake as Ui
 from snake_model import SnakeModel
 

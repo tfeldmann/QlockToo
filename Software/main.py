@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import sys
 from PySide.QtGui import QApplication
 from qlocktoo.app import QlockToo

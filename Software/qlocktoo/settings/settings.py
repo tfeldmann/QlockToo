@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from PySide.QtGui import QDialog
 from PySide.QtCore import Qt, Slot
 from settings_ui import Ui_settings as Ui

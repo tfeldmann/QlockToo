@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from PySide.QtGui import QDialog
 from PySide.QtCore import Slot, QTimer
 from demo_ui import Ui_demoapp as Ui
