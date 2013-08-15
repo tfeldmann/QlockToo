@@ -9,6 +9,8 @@ Software
 --------
 The QlockToo Software Suite is written in PySide.
 
+<img src="Documentation/Screenshot.png" alt="Software">
+
 Firmware
 --------
 We use an Arduino Micro as the central microcontroller.
