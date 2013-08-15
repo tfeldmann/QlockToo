@@ -2,7 +2,7 @@
 from __future__ import division
 import time
 import itertools
-from PySide.QtCore import Qt, QTimer, Slot
+from PySide.QtCore import QTimer
 
 
 class TimeWordsApp(object):
@@ -36,15 +36,16 @@ class TimeWordsApp(object):
         self.device.corners = self.litCorners(minute)
         self.device.matrix = matrix
 
+    @classmethod
     def litCorners(self, minute):
         """
-        >>> app.litCorners(0)
+        >>> TimeWordsApp.litCorners(0)
         [0, 0, 0, 0]
-        >>> app.litCorners(55)
+        >>> TimeWordsApp.litCorners(55)
         [0, 0, 0, 0]
-        >>> app.litCorners(34)
+        >>> TimeWordsApp.litCorners(34)
         [1, 1, 1, 1]
-        >>> app.litCorners(28)
+        >>> TimeWordsApp.litCorners(28)
         [1, 1, 1, 0]
         """
         corners_active = minute % 5
@@ -53,7 +54,7 @@ class TimeWordsApp(object):
             result[x] = 1
         return result
 
-
+    @classmethod
     def litLetters(self, hour, minute):
         """
         Given a time in hours and minutes, this method returns a list of all
@@ -128,7 +129,7 @@ class TimeWordsApp(object):
             hour_names[(hour+1) % 12],  # hour+1
             (107, 109)]                 # UHR
 
-        # Corner case: "ES IST EINS UHR" -> "ES IST EIN UHR"
+        # Corner case: "ES IST EINS UHR" has to be "ES IST EIN UHR"
         if hour % 12 == 1 and minute < 5:
             words[9] = (55, 57)
 
@@ -137,4 +138,4 @@ class TimeWordsApp(object):
 
 if __name__ == '__main__':
     import doctest
-    doctest.testmod(extraglobs={'app': TimeWordsApp()})
+    doctest.testmod()

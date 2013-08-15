@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from PySide.QtGui import QDialog
-from PySide.QtCore import Qt, Slot, QTimer
+from PySide.QtCore import Slot, QTimer
 from demo_ui import Ui_demoapp as Ui
 import math
 
@@ -11,42 +11,42 @@ class DemoApp(QDialog):
     Features various graphical demos to show off the QlockToo
     """
     def __init__(self, device):
-        super(DemoApp, self).__init__()
+        QDialog.__init__(self)
         self.device = device
         self.demo = None
         self.ui = Ui()
         self.ui.setupUi(self)
-        self.ui.black.clicked.connect(self.black)
-        self.ui.white.clicked.connect(self.white)
-        self.ui.pulse.clicked.connect(self.pulse)
-        self.ui.fade.clicked.connect(self.fade)
-        self.ui.wave.clicked.connect(self.wave)
-        self.ui.pong.clicked.connect(self.pong)
-        self.ui.helix.clicked.connect(self.helix)
 
-    def black(self):
+    @Slot()
+    def on_black_clicked(self):
         self.demo = None
         self.device.matrix = [[0]*11]*10
         self.device.corners = [0]*4
 
-    def white(self):
+    @Slot()
+    def on_white_clicked(self):
         self.demo = None
         self.device.matrix = [[1]*11]*10
         self.device.corners = [1]*4
 
-    def pulse(self):
+    @Slot()
+    def on_pulse_clicked(self):
         self.demo = PulseDemo(self.device)
 
-    def fade(self):
+    @Slot()
+    def on_fade_clicked(self):
         self.demo = FadeDemo(self.device)
 
-    def wave(self):
+    @Slot()
+    def on_wave_clicked(self):
         self.demo = WaveDemo(self.device)
 
-    def pong(self):
+    @Slot()
+    def on_pong_clicked(self):
         self.demo = PongDemo(self.device)
 
-    def helix(self):
+    @Slot()
+    def on_helix_clicked(self):
         self.demo = HelixDemo(self.device)
 
 

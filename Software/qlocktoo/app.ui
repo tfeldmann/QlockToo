@@ -129,7 +129,7 @@
   <customwidget>
    <class>Simulator</class>
    <extends>QWidget</extends>
-   <header>simulator.h</header>
+   <header>device.simulator.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

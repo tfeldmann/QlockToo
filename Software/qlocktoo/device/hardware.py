@@ -3,9 +3,9 @@ from PySide.QtCore import QTimer
 from serialconnection import SerialConnection
 
 
-class Device(object):
+class Hardware(object):
     """
-    Device
+    Hardware
 
     Wrapper class for the actual QlockToo device.
     Commands are send via a serial connection.

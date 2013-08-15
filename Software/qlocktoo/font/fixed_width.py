@@ -5,7 +5,7 @@ Default QlockToo Font
 A simple 5x10 fixed size font.
 """
 
-default = {
+font = {
     "name": "Default QlockToo Font",
     "author": "Marlene Feldmann, Thomas Feldmann",
     "letter_width": 5,

@@ -1,20 +1,18 @@
 # -*- coding: utf-8 -*-
-from PySide.QtGui import *
-from PySide.QtCore import *
+from PySide.QtGui import QDialog
+from PySide.QtCore import Qt, QTimer, Slot
+import qlocktoo.font.fixed_width as Font
 from marquee_ui import Ui_marquee as Ui
-import font
-
 
 class MarqueeMatrix(object):
     def __init__(self, font):
         self.matrix = []
-        self.font = font
+        self.font = Font.font
 
     def setText(self, text):
         # font settings
-        font = self.font
-        letter_height = font['letter_height']
-        letter_width = font['letter_width']
+        letter_width = self.font['letter_width']
+        # letter_height = self.font['letter_height']  # not needed here
         spacing = 1
 
         # build a empty 2d-array of desired size
@@ -26,7 +24,7 @@ class MarqueeMatrix(object):
 
         # print letters
         for _x, _c in enumerate(text):
-            c = font[_c]
+            c = self.font[_c]
             x = _x * (letter_width + spacing)
             for y, line in enumerate(c):
                 matrix[y][x:x+letter_width] = line
@@ -35,7 +33,7 @@ class MarqueeMatrix(object):
 
     def regionFromLetter(self, letter):
         return self.regionFromPosition(
-            (letter - 1) * (font.default['letter_width'] + 1))
+            (letter - 1) * (self.font['letter_width'] + 1))
 
     def regionFromPosition(self, x):
         if -11 < x < 0:
@@ -74,15 +72,13 @@ class MarqueeApp(QDialog):
         self.ui.setupUi(self)
         self.setAttribute(Qt.WA_DeleteOnClose)
         self.ui.text.cursorPositionChanged.connect(self.cursorPositionChanged)
-        self.ui.play.stateChanged.connect(self.playToggled)
-        self.ui.speed.valueChanged.connect(self.speedChanged)
 
         # create the update timer
         self.timer = QTimer()
         self.timer.timeout.connect(self.move)
 
         # marquee
-        self.marquee = MarqueeMatrix(font.default)
+        self.marquee = MarqueeMatrix(self.font)
         self.startposition = - self.device.columns
         self.speed = 50  # this is the initial dial position
 
@@ -107,15 +103,16 @@ class MarqueeApp(QDialog):
         """
         return 200 - 170 * abs(speed / 100.0)
 
-    def playToggled(self, state):
-        if state == Qt.Checked:
-            text = self.ui.text.text()
+    @Slot()
+    def on_play_stateChanged(self):
+        if self.ui.play.isChecked():
             self.x = self.startposition
             self.timer.start(self._frequency(self.speed))
         else:
             self.timer.stop()
 
-    def speedChanged(self):
+    @Slot()
+    def on_speed_valueChanged(self):
         """
         Gets called from the speed dial and sets the new speed.
         """
