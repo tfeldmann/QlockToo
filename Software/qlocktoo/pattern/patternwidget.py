@@ -1,7 +1,9 @@
 from PySide.QtGui import *
 from PySide.QtCore import *
 
+
 class PatternWidget(QWidget):
+
     def __init__(self, parent=None):
         super(PatternWidget, self).__init__()
 

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 from __future__ import division
 import time
 import itertools
@@ -6,9 +6,11 @@ from PySide.QtCore import QTimer
 
 
 class TimeWordsApp(object):
+
     """
     Shows the time as words (lit letters) and minutes (lit corners)
     """
+
     def __init__(self, device=None):
         super(TimeWordsApp, self).__init__()
         self.device = device
@@ -26,7 +28,7 @@ class TimeWordsApp(object):
         t = time.localtime()
         hour, minute, second = t.tm_hour, t.tm_min, t.tm_sec
 
-        matrix = [[0]*self.device.columns for _ in range(self.device.rows)]
+        matrix = [[0] * self.device.columns for _ in range(self.device.rows)]
         for start, end in self.litLetters(hour, minute):
             for x in range(end - start + 1):
                 row = start // self.device.columns
@@ -65,8 +67,9 @@ class TimeWordsApp(object):
 
             areas = [(start1, end1), (start2, end2)]
 
-        'start' and 'end' are integer numbers that each correspond to a specific
-        letter on the clock as shown in this (german) QlockToo reference layout:
+        'start' and 'end' are integer numbers that each correspond to a
+        specific letter on the clock as shown in this (german) QlockToo
+        reference layout:
 
             E S K I S T A F Ü N F   ( 0 ... 10)
             Z E H N Z W A N Z I G   (11 ... 21)
@@ -116,18 +119,18 @@ class TimeWordsApp(object):
 
         # fill values for the sentence
         words = [
-            (0, 1),                     # ES
-            (3, 5),                     # IST
-            (7, 10),                    # FÜNF
-            (11, 14),                   # ZEHN
-            (26, 32),                   # VIERTEL
-            (15, 21),                   # ZWANZIG
-            (33, 35),                   # VOR
-            (40, 43),                   # NACH
-            (44, 47),                   # HALB
-            hour_names[hour % 12],      # hour
-            hour_names[(hour+1) % 12],  # hour+1
-            (107, 109)]                 # UHR
+            (0, 1),                       # ES
+            (3, 5),                       # IST
+            (7, 10),                      # FÜNF
+            (11, 14),                     # ZEHN
+            (26, 32),                     # VIERTEL
+            (15, 21),                     # ZWANZIG
+            (33, 35),                     # VOR
+            (40, 43),                     # NACH
+            (44, 47),                     # HALB
+            hour_names[hour % 12],        # hour
+            hour_names[(hour + 1) % 12],  # hour+1
+            (107, 109)]                   # UHR
 
         # Corner case: "ES IST EINS UHR" has to be "ES IST EIN UHR"
         if hour % 12 == 1 and minute < 5:

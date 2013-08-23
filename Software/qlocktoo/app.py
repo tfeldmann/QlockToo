@@ -12,13 +12,16 @@ from app_ui import Ui_qlocktoo as Ui
 
 __version__ = '1.0'
 
+
 class QlockToo(QMainWindow):
+
     """
     QlockToo
 
     The main window that contains the simulator widget. From here you can start
     all the provided apps.
     """
+
     def __init__(self):
         """
         Initializes the application's UI

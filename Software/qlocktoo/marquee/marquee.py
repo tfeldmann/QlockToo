@@ -4,7 +4,9 @@ from PySide.QtCore import Qt, QTimer, Slot
 import qlocktoo.font.fixed_width as Font
 from marquee_ui import Ui_marquee as Ui
 
+
 class MarqueeMatrix(object):
+
     def __init__(self, font):
         self.matrix = []
         self.font = Font.font
@@ -20,14 +22,14 @@ class MarqueeMatrix(object):
         length = (spacing + letter_width) * len(text)
         # see http://stackoverflow.com/q/15956969/300783
         # we cannot use [[0]*length]*height here
-        matrix = [[0]*length for _ in range(height)]
+        matrix = [[0] * length for _ in range(height)]
 
         # print letters
         for _x, _c in enumerate(text):
             c = self.font[_c]
             x = _x * (letter_width + spacing)
             for y, line in enumerate(c):
-                matrix[y][x:x+letter_width] = line
+                matrix[y][x:x + letter_width] = line
 
         self.matrix = matrix
 
@@ -38,15 +40,15 @@ class MarqueeMatrix(object):
     def regionFromPosition(self, x):
         if -11 < x < 0:
             # area before text
-            extract = [line[0:x+11] for line in self.matrix]
-            result = [[0]*abs(x) + line for line in extract]
+            extract = [line[0:x + 11] for line in self.matrix]
+            result = [[0] * abs(x) + line for line in extract]
         elif x < -11:
             # screen is completely empty
-            result = [[0]*11 for _ in range(10)]
+            result = [[0] * 11 for _ in range(10)]
         else:
             # middle or end of marquee
-            extract = [line[x:x+11] for line in self.matrix]
-            result = [line + [0]*(11 - len(line)) for line in extract]
+            extract = [line[x:x + 11] for line in self.matrix]
+            result = [line + [0] * (11 - len(line)) for line in extract]
         return result
 
     @property
@@ -59,12 +61,14 @@ class MarqueeMatrix(object):
 
 
 class MarqueeApp(QDialog):
+
     """
     Marquee App
 
     Shows scrolling texts on the QlockToo. You can modify the animation's
     direction, speed and style.
     """
+
     def __init__(self, device):
         super(MarqueeApp, self).__init__()
         self.device = device
@@ -83,8 +87,8 @@ class MarqueeApp(QDialog):
         self.speed = 50  # this is the initial dial position
 
         # init device with a black screen
-        self.device.matrix = [[0]*11]*10
-        self.device.corners = [0]*4
+        self.device.matrix = [[0] * 11] * 10
+        self.device.corners = [0] * 4
 
     def cursorPositionChanged(self, old, new):
         """

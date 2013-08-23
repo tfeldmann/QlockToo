@@ -5,9 +5,11 @@ import math
 
 
 class DemoApp(QDialog):
+
     """
     Features various graphical demos to show off the QlockToo
     """
+
     def __init__(self, device):
         QDialog.__init__(self)
         self.device = device
@@ -18,14 +20,14 @@ class DemoApp(QDialog):
     @Slot()
     def on_black_clicked(self):
         self.demo = None
-        self.device.matrix = [[0]*11]*10
-        self.device.corners = [0]*4
+        self.device.matrix = [[0] * 11] * 10
+        self.device.corners = [0] * 4
 
     @Slot()
     def on_white_clicked(self):
         self.demo = None
-        self.device.matrix = [[1]*11]*10
-        self.device.corners = [1]*4
+        self.device.matrix = [[1] * 11] * 10
+        self.device.corners = [1] * 4
 
     @Slot()
     def on_pulse_clicked(self):
@@ -49,6 +51,7 @@ class DemoApp(QDialog):
 
 
 class Demo(object):
+
     def __init__(self, device, framerate):
         self.device = device
         self.timer = QTimer()
@@ -60,6 +63,7 @@ class Demo(object):
 
 
 class PulseDemo(Demo):
+
     def __init__(self, device, framerate=50):
         Demo.__init__(self, device, framerate)
         self.b = 0
@@ -73,27 +77,30 @@ class PulseDemo(Demo):
         elif self.b < 0:
             self.b = 0
             self.inc *= -1
-        self.device.matrix = [[self.b]*11]*10
-        self.device.corners = [1-self.b]*4
+        self.device.matrix = [[self.b] * 11] * 10
+        self.device.corners = [1 - self.b] * 4
 
 
 class FadeDemo(Demo):
+
     def __init__(self, device, framerate=50):
         Demo.__init__(self, device, framerate)
-        self.device.corners = [0]*4
-        self.matrix = [[0]*11]*10
+        self.device.corners = [0] * 4
+        self.matrix = [[0] * 11] * 10
         self.b = 0
 
     def update(self):
         self.b += 0.1
-        self.matrix = [[abs(0.5*math.sin(self.b)-x*0.1 + 0.5) for x in range(11)]]*10
+        self.matrix = [[abs(0.5 * math.sin(self.b) - x * 0.1 + 0.5)
+                        for x in range(11)]] * 10
         self.device.matrix = self.matrix
 
 
 class WaveDemo(Demo):
+
     def __init__(self, device, framerate=30):
         Demo.__init__(self, device, framerate)
-        self.device.corners = [0]*4
+        self.device.corners = [0] * 4
         self.t = 0
 
     def update(self):
@@ -101,7 +108,8 @@ class WaveDemo(Demo):
             px = self.device.columns / 2 + 1.7 * math.sin(0.1 * t)
             py = self.device.rows / 2 + 1.7 * math.cos(0.1 * t)
             buckling = 1.3
-            result = math.sin(buckling * ((x-px)**2 + (y-py)**2)**0.5 - t)
+            result = math.sin(
+                buckling * ((x - px) ** 2 + (y - py) ** 2) ** 0.5 - t)
             return result * 0.5 + 0.5  # scale result to 0 < values < 1
 
         self.t += 0.2
@@ -110,9 +118,10 @@ class WaveDemo(Demo):
 
 
 class PongDemo(Demo):
+
     def __init__(self, device, framerate=70):
         Demo.__init__(self, device, framerate)
-        self.device.corners = [0]*4
+        self.device.corners = [0] * 4
 
         self.x, self.y = device.columns / 2, device.rows / 2
         self.dx, self.dy = 1, 1
@@ -143,7 +152,7 @@ class PongDemo(Demo):
             self.paddles[0] = self.y
 
     def draw(self):
-        self.matrix = [[0]*11 for _ in range(10)]
+        self.matrix = [[0] * 11 for _ in range(10)]
 
         self.drawPaddles()
 
@@ -153,15 +162,16 @@ class PongDemo(Demo):
 
     def drawPaddles(self):
         self.matrix[self.paddles[0]][0] = 1
-        self.matrix[self.paddles[1]][self.device.columns-1] = 1
+        self.matrix[self.paddles[1]][self.device.columns - 1] = 1
 
 
 class HelixDemo(Demo):
+
     def __init__(self, device, framerate=100):
         Demo.__init__(self, device, framerate)
-        self.device.corners = [0]*4
-        self.matrix = [[0]*11 for _ in range(10)]
-        self.matrix[0] = [1]*11
+        self.device.corners = [0] * 4
+        self.matrix = [[0] * 11 for _ in range(10)]
+        self.matrix[0] = [1] * 11
         self.t = 0
 
     def update(self):
@@ -169,10 +179,10 @@ class HelixDemo(Demo):
             k = 0.6
             y = math.sin(k * x - t)
             brightness = math.cos(k * x - t) * 0.3 + 0.7
-            return [self.device.columns * (y*0.5+0.5), brightness]
+            return [self.device.columns * (y * 0.5 + 0.5), brightness]
 
         self.t += 0.2
-        self.matrix = [[0]*11 for _ in range(10)]
+        self.matrix = [[0] * 11 for _ in range(10)]
         # helix 1
         for x, line in enumerate(self.matrix):
             for r in range(-2, 2):

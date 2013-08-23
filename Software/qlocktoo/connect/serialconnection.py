@@ -6,7 +6,9 @@ import Queue
 
 
 class SerialConnection(object):
+
     """receives and sends serial data in a thread"""
+
     def __init__(self):
         self.queue = Queue.Queue()
 
@@ -41,7 +43,7 @@ class SerialConnection(object):
             for i in range(256):
                 try:
                     s = serial.Serial(i)
-                    available.append('COM'+str(i + 1))
+                    available.append('COM' + str(i + 1))
                     s.close()
                 except serial.SerialException:
                     pass

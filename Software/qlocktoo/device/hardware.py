@@ -3,12 +3,14 @@ from serialconnection import SerialConnection
 
 
 class Hardware(object):
+
     """
     Hardware
 
     Wrapper class for the actual QlockToo device.
     Commands are send via a serial connection.
     """
+
     def __init__(self, port, baudrate=57600):
         self.width = 11
         self.height = 10

@@ -6,6 +6,7 @@ from snake_model import SnakeModel
 
 
 class SnakeApp(QDialog):
+
     def __init__(self, device):
         super(SnakeApp, self).__init__()
         self.device = device
@@ -26,7 +27,7 @@ class SnakeApp(QDialog):
             [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         ]
         self.device.matrix = welcomeScreen
-        self.device.corners = [0]*4
+        self.device.corners = [0] * 4
         self.stepFrequency = 5
 
         # init the game model
@@ -60,7 +61,7 @@ class SnakeApp(QDialog):
 
     def gameOver(self, score):
         QMessageBox.warning(self, "Game Over",
-            "Game Over.\nDeine Punktzahl: " + str(score))
+                            "Game Over.\nDeine Punktzahl: " + str(score))
         self.stepTimer.stop()
 
     def ateFood(self, score):
@@ -84,7 +85,7 @@ class SnakeApp(QDialog):
         # draw snake
         for pos, element in enumerate(tail):
             self._set_matrix_element(matrix, *element,
-                value=0.7 - 0.4 * pos / len(tail))
+                                     value=0.7 - 0.4 * pos / len(tail))
         self._set_matrix_element(matrix, *head, value=1)
         self.device.matrix = matrix
 
@@ -93,7 +94,7 @@ class SnakeApp(QDialog):
             matrix[y][x] = value
 
     def _empty_matrix(self):
-        return [[0.1]*self.device.columns for _ in range(self.device.rows)]
+        return [[0.1] * self.device.columns for _ in range(self.device.rows)]
 
     def reject(self):
         # this fixes a bug where the snake app would not be

@@ -1,11 +1,14 @@
 import random
 
+
 class SnakeModel(object):
+
     """
     Model for a snake-like game.
     """
+
     def __init__(self, width, height,
-        gameOverCallback, ateFoodCallback):
+                 gameOverCallback, ateFoodCallback):
         self._width = width
         self._height = height
         self._gameover = gameOverCallback
@@ -55,7 +58,8 @@ class SnakeModel(object):
         self.tail.pop()
 
     def _newFoodLocation(self):
-        possible = set([(x, y) for x in range(self._width)
-            for y in range(self._height)]) - set(self.tail) - set([self.head])
+        game_field = set([(x, y) for x in range(self._width)
+                          for y in range(self._height)])
+        possible = game_field - set(self.tail) - set([self.head])
         newPosition = random.choice(list(possible))
         return newPosition

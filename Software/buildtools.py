@@ -11,8 +11,10 @@ def _naming_convetion_ui(pydir, pyfile):
     name = os.path.splitext(pyfile)[0]
     return pydir, name + '_ui.py'
 
+
 def convert_ui(path):
     pysideuic.compileUiDir(path, recurse=True, map=_naming_convetion_ui)
+
 
 def convert_rcc(args, dirname, filenames):
     for filename in filenames:
@@ -21,6 +23,7 @@ def convert_rcc(args, dirname, filenames):
             new_filename = os.path.splitext(filename)[0] + "_rc.py"
             new_path = os.path.join(dirname, new_filename)
             os.system("pyside-rcc " + old_path + " > " + new_path)
+
 
 def run(ui=True, qrc=True):
     path = './'
