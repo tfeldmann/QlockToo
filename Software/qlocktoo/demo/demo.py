@@ -1,6 +1,7 @@
 from PySide.QtGui import QDialog
 from PySide.QtCore import Slot, QTimer
 from demo_ui import Ui_demoapp as Ui
+import lowpass
 import math
 
 
@@ -189,4 +190,4 @@ class HelixDemo(Demo):
                 pos, brightness = helix(x, self.t + r / 10.0)
                 line[int(pos)] = brightness
 
-        self.device.matrix = self.matrix
+        self.device.matrix = lowpass.lowpass(self.matrix)
