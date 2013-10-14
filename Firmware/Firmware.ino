@@ -15,7 +15,7 @@ void setup()
     Serial.begin(BAUDRATE);
     api_init();
     time_init();
-    //display_init();
+    display_init();
 }
 
 void loop()
