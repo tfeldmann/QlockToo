@@ -6,21 +6,12 @@
 
 volatile bool time_has_updated = false;
 
+
 void time_init()
 {
     seconds = minutes = hours = day = month = year = 0;
     dcf77_init();
     time_startTimer();
-}
-
-
-void time_update()
-{
-    if (time_has_updated)
-    {
-        time_has_updated = false;
-        time_dump();
-    }
 }
 
 
@@ -63,7 +54,7 @@ void time_dump()
 
 void time_startTimer()
 {
-    // initialize timer1
+    // initialize timer1 to fire with 1 Hz
     noInterrupts();           // disable all interrupts
     TCCR1A = 0;
     TCCR1B = 0;
