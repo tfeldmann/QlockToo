@@ -12,10 +12,10 @@ Run with:
 ## Todo
 - Custom Patterns
 - Marquee with variable font width
-- Binary Clock
-- Helix Demo
+- Binary Clock Mode
 - Pong Demo
 - Tetris
 - Settings for DCF77 / Manual / Internet-time
 - Settings for Manual / Automatic Brightness
 - Setting to darken "ES IST"
+- Matrix Mode
