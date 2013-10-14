@@ -20,11 +20,12 @@ void setup()
     api_init();
     time_init();
     display_init();
+    controller_init();
 }
 
 
 void loop()
 {
     api_update();
-    time_update();
+    controller_update();
 }

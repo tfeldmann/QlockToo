@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include "statemachine.h"
 
 // Clock time
 volatile unsigned char seconds, minutes, hours, day, month;
@@ -24,3 +25,11 @@ volatile unsigned int year;
 
 // Led Pin
 #define LED_PIN 13
+
+// List of device states
+STATES(
+    TIMEWORDS,
+    SECONDS,
+    STREAM,
+    TEMPERATURE
+);
