@@ -48,10 +48,10 @@ void api_about()
     Serial.println("#   - an open-source remake of the QlockTwo.");
     Serial.println("#===========================================");
     Serial.println("#Firmware Version:");
-    Serial.println("#    " + String(VERSION) + "");
+    Serial.println("#    " + String(VERSION));
     Serial.println("#");
     Serial.println("#Compiled on:");
-    Serial.println("#    " + String(__TIMESTAMP__) + "");
+    Serial.println("#    " + String(__TIMESTAMP__));
     Serial.println("#");
     Serial.println("#Creators: ");
     Serial.println("#    Thomas Feldmann");

@@ -7,8 +7,8 @@
 // Firmware entry point for the QlockToo, an open-source remake of the QlockTwo.
 // Author: Thomas Feldmann
 //
-// Timer1 keeps the time
-// Timer3 updates the display
+// Timer1: keeps the time
+// Timer3: updates the display
 
 #define VERSION "0.1"
 #define BAUDRATE 115200

@@ -23,7 +23,7 @@ void controller_update()
     STATE_LOOP
         if (time_has_updated)
         {
-            Serial.println("update the display");
+            Serial.println("Update the display now");
         }
     STATE_LEAVE
     END_OF_STATE
