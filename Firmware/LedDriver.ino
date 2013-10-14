@@ -5,8 +5,10 @@
 #include <Wire.h>
 #include "globals.h"
 
+
 unsigned char leddriver_address;
 unsigned char leddriver_rawPinModes[4];
+
 
 void leddriver_begin(unsigned char address_)
 {
@@ -20,6 +22,7 @@ void leddriver_begin(unsigned char address_)
     Wire.endTransmission();
 }
 
+
 void leddriver_setPinMode(int pin, int pinMode)
 {
     Wire.beginTransmission(leddriver_address);
@@ -30,6 +33,7 @@ void leddriver_setPinMode(int pin, int pinMode)
     Wire.endTransmission();
 }
 
+
 void leddriver_setPinPWM(int pin, unsigned char dutyCycle)
 {
     Wire.beginTransmission(leddriver_address);
@@ -37,6 +41,7 @@ void leddriver_setPinPWM(int pin, unsigned char dutyCycle)
     Wire.write(dutyCycle);
     Wire.endTransmission();
 }
+
 
 void leddriver_setAllPinPWM(unsigned char dutyCycles[16])
 {

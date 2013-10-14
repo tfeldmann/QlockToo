@@ -7,6 +7,7 @@
 
 #define FPS_TO_PERIOD_US(_x_) (1e6 / _x_)
 
+
 volatile unsigned char matrix[ROWS][COLS] = {
     {LED_MAX, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, LED_MAX, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -50,7 +51,7 @@ void display_init()
 void display_update()
 {
     int8_t row = display_enableNextRow();
-    leddriver_setPinPWM(0, matrix[row][0]);
+    // leddriver_setPinPWM(0, matrix[row][0]);
 
     digitalWrite(13, !digitalRead(13));
 }
