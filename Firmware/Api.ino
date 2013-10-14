@@ -19,17 +19,17 @@ void api_unknown(const char *command)
 
 void api_init()
 {
-    serialCommand.addCommand("@time", api_time);
-    serialCommand.addCommand("@brightness_min", api_brightness_min);
-    serialCommand.addCommand("@brightness_max", api_brightness_max);
-    serialCommand.addCommand("@nighttime_begin", api_nighttime_begin);
-    serialCommand.addCommand("@nighttime_end", api_nighttime_end);
-    serialCommand.addCommand("@nighttime_brightness", api_nighttime_brightness);
-    serialCommand.addCommand("@duration_words", api_duration_words);
-    serialCommand.addCommand("@duration_seconds", api_duration_seconds);
-    serialCommand.addCommand("@duration_date", api_duration_date);
-    serialCommand.addCommand("@duration_temperature", api_duration_temperature);
-    serialCommand.addCommand("@matrix" api_matrix);
+    // serialCommand.addCommand("@time", api_time);
+    // serialCommand.addCommand("@brightness_min", api_brightness_min);
+    // serialCommand.addCommand("@brightness_max", api_brightness_max);
+    // serialCommand.addCommand("@nighttime_begin", api_nighttime_begin);
+    // serialCommand.addCommand("@nighttime_end", api_nighttime_end);
+    // serialCommand.addCommand("@nighttime_brightness", api_nighttime_brightness);
+    // serialCommand.addCommand("@duration_words", api_duration_words);
+    // serialCommand.addCommand("@duration_seconds", api_duration_seconds);
+    // serialCommand.addCommand("@duration_date", api_duration_date);
+    // serialCommand.addCommand("@duration_temperature", api_duration_temperature);
+    // serialCommand.addCommand("@matrix" api_matrix);
     serialCommand.addCommand("@about", api_about);
     serialCommand.setDefaultHandler(api_unknown);
 }
