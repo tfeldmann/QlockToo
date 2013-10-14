@@ -3,6 +3,7 @@
 //
 
 #include "globals.h"
+#include "numbers.h"
 
 volatile bool time_has_updated = false;
 

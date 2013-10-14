@@ -10,7 +10,7 @@
 // Timer1: keeps the time
 // Timer3: updates the display
 
-#define VERSION "0.1"
+#define VERSION "0.2"
 #define BAUDRATE 115200
 
 

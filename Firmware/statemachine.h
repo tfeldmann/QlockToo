@@ -1,4 +1,9 @@
+//
+// statemachine.h
+//
+
 #pragma once
+
 #define STATES(_states_...)      char flag_state_inited; \
                                  enum State {_states_, STATE_NONE} state; \
                                  State next_state;
