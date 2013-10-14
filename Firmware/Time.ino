@@ -4,12 +4,26 @@
 
 #include "globals.h"
 
+volatile bool ;
+
 void time_init()
 {
     seconds = minutes = hours = day = month = year = 0;
+    needs_time_dump = false;
     dcf77_init();
     time_startTimer();
 }
+
+
+void time_update()
+{
+    if (needs_time_dump)
+    {
+        needs_time_dump = false;
+        time_dump();
+    }
+}
+
 
 void time_addSecond()
 {
@@ -17,12 +31,10 @@ void time_addSecond()
     if (seconds == 60)
     {
         seconds = 0;
-
         minutes++;
         if (minutes == 60)
         {
             minutes = 0;
-
             hours++;
             if (hours == 24)
             {
@@ -31,6 +43,7 @@ void time_addSecond()
         }
     }
 };
+
 
 void time_dump()
 {
@@ -48,6 +61,7 @@ void time_dump()
     Serial.println(year, DEC);
 }
 
+
 void time_startTimer()
 {
     // initialize timer1
@@ -61,8 +75,9 @@ void time_startTimer()
     interrupts();             // enable all interrupts
 }
 
+
 ISR(TIMER1_OVF_vect)
 {
     time_addSecond();
-    time_dump();
+    needs_time_dump = true;
 }
