@@ -4,12 +4,11 @@
 
 #include "globals.h"
 
-volatile bool ;
+volatile bool time_has_updated = false;
 
 void time_init()
 {
     seconds = minutes = hours = day = month = year = 0;
-    needs_time_dump = false;
     dcf77_init();
     time_startTimer();
 }
@@ -17,9 +16,9 @@ void time_init()
 
 void time_update()
 {
-    if (needs_time_dump)
+    if (time_has_updated)
     {
-        needs_time_dump = false;
+        time_has_updated = false;
         time_dump();
     }
 }
@@ -69,7 +68,7 @@ void time_startTimer()
     TCCR1A = 0;
     TCCR1B = 0;
 
-    TCNT1 = 3036;             // preload timer 65536-16MHz/256/1Hz
+    TCNT1 = 3036;             // preload timer 65536-16000000Hz/256/1Hz
     TCCR1B |= (1 << CS12);    // 256 prescaler
     TIMSK1 |= (1 << TOIE1);   // enable timer overflow interrupt
     interrupts();             // enable all interrupts
@@ -79,5 +78,5 @@ void time_startTimer()
 ISR(TIMER1_OVF_vect)
 {
     time_addSecond();
-    needs_time_dump = true;
+    time_has_updated = true;
 }
