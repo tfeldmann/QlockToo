@@ -7,30 +7,25 @@
 
 SerialCommand serialCommand;
 
-void api_update()
-{
-    serialCommand.readSerial();
-}
-
-void api_unknown(const char *command)
-{
-    Serial.print("!Unknown command: ");
-    Serial.println(command);
-}
-
 void api_init()
 {
     // States
     serialCommand.addCommand("@timewords", api_timewords);
     serialCommand.addCommand("@seconds", api_seconds);
 
+    // Infos
     serialCommand.addCommand("@about", api_about);
     serialCommand.setDefaultHandler(api_unknown);
 }
 
+void api_update()
+{
+    serialCommand.readSerial();
+}
 
-// ===========================================================================
-// custom functions:
+
+// ----------------------------------------------------------------------------
+// States
 
 void api_timewords()
 {
@@ -41,6 +36,10 @@ void api_seconds()
 {
     STATE_SWITCH(SECONDS);
 }
+
+
+// ----------------------------------------------------------------------------
+// Infos
 
 void api_about()
 {
@@ -59,4 +58,10 @@ void api_about()
     Serial.println("#    Manuel Fehmer");
     Serial.println("#    Carsten Hussmann");
     Serial.println("#===========================================");
+}
+
+void api_unknown(const char *command)
+{
+    Serial.print("!Unknown command: ");
+    Serial.println(command);
 }

@@ -36,7 +36,7 @@ void controller_update()
     END_OF_STATE
     END_STATEMACHINE
 
-    // always dump the time and reset the flag
+    // dump the time and reset the flag
     if (time_has_updated)
     {
         time_has_updated = false;
