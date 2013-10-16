@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include <Arduino.h>
 #include "statemachine.h"
 
 // Clock time
@@ -34,3 +35,17 @@ STATES(
     STREAM,
     TEMPERATURE
 );
+
+uint8_t matrix[ROWS][COLS] = {  // needs to be volatile?
+    {LED_MAX, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, LED_MAX, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, LED_MAX, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, LED_MAX, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, LED_MAX, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, LED_MAX, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, LED_MAX, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, LED_MAX, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, LED_MAX, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, LED_MAX, 0},
+};
+uint8_t corner[4] = {0, 0, 0, 0};

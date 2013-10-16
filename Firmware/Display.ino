@@ -7,20 +7,6 @@
 
 #define FPS_TO_PERIOD_US(_x_) (1e6 / _x_)
 
-
-volatile uint8_t matrix[ROWS][COLS] = {
-    {LED_MAX, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, LED_MAX, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, LED_MAX, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, LED_MAX, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, LED_MAX, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, LED_MAX, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, LED_MAX, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, LED_MAX, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, LED_MAX, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, LED_MAX, 0},
-};
-volatile uint8_t corner[4] = {0, 0, 0, 0};
 int8_t rowpins[] = {4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 int8_t cornerpin = 4;  // outputs 12 13 14 15
 
