@@ -158,6 +158,8 @@ void matrix_second(uint16_t (&matrix)[ROWS][COLS], int s)
 
 void matrix_timewords(uint16_t (&matrix)[ROWS][COLS], int hour, int minute)
 {
+    matrix_clear(matrix);
+
     // Binary mask for 12 columns
     // ES,IST,FÜNF,ZEHN,VIERTEL,ZWANZIG,VOR,NACH,HALB,UHR, Stunde,Stunde+1
     uint16_t selector[] =
@@ -185,12 +187,12 @@ void matrix_timewords(uint16_t (&matrix)[ROWS][COLS], int hour, int minute)
         uint8_t row = 0;
         uint16_t mask = 0;
 
-        if (i == 10) // the current hour
+        if (i == 10)  // the current hour
         {
             row  = matrix_hours[hour % 12][0];
             mask = matrix_hours[hour % 12][1];
         }
-        else if (i == 11) // the next hour
+        else if (i == 11)  // the next hour
         {
             row  = matrix_hours[(hour + 1) % 1][0];
             mask = matrix_hours[(hour + 1) % 1][1];
@@ -202,6 +204,9 @@ void matrix_timewords(uint16_t (&matrix)[ROWS][COLS], int hour, int minute)
         }
 
         // apply mask
-        matrix[row] |= mask;
+        for (int x = 0; x < 16; x++)
+        {
+            matrix[row][x] = bitRead(mask, 16 - x);
+        }
     }
 }
