@@ -128,6 +128,10 @@ const byte matrix_numbers[][7] = {
 };
 
 
+// ============================================================================
+// Matrix manipulation
+
+
 void matrix_clear(uint8_t (&matrix)[ROWS][COLS])
 {
     for (int y = 0; y < ROWS; y++)
@@ -209,4 +213,20 @@ void matrix_timewords(uint8_t (&matrix)[ROWS][COLS], int hour, int minute)
             matrix[row][x] = bitRead(mask, 16 - x);
         }
     }
+}
+
+
+// ============================================================================
+// Corner manipulation
+
+
+void corner_clear()
+{
+
+}
+
+
+void corner_minute(int m)
+{
+
 }
