@@ -22,7 +22,7 @@ void display_init()
     }
 
     // init i2c leddriver
-    leddriver_begin(B1100000);  // = 0x60
+    leddriver_begin(0b1100000);  // = 0x60
     for (int i = 0; i < COLS; i++)
     {
         leddriver_setPinMode(i, LPM_PWM);

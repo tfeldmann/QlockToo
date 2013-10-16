@@ -23,7 +23,7 @@ void controller_update()
     STATE_LOOP
         if (time_has_updated)
         {
-            Serial.println("Update the display now");
+            matrix_timewords(matrix, hours, minutes);
         }
     STATE_LEAVE
     END_OF_STATE
@@ -32,9 +32,14 @@ void controller_update()
     STATE_ENTER(SECONDS)
         Serial.println("#State: Seconds");
     STATE_LOOP
+        if (time_has_updated)
+        {
+            matrix_second(matrix, seconds);
+        }
     STATE_LEAVE
     END_OF_STATE
     END_STATEMACHINE
+
 
     // dump the time and reset the flag
     if (time_has_updated)
