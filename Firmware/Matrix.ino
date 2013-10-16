@@ -128,7 +128,7 @@ const byte matrix_numbers[][7] = {
 };
 
 
-void matrix_clear(uint16_t (&matrix)[ROWS][COLS])
+void matrix_clear(uint8_t (&matrix)[ROWS][COLS])
 {
     for (int y = 0; y < ROWS; y++)
         for (int x = 0; x < COLS; x++)
@@ -136,7 +136,7 @@ void matrix_clear(uint16_t (&matrix)[ROWS][COLS])
 }
 
 
-void matrix_second(uint16_t (&matrix)[ROWS][COLS], int s)
+void matrix_second(uint8_t (&matrix)[ROWS][COLS], int s)
 {
     // split second in left and right part
     int s_1 = s / 10;
@@ -156,7 +156,7 @@ void matrix_second(uint16_t (&matrix)[ROWS][COLS], int s)
 }
 
 
-void matrix_timewords(uint16_t (&matrix)[ROWS][COLS], int hour, int minute)
+void matrix_timewords(uint8_t (&matrix)[ROWS][COLS], int hour, int minute)
 {
     matrix_clear(matrix);
 
