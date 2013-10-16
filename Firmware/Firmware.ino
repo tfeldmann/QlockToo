@@ -13,6 +13,13 @@
 #define VERSION "0.2"
 #define BAUDRATE 115200
 
+#include "globals.h"
+
+
+// The arduino software does not create prototypes for functions with
+// references, so we announce some functions ourselves
+void matrix_timewords(uint8_t (&matrix)[ROWS][COLS], int hour, int minute);
+
 
 void setup()
 {
