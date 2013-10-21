@@ -1,8 +1,10 @@
 from PySide.QtGui import QDialog
 from PySide.QtCore import Slot, QTimer
 from demo_ui import Ui_demoapp as Ui
+import itertools
 import lowpass
 import math
+import random
 
 
 class DemoApp(QDialog):
@@ -49,6 +51,14 @@ class DemoApp(QDialog):
     @Slot()
     def on_helix_clicked(self):
         self.demo = HelixDemo(self.device)
+
+    @Slot()
+    def on_gameoflife_clicked(self):
+        self.demo = GameOfLifeDemo(self.device)
+
+    @Slot()
+    def on_matrix_clicked(self):
+        self.demo = MatrixDemo(self.device)
 
 
 class Demo(object):
@@ -191,3 +201,69 @@ class HelixDemo(Demo):
                 line[int(pos)] = brightness
 
         self.device.matrix = lowpass.lowpass(self.matrix)
+
+
+class GameOfLifeDemo(Demo):
+
+    def __init__(self, device, framerate=150):
+        Demo.__init__(self, device, framerate)
+        self.device.corners = [0] * 4
+        self.matrix = [[0] * 11 for _ in range(10)]
+
+        # random prefill
+        for x, y in itertools.product(
+                range(self.device.columns),
+                range(self.device.rows)):
+            if random.randint(0, 5) == 0:
+                self.matrix[y][x] = 1
+
+    def update(self):
+        temp = [[0] * 11 for _ in range(10)]
+        for x in range(self.device.columns):
+            for y in range(self.device.rows):
+                cell = self.matrix[y][x]
+                neighbors = (
+                    self.matrix[(y - 1) % 10][(x - 1) % 11] +
+                    self.matrix[(y - 1) % 10][x % 11] +
+                    self.matrix[(y - 1) % 10][(x + 1) % 11] +
+
+                    self.matrix[y % 10][(x - 1) % 11] +
+                    self.matrix[y % 10][(x + 1) % 11] +
+
+                    self.matrix[(y + 1) % 10][(x - 1) % 11] +
+                    self.matrix[(y + 1) % 10][x % 11] +
+                    self.matrix[(y + 1) % 10][(x + 1) % 11])
+
+                if cell and (2 <= neighbors <= 3):
+                    temp[y][x] = 1
+
+                if not cell and neighbors == 3:
+                    temp[y][x] = 1
+
+                if cell and (neighbors > 3 or neighbors < 2):
+                    temp[y][x] = 0
+
+        self.device.matrix = temp
+        self.matrix = temp
+
+
+class MatrixDemo(Demo):
+
+    def __init__(self, device, framerate=100):
+        Demo.__init__(self, device, framerate)
+        self.device.corners = [0] * 4
+        self.matrix = [[0] * 11 for _ in range(10)]
+        self.t = 0
+
+    def update(self):
+        self.t += 1
+        self.matrix.pop()
+        self.matrix.insert(0, [0.8 * e for e in self.matrix[0]])
+
+        if (self.t % 30):
+            col = random.randint(0, self.device.columns - 1)
+            self.matrix[0][col] += random.random()
+            if self.matrix[0][col] > 1.0:
+                self.matrix[0][col] = 1.0
+
+        self.device.matrix = self.matrix
