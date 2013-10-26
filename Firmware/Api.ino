@@ -12,6 +12,7 @@ void api_init()
     // States
     serialCommand.addCommand("@timewords", api_timewords);
     serialCommand.addCommand("@seconds", api_seconds);
+    serialCommand.addCommand("@next", api_next);
 
     // Infos
     serialCommand.addCommand("@about", api_about);
@@ -37,6 +38,10 @@ void api_seconds()
     STATE_SWITCH(SECONDS);
 }
 
+void api_next()
+{
+    display_update();
+}
 
 // ----------------------------------------------------------------------------
 // Infos
