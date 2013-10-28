@@ -10,7 +10,7 @@
 // Timer1: keeps the time
 // Timer3: updates the display
 
-#define VERSION "0.2"
+#define VERSION "0.3"
 #define BAUDRATE 115200
 
 #include "globals.h"
