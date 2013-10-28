@@ -14,6 +14,8 @@ void api_init()
     serialCommand.addCommand("@seconds", api_seconds);
     serialCommand.addCommand("@next", api_next);
 
+    serialCommand.addCommand("@celsius", thermo_celsius);
+
     // Infos
     serialCommand.addCommand("@about", api_about);
     serialCommand.setDefaultHandler(api_unknown);
