@@ -2,18 +2,25 @@
 // Button.ino
 //
 
-#define BUTTON_COUNT 4
-const int button_pin[BUTTON_COUNT] = {A2, A3, A4, A5};
+#include <Bounce.h>
+
+Bounce button1 = Bounce(A2, 50);
+Bounce button2 = Bounce(A3, 50);
+Bounce button3 = Bounce(A4, 50);
+Bounce button4 = Bounce(A5, 50);
 
 void button_init()
 {
-    for (int i = 0; i < BUTTON_COUNT; i++)
-    {
-        pinMode(button_pin[i], INPUT);
-    }
+    pinMode(A2, INPUT);
+    pinMode(A3, INPUT);
+    pinMode(A4, INPUT);
+    pinMode(A5, INPUT);
 }
 
-bool button_pressed(int button)
+void button_update()
 {
-    return digitalRead(button_pin[button]);
+    button1.update();
+    button2.update();
+    button3.update();
+    button4.update();
 }
