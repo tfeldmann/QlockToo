@@ -36,94 +36,94 @@ const uint16_t matrix_hours[][2] = {
 
 const byte matrix_numbers[][7] = {
     {
-        0b00001110,   // 0
-        0b00010001,
-        0b00010011,
-        0b00010101,
-        0b00011001,
-        0b00010001,
-        0b00001110
+        0b01110000,   // 0
+        0b10001000,
+        0b10011000,
+        0b10101000,
+        0b11001000,
+        0b10001000,
+        0b01110000
     },
     {
-        0b00000100,   // 1
-        0b00001100,
-        0b00000100,
-        0b00000100,
-        0b00000100,
-        0b00000100,
-        0b00001110
+        0b00100000,   // 1
+        0b01100000,
+        0b00100000,
+        0b00100000,
+        0b00100000,
+        0b00100000,
+        0b01110000
     },
     {
-        0b00001110,   // 2
-        0b00010001,
-        0b00000001,
-        0b00000010,
-        0b00000100,
-        0b00001000,
-        0b00011111
-    },
-    {
-        0b00011111,   // 3
-        0b00000010,
-        0b00000100,
-        0b00000010,
-        0b00000001,
-        0b00010001,
-        0b00001110
-    },
-    {
-        0b00000010,   // 4
-        0b00000110,
-        0b00001010,
-        0b00010010,
-        0b00011111,
-        0b00000010,
-        0b00000010
-    },
-    {
-        0b00011111,   // 5
-        0b00010000,
-        0b00011110,
-        0b00000001,
-        0b00000001,
-        0b00010001,
-        0b00001110
-    },
-    {
-        0b00000110,   // 6
+        0b01110000,   // 2
+        0b10001000,
         0b00001000,
         0b00010000,
-        0b00011110,
-        0b00010001,
-        0b00010001,
-        0b00001110
+        0b00100000,
+        0b01000000,
+        0b11111000
     },
     {
-        0b00011111,   // 7
-        0b00000001,
-        0b00000010,
-        0b00000100,
+        0b11111000,   // 3
+        0b00010000,
+        0b00100000,
+        0b00010000,
+        0b00001000,
+        0b10001000,
+        0b01110000
+    },
+    {
+        0b00010000,   // 4
+        0b00110000,
+        0b01010000,
+        0b10010000,
+        0b11111000,
+        0b00010000,
+        0b00010000
+    },
+    {
+        0b11111000,   // 5
+        0b10000000,
+        0b11110000,
         0b00001000,
         0b00001000,
-        0b00001000
+        0b10001000,
+        0b01110000
     },
     {
-        0b00001110,   // 8
-        0b00010001,
-        0b00010001,
-        0b00001110,
-        0b00010001,
-        0b00010001,
-        0b00001110
+        0b00110000,   // 6
+        0b01000000,
+        0b10000000,
+        0b11110000,
+        0b10001000,
+        0b10001000,
+        0b01110000
     },
     {
-        0b00001110,   // 9
-        0b00010001,
-        0b00010001,
-        0b00001111,
-        0b00000001,
-        0b00000010,
-        0b00001100
+        0b11111000,   // 7
+        0b00001000,
+        0b00010000,
+        0b00100000,
+        0b01000000,
+        0b01000000,
+        0b01000000
+    },
+    {
+        0b01110000,   // 8
+        0b10001000,
+        0b10001000,
+        0b01110000,
+        0b10001000,
+        0b10001000,
+        0b01110000
+    },
+    {
+        0b01110000,   // 9
+        0b10001000,
+        0b10001000,
+        0b01111000,
+        0b00001000,
+        0b00010000,
+        0b01100000
     }
 };
 
@@ -132,7 +132,7 @@ const byte matrix_numbers[][7] = {
 // Matrix manipulation
 
 
-void matrix_clear(uint8_t (&matrix)[ROWS][COLS])
+void matrix_clear()
 {
     for (int y = 0; y < ROWS; y++)
         for (int x = 0; x < COLS; x++)
@@ -140,7 +140,7 @@ void matrix_clear(uint8_t (&matrix)[ROWS][COLS])
 }
 
 
-void matrix_second(uint8_t (&matrix)[ROWS][COLS], int s)
+void matrix_second(char s)
 {
     // split second in left and right part
     int s_1 = s / 10;
@@ -150,19 +150,32 @@ void matrix_second(uint8_t (&matrix)[ROWS][COLS], int s)
     {
         for (int x = 0; x < COLS; x++)
         {
-            // first two rows and last row is always empty
-            if (y < 2 || y == 10)
-                matrix[y][x] = 0;
-
-            // print number
+            // the rows
+            if (y >= 1 && y <= 7)
+            {
+                // first letter
+                if (x >= 0 && x <= 4)
+                {
+                    matrix[y][x] = 255*bitRead(matrix_numbers[s_1][y-1], 7-x);
+                }
+                // second letter
+                else if (x >= 6 && x <= 10)
+                {
+                    int _x = x - 6;
+                    matrix[y][x] = 255*bitRead(matrix_numbers[s_2][y-1], 7-_x);
+                }
+                // clear the rest
+                else matrix[y][x] = 0;
+            }
+            else matrix[y][x] = 0;
         }
     }
 }
 
 
-void matrix_timewords(uint8_t (&matrix)[ROWS][COLS], int hour, int minute)
+void matrix_timewords(int hour, int minute)
 {
-    matrix_clear(matrix);
+    matrix_clear();
 
     // Binary mask for 12 columns
     // ES,IST,FÜNF,ZEHN,VIERTEL,ZWANZIG,VOR,NACH,HALB,UHR, Stunde,Stunde+1
@@ -216,6 +229,20 @@ void matrix_timewords(uint8_t (&matrix)[ROWS][COLS], int hour, int minute)
 
         // TODO: ES IST EINS UHR
     }
+}
+
+void matrix_dump()
+{
+    for (int y = 0; y < ROWS; y++)
+    {
+        for (int x = 0; x < COLS; x++)
+        {
+            Serial.print(matrix[y][x]);
+            Serial.print(" ");
+        }
+        Serial.println();
+    }
+    Serial.println();
 }
 
 
