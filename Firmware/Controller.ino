@@ -17,6 +17,14 @@ void controller_init()
 
 void controller_update()
 {
+    button_update();
+    controller_statemachine();
+    time_resetFlags();  // reset the second / minute / hour has_updated flags
+}
+
+
+void controller_statemachine()
+{
     STATEMACHINE
     STATE_ENTER(TIMEWORDS)
         #ifdef DEBUG
@@ -27,6 +35,11 @@ void controller_update()
         if (minute_has_changed)
         {
             matrix_timewords(hours, minutes);
+        }
+
+        if (button1.read() && button1.duration() > 3000)
+        {
+            STATE_SWITCH(SECONDS);
         }
     STATE_LEAVE
     END_OF_STATE
@@ -42,11 +55,13 @@ void controller_update()
         {
             matrix_second(seconds);
         }
+
+        if (button1.risingEdge() || button2.risingEdge()
+            || button3.risingEdge() || button4.risingEdge())
+        {
+            STATE_SWITCH(TIMEWORDS);
+        }
     STATE_LEAVE
     END_OF_STATE
     END_STATEMACHINE
-
-
-    // reset the second / minute / hour has_updated flags
-    time_resetFlags();
 }
