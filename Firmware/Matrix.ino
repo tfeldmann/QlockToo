@@ -184,9 +184,10 @@ void matrix_timewords(uint8_t (&matrix)[ROWS][COLS], int hour, int minute)
 
     uint16_t action = selector[minute / 5];
 
-    for (int i = 0; i < 12; i++)
+    for (int i = 0; i < 12; i++)  // 12 selector columns
     {
-        if (!bitRead(action, i)) continue;  // selector doesn't apply
+        // read from leftmost position
+        if (!bitRead(action, 15 - i)) continue;  // selector doesn't apply
 
         uint8_t row = 0;
         uint16_t mask = 0;
@@ -210,8 +211,10 @@ void matrix_timewords(uint8_t (&matrix)[ROWS][COLS], int hour, int minute)
         // apply mask
         for (int x = 0; x < 16; x++)
         {
-            matrix[row][x] = bitRead(mask, 16 - x);
+            matrix[row][x] |= bitRead(mask, 15 - x) * 255;
         }
+
+        // TODO: ES IST EINS UHR
     }
 }
 
