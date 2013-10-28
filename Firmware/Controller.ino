@@ -19,7 +19,9 @@ void controller_update()
 {
     STATEMACHINE
     STATE_ENTER(TIMEWORDS)
-        Serial.println("#State: Timewords");
+        #ifdef DEBUG
+            Serial.println("#State: Timewords");
+        #endif
     STATE_LOOP
         if (time_has_updated)
         {
@@ -30,11 +32,13 @@ void controller_update()
 
 
     STATE_ENTER(SECONDS)
-        Serial.println("#State: Seconds");
+        #ifdef DEBUG
+            Serial.println("#State: Seconds");
+        #endif
     STATE_LOOP
         if (time_has_updated)
         {
-            matrix_second(matrix, seconds);
+            matrix_clear(matrix);
         }
     STATE_LEAVE
     END_OF_STATE
@@ -45,6 +49,8 @@ void controller_update()
     if (time_has_updated)
     {
         time_has_updated = false;
-        time_dump();
+        #ifdef DEBUG
+            time_dump();
+        #endif
     }
 }
