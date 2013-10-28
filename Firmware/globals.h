@@ -30,6 +30,5 @@ STATES(
     TEMPERATURE
 );
 
-//
 volatile uint8_t matrix[ROWS][COLS];
 volatile uint8_t corner[CORNERS];
