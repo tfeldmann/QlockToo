@@ -18,8 +18,11 @@ void controller_init()
 void controller_update()
 {
     button_update();
+    brightness_update();
     controller_statemachine();
-    time_resetFlags();  // reset the second / minute / hour has_updated flags
+
+    // reset the second / minute / hour has_updated flags
+    time_resetFlags();
 }
 
 
@@ -37,7 +40,7 @@ void controller_statemachine()
             matrix_timewords(hours, minutes);
         }
 
-        if (button1.read() && button1.duration() > 3000)
+        if (button1.read() && button1.duration() > 1000)
         {
             STATE_SWITCH(SECONDS);
         }

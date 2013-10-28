@@ -14,13 +14,13 @@ volatile unsigned char seconds, minutes, hours, day, month;
 volatile unsigned int year;
 
 // Display dimensions
-#define ROWS    10
-#define COLS    11
-#define CORNERS 4
+const int ROWS    = 10;
+const int COLS    = 11;
+const int CORNERS = 4;
 
 // Led brightness
-#define LED_MIN 0
-#define LED_MAX 255
+volatile byte BRIGHTNESS = 255;
+const byte BRIGHTNESS_MAX = 255;
 
 // List of device states
 STATES(
@@ -30,5 +30,6 @@ STATES(
     TEMPERATURE
 );
 
-uint8_t matrix[ROWS][COLS];
-uint8_t corner[4] = {0, 0, 0, 0};
+//
+volatile uint8_t matrix[ROWS][COLS];
+volatile uint8_t corner[CORNERS];

@@ -62,7 +62,7 @@ void display_update()
     }
     for (int i = 0; i < COLS; i++)
     {
-        data[i2c_led_position[i]] = matrix[row][i];
+        data[i2c_led_position[i]] = map(matrix[row][i], 0, BRIGHTNESS_MAX, 0, BRIGHTNESS);
     }
 
     // write data to led driver

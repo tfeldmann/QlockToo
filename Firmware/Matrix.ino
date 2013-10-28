@@ -5,7 +5,7 @@
 #include "globals.h"
 
 const uint16_t matrix_words[][2] = {
-    // row|mask
+    // row, mask
     {0, 0b1100000000000000},  // ES
     {0, 0b0001110000000000},  // IST
     {0, 0b0000000111100000},  // FÜNF
@@ -19,7 +19,7 @@ const uint16_t matrix_words[][2] = {
 };
 
 const uint16_t matrix_hours[][2] = {
-    // row|mask
+    // row, mask
     {8, 0b0000001111100000},  // ZWOELF
     {5, 0b1111000000000000},  // EINS
     {5, 0b0000000111100000},  // ZWEI
@@ -156,13 +156,15 @@ void matrix_second(char s)
                 // first letter
                 if (x >= 0 && x <= 4)
                 {
-                    matrix[y][x] = 255*bitRead(matrix_numbers[s_1][y-1], 7-x);
+                    bool en = bitRead(matrix_numbers[s_1][y-1], 7-x);
+                    matrix[y][x] = BRIGHTNESS_MAX * en;
                 }
                 // second letter
                 else if (x >= 6 && x <= 10)
                 {
                     int _x = x - 6;
-                    matrix[y][x] = 255*bitRead(matrix_numbers[s_2][y-1], 7-_x);
+                    bool en = bitRead(matrix_numbers[s_2][y-1], 7-_x);
+                    matrix[y][x] = BRIGHTNESS_MAX * en;
                 }
                 // clear the rest
                 else matrix[y][x] = 0;
@@ -224,7 +226,7 @@ void matrix_timewords(int hour, int minute)
         // apply mask
         for (int x = 0; x < 16; x++)
         {
-            matrix[row][x] |= bitRead(mask, 15 - x) * 255;
+            matrix[row][x] |= bitRead(mask, 15 - x) * BRIGHTNESS_MAX;
         }
 
         // TODO: ES IST EINS UHR
