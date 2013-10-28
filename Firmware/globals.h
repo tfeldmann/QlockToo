@@ -7,7 +7,7 @@
 #include "statemachine.h"
 
 // Undefine this to enable logging output
-#define DEBUG
+// #define DEBUG
 
 // Clock time
 volatile unsigned char seconds, minutes, hours, day, month;

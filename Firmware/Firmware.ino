@@ -15,9 +15,9 @@
 
 #include "globals.h"
 
-
 // The arduino software does not create prototypes for functions with
 // references, so we announce some functions ourselves
+void matrix_clear(uint8_t (&matrix)[ROWS][COLS]);
 void matrix_second(uint8_t (&matrix)[ROWS][COLS], int s);
 void matrix_timewords(uint8_t (&matrix)[ROWS][COLS], int hour, int minute);
 
@@ -28,6 +28,7 @@ void setup()
     api_init();
     time_init();
     display_init();
+    button_init();
     controller_init();
 }
 
@@ -35,5 +36,4 @@ void setup()
 void loop()
 {
     api_update();
-    controller_update();
 }
