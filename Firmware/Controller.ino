@@ -40,7 +40,7 @@ void controller_statemachine()
             matrix_timewords(hours, minutes);
         }
 
-        if (button1.read() && button1.duration() > 1000)
+        if (button1.read() && button1.duration() > 1500)
         {
             STATE_SWITCH(SECONDS);
         }
