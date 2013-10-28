@@ -6,7 +6,7 @@
 
 // the time module will care for setting this flag, just make sure to reset
 // it after every controller update.
-extern volatile bool time_has_updated;
+extern volatile bool second_has_changed, minute_has_changed, hour_has_changed;
 
 
 void controller_init()
@@ -22,8 +22,9 @@ void controller_update()
         #ifdef DEBUG
             Serial.println("#State: Timewords");
         #endif
+        matrix_timewords(hours, minutes);
     STATE_LOOP
-        if (time_has_updated)
+        if (minute_has_changed)
         {
             matrix_timewords(hours, minutes);
         }
@@ -35,8 +36,9 @@ void controller_update()
         #ifdef DEBUG
             Serial.println("#State: Seconds");
         #endif
+        matrix_second(seconds);
     STATE_LOOP
-        if (time_has_updated)
+        if (second_has_changed)
         {
             matrix_second(seconds);
         }
@@ -45,12 +47,6 @@ void controller_update()
     END_STATEMACHINE
 
 
-    // dump the time and reset the flag
-    if (time_has_updated)
-    {
-        time_has_updated = false;
-        #ifdef DEBUG
-            time_dump();
-        #endif
-    }
+    // reset the second / minute / hour has_updated flags
+    time_resetFlags();
 }

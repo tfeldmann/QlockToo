@@ -4,7 +4,9 @@
 
 #include "globals.h"
 
-volatile bool time_has_updated = false;
+volatile bool second_has_changed = false;
+volatile bool minute_has_changed = false;
+volatile bool hour_has_changed = false;
 
 
 void time_init()
@@ -18,14 +20,17 @@ void time_init()
 void time_addSecond()
 {
     seconds++;
+    second_has_changed = true;
     if (seconds == 60)
     {
         seconds = 0;
         minutes++;
+        minute_has_changed = true;
         if (minutes == 60)
         {
             minutes = 0;
             hours++;
+            hour_has_changed = true;
             if (hours == 24)
             {
                 hours = 0;
@@ -69,5 +74,12 @@ void time_startTimer()
 ISR(TIMER1_OVF_vect)
 {
     time_addSecond();
-    time_has_updated = true;
+}
+
+
+void time_resetFlags()
+{
+    second_has_changed = false;
+    minute_has_changed = false;
+    hour_has_changed = false;
 }
