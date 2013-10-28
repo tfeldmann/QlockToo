@@ -3,5 +3,7 @@ QlockToo Firmware
 
 Changelog
 ---------
-### v1.0
-- Beleuchten der Buchstaben
+### v0.3
+- Timewords
+- Sekunden
+- Timewords / Sekunden Wechsel mit Buttons
