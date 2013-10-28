@@ -5,7 +5,7 @@
 #include "globals.h"
 
 const uint16_t matrix_words[][2] = {
-    // row,mask
+    // row|mask
     {0, 0b1100000000000000},  // ES
     {0, 0b0001110000000000},  // IST
     {0, 0b0000000111100000},  // FÜNF
@@ -19,8 +19,8 @@ const uint16_t matrix_words[][2] = {
 };
 
 const uint16_t matrix_hours[][2] = {
-    // row, mask
-    {8, 0b0000000111100000},  // ZWOELF
+    // row|mask
+    {8, 0b0000001111100000},  // ZWOELF
     {5, 0b1111000000000000},  // EINS
     {5, 0b0000000111100000},  // ZWEI
     {6, 0b1111000000000000},  // DREI
@@ -178,7 +178,7 @@ void matrix_timewords(int hour, int minute)
     matrix_clear();
 
     // Binary mask for 12 columns
-    // ES,IST,FÜNF,ZEHN,VIERTEL,ZWANZIG,VOR,NACH,HALB,UHR, Stunde,Stunde+1
+    // ES|IST|FÜNF|ZEHN|VIERTEL|ZWANZIG|VOR|NACH|HALB|UHR|Stunde|Stunde+1
     uint16_t selector[] =
     {
         0b1100000001100000,  // minute 0
