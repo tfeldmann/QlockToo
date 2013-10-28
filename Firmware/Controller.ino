@@ -25,7 +25,7 @@ void controller_update()
     STATE_LOOP
         if (time_has_updated)
         {
-            matrix_timewords(matrix, hours, minutes);
+            matrix_timewords(hours, minutes);
         }
     STATE_LEAVE
     END_OF_STATE
@@ -38,7 +38,7 @@ void controller_update()
     STATE_LOOP
         if (time_has_updated)
         {
-            matrix_clear(matrix);
+            matrix_second(seconds);
         }
     STATE_LEAVE
     END_OF_STATE

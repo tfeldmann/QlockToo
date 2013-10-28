@@ -15,7 +15,7 @@ int8_t cornerpin = 4;  // outputs 12 13 14 15
 
 void display_init()
 {
-    matrix_clear(matrix);
+    matrix_clear();
 
     // init row pins (transistors)
     // a HIGH value means that the row is deactivated
@@ -70,17 +70,4 @@ void display_update()
 
     // enable next line
     digitalWrite(rowpins[row], LOW);
-}
-
-void dump_matrix()
-{
-    for (int y = 0; y < ROWS; y++)
-    {
-        for (int x = 0; x < COLS; x++)
-        {
-            Serial.print(matrix[y][x]);
-            Serial.print(" ");
-        }
-        Serial.println();
-    }
 }

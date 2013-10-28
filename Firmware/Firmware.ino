@@ -15,13 +15,6 @@
 
 #include "globals.h"
 
-// The arduino software does not create prototypes for functions with
-// references, so we announce some functions ourselves
-void matrix_clear(uint8_t (&matrix)[ROWS][COLS]);
-void matrix_second(uint8_t (&matrix)[ROWS][COLS], int s);
-void matrix_timewords(uint8_t (&matrix)[ROWS][COLS], int hour, int minute);
-
-
 void setup()
 {
     Serial.begin(BAUDRATE);
