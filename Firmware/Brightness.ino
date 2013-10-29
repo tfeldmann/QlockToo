@@ -5,7 +5,7 @@
 #include "globals.h"
 
 const int LDR_PIN = A0;
-#define FILTER_MAX (5000)  // filter response time in ms (max 65535!)
+#define FILTER_MAX 4000  // max filter response time in ms
 
 
 void brightness_update()
