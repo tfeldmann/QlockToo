@@ -21,6 +21,9 @@ void controller_update()
     brightness_update();
     controller_statemachine();
 
+
+    if (button4.risingEdge()) brightness_next_mode();
+
     // reset the second / minute / hour has_updated flags
     time_resetFlags();
 }
