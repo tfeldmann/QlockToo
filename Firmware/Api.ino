@@ -15,7 +15,10 @@ void api_init()
     serialCommand.addCommand("@celsius", thermo_celsius);
 
     // Streaming
-    serialCommand.addCommand("@matrix", api_matrix);
+    serialCommand.addCommand("@m", api_matrix);
+    serialCommand.addCommand("@c", api_corners);
+
+    // Debug
     serialCommand.addCommand("@dump", api_dump);
 
     // Infos
@@ -47,6 +50,9 @@ void api_seconds()
 // Streaming
 void api_matrix()
 {
+    // map(x, 33, 126, 0, 255) = x * 255.0 / 93 - 33 * 255.0 / 93
+    const static byte lut[] = {0, 2, 5, 8, 10, 13, 16, 19, 21, 24, 27, 30, 32, 35, 38, 41, 43, 46, 49, 52, 54, 57, 60, 63, 65, 68, 71, 74, 76, 79, 82, 84, 87, 90, 93, 95, 98, 101, 104, 106, 109, 112, 115, 117, 120, 123, 126, 128, 131, 134, 137, 139, 142, 145, 148, 150, 153, 156, 159, 161, 164, 167, 170, 172, 175, 178, 180, 183, 186, 189, 191, 194, 197, 200, 202, 205, 208, 211, 213, 216, 219, 222, 224, 227, 230, 233, 235, 238, 241, 244, 246, 249, 252, 255};
+
     STATE_SWITCH(STATE_NONE);
     char *m = serialCommand.next();
     for (int y = 0; y < ROWS; y++)
@@ -54,12 +60,20 @@ void api_matrix()
         for (int x = 0; x < COLS; x++)
         {
             // be careful to only use chars that have no control function
-            matrix[y][x] = map(*m, 33, 126, 0, 255);
+            matrix[y][x] = lut[*m - 33];
             m++;
         }
     }
 }
 
+void api_corners()
+{
+    Serial.println("Not yet implemented");
+}
+
+
+// ----------------------------------------------------------------------------
+// Debug
 void api_dump()
 {
     matrix_dump();
