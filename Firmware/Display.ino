@@ -4,6 +4,7 @@
 
 #include <TimerThree.h>
 #include <I2C.h>
+#include <digitalWriteFast.h>
 #include "globals.h"
 
 #define FPS_TO_PERIOD_US(_x_) (1e6 / _x_)
@@ -38,36 +39,34 @@ void display_init()
 }
 
 
+/**
+ * This is the routine for multiplexing the display.
+ * It will be called about a thousand times per seconds
+ * - keep it as tight as possible!
+ */
 void display_update()
 {
-    controller_update();
-
     // maps led columns to positions in data array
     const static int8_t i2c_led_position[COLS] = {
         14, 15, 12, 13, 10, 11, 8, 9, 6, 7, 4
     };
-    volatile static int8_t row = 0;
-    static uint8_t data[16];
+    static int8_t row = 0;
+    uint8_t data[16];
 
-    // disable current line
-    digitalWrite(rowpins[row], HIGH);
+    int8_t previous_row = row;
+    if (++row >= ROWS) row = 0;
 
-    // advance line index
-    row = (row + 1) % ROWS;
-
-    // clear and fill data array
-    for (int i = 0; i < 16; i++)
-    {
-        data[i] = 0;
-    }
     for (int i = 0; i < COLS; i++)
     {
-        data[i2c_led_position[i]] = map(matrix[row][i], 0, BRIGHTNESS_MAX, 0, BRIGHTNESS);
+        data[i2c_led_position[i]] = matrix[row][i];
     }
+
+    // disable current line
+    digitalWriteFast(rowpins[previous_row], HIGH);
 
     // write data to led driver
     I2c.write(LEDDRIVER_ADDRESS, 0x82, data, 16);
 
     // enable next line
-    digitalWrite(rowpins[row], LOW);
+    digitalWriteFast(rowpins[row], LOW);
 }

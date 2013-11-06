@@ -10,10 +10,11 @@
 // Timer1: keeps the time
 // Timer3: updates the display
 
-#define VERSION "0.3"
+#define VERSION "0.4"
 #define BAUDRATE 115200
 
 #include "globals.h"
+
 
 void setup()
 {
@@ -28,5 +29,6 @@ void setup()
 
 void loop()
 {
+    controller_update();
     api_update();
 }

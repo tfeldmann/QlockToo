@@ -16,6 +16,7 @@ void api_init()
 
     // Streaming
     serialCommand.addCommand("@matrix", api_matrix);
+    serialCommand.addCommand("@dump", api_dump);
 
     // Infos
     serialCommand.addCommand("@about", api_about);
@@ -43,7 +44,7 @@ void api_seconds()
 
 
 // ----------------------------------------------------------------------------
-// States
+// Streaming
 void api_matrix()
 {
     STATE_SWITCH(STATE_NONE);
@@ -52,13 +53,16 @@ void api_matrix()
     {
         for (int x = 0; x < COLS; x++)
         {
-            if (*m == '1')
-                matrix[y][x] = 255;
-            else
-                matrix[y][x] = 0;
+            // be careful to only use chars that have no control function
+            matrix[y][x] = map(*m, 33, 126, 0, 255);
             m++;
         }
     }
+}
+
+void api_dump()
+{
+    matrix_dump();
 }
 
 

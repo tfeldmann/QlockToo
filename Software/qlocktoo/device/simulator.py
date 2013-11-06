@@ -1,6 +1,8 @@
 # coding: utf-8
 from PySide.QtGui import QWidget, QPainter, QColor, QFont
 from PySide.QtCore import Qt
+from itertools import chain
+import serial
 
 
 class Simulator(QWidget):
@@ -13,6 +15,8 @@ class Simulator(QWidget):
 
     def __init__(self, parent):
         super(Simulator, self).__init__()
+        self.c = serial.Serial(
+            '/dev/cu.usbmodemfa131', 115200, timeout=60)
         frontpanel = u"""
             E S K I S T A F Ü N F
             Z E H N Z W A N Z I G
@@ -37,6 +41,16 @@ class Simulator(QWidget):
     @matrix.setter
     def matrix(self, value):
         self._matrix = value
+
+        self.c.flush()
+        flat_matrix = list(chain.from_iterable(self.matrix))
+        # only use chars that have to control function
+        data = [int(33 + 93 * elem) for elem in flat_matrix]
+
+        self.c.write('@matrix ')
+        self.c.write(bytearray(data))
+        self.c.write('\n')
+
         self.update()
 
     @property
