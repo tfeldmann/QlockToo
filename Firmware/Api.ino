@@ -12,9 +12,10 @@ void api_init()
     // States
     serialCommand.addCommand("@timewords", api_timewords);
     serialCommand.addCommand("@seconds", api_seconds);
-    serialCommand.addCommand("@next", api_next);
-
     serialCommand.addCommand("@celsius", thermo_celsius);
+
+    // Streaming
+    serialCommand.addCommand("@matrix", api_matrix);
 
     // Infos
     serialCommand.addCommand("@about", api_about);
@@ -40,10 +41,26 @@ void api_seconds()
     STATE_SWITCH(SECONDS);
 }
 
-void api_next()
+
+// ----------------------------------------------------------------------------
+// States
+void api_matrix()
 {
-    display_update();
+    STATE_SWITCH(STATE_NONE);
+    char *m = serialCommand.next();
+    for (int y = 0; y < ROWS; y++)
+    {
+        for (int x = 0; x < COLS; x++)
+        {
+            if (*m == '1')
+                matrix[y][x] = 255;
+            else
+                matrix[y][x] = 0;
+            m++;
+        }
+    }
 }
+
 
 // ----------------------------------------------------------------------------
 // Infos
