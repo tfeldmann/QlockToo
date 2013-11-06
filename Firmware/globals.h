@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include <Bounce.h>
 #include <Arduino.h>
 #include "statemachine.h"
 
@@ -32,3 +33,8 @@ STATES(
 
 volatile uint8_t matrix[ROWS][COLS];
 volatile uint8_t corner[CORNERS];
+
+Bounce button1 = Bounce(A2, 50);
+Bounce button2 = Bounce(A3, 50);
+Bounce button3 = Bounce(A4, 50);
+Bounce button4 = Bounce(A5, 50);

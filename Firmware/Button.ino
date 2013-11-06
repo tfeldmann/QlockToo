@@ -2,12 +2,7 @@
 // Button.ino
 //
 
-#include <Bounce.h>
-
-Bounce button1 = Bounce(A2, 50);
-Bounce button2 = Bounce(A3, 50);
-Bounce button3 = Bounce(A4, 50);
-Bounce button4 = Bounce(A5, 50);
+#include "globals.h"
 
 void button_init()
 {

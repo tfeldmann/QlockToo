@@ -13,6 +13,7 @@
 #define VERSION "0.4"
 #define BAUDRATE 115200
 
+#include <Bounce.h>
 #include "globals.h"
 
 
@@ -29,6 +30,10 @@ void setup()
 
 void loop()
 {
-    controller_update();
     api_update();
+
+    button_update();
+    if (button1.risingEdge()) STATE_SWITCH(TIMEWORDS);
+    if (button2.risingEdge()) STATE_SWITCH(SECONDS);
+    if (button4.risingEdge()) brightness_next_mode();
 }

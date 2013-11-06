@@ -46,6 +46,8 @@ void display_init()
  */
 void display_update()
 {
+    controller_update();
+
     // maps led columns to positions in data array
     const static int8_t i2c_led_position[COLS] = {
         14, 15, 12, 13, 10, 11, 8, 9, 6, 7, 4

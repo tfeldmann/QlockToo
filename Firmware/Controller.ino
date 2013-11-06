@@ -17,12 +17,8 @@ void controller_init()
 
 void controller_update()
 {
-    button_update();
     brightness_update();
     controller_statemachine();
-
-
-    if (button4.risingEdge()) brightness_next_mode();
 
     // reset the second / minute / hour has_updated flags
     time_resetFlags();
@@ -42,11 +38,6 @@ void controller_statemachine()
         {
             matrix_timewords(hours, minutes);
         }
-
-        if (button1.read() && button1.duration() > 1500)
-        {
-            STATE_SWITCH(SECONDS);
-        }
     STATE_LEAVE
     END_OF_STATE
 
@@ -60,12 +51,6 @@ void controller_statemachine()
         if (second_has_changed)
         {
             matrix_second(seconds);
-        }
-
-        if (button1.risingEdge() || button2.risingEdge()
-            || button3.risingEdge() || button4.risingEdge())
-        {
-            STATE_SWITCH(TIMEWORDS);
         }
     STATE_LEAVE
     END_OF_STATE
