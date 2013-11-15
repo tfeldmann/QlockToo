@@ -3,3 +3,45 @@
 
 \section{Software}
 \label{sec:Software}
+Noch vor der Konzeption der Uhr wird eine Desktop-Software entwickelt, um den Testprozess für die Algorithmen zu beschleunigen. Mit der Zeit wächst der Umfang des Programms jedoch deutlich und es enthält mittlerweile folgende Funktionen:
+
+- Die QlockToo kann über USB angeschlossen und als Display genutzt werden. Dazu kommt ein selbst entwickeltes Streaming-Protokoll zum Einsatz.
+- Die Software enthält einen Simulator. So können Muster und Algorithmen auch ohne Anschluss an die Hardware getestet werden.
+- Zu Testzwecken sind verschiedene Demonstrationsmuster implementiert
+- Das Spiel Snake kann auf der QlockToo gespielt werden. Die Steuerung erfolgt über die Pfeiltasten am Computer.
+- Es können Laufschriften in beliebiger Geschwindigkeit angezeigt werden.
+- Ein Einstellungsdialog, in dem alle wichtigen Einstellungen an der QlockToo am Rechner vorgenommen werden können.
+
+\section{Aufbau}
+Da die Software auf allen gängigen Plattformen (Windows / Mac OS X / Linux) lauffähig sein soll und wegen der besonders hohen Entwicklungsgeschwindigkeit wird Python als Programmiersprache verwendet.
+Das aus der C++ - Welt bekannte Framework Qt wird über die von Digia bereitgestellten PySide -Bindings als GUI-Framework genutzt. Die Software baut somit ausschließlich auf freier Open-Source Software auf.
+
+\section{Rundgang durch die Software}
+Der QlockToo-Manager zeigt nach dem Start den Simulator und eine seitlich angebrachte Menüleiste zum Starten der Unterprogramme.
+Das Programm "Timewords", welches für die Anzeige der Zeit in Worten zuständig ist, wird standardmäßig angezeigt, wenn keines der Unterprogramme aktiv ist. Der QlockToo-Manager zieht dazu die momentane Systemzeit heran.
+
+<Bild Simulator>
+
+Die Unterprogramme sind jeweils einzelne unabhängige Python-Module -- lassen sich also leicht erweitern.
+Der Simulator besitzt die gleiche API wie die Hardware. Die Ausgabe der Programme kann also ohne Anpassungen auf die Hardware gestreamt werden oder im Simulator angezeigt werden (oder beides gleichzeitig).
+
+<BILD: Verbindungsdialog>
+
+Für die Entwicklung ist eine Konsole integriert, mit der auf direktem Wege Befehle an die API der QlockToo gesendet werden können. Kommandos und Rückgabewerte werden zur besseren optischen Erfassbarkeit farblich hervorgehoben.
+
+<Bild: Konsole>
+
+Der nächste Punkt in der Menüleiste sind die Demonstrationsmuster.
+Probleme bereitet die Helix-Demonstration. Hier wird eine dreidimensionale Spirale angezeigt, wobei die Tiefe als Helligkeitswert dargestellt wird.
+Durch die diskrete Berechnung der Funktion und die geringe Pixelanzahl der Uhr wirkte die Demonstration zuerst sehr dünn und gestückelt. Daraufhin wird ein Gauss-Tiefpass implementiert, der den gewünschten Anti-Alias-Effekt mit sich bringt.
+
+<Bild: Helix mit und ohne Tiefpass>
+
+PulseDemo
+FadeDemo
+WaveDemo
+PongDemo
+HelixDemo
+GameOfLifeDemo
+MatrixDemo
+
