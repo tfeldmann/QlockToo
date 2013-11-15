@@ -22,10 +22,10 @@ void brightness_update()
     if (mode == BRIGHTNESS_MODE_AUTOMATIC)
     {
         static uint16_t filtered_value = FILTER_MAX;
-        uint16_t new_sample = map(analogRead(LDR_PIN), 0, 1024, 0, FILTER_MAX);
+        uint16_t new_sample = analogRead(LDR_PIN) * FILTER_MAX / 1024.0;
 
         new_sample > filtered_value ? filtered_value++ : filtered_value--;
-        BRIGHTNESS = map(filtered_value, 0, FILTER_MAX, 0, BRIGHTNESS_MAX);
+        BRIGHTNESS = filtered_value * 1024.0 / FILTER_MAX;
     }
     else
     {
