@@ -2,3 +2,9 @@
 *_ui.py
 *_rc.py
 *.sublime-workspace
+*.fdb_latexmk
+*.aux
+*.log
+QlockToo.pdf
+*.gz
+*.toc
