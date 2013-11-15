@@ -4,7 +4,7 @@
 
 #include "globals.h"
 
-#define DCF77PIN 2  // The pin the DCF77-module is connected to
+#define DCF77PIN 4  // The pin the DCF77-module is connected to
 #define DCF_SPLIT_MILLIS 140  // length of signal before we assume a "1"
 #define DCF_SYNC_MILLIS 1200  // pause to detect a new minute
 
