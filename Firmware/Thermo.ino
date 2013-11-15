@@ -4,7 +4,7 @@
 
 const int THERMO_PIN = A1;
 
-void thermo_celsius()
+float thermo_celsius()
 {
-    Serial.println(analogRead(THERMO_PIN));
+    return analogRead(THERMO_PIN) * 0.1145 - 33.449;
 }

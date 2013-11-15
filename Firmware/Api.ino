@@ -12,7 +12,6 @@ void api_init()
     // States
     serialCommand.addCommand("@timewords", api_timewords);
     serialCommand.addCommand("@seconds", api_seconds);
-    serialCommand.addCommand("@celsius", thermo_celsius);
 
     // Streaming
     serialCommand.addCommand("@m", api_matrix);
