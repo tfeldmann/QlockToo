@@ -22,6 +22,7 @@ void api_init()
 
     // Infos
     serialCommand.addCommand("@about", api_about);
+    serialCommand.addCommand("@device", api_device);
     serialCommand.setDefaultHandler(api_unknown);
 }
 
@@ -99,6 +100,12 @@ void api_about()
     Serial.println("#    Manuel Fehmer");
     Serial.println("#    Carsten Hussmann");
     Serial.println("#===========================================");
+}
+
+void api_device()
+{
+    Serial.print("@device QlockToo ");
+    Serial.println(VERSION);
 }
 
 void api_unknown(const char *command)

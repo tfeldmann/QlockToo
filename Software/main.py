@@ -1,10 +1,13 @@
 import sys
-from PySide.QtGui import QApplication
+import platform
+from PySide.QtGui import QApplication, QFont
 from qlocktoo.app import QlockToo
-import buildtools
 
 if __name__ == "__main__":
-    buildtools.run(ui=True, qrc=False)
+    # Fix OS X Mavericks QT font bug
+    if platform.mac_ver()[0].split('.')[:2] == ['10', '9']:
+        QFont.insertSubstitution('.Lucida Grande UI', 'Lucida Grande')
+
     application = QApplication(sys.argv)
     app = QlockToo()
     app.show()

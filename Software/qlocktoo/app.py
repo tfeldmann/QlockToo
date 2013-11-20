@@ -2,6 +2,7 @@ from PySide.QtGui import QMainWindow, QMessageBox
 from PySide.QtCore import Slot
 import device
 from connect.serialconnection import SerialConnection
+from connect import ConnectDialog
 from console import ConsoleApp
 from snake import SnakeApp
 from marquee import MarqueeApp
@@ -32,6 +33,13 @@ class QlockToo(QMainWindow):
         self.setWindowTitle('QlockToo v{0}'.format(__version__))
         self.device = self.ui.simulator
         self.app = TimeWordsApp(device=self.device)
+
+    @Slot()
+    def on_actionConnect_triggered(self):
+        """Show ConnectionDialog"""
+        con = ConnectDialog(self)
+        con.exec_()
+
 
     @Slot()
     def on_actionConsole_triggered(self):
@@ -101,6 +109,6 @@ class QlockToo(QMainWindow):
                 port = self.ui.port.currentText()
                 self.device = device.Device(port=port)
                 self.ui.appbox.setEnabled(True)
-            except Exception, e:
+            except Exception as e:
                 QMessageBox.warning(self, "Error: ", e.message)
                 self.ui.port.setCurrentIndex(0)
