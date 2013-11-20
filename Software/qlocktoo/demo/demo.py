@@ -124,7 +124,7 @@ class WaveDemo(Demo):
             return result * 0.5 + 0.5  # scale result to 0 < values < 1
 
         self.t += 0.2
-        matrix = [[f(x, y, self.t) for x in xrange(11)] for y in xrange(10)]
+        matrix = [[f(x, y, self.t) for x in range(11)] for y in range(10)]
         self.device.matrix = matrix
 
 
