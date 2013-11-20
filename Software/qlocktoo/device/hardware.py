@@ -1,6 +1,8 @@
 from PySide.QtCore import QTimer
 from serialconnection import SerialConnection
 
+import serial
+
 
 class Hardware(object):
 
