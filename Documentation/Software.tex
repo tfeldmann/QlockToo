@@ -31,14 +31,15 @@ Das Programm \emph{Timewords}, welches für die Anzeige der Zeit in Worten zust�
 
 Die Unterprogramme sind jeweils einzelne, unabhängige Python-Module -- lassen sich also leicht erweitern.
 Der Simulator besitzt die gleiche API wie die Hardware. Die Ausgabe der Programme kann also ohne Anpassungen auf die Hardware gestreamt werden oder im Simulator angezeigt werden (oder beides gleichzeitig).
-%
+
+\subsubsection{Konnektivität}
 \begin{figure}[h]
     \centering
     \includegraphics[width=\columnwidth,draft]{Abbildungen/Screenshot}
     \caption[Verbindungsdialog]{Der Verbindungdialog}
     \label{fig:Verbindungsdialog}
 \end{figure}
-%
+
 Für die Entwicklung ist eine Konsole integriert, mit der auf direktem Wege Befehle an die API der QlockToo gesendet werden können. Kommandos und Rückgabewerte werden zur besseren optischen Erfassbarkeit farblich hervorgehoben.
 %
 \begin{figure}[h]
@@ -48,18 +49,41 @@ Für die Entwicklung ist eine Konsole integriert, mit der auf direktem Wege Befe
     \label{fig:Konsole}
 \end{figure}
 %
+
+\subsubsection{Demonstrationsmuster}
 Der nächste Punkt in der Menüleiste sind die Demonstrationsmuster.
-Probleme bereitet die Helix-Demonstration. Hier wird eine dreidimensionale Spirale angezeigt, wobei die Tiefe als Helligkeitswert dargestellt wird.
-Bedingt durch die diskrete Berechnung der Funktion und die geringe Pixelanzahl der Uhr wirkte die Demonstration zuerst sehr dünn und gestückelt.
+
+\emph{Pulse} \\
+Die Buchstaben und Ecken wechseln sanft zwischen minimaler und maximaler Helligkeit.
+
+\emph{Fade} \\
+Zeigt einen Farbverlauf auf der Uhr, der sich sinusförmig von links nach rechts und zurück bewegt.
+
+\emph{Wave} \\
+Zeigt ein pulsierendes Wellenbild, dessen Zentrum mit der Zeit langsam wandert.
+
+\emph{Pong} \\
+Zeigt zwei perfekt spielende Computergegner bei einer Partie Pong.
+
+\emph{Helix} \\
+Zeigt die zweidimensionale Projektion einer dreidimensionalen Spirale. Die z-Achse wird dabei über Helligkeitswerte visualisiert.
+Bedingt durch die Berechnung der Funktionwerte für diskrete Buchstaben auf der Uhr und die geringe Pixelanzahl der Uhr wirkte die Demonstration zuerst sehr dünn und zerstückelt.
 Daraufhin wird ein Gauss-Tiefpass implementiert, der den gewünschten Anti-Alias-Effekt mit sich bringt.
 
 <Bild: Helix mit und ohne Tiefpass>
 
-PulseDemo
-FadeDemo
-WaveDemo
-PongDemo
-HelixDemo
-GameOfLifeDemo
-MatrixDemo
+\emph{GameOfLife} \\
+Implementation von Conways Spiel des Lebens, wobei tote Zellen schwarz und lebende Zellen weiß dargestellt werden.
+Grundlage sind folgende vier Regeln, die bei jeder Iteration befolgt werden\footnote{de.wikipedia.org/wiki/Conways\_Spiel\_des\_Lebens}:
+\begin{itemize}
+    \item Eine tote Zelle mit genau drei lebenden Nachbarn wird in der Folgegeneration neu geboren.
+    \item Lebende Zellen mit weniger als zwei lebenden Nachbarn sterben in der Folgegeneration an Einsamkeit.
+    \item Eine lebende Zelle mit zwei oder drei lebenden Nachbarn bleibt in der Folgegeneration lebend.
+    \item Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der Folgegeneration an Überbevölkerung.
+\end{itemize}
+
+\emph{Matrix} \\
+asd
+
+
 
