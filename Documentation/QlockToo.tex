@@ -28,7 +28,11 @@
 \maketitle
 \pagenumbering{gobble}
 \end{titlepage}
-\tableofcontents
+\twocolumn[
+   \begin{@twocolumnfalse}
+     \tableofcontents
+    \end{@twocolumnfalse}
+]
 \pagenumbering{arabic}
 \newpage
 
