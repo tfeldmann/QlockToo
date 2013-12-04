@@ -68,7 +68,7 @@ void api_matrix()
 
 void api_corners()
 {
-    Serial.println("Not yet implemented");
+    Serial.println("!Not yet implemented");
 }
 
 
