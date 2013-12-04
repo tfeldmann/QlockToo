@@ -33,10 +33,8 @@ void loop()
     api_update();
 
     button_update();
-    if (button1.risingEdge())
-    {
-        STATE_SWITCH(STATE_TIMEWORDS);
-    }
+    if (button1.risingEdge()) STATE_SWITCH(STATE_TIMEWORDS);
     if (button2.risingEdge()) STATE_SWITCH(STATE_SECONDS);
-    if (button4.risingEdge()) brightness_next_mode();
+    if (button3.risingEdge()) STATE_SWITCH(STATE_TEMPERATURE);
+    if (button4.risingEdge()) brightness_next_step();
 }

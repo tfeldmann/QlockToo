@@ -4,36 +4,70 @@
 
 #include "globals.h"
 
-const int LDR_PIN = A0;
+volatile bool brightness_has_changed = false;
 #define FILTER_MAX 4000  // max filter response time in ms
-#define BRIGHTNESS_MODE_AUTOMATIC -1
 
-const int BRIGHTNESS_MODE_COUNT = 8;
-int BRIGHTNESS_MODE[BRIGHTNESS_MODE_COUNT] = {
-    BRIGHTNESS_MODE_AUTOMATIC, 255, 220, 200, 150, 100, 50, 0
-};
-static int brightness_mode_index = 0;
-
+bool automatic = true;
+const int STEPS = 7;
+const int step[STEPS] = {255, 220, 200, 150, 100, 50, 0};
+byte index = STEPS;  // start in automatic mode
 
 void brightness_update()
 {
-    int mode = BRIGHTNESS_MODE[brightness_mode_index];
-
-    if (mode == BRIGHTNESS_MODE_AUTOMATIC)
+    if (automatic)
     {
-        static uint16_t filtered_value = FILTER_MAX;
-        uint16_t new_sample = analogRead(LDR_PIN) * FILTER_MAX / 1024.0;
+        int _value = analogRead(LDR_PIN);
+        static int value = _value;
+        if (_value > value) value++;
+        else if (_value < value) value--;
 
-        new_sample > filtered_value ? filtered_value++ : filtered_value--;
-        BRIGHTNESS = filtered_value * 1024.0 / FILTER_MAX;
+        int _proposed = map(value, 0, 600, 5, 255);
+        if (_proposed > 255) _proposed = 255;
+
+
+        static int prev_brightness = 0;
+        for (int i = 0; i < STEPS; i++)
+        {
+            if (_proposed >= step[i])
+            {
+                brightness = step[i];
+                if (prev_brightness != brightness)
+                {
+                    // Serial.println("Proposed " + String(brightness));
+                    brightness_has_changed = true;
+                    prev_brightness = brightness;
+                    return;
+                }
+            }
+        }
     }
     else
     {
-        BRIGHTNESS = mode;
+        brightness = step[index];
     }
 }
 
-void brightness_next_mode()
+
+void brightness_next_step()
 {
-    brightness_mode_index = (brightness_mode_index + 1) % BRIGHTNESS_MODE_COUNT;
+    index = (index + 1) % (STEPS + 1);
+
+    if (index < STEPS)
+    {
+        Serial.println("Step " + String(index));
+        automatic = false;
+        brightness_update();
+        brightness_has_changed = true;
+    }
+    else if (index == STEPS)
+    {
+        Serial.println("Auto");
+        automatic = true;
+    }
+}
+
+
+void brightness_resetFlags()
+{
+    brightness_has_changed = false;
 }

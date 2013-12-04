@@ -167,14 +167,14 @@ void matrix_second(char s)
                 if (x >= 0 && x <= 4)
                 {
                     bool en = bitRead(matrix_numbers[s_1][y-1], 7-x);
-                    matrix[y][x] = BRIGHTNESS_MAX * en;
+                    matrix[y][x] = brightness * en;
                 }
                 // second letter
                 else if (x >= 6 && x <= 10)
                 {
                     int _x = x - 6;
                     bool en = bitRead(matrix_numbers[s_2][y-1], 7-_x);
-                    matrix[y][x] = BRIGHTNESS_MAX * en;
+                    matrix[y][x] = brightness * en;
                 }
                 // clear the rest
                 else matrix[y][x] = 0;
@@ -236,7 +236,7 @@ void matrix_timewords(int hour, int minute)
         // apply mask
         for (int x = 0; x < 16; x++)
         {
-            matrix[row][x] |= bitRead(mask, 15 - x) * BRIGHTNESS_MAX;
+            matrix[row][x] |= bitRead(mask, 15 - x) * brightness;
         }
 
         // TODO: ES IST EINS UHR
@@ -277,7 +277,7 @@ void corner_minute(int m)
     {
         if (i < m % 5)
         {
-            corner[i] = BRIGHTNESS_MAX;
+            corner[i] = brightness;
         }
         else
         {

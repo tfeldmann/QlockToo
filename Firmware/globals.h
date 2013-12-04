@@ -10,6 +10,8 @@
 // Undefine this to enable logging output
 #define DEBUG
 
+const int LDR_PIN = A0;
+
 // Clock time
 volatile unsigned char seconds, minutes, hours, day, month;
 volatile unsigned int year;
@@ -20,8 +22,7 @@ const int COLS    = 11;
 const int CORNERS = 4;
 
 // Led brightness
-volatile byte BRIGHTNESS = 255;
-const byte BRIGHTNESS_MAX = 255;
+byte brightness = 255;
 
 // List of device states
 STATES(
