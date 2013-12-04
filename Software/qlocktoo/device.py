@@ -38,8 +38,6 @@ class Device(QWidget):
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.listen_serial)
         self._buffer = ''
-        self._prev_matrix = None
-        self._prev_corners = None
 
     def use_connection(self, connection):
         self.connection = connection
@@ -48,6 +46,7 @@ class Device(QWidget):
 
     def disconnect(self):
         self.timer.stop()
+        self.connection.write('@disconnect\n')
         self.connection.close()
         self.connection = None
 
@@ -77,13 +76,12 @@ class Device(QWidget):
         self._matrix = value
         self.update()
 
-        if self.is_connected() and self._prev_matrix != self.matrix:
+        if self.is_connected():
             flat_matrix = list(chain.from_iterable(self.matrix))
             data = [self.encode_brightness(elem) for elem in flat_matrix]
             self.connection.write('@m ')
             self.connection.write(bytearray(data))
             self.connection.write('\n')
-            self._prev_matrix = self.matrix
 
     @property
     def corners(self):
@@ -93,6 +91,12 @@ class Device(QWidget):
     def corners(self, value):
         self._corners = value
         self.update()
+
+        if self.is_connected():
+            data = [self.encode_brightness(elem) for elem in self.corners]
+            self.connection.write('@c ')
+            self.connection.write(bytearray(data))
+            self.connection.write('\n')
 
     def paintEvent(self, e):
         """

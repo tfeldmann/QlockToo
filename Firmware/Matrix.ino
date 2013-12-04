@@ -264,11 +264,24 @@ void matrix_dump()
 
 void corner_clear()
 {
-
+    for (int i = 0; i < CORNERS; i++)
+    {
+        corner[i] = 0;
+    }
 }
 
 
 void corner_minute(int m)
 {
-
+    for (int i = 0; i < CORNERS; i++)
+    {
+        if (i < m % 5)
+        {
+            corner[i] = BRIGHTNESS_MAX;
+        }
+        else
+        {
+            corner[i] = 0;
+        }
+    }
 }
