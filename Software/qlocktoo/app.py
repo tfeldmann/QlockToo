@@ -41,13 +41,16 @@ class QlockToo(QMainWindow):
         """
         if self.device.is_connected():
             self.device.disconnect()
-            self.ui.actionConnect.setIcon(QIcon(':icons/fa-power-off.png'))
+            self.ui.actionConnect.setIcon(
+                QIcon(':icons/black32/fa-bolt.png'))
             self.ui.actionConnect.setText('Verbinden')
         else:
             dialog = ConnectDialog(self)
             if dialog.exec_() == QDialog.Accepted:
                 # take over connection from dialog and assign it to the device
                 self.device.use_connection(dialog.connection)
+                self.ui.actionConnect.setIcon(
+                    QIcon(':icons/black32/fa-eject.png'))
                 self.ui.actionConnect.setText("Trennen")
 
     @Slot(str)

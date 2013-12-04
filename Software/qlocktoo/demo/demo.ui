@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>347</width>
-    <height>247</height>
+    <width>408</width>
+    <height>290</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,10 +34,14 @@
      <property name="text">
       <string>Verlauf</string>
      </property>
+     <property name="icon">
+      <iconset resource="../assets/assets.qrc">
+       <normaloff>:/icons/black32/fa-arrows-h.png</normaloff>:/icons/black32/fa-arrows-h.png</iconset>
+     </property>
      <property name="iconSize">
       <size>
-       <width>30</width>
-       <height>30</height>
+       <width>32</width>
+       <height>32</height>
       </size>
      </property>
      <property name="autoDefault">
@@ -62,10 +66,14 @@
      <property name="text">
       <string>Helix</string>
      </property>
+     <property name="icon">
+      <iconset resource="../assets/assets.qrc">
+       <normaloff>:/icons/black32/fa-random.png</normaloff>:/icons/black32/fa-random.png</iconset>
+     </property>
      <property name="iconSize">
       <size>
-       <width>30</width>
-       <height>30</height>
+       <width>32</width>
+       <height>32</height>
       </size>
      </property>
      <property name="autoDefault">
@@ -90,10 +98,14 @@
      <property name="text">
       <string>Welle</string>
      </property>
+     <property name="icon">
+      <iconset resource="../assets/assets.qrc">
+       <normaloff>:/icons/black32/fa-bullseye.png</normaloff>:/icons/black32/fa-bullseye.png</iconset>
+     </property>
      <property name="iconSize">
       <size>
-       <width>30</width>
-       <height>30</height>
+       <width>32</width>
+       <height>32</height>
       </size>
      </property>
      <property name="autoDefault">
@@ -118,10 +130,14 @@
      <property name="text">
       <string>Pong</string>
      </property>
+     <property name="icon">
+      <iconset resource="../assets/assets.qrc">
+       <normaloff>:/icons/black32/fa-gamepad.png</normaloff>:/icons/black32/fa-gamepad.png</iconset>
+     </property>
      <property name="iconSize">
       <size>
-       <width>30</width>
-       <height>30</height>
+       <width>32</width>
+       <height>32</height>
       </size>
      </property>
      <property name="autoDefault">
@@ -146,10 +162,14 @@
      <property name="text">
       <string>Puls</string>
      </property>
+     <property name="icon">
+      <iconset resource="../assets/assets.qrc">
+       <normaloff>:/icons/black32/fa-refresh.png</normaloff>:/icons/black32/fa-refresh.png</iconset>
+     </property>
      <property name="iconSize">
       <size>
-       <width>30</width>
-       <height>30</height>
+       <width>32</width>
+       <height>32</height>
       </size>
      </property>
      <property name="autoDefault">
@@ -174,10 +194,14 @@
      <property name="text">
       <string>Weiß</string>
      </property>
+     <property name="icon">
+      <iconset resource="../assets/assets.qrc">
+       <normaloff>:/icons/black32/fa-square-o.png</normaloff>:/icons/black32/fa-square-o.png</iconset>
+     </property>
      <property name="iconSize">
       <size>
-       <width>30</width>
-       <height>30</height>
+       <width>32</width>
+       <height>32</height>
       </size>
      </property>
      <property name="autoDefault">
@@ -202,10 +226,14 @@
      <property name="text">
       <string>Schwarz</string>
      </property>
+     <property name="icon">
+      <iconset resource="../assets/assets.qrc">
+       <normaloff>:/icons/black32/fa-square.png</normaloff>:/icons/black32/fa-square.png</iconset>
+     </property>
      <property name="iconSize">
       <size>
-       <width>30</width>
-       <height>30</height>
+       <width>32</width>
+       <height>32</height>
       </size>
      </property>
      <property name="autoDefault">
@@ -230,10 +258,14 @@
      <property name="text">
       <string>Matrix</string>
      </property>
+     <property name="icon">
+      <iconset resource="../assets/assets.qrc">
+       <normaloff>:/icons/black32/fa-sort-alpha-asc.png</normaloff>:/icons/black32/fa-sort-alpha-asc.png</iconset>
+     </property>
      <property name="iconSize">
       <size>
-       <width>30</width>
-       <height>30</height>
+       <width>32</width>
+       <height>32</height>
       </size>
      </property>
      <property name="autoDefault">
@@ -258,10 +290,14 @@
      <property name="text">
       <string>GoL</string>
      </property>
+     <property name="icon">
+      <iconset resource="../assets/assets.qrc">
+       <normaloff>:/icons/black32/fa-globe.png</normaloff>:/icons/black32/fa-globe.png</iconset>
+     </property>
      <property name="iconSize">
       <size>
-       <width>30</width>
-       <height>30</height>
+       <width>32</width>
+       <height>32</height>
       </size>
      </property>
      <property name="autoDefault">
@@ -274,6 +310,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../assets/assets.qrc"/>
+ </resources>
  <connections/>
 </ui>

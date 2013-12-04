@@ -67,7 +67,7 @@ class Demo(object):
         self.device = device
         self.timer = QTimer()
         self.timer.timeout.connect(self.update)
-        self.timer.start(framerate)
+        self.timer.start(1000.0 / framerate)
 
     def update(self):
         pass
@@ -75,8 +75,8 @@ class Demo(object):
 
 class PulseDemo(Demo):
 
-    def __init__(self, device, framerate=50):
-        Demo.__init__(self, device, framerate)
+    def __init__(self, device):
+        Demo.__init__(self, device, framerate=20)
         self.b = 0
         self.inc = 0.05
 
@@ -94,8 +94,8 @@ class PulseDemo(Demo):
 
 class FadeDemo(Demo):
 
-    def __init__(self, device, framerate=50):
-        Demo.__init__(self, device, framerate)
+    def __init__(self, device):
+        Demo.__init__(self, device, framerate=20)
         self.device.corners = [0] * 4
         self.matrix = [[0] * 11] * 10
         self.b = 0
@@ -109,8 +109,8 @@ class FadeDemo(Demo):
 
 class WaveDemo(Demo):
 
-    def __init__(self, device, framerate=30):
-        Demo.__init__(self, device, framerate)
+    def __init__(self, device):
+        Demo.__init__(self, device, framerate=25)
         self.device.corners = [0] * 4
         self.t = 0
 
@@ -130,8 +130,8 @@ class WaveDemo(Demo):
 
 class PongDemo(Demo):
 
-    def __init__(self, device, framerate=70):
-        Demo.__init__(self, device, framerate)
+    def __init__(self, device):
+        Demo.__init__(self, device, framerate=15)
         self.device.corners = [0] * 4
 
         self.x, self.y = device.columns / 2, device.rows / 2
@@ -178,8 +178,8 @@ class PongDemo(Demo):
 
 class HelixDemo(Demo):
 
-    def __init__(self, device, framerate=100):
-        Demo.__init__(self, device, framerate)
+    def __init__(self, device):
+        Demo.__init__(self, device, framerate=10)
         self.device.corners = [0] * 4
         self.matrix = [[0] * 11 for _ in range(10)]
         self.matrix[0] = [1] * 11
@@ -205,8 +205,8 @@ class HelixDemo(Demo):
 
 class GameOfLifeDemo(Demo):
 
-    def __init__(self, device, framerate=150):
-        Demo.__init__(self, device, framerate)
+    def __init__(self, device):
+        Demo.__init__(self, device, framerate=10)
         self.device.corners = [0] * 4
         self.matrix = [[0] * 11 for _ in range(10)]
 
@@ -249,8 +249,8 @@ class GameOfLifeDemo(Demo):
 
 class MatrixDemo(Demo):
 
-    def __init__(self, device, framerate=100):
-        Demo.__init__(self, device, framerate)
+    def __init__(self, device):
+        Demo.__init__(self, device, framerate=10)
         self.device.corners = [0] * 4
         self.matrix = [[0] * 11 for _ in range(10)]
         self.t = 0

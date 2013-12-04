@@ -43,6 +43,7 @@ class Device(QWidget):
 
     def use_connection(self, connection):
         self.connection = connection
+        self.connection.timeout = 0
         self.timer.start(50)  # ms
 
     def disconnect(self):

@@ -100,7 +100,7 @@
   <action name="actionDemo">
    <property name="icon">
     <iconset resource="assets/assets.qrc">
-     <normaloff>:/icons/black32/fa-thumbs-o-up.png</normaloff>:/icons/black32/fa-thumbs-o-up.png</iconset>
+     <normaloff>:/icons/black32/fa-th-large.png</normaloff>:/icons/black32/fa-th-large.png</iconset>
    </property>
    <property name="text">
     <string>Demo</string>
@@ -109,7 +109,7 @@
   <action name="actionConnect">
    <property name="icon">
     <iconset resource="assets/assets.qrc">
-     <normaloff>:/icons/black32/fa-chain-broken.png</normaloff>:/icons/black32/fa-chain-broken.png</iconset>
+     <normaloff>:/icons/black32/fa-compress.png</normaloff>:/icons/black32/fa-compress.png</iconset>
    </property>
    <property name="text">
     <string>Verbinden</string>
