@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>548</width>
-    <height>448</height>
+    <width>545</width>
+    <height>469</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,20 +18,11 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
-    <property name="leftMargin">
-     <number>0</number>
-    </property>
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
+    <property name="margin">
      <number>0</number>
     </property>
     <item>
-     <widget class="Simulator" name="simulator" native="true"/>
+     <widget class="Device" name="simulator" native="true"/>
     </item>
    </layout>
   </widget>
@@ -72,8 +63,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="assets.qrc">
-     <normaloff>:/icons/assets/coffee.png</normaloff>:/icons/assets/coffee.png</iconset>
+    <iconset resource="assets/assets.qrc">
+     <normaloff>:/icons/black32/fa-terminal.png</normaloff>:/icons/black32/fa-terminal.png</iconset>
    </property>
    <property name="iconText">
     <string>Konsole</string>
@@ -81,8 +72,8 @@
   </action>
   <action name="actionSnake">
    <property name="icon">
-    <iconset resource="assets.qrc">
-     <normaloff>:/icons/assets/circle-blank.png</normaloff>:/icons/assets/circle-blank.png</iconset>
+    <iconset resource="assets/assets.qrc">
+     <normaloff>:/icons/black32/fa-gamepad.png</normaloff>:/icons/black32/fa-gamepad.png</iconset>
    </property>
    <property name="text">
     <string>Snake</string>
@@ -90,8 +81,8 @@
   </action>
   <action name="actionMarquee">
    <property name="icon">
-    <iconset resource="assets.qrc">
-     <normaloff>:/icons/assets/text-width.png</normaloff>:/icons/assets/text-width.png</iconset>
+    <iconset resource="assets/assets.qrc">
+     <normaloff>:/icons/black32/fa-text-width.png</normaloff>:/icons/black32/fa-text-width.png</iconset>
    </property>
    <property name="text">
     <string>Laufschrift</string>
@@ -99,8 +90,8 @@
   </action>
   <action name="actionSettings">
    <property name="icon">
-    <iconset resource="assets.qrc">
-     <normaloff>:/icons/assets/cog.png</normaloff>:/icons/assets/cog.png</iconset>
+    <iconset resource="assets/assets.qrc">
+     <normaloff>:/icons/black32/fa-cogs.png</normaloff>:/icons/black32/fa-cogs.png</iconset>
    </property>
    <property name="text">
     <string>Einstellungen</string>
@@ -108,8 +99,8 @@
   </action>
   <action name="actionDemo">
    <property name="icon">
-    <iconset resource="assets.qrc">
-     <normaloff>:/icons/assets/star.png</normaloff>:/icons/assets/star.png</iconset>
+    <iconset resource="assets/assets.qrc">
+     <normaloff>:/icons/black32/fa-thumbs-o-up.png</normaloff>:/icons/black32/fa-thumbs-o-up.png</iconset>
    </property>
    <property name="text">
     <string>Demo</string>
@@ -117,8 +108,8 @@
   </action>
   <action name="actionConnect">
    <property name="icon">
-    <iconset resource="assets.qrc">
-     <normaloff>:/icons/assets/exchange.png</normaloff>:/icons/assets/exchange.png</iconset>
+    <iconset resource="assets/assets.qrc">
+     <normaloff>:/icons/black32/fa-chain-broken.png</normaloff>:/icons/black32/fa-chain-broken.png</iconset>
    </property>
    <property name="text">
     <string>Verbinden</string>
@@ -127,14 +118,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Simulator</class>
+   <class>Device</class>
    <extends>QWidget</extends>
-   <header>device.simulator.h</header>
+   <header>device.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="assets.qrc"/>
+  <include location="assets/assets.qrc"/>
  </resources>
  <connections/>
 </ui>
