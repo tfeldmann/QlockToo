@@ -1,17 +1,15 @@
-from PySide.QtGui import QMainWindow, QMessageBox
+from PySide.QtGui import QMainWindow, QDialog
 from PySide.QtCore import Slot
-import device
-from connect.serialconnection import SerialConnection
-from connect import ConnectDialog
-from console import ConsoleApp
-from snake import SnakeApp
-from marquee import MarqueeApp
-from settings import SettingsApp
-from demo import DemoApp
-from timewords import TimeWordsApp
+from qlocktoo.connect import ConnectDialog
+from qlocktoo.console import ConsoleApp
+from qlocktoo.snake import SnakeApp
+from qlocktoo.marquee import MarqueeApp
+from qlocktoo.settings import SettingsApp
+from qlocktoo.demo import DemoApp
+from qlocktoo.timewords import TimeWordsApp
 from app_ui import Ui_qlocktoo as Ui
 
-__version__ = '1.0'
+__version__ = '1.1'
 
 
 class QlockToo(QMainWindow):
@@ -31,15 +29,29 @@ class QlockToo(QMainWindow):
         self.ui = Ui()
         self.ui.setupUi(self)
         self.setWindowTitle('QlockToo v{0}'.format(__version__))
+
         self.device = self.ui.simulator
+        self.device.signal_linereceived.connect(self.brop)
         self.app = TimeWordsApp(device=self.device)
 
     @Slot()
     def on_actionConnect_triggered(self):
-        """Show ConnectionDialog"""
-        con = ConnectDialog(self)
-        con.exec_()
+        """
+        Show ConnectionDialog
+        """
+        if self.device.is_connected():
+            self.device.disconnect()
+            self.ui.actionConnect.setText('Verbinden')
+        else:
+            dialog = ConnectDialog(self)
+            if dialog.exec_() == QDialog.Accepted:
+                # take over connection from dialog and assign it to the device
+                self.device.use_connection(dialog.connection)
+                self.ui.actionConnect.setText("Trennen")
 
+    @Slot(str)
+    def brop(self, s):
+        print s
 
     @Slot()
     def on_actionConsole_triggered(self):
@@ -74,41 +86,3 @@ class QlockToo(QMainWindow):
         self.app = App(device=self.device)
         self.app.exec_()
         self.app = TimeWordsApp(device=self.device)
-
-    def refreshPorts(self):
-        """
-        Refreshes the port list
-        """
-        self.ui.port.clear()
-        self.ui.port.addItem('Getrennt')
-        self.ui.port.addItem('Simulator')
-        for port in SerialConnection.list_ports():
-            self.ui.port.addItem(port)
-
-    def portSelect(self, index):
-        """
-        Connects / disconnects a device
-
-        This method is called when the user selected a device in the ports
-        combo box. The Device can be either the simulator or a serial device.
-        """
-        # disconnect device / stop simulator
-        if self.device:
-            self.device.close()
-            self.device = None
-        self.ui.appbox.setEnabled(False)
-
-        if index == 1:
-            # connect to the simulator
-            self.device = device.Simulator()
-            self.ui.appbox.setEnabled(True)
-
-        if index > 1:
-            # connect to actual QlockToo device
-            try:
-                port = self.ui.port.currentText()
-                self.device = device.Device(port=port)
-                self.ui.appbox.setEnabled(True)
-            except Exception as e:
-                QMessageBox.warning(self, "Error: ", e.message)
-                self.ui.port.setCurrentIndex(0)
