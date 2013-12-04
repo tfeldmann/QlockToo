@@ -1,6 +1,5 @@
 *.pyc
 *_ui.py
-*_rc.py
 *.sublime-workspace
 *.fdb_latexmk
 *.aux
