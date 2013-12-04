@@ -10,7 +10,7 @@
 // Timer1: keeps the time
 // Timer3: updates the display
 
-#define VERSION "0.4"
+#define VERSION "0.5"
 #define BAUDRATE 115200
 
 #include <Bounce.h>
@@ -33,7 +33,10 @@ void loop()
     api_update();
 
     button_update();
-    if (button1.risingEdge()) STATE_SWITCH(TIMEWORDS);
-    if (button2.risingEdge()) STATE_SWITCH(SECONDS);
+    if (button1.risingEdge())
+    {
+        STATE_SWITCH(STATE_TIMEWORDS);
+    }
+    if (button2.risingEdge()) STATE_SWITCH(STATE_SECONDS);
     if (button4.risingEdge()) brightness_next_mode();
 }

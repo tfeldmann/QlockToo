@@ -10,8 +10,8 @@
 #define FPS_TO_PERIOD_US(_x_) (1e6 / _x_)
 #define LEDDRIVER_ADDRESS (0x60)
 
+// used pins on the uC
 const int8_t rowpins[ROWS] = {13, 12, 11, 10, 9, 8, 7, 6, 5, 4};
-int8_t cornerpin = 4;  // outputs 12 13 14 15
 
 
 void display_init()
@@ -30,8 +30,10 @@ void display_init()
     I2c.setSpeed(true);  // fast
     I2c.pullup(false);
 
-    uint8_t data[] = {0x00,0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0x00, 0xAA, 0xAA, 0xAA, 0xAA, 0x00, 0x00, 0x00, 0x00, 0xFF};
-    I2c.write(LEDDRIVER_ADDRESS, 0x80, data, 29);
+    uint8_t initdata[] = {0x00,0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0x00, 0xAA,
+        0xAA, 0xAA, 0xAA, 0x00, 0x00, 0x00, 0x00, 0xFF};
+    I2c.write(LEDDRIVER_ADDRESS, 0x80, initdata, 29);
 
     // start display update timer interrupt
     Timer3.initialize(FPS_TO_PERIOD_US(1000));
@@ -52,6 +54,8 @@ void display_update()
     const static int8_t i2c_led_position[COLS] = {
         14, 15, 12, 13, 10, 11, 8, 9, 6, 7, 4
     };
+    const static int8_t i2c_corner_position[CORNERS] = {1, 0, 2, 3};
+
     static int8_t row = 0;
     uint8_t data[16];
 
@@ -61,6 +65,10 @@ void display_update()
     for (int i = 0; i < COLS; i++)
     {
         data[i2c_led_position[i]] = matrix[row][i];
+    }
+    for (int i = 0; i < CORNERS; i++)
+    {
+        data[i2c_corner_position[i]] = corner[i];
     }
 
     // disable current line
