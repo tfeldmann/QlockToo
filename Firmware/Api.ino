@@ -23,6 +23,7 @@ void api_init()
     // Infos
     serialCommand.addCommand("@about", api_about);
     serialCommand.addCommand("@device", api_device);
+    serialCommand.addCommand("@temp", api_temp);
     serialCommand.setDefaultHandler(api_unknown);
 }
 
@@ -106,6 +107,12 @@ void api_device()
 {
     Serial.print("@device QlockToo ");
     Serial.println(VERSION);
+}
+
+void api_temp()
+{
+    Serial.print("@temp ");
+    Serial.println(thermo_celsius());
 }
 
 void api_unknown(const char *command)

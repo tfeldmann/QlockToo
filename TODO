@@ -1,5 +1,9 @@
 Firmware:
  ☐ Bug: ES IST EINS UHR
+ ☐ Eck-LED
 
 Software:
- ☐ COM-Port Auswahl
+ ✔ COM-Port Auswahl @done (13-12-04 14:48)
+ ☐ Variable Schriftlänge
+ ☐ Einstellungen
+ ☐ Matrix Demo
