@@ -11,10 +11,11 @@ class ConsoleApp(QDialog):
 
     def __init__(self, device):
         super(ConsoleApp, self).__init__()
-        self.device = device
-        self.device.callback = self.incomingSerial
         self.ui = Ui()
         self.ui.setupUi(self)
+
+        self.device = device
+        self.device.signal_linereceived.connect(self.incomingSerial)
         self.ui.command.returnPressed.connect(self.sendCommand)
 
     def sendCommand(self):
@@ -24,7 +25,7 @@ class ConsoleApp(QDialog):
             self.ui.command.clear()
         elif cmd:
             self.ui.log.append('<b>Gesendet:</b> <i>' + cmd + '</i>')
-            self.device.send(cmd)
+            self.device.connection.write(str(cmd + '\n'))
             self.ui.command.clear()
 
     def incomingSerial(self, input):

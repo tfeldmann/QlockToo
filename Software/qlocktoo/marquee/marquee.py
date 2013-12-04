@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from PySide.QtGui import QDialog
 from PySide.QtCore import Qt, QTimer, Slot
-import qlocktoo.font.fixed_width as Font
+from .fixed_width import font as Font
 from marquee_ui import Ui_marquee as Ui
 
 
@@ -96,7 +96,10 @@ class MarqueeApp(QDialog):
         """
         text = self.ui.text.text()
         self.marquee.setText(text)
-        self.device.matrix = self.marquee.regionFromLetter(new)
+        if len(text) > 0:
+            self.device.matrix = self.marquee.regionFromLetter(new)
+        else:
+            print "test"
 
     def _frequency(self, speed):
         """

@@ -49,7 +49,11 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>R</string>
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../assets/assets.qrc">
+              <normaloff>:/icons/black32/fa-refresh.png</normaloff>:/icons/black32/fa-refresh.png</iconset>
             </property>
            </widget>
           </item>
@@ -122,7 +126,9 @@
   <tabstop>btnCancel</tabstop>
   <tabstop>btnOk</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../assets/assets.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>btnCancel</sender>

@@ -1,1 +1,0 @@
-from pattern import PatternApp

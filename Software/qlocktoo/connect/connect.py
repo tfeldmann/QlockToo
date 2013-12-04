@@ -2,54 +2,14 @@ import os
 import time
 import serial
 from serial.tools import list_ports
-from PySide.QtGui import QDialog, QMessageBox
 from PySide.QtCore import Slot
-
-
-class Device(object):
-
-    def __init__(self, port=None, baudrate=19200, timeout=60):
-        if port:
-            self.connection = serial.Serial(port=port,
-                                            baudrate=baudrate,
-                                            timeout=timeout)
-        else:
-            self.connection = None
-
-    def request(self, cmd, *args):
-        c = self.connection
-        c.write(cmd + " " + " ".join(args) + "\n")
-        for line in c:
-            line = line.strip()
-            print(line)
-
-            if not (line[0] == '!' or line[0] == '#' or line[0] == '@'):
-                continue  # most likely garbage
-
-            # check for errors
-            if line[0] == '!':
-                raise Exception(line)
-
-            # check for result
-            if cmd in line:
-                result = line.split(" ")[1:]
-                if len(result) == 1:
-                    return result[0]
-                else:
-                    return result
-
-    def device(self):
-        result = self.request('@device')
-        return {
-            'device': result[0],
-            'firmware': result[1]
-        }
+from PySide.QtGui import QDialog, QMessageBox
+from connect_ui import Ui_ConnectDialog as Ui
 
 
 class ConnectDialog(QDialog):
 
     def __init__(self, parent=None):
-        from connect_ui import Ui_ConnectDialog as Ui
         super(ConnectDialog, self).__init__(parent)
         self.ui = Ui()
         self.ui.setupUi(self)
@@ -58,6 +18,8 @@ class ConnectDialog(QDialog):
 
         # get port list on startup
         self.on_btnRefresh_clicked()
+
+        self.connection = None
 
     def serial_ports(self):
         """
@@ -79,7 +41,7 @@ class ConnectDialog(QDialog):
 
     @Slot()
     def on_btnRefresh_clicked(self):
-        self.device = None
+        self.connection = None
         self.ui.cmbPorts.clear()
         self.ui.cmbPorts.addItem('Disconnected')
         self.ui.cmbPorts.insertSeparator(1)
@@ -88,12 +50,7 @@ class ConnectDialog(QDialog):
 
     @Slot()
     def on_btnOk_clicked(self):
-        print("ok")
-        # if self.about['device'] == 'P1':
-        #     self.parent.device = device.P1()
-        #     self.parent.device.connection = self.device.connection
-        # else:
-        #     self.parent.device = None
+        self.accept()
 
     @Slot(int)
     def on_cmbPorts_currentIndexChanged(self, index):
@@ -108,28 +65,41 @@ class ConnectDialog(QDialog):
         # connect
         else:
             try:
-                # try connecting to the default device class
-                self.device = Device(
-                    port=self.ui.cmbPorts.currentText(),
-                    baudrate=115200,
-                    timeout=5)
+                self.ui.btnOk.setEnabled(False)
+                self.ui.lblDeviceConnected.setText('Please wait...')
 
-                time.sleep(2.0)
+                port = self.ui.cmbPorts.currentText()
+                self.connection = serial.Serial(port=port,
+                                                baudrate=115200,
+                                                timeout=5.0)
+                time.sleep(3.0)
+                self.connection.write('@device\n')
+                for i, _line in enumerate(self.connection):
+                    line = _line.strip()
+                    print line
+                    if i == 10:
+                        # wait for maximum ten lines
+                        break
+                    if line.startswith('@device'):
+                        _line = line.split(' ')
+                        self.device = _line[1]
+                        self.firmware = _line[2:]
+                        self.ui.btnOk.setEnabled(True)
+                        self.ui.lblDeviceConnected.setText(
+                            'Connected to Device %s with Firmware %s' %
+                            (self.device, ' '.join(self.firmware)))
+                        return
 
-                self.device = self.device.device()
-                about_line = ('Verbunden mit {device}'
-                              ', Firmware v{firmware}').format(**self.device)
-
-                self.ui.lblDeviceConnected.setText(about_line)
-            except TypeError as e:
+                # found nothing
                 self._disconnect()
                 QMessageBox.warning(
                     self, 'Error: ', 'Received no answer from device')
+
             except Exception as e:
                 self._disconnect()
                 QMessageBox.warning(self, 'Error: ', str(e))
 
     def _disconnect(self):
-        self.device = None
+        self.connection = None
         self.ui.cmbPorts.setCurrentIndex(0)
         self.ui.lblDeviceConnected.setText('')
