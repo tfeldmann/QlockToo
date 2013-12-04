@@ -15,8 +15,13 @@ class ConsoleApp(QDialog):
         self.ui.setupUi(self)
 
         self.device = device
-        self.device.signal_linereceived.connect(self.incomingSerial)
-        self.ui.command.returnPressed.connect(self.sendCommand)
+
+        if self.device.is_connected():
+            self.device.signal_linereceived.connect(self.incomingSerial)
+            self.ui.command.returnPressed.connect(self.sendCommand)
+        else:
+            self.ui.command.setText('Nicht verbunden')
+            self.ui.command.setEnabled(False)
 
     def sendCommand(self):
         cmd = self.ui.command.text()
