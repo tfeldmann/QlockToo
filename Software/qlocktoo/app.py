@@ -42,7 +42,7 @@ class QlockToo(QMainWindow):
         if self.device.is_connected():
             self.device.disconnect()
             self.ui.actionConnect.setIcon(
-                QIcon(':icons/black32/fa-bolt.png'))
+                QIcon(':icons/black32/fa-compress.png'))
             self.ui.actionConnect.setText('Verbinden')
         else:
             dialog = ConnectDialog(self)
