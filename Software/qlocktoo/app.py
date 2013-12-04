@@ -1,4 +1,4 @@
-from PySide.QtGui import QMainWindow, QDialog
+from PySide.QtGui import QMainWindow, QDialog, QIcon
 from PySide.QtCore import Slot
 from qlocktoo.connect import ConnectDialog
 from qlocktoo.console import ConsoleApp
@@ -41,6 +41,7 @@ class QlockToo(QMainWindow):
         """
         if self.device.is_connected():
             self.device.disconnect()
+            self.ui.actionConnect.setIcon(QIcon(':icons/fa-power-off.png'))
             self.ui.actionConnect.setText('Verbinden')
         else:
             dialog = ConnectDialog(self)

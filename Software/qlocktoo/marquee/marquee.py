@@ -9,7 +9,7 @@ class MarqueeMatrix(object):
 
     def __init__(self, font):
         self.matrix = []
-        self.font = Font.font
+        self.font = Font
 
     def setText(self, text):
         # font settings

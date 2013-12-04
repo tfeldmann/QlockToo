@@ -1,22 +1,22 @@
 # coding: utf-8
 from PySide.QtGui import QWidget, QPainter, QColor, QFont
-from PySide.QtCore import Qt
+from PySide.QtCore import Qt, Slot, Signal, QTimer
 from itertools import chain
-import serial
 
 
-class Simulator(QWidget):
+class Device(QWidget):
 
     """
     QlockToo Simulator
 
     This widget shows the QlockToo front with letters and corner leds.
     """
+    connection = None
+    signal_linereceived = Signal(str)
 
     def __init__(self, parent):
-        super(Simulator, self).__init__()
-        # self.c = serial.Serial(
-        #     '/dev/cu.usbmodemfa131', 115200, timeout=60)
+        super(Device, self).__init__()
+
         frontpanel = u"""
             E S K I S T A F Ü N F
             Z E H N Z W A N Z I G
@@ -28,11 +28,44 @@ class Simulator(QWidget):
             S E C H S N L A C H T
             S I E B E N Z W Ö L F
             Z E H N E U N K U H R"""
+
         self.columns = 11
         self.rows = 10
         self.matrix = [[1] * self.columns] * self.rows
         self.corners = [1] * 4
         self.letters = [row.split() for row in frontpanel.split("\n") if row]
+
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.listen_serial)
+        self._buffer = ''
+        self._prev_matrix = None
+        self._prev_corners = None
+
+    def use_connection(self, connection):
+        self.connection = connection
+        self.timer.start(50)  # ms
+
+    def disconnect(self):
+        self.timer.stop()
+        self.connection.close()
+        self.connection = None
+
+    def is_connected(self):
+        return self.connection is not None
+
+    @Slot()
+    def listen_serial(self):
+        while self.connection.inWaiting() > 0 and self.is_connected():
+            self._buffer += self.connection.read()
+            if len(self._buffer) > 0 and self._buffer[-1] == '\n':
+                line = self._buffer.strip()
+                if len(line) > 0:
+                    self.signal_linereceived.emit(line)
+                self._buffer = ''
+
+    def encode_brightness(self, brightness):
+        """ only use chars that have to control function """
+        return int(33 + 93 * brightness)
 
     @property
     def matrix(self):
@@ -41,17 +74,15 @@ class Simulator(QWidget):
     @matrix.setter
     def matrix(self, value):
         self._matrix = value
-
-        # self.c.flush()
-        # flat_matrix = list(chain.from_iterable(self.matrix))
-        # # only use chars that have to control function
-        # data = [int(33 + 93 * elem) for elem in flat_matrix]
-
-        # self.c.write('@matrix ')
-        # self.c.write(bytearray(data))
-        # self.c.write('\n')
-
         self.update()
+
+        if self.is_connected() and self._prev_matrix != self.matrix:
+            flat_matrix = list(chain.from_iterable(self.matrix))
+            data = [self.encode_brightness(elem) for elem in flat_matrix]
+            self.connection.write('@m ')
+            self.connection.write(bytearray(data))
+            self.connection.write('\n')
+            self._prev_matrix = self.matrix
 
     @property
     def corners(self):
