@@ -18,12 +18,32 @@ void controller_init()
 
 void controller_update()
 {
+    static bool last_status = false;
     brightness_update();
     controller_statemachine();
 
     // reset the second / minute / hour has_updated flags
     time_resetFlags();
-    brightness_resetFlags();
+
+    if (!last_status && digitalRead(A5))
+    {
+        STATE_SWITCH(STATE_TIMEWORDS);
+        for (int i = 0; i < 60*5; i++) time_addSecond();
+    }
+    else if (digitalRead(A4))
+    {
+        STATE_SWITCH(STATE_SECONDS);
+    }
+    else if (digitalRead(A3))
+    {
+        STATE_SWITCH(STATE_TEMPERATURE);
+    }
+    else if (digitalRead(A2))
+    {
+        brightness_next_step();
+    }
+
+    last_status = digitalRead(A5);
 }
 
 
@@ -37,7 +57,7 @@ void controller_statemachine()
         #endif
         matrix_timewords(hours, minutes);
     STATE_LOOP
-        if (minute_has_changed || brightness_has_changed)
+        if (minute_has_changed)
         {
             matrix_timewords(hours, minutes);
         }
@@ -50,7 +70,7 @@ void controller_statemachine()
         #endif
         matrix_second(seconds);
     STATE_LOOP
-        if (second_has_changed || brightness_has_changed)
+        if (second_has_changed)
         {
             matrix_second(seconds);
         }
