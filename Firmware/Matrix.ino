@@ -20,7 +20,7 @@ const uint16_t matrix_words[][2] = {
     {0, 0b0001110000000000},  // IST
     {0, 0b0000000111100000},  // FÜNF
     {1, 0b1111000000000000},  // ZEHN
-    {2, 0b0000111111110000},  // VIERTEL
+    {2, 0b0000111111100000},  // VIERTEL
     {1, 0b0000111111100000},  // ZWANZIG
     {3, 0b1110000000000000},  // VOR
     {3, 0b0000000111100000},  // NACH
@@ -144,8 +144,8 @@ const byte matrix_numbers[][7] = {
 
 void matrix_clear()
 {
-    for (int y = 0; y < ROWS; y++)
-        for (int x = 0; x < COLS; x++)
+    for (byte y = 0; y < ROWS; y++)
+        for (byte x = 0; x < COLS; x++)
             matrix[y][x] = 0;
 }
 
@@ -153,12 +153,12 @@ void matrix_clear()
 void matrix_second(char s)
 {
     // split second in left and right part
-    int s_1 = s / 10;
-    int s_2 = s % 10;
+    byte s_1 = s / 10;
+    byte s_2 = s % 10;
 
-    for (int y = 0; y < ROWS; y++)
+    for (byte y = 0; y < ROWS; y++)
     {
-        for (int x = 0; x < COLS; x++)
+        for (byte x = 0; x < COLS; x++)
         {
             // the rows
             if (y >= 1 && y <= 7)
@@ -166,15 +166,27 @@ void matrix_second(char s)
                 // first letter
                 if (x >= 0 && x <= 4)
                 {
-                    bool en = bitRead(matrix_numbers[s_1][y-1], 7-x);
-                    matrix[y][x] = brightness * en;
+                    if (bitRead(matrix_numbers[s_1][y-1], 7-x))
+                    {
+                        matrix[y][x] = 1;
+                    }
+                    else
+                    {
+                        matrix[y][x] = 0;
+                    }
                 }
                 // second letter
                 else if (x >= 6 && x <= 10)
                 {
-                    int _x = x - 6;
-                    bool en = bitRead(matrix_numbers[s_2][y-1], 7-_x);
-                    matrix[y][x] = brightness * en;
+                    byte _x = x - 6;
+                    if (bitRead(matrix_numbers[s_2][y-1], 7-_x))
+                    {
+                        matrix[y][x] = 1;
+                    }
+                    else
+                    {
+                        matrix[y][x] = 0;
+                    }
                 }
                 // clear the rest
                 else matrix[y][x] = 0;
@@ -207,9 +219,10 @@ void matrix_timewords(int hour, int minute)
         0b1110001000010000   // minute 55
     };
 
-    uint16_t action = selector[minute / 5];
+    byte _minute = minute / 5;
+    uint16_t action = selector[_minute];
 
-    for (int i = 0; i < 12; i++)  // 12 selector columns
+    for (byte i = 0; i < 12; i++)  // 12 selector columns
     {
         // read from leftmost position
         if (!bitRead(action, 15 - i)) continue;  // selector doesn't apply
@@ -219,13 +232,21 @@ void matrix_timewords(int hour, int minute)
 
         if (i == 10)  // the current hour
         {
-            row  = matrix_hours[hour % 12][0];
-            mask = matrix_hours[hour % 12][1];
+            byte _hour = hour % 12;
+            row  = matrix_hours[_hour][0];
+            mask = matrix_hours[_hour][1];
+
+            // Bugfix for ES IST EINS UHR => ES IST EIN UHR
+            if (_hour == 1 && _minute == 0)
+            {
+                bitClear(mask, 12);  // clear "S"
+            }
         }
         else if (i == 11)  // the next hour
         {
-            row  = matrix_hours[(hour + 1) % 1][0];
-            mask = matrix_hours[(hour + 1) % 1][1];
+            byte _hour = (hour + 1) % 12;
+            row  = matrix_hours[_hour][0];
+            mask = matrix_hours[_hour][1];
         }
         else  // first nine selectors mask words
         {
@@ -234,9 +255,9 @@ void matrix_timewords(int hour, int minute)
         }
 
         // apply mask
-        for (int x = 0; x < 16; x++)
+        for (byte x = 0; x < 16; x++)
         {
-            matrix[row][x] |= bitRead(mask, 15 - x) * brightness;
+            matrix[row][x] |= bitRead(mask, 15 - x);
         }
 
         // TODO: ES IST EINS UHR
@@ -245,9 +266,9 @@ void matrix_timewords(int hour, int minute)
 
 void matrix_dump()
 {
-    for (int y = 0; y < ROWS; y++)
+    for (byte y = 0; y < ROWS; y++)
     {
-        for (int x = 0; x < COLS; x++)
+        for (byte x = 0; x < COLS; x++)
         {
             Serial.print(matrix[y][x]);
             Serial.print(" ");
@@ -264,7 +285,7 @@ void matrix_dump()
 
 void corner_clear()
 {
-    for (int i = 0; i < CORNERS; i++)
+    for (byte i = 0; i < CORNERS; i++)
     {
         corner[i] = 0;
     }
@@ -273,15 +294,8 @@ void corner_clear()
 
 void corner_minute(int m)
 {
-    for (int i = 0; i < CORNERS; i++)
+    for (byte i = 0; i < CORNERS; i++)
     {
-        if (i < m % 5)
-        {
-            corner[i] = brightness;
-        }
-        else
-        {
-            corner[i] = 0;
-        }
+        corner[i] = (i < m % 5);
     }
 }
