@@ -7,11 +7,13 @@
 
 SerialCommand serialCommand;
 
+
 void api_init()
 {
     // States
     serialCommand.addCommand("@timewords", api_timewords);
     serialCommand.addCommand("@seconds", api_seconds);
+    serialCommand.addCommand("@temperature", api_temperature);
 
     // Streaming
     serialCommand.addCommand("@m", api_matrix);
@@ -20,12 +22,12 @@ void api_init()
 
     // Debug
     serialCommand.addCommand("@dump", api_dump);
-    serialCommand.addCommand("@minute", api_minute);
+    serialCommand.addCommand("@temp", api_temp);
 
     // Infos
     serialCommand.addCommand("@about", api_about);
     serialCommand.addCommand("@device", api_device);
-    serialCommand.addCommand("@temp", api_temp);
+
     serialCommand.setDefaultHandler(api_unknown);
 }
 
@@ -48,19 +50,33 @@ void api_seconds()
     STATE_SWITCH(STATE_SECONDS);
 }
 
+void api_temperature()
+{
+    STATE_SWITCH(STATE_TEMPERATURE);
+}
+
 
 // ----------------------------------------------------------------------------
 // Streaming
 void api_matrix()
 {
     // LUT for map(x, 33, 126, 0, 255) = x * 255.0 / 93 - 33 * 255.0 / 93
-    const static byte lut[] = {0, 2, 5, 8, 10, 13, 16, 19, 21, 24, 27, 30, 32, 35, 38, 41, 43, 46, 49, 52, 54, 57, 60, 63, 65, 68, 71, 74, 76, 79, 82, 84, 87, 90, 93, 95, 98, 101, 104, 106, 109, 112, 115, 117, 120, 123, 126, 128, 131, 134, 137, 139, 142, 145, 148, 150, 153, 156, 159, 161, 164, 167, 170, 172, 175, 178, 180, 183, 186, 189, 191, 194, 197, 200, 202, 205, 208, 211, 213, 216, 219, 222, 224, 227, 230, 233, 235, 238, 241, 244, 246, 249, 252, 255};
+    const static byte lut[] = {0, 2, 5, 8, 10, 13, 16, 19, 21, 24, 27, 30, 32,
+                               35, 38, 41, 43, 46, 49, 52, 54, 57, 60, 63, 65,
+                               68, 71, 74, 76, 79, 82, 84, 87, 90, 93, 95, 98,
+                               101, 104, 106, 109, 112, 115, 117, 120, 123,
+                               126, 128, 131, 134, 137, 139, 142, 145, 148,
+                               150, 153, 156, 159, 161, 164, 167, 170, 172,
+                               175, 178, 180, 183, 186, 189, 191, 194, 197,
+                               200, 202, 205, 208, 211, 213, 216, 219, 222,
+                               224, 227, 230, 233, 235, 238, 241, 244, 246,
+                               249, 252, 255};
 
     STATE_SWITCH(STATE_STREAM);
     char *m = serialCommand.next();
-    for (int y = 0; y < ROWS; y++)
+    for (byte y = 0; y < ROWS; y++)
     {
-        for (int x = 0; x < COLS; x++)
+        for (byte x = 0; x < COLS; x++)
         {
             // be careful to only use chars that have no control function
             matrix[y][x] = lut[*m - 33];
@@ -72,11 +88,20 @@ void api_matrix()
 void api_corners()
 {
     // LUT for map(x, 33, 126, 0, 255) = x * 255.0 / 93 - 33 * 255.0 / 93
-    const static byte lut[] = {0, 2, 5, 8, 10, 13, 16, 19, 21, 24, 27, 30, 32, 35, 38, 41, 43, 46, 49, 52, 54, 57, 60, 63, 65, 68, 71, 74, 76, 79, 82, 84, 87, 90, 93, 95, 98, 101, 104, 106, 109, 112, 115, 117, 120, 123, 126, 128, 131, 134, 137, 139, 142, 145, 148, 150, 153, 156, 159, 161, 164, 167, 170, 172, 175, 178, 180, 183, 186, 189, 191, 194, 197, 200, 202, 205, 208, 211, 213, 216, 219, 222, 224, 227, 230, 233, 235, 238, 241, 244, 246, 249, 252, 255};
+    const static byte lut[] = {0, 2, 5, 8, 10, 13, 16, 19, 21, 24, 27, 30, 32,
+                               35, 38, 41, 43, 46, 49, 52, 54, 57, 60, 63, 65,
+                               68, 71, 74, 76, 79, 82, 84, 87, 90, 93, 95, 98,
+                               101, 104, 106, 109, 112, 115, 117, 120, 123,
+                               126, 128, 131, 134, 137, 139, 142, 145, 148,
+                               150, 153, 156, 159, 161, 164, 167, 170, 172,
+                               175, 178, 180, 183, 186, 189, 191, 194, 197,
+                               200, 202, 205, 208, 211, 213, 216, 219, 222,
+                               224, 227, 230, 233, 235, 238, 241, 244, 246,
+                               249, 252, 255};
 
     STATE_SWITCH(STATE_STREAM);
     char *m = serialCommand.next();
-    for (int i = 0; i < CORNERS; i++)
+    for (byte i = 0; i < CORNERS; i++)
     {
         // be careful to only use chars that have no control function
         corner[i] = lut[*m - 33];
@@ -96,13 +121,6 @@ void api_disconnect()
 void api_dump()
 {
     matrix_dump();
-}
-
-void api_minute()
-{
-    int m = atoi(serialCommand.next());
-    Serial.println(m);
-    corner_minute(m);
 }
 
 
@@ -142,6 +160,8 @@ void api_temp()
 
 void api_unknown(const char *command)
 {
-    Serial.print("!Unknown command: ");
-    Serial.println(command);
+    #ifdef DEBUG
+        Serial.print("!Unknown command: ");
+        Serial.println(command);
+    #endif
 }
