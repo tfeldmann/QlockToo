@@ -2,12 +2,10 @@
 // Display.ino
 //
 
-#include <TimerThree.h>
 #include <I2C.h>
 #include <digitalWriteFast.h>
 #include "globals.h"
 
-#define FPS_TO_PERIOD_US(_x_) (1e6 / _x_)
 #define LEDDRIVER_ADDRESS (0x60)
 
 // used pins on the uC
@@ -34,10 +32,6 @@ void display_init()
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0x00, 0xAA,
         0xAA, 0xAA, 0xAA, 0x00, 0x00, 0x00, 0x00, 0xFF};
     I2c.write(LEDDRIVER_ADDRESS, 0x80, initdata, 29);
-
-    // start display update timer interrupt
-    Timer3.initialize(FPS_TO_PERIOD_US(1000));
-    Timer3.attachInterrupt(display_update);
 }
 
 
@@ -48,27 +42,25 @@ void display_init()
  */
 void display_update()
 {
-    controller_update();
-
     // maps led columns to positions in data array
-    const static int8_t i2c_led_position[COLS] = {
+    const static uint8_t i2c_led_position[COLS] = {
         14, 15, 12, 13, 10, 11, 8, 9, 6, 7, 4
     };
-    const static int8_t i2c_corner_position[CORNERS] = {1, 0, 2, 3};
+    const static uint8_t i2c_corner_position[CORNERS] = {1, 0, 2, 3};
 
-    static int8_t row = 0;
+    static uint8_t row = 0;
     uint8_t data[16];
 
-    int8_t previous_row = row;
+    uint8_t previous_row = row;
     if (++row >= ROWS) row = 0;
 
-    for (int i = 0; i < COLS; i++)
+    for (uint8_t i = 0; i < COLS; i++)
     {
-        data[i2c_led_position[i]] = matrix[row][i];
+        data[i2c_led_position[i]] = matrix[row][i] * brightness;
     }
-    for (int i = 0; i < CORNERS; i++)
+    for (uint8_t i = 0; i < CORNERS; i++)
     {
-        data[i2c_corner_position[i]] = corner[i];
+        data[i2c_corner_position[i]] = corner[i] * brightness;
     }
 
     // disable current line
