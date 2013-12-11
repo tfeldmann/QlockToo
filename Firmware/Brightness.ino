@@ -9,7 +9,7 @@ const uint8_t STEPS = 8;
 const uint8_t step[STEPS] = {-1, 255, 220, 200, 150, 100, 50, 0};
 
 #define AUTOMATIC 0
-static uint8_t mode = AUTOMATIC;  // start in automatic mode
+static uint8_t mode = 1;
 
 
 void brightness_update()
