@@ -33,13 +33,12 @@ void setup()
 
 void main_timer()
 {
-    static uint8_t ms = 0;
-
     // update display
     display_update();
 
     // update controller every 100ms
-    if (++ms == 100)
+    static uint8_t ms = 0;
+    if (++ms == 10)
     {
         controller_update();
         ms = 0;

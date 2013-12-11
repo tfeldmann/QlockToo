@@ -44,7 +44,7 @@ const uint16_t matrix_hours[][2] = {
     {4, 0b0000011100000000}   // ELF
 };
 
-const byte matrix_numbers[][7] = {
+const uint8_t matrix_numbers[][7] = {
     {
         0b01110000,   // 0
         0b10001000,
@@ -166,27 +166,13 @@ void matrix_second(char s)
                 // first letter
                 if (x >= 0 && x <= 4)
                 {
-                    if (bitRead(matrix_numbers[s_1][y-1], 7-x))
-                    {
-                        matrix[y][x] = 1;
-                    }
-                    else
-                    {
-                        matrix[y][x] = 0;
-                    }
+                    matrix[y][x] = bitRead(matrix_numbers[s_1][y-1], 7-x);
                 }
                 // second letter
                 else if (x >= 6 && x <= 10)
                 {
                     byte _x = x - 6;
-                    if (bitRead(matrix_numbers[s_2][y-1], 7-_x))
-                    {
-                        matrix[y][x] = 1;
-                    }
-                    else
-                    {
-                        matrix[y][x] = 0;
-                    }
+                    matrix[y][x] = bitRead(matrix_numbers[s_2][y-1], 7-_x);
                 }
                 // clear the rest
                 else matrix[y][x] = 0;
@@ -236,7 +222,7 @@ void matrix_timewords(int hour, int minute)
             row  = matrix_hours[_hour][0];
             mask = matrix_hours[_hour][1];
 
-            // Bugfix for ES IST EINS UHR => ES IST EIN UHR
+            // Corner case "ES IST EINS UHR" => "ES IST EIN UHR"
             if (_hour == 1 && _minute == 0)
             {
                 bitClear(mask, 12);  // clear "S"
@@ -259,8 +245,6 @@ void matrix_timewords(int hour, int minute)
         {
             matrix[row][x] |= bitRead(mask, 15 - x);
         }
-
-        // TODO: ES IST EINS UHR
     }
 }
 

@@ -8,6 +8,7 @@
 // it after you read it.
 extern volatile bool second_has_changed, minute_has_changed, hour_has_changed;
 extern volatile bool brightness_has_changed;
+#define BUTTON_PRESSED(_x_) (!last_status[_x_] && status[_x_])
 
 
 void controller_init()
@@ -29,26 +30,39 @@ void controller_update()
 
 void controller_buttons()
 {
-    static bool last_status = false;
-    if (!last_status && digitalRead(A5))
+    // variable declarations
+    const int button[] = {A5, A4, A3, A2};
+    static bool last_status[] = {false, false, false, false};
+
+    // read in current button status
+    bool status[4];
+    for (byte i = 0; i < 4; i++)
+    {
+        status[i] = digitalRead(button[i]);
+    }
+
+    if (BUTTON_PRESSED(0))
     {
         STATE_SWITCH(STATE_TIMEWORDS);
-        for (int i = 0; i < 60*5; i++) time_addSecond();
     }
-    else if (digitalRead(A4))
+    else if (BUTTON_PRESSED(1))
     {
         STATE_SWITCH(STATE_SECONDS);
     }
-    else if (digitalRead(A3))
+    else if (BUTTON_PRESSED(2))
     {
         STATE_SWITCH(STATE_TEMPERATURE);
     }
-    else if (digitalRead(A2))
+    else if (BUTTON_PRESSED(3))
     {
         brightness_next_step();
     }
 
-    last_status = digitalRead(A5);
+    // copy status to last status
+    for (byte i = 0; i < 4; i++)
+    {
+        last_status[i] = status[i];
+    }
 }
 
 
@@ -90,6 +104,8 @@ STATEMACHINE
         #endif
     STATE_LOOP
         brightness_update();
+        float temp = thermo_celsius();
+        thermo_display((int)temp);
     STATE_LEAVE
     END_OF_STATE
 
@@ -99,7 +115,8 @@ STATEMACHINE
         #endif
     STATE_LOOP
         brightness = 1;
-        api_update();
+        // global brightness must be 1 because the pc already
+        // sends brightness values from 0-255
     STATE_LEAVE
     END_OF_STATE
 

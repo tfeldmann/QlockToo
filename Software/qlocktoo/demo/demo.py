@@ -76,7 +76,7 @@ class Demo(object):
 class PulseDemo(Demo):
 
     def __init__(self, device):
-        Demo.__init__(self, device, framerate=20)
+        Demo.__init__(self, device, framerate=15)
         self.b = 0
         self.inc = 0.05
 
@@ -95,7 +95,7 @@ class PulseDemo(Demo):
 class FadeDemo(Demo):
 
     def __init__(self, device):
-        Demo.__init__(self, device, framerate=20)
+        Demo.__init__(self, device, framerate=15)
         self.device.corners = [0] * 4
         self.matrix = [[0] * 11] * 10
         self.b = 0
@@ -110,7 +110,7 @@ class FadeDemo(Demo):
 class WaveDemo(Demo):
 
     def __init__(self, device):
-        Demo.__init__(self, device, framerate=25)
+        Demo.__init__(self, device, framerate=15)
         self.device.corners = [0] * 4
         self.t = 0
 
