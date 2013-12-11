@@ -28,14 +28,14 @@
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="no" active="yes"/>
 <layer number="20" name="Dimension" color="15" fill="1" visible="yes" active="yes"/>
-<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
-<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
-<layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="28" name="bValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="no" active="yes"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="no" active="yes"/>
+<layer number="23" name="tOrigins" color="15" fill="1" visible="no" active="yes"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="yes"/>
+<layer number="25" name="tNames" color="7" fill="1" visible="no" active="yes"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="no" active="yes"/>
+<layer number="28" name="bValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
 <layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
@@ -51,15 +51,15 @@
 <layer number="41" name="tRestrict" color="4" fill="10" visible="no" active="yes"/>
 <layer number="42" name="bRestrict" color="1" fill="10" visible="no" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="yes"/>
-<layer number="44" name="Drills" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
+<layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
 <layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
-<layer number="47" name="Measures" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="49" name="Reference" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
+<layer number="48" name="Document" color="7" fill="1" visible="no" active="yes"/>
+<layer number="49" name="Reference" color="7" fill="1" visible="no" active="yes"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="no"/>
-<layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="51" name="tDocu" color="7" fill="1" visible="no" active="yes"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="no" active="yes"/>
 <layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
 <layer number="54" name="bGND_GNDA" color="1" fill="9" visible="no" active="no"/>
 <layer number="56" name="wert" color="7" fill="1" visible="no" active="no"/>
@@ -74,11 +74,11 @@
 <layer number="100" name="Muster" color="7" fill="1" visible="no" active="no"/>
 <layer number="101" name="Hidden" color="15" fill="1" visible="no" active="yes"/>
 <layer number="102" name="Changes" color="12" fill="1" visible="no" active="yes"/>
-<layer number="103" name="tMap" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="103" name="tMap" color="7" fill="1" visible="no" active="yes"/>
 <layer number="104" name="Name" color="16" fill="1" visible="no" active="yes"/>
-<layer number="105" name="tPlate" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="105" name="tPlate" color="7" fill="1" visible="no" active="yes"/>
 <layer number="106" name="bPlate" color="7" fill="1" visible="no" active="yes"/>
-<layer number="107" name="Crop" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="107" name="Crop" color="7" fill="1" visible="no" active="yes"/>
 <layer number="116" name="Patch_BOT" color="9" fill="4" visible="no" active="yes"/>
 <layer number="121" name="_tsilk" color="7" fill="1" visible="no" active="yes"/>
 <layer number="122" name="_bsilk" color="7" fill="1" visible="no" active="yes"/>
@@ -2257,7 +2257,7 @@ design rules under a new name.</description>
 <element name="R11" library="resistor" package="0207/12" value="" x="124.7775" y="34.29" rot="R180"/>
 <element name="R12" library="resistor" package="0207/10" value="" x="112.7125" y="32.7025" rot="R315"/>
 <element name="R13" library="resistor" package="0207/10" value="" x="107.315" y="32.7025" rot="R315"/>
-<element name="ZEILE1" library="bastian" package="STIFTLEISTE_2.54_SINGLEPIN" value="STIFTLEISTE_2.54_SINGLEPIN" x="146.05" y="25.4" rot="R270"/>
+<element name="U$3" library="bastian" package="STIFTLEISTE_2.54_SINGLEPIN" value="STIFTLEISTE_2.54_SINGLEPIN" x="146.05" y="25.4" rot="R270"/>
 <element name="U$4" library="bastian" package="STIFTLEISTE_2.54_SINGLEPIN" value="STIFTLEISTE_2.54_SINGLEPIN" x="146.05" y="25.4" rot="MR270"/>
 <element name="U$5" library="bastian" package="STIFTLEISTE_2.54_SINGLEPIN" value="STIFTLEISTE_2.54_SINGLEPIN" x="146.05" y="27.94" rot="R270"/>
 <element name="U$6" library="bastian" package="STIFTLEISTE_2.54_SINGLEPIN" value="STIFTLEISTE_2.54_SINGLEPIN" x="146.05" y="27.94" rot="MR270"/>
@@ -2311,7 +2311,7 @@ design rules under a new name.</description>
 <element name="C8" library="resistor" package="E5-5" value="" x="91.7575" y="19.685" rot="R270"/>
 <element name="IC1" library="SparkFun" package="78XXL" value="" x="15.875" y="23.1775" rot="R90"/>
 <element name="R22" library="resistor" package="M0805" value="" x="95.25" y="23.495" rot="R270"/>
-<element name="TASTER" library="jumper" package="JP3Q" value="" x="49.53" y="4.7625"/>
+<element name="JP1" library="jumper" package="JP3Q" value="" x="49.53" y="4.7625"/>
 </elements>
 <signals>
 <signal name="+5V">
@@ -2325,7 +2325,7 @@ design rules under a new name.</description>
 <contactref element="R16" pad="2"/>
 <contactref element="U$1" pad="P$23"/>
 <contactref element="C8" pad="+"/>
-<contactref element="TASTER" pad="1"/>
+<contactref element="JP1" pad="1"/>
 <wire x1="100.965" y1="12.3825" x2="99.695" y2="11.1125" width="0.4064" layer="1"/>
 <wire x1="99.695" y1="11.1125" x2="89.2175" y2="11.1125" width="0.4064" layer="1"/>
 <wire x1="89.2175" y1="11.1125" x2="87.9475" y2="12.3825" width="0.4064" layer="1"/>
@@ -2384,7 +2384,7 @@ design rules under a new name.</description>
 <contactref element="C7" pad="-"/>
 <contactref element="C5" pad="-"/>
 <contactref element="X1" pad="2"/>
-<contactref element="TASTER" pad="6"/>
+<contactref element="JP1" pad="6"/>
 <wire x1="121.2025" y1="31.39" x2="121.2025" y2="34.29" width="0.3048" layer="1"/>
 <wire x1="121.2025" y1="34.29" x2="121.8525" y2="34.29" width="0.3048" layer="1"/>
 <wire x1="121.8525" y1="34.29" x2="122.5025" y2="34.29" width="0.3048" layer="1"/>
@@ -2565,7 +2565,7 @@ design rules under a new name.</description>
 </signal>
 <signal name="N$16">
 <contactref element="U$2" pad="6"/>
-<contactref element="ZEILE1" pad="P$1"/>
+<contactref element="U$3" pad="P$1"/>
 <wire x1="146.05" y1="25.4" x2="146.05" y2="24.765" width="0.3048" layer="1"/>
 <wire x1="146.05" y1="24.765" x2="143.51" y2="24.765" width="0.3048" layer="1"/>
 <wire x1="143.51" y1="24.765" x2="143.51" y2="23.1775" width="0.3048" layer="1"/>
@@ -2852,7 +2852,7 @@ design rules under a new name.</description>
 <contactref element="R18" pad="2"/>
 <contactref element="C1" pad="1"/>
 <contactref element="U$1" pad="P$29"/>
-<contactref element="TASTER" pad="2"/>
+<contactref element="JP1" pad="2"/>
 <wire x1="45.72" y1="11.1125" x2="45.7675" y2="13.0175" width="0.4064" layer="16"/>
 <wire x1="45.7075" y1="14.9225" x2="45.7075" y2="13.335" width="0.4064" layer="16"/>
 <wire x1="45.7075" y1="13.335" x2="45.7675" y2="13.0175" width="0.4064" layer="16"/>
@@ -2863,7 +2863,7 @@ design rules under a new name.</description>
 <contactref element="R19" pad="2"/>
 <contactref element="C2" pad="1"/>
 <contactref element="U$1" pad="P$28"/>
-<contactref element="TASTER" pad="3"/>
+<contactref element="JP1" pad="3"/>
 <wire x1="48.26" y1="17.0975" x2="48.26" y2="11.1125" width="0.4064" layer="16"/>
 <wire x1="46.355" y1="17.1575" x2="46.355" y2="17.0975" width="0.4064" layer="16"/>
 <wire x1="46.355" y1="17.0975" x2="48.26" y2="17.0975" width="0.4064" layer="16"/>
@@ -2874,7 +2874,7 @@ design rules under a new name.</description>
 <contactref element="R20" pad="2"/>
 <contactref element="C3" pad="1"/>
 <contactref element="U$1" pad="P$27"/>
-<contactref element="TASTER" pad="4"/>
+<contactref element="JP1" pad="4"/>
 <wire x1="50.8" y1="18.685" x2="50.8" y2="11.1125" width="0.4064" layer="16"/>
 <wire x1="52.705" y1="18.745" x2="52.705" y2="18.685" width="0.4064" layer="16"/>
 <wire x1="52.705" y1="18.685" x2="50.8" y2="18.685" width="0.4064" layer="16"/>
@@ -2885,7 +2885,7 @@ design rules under a new name.</description>
 <contactref element="R21" pad="2"/>
 <contactref element="C4" pad="1"/>
 <contactref element="U$1" pad="P$26"/>
-<contactref element="TASTER" pad="5"/>
+<contactref element="JP1" pad="5"/>
 <wire x1="53.2925" y1="13.0175" x2="53.34" y2="11.1125" width="0.4064" layer="16"/>
 <wire x1="53.34" y1="11.1125" x2="53.3525" y2="14.9225" width="0.4064" layer="16"/>
 <wire x1="52.07" y1="3.4925" x2="53.34" y2="4.7625" width="0.4064" layer="16"/>
