@@ -1,7 +1,7 @@
 The MIT License (MIT)
 
 Copyright (c) 2013
-    Thomas Feldmann
+    Thomas Feldmann <feldmann.thomas@googlemail.com>
     Manuel Fehmer
     Marlene Feldmann
     Carsten Hußmann
