@@ -5,7 +5,7 @@
 #pragma once
 
 #define STATES(_states_...)      char flag_state_inited; \
-                                 enum State {_states_, STATE_NONE} state; \
+                                 enum State {STATE_NONE, _states_} state; \
                                  State next_state;
 #define STATE_MACHINE_START(_x_) flag_state_inited = false; \
                                  state = _x_; next_state = _x_;
