@@ -21,7 +21,6 @@ void api_init()
     // Debug
     serialCommand.addCommand("@dump", api_dump);
     serialCommand.addCommand("@minute", api_minute);
-    serialCommand.addCommand("@brightness", api_brightness);
 
     // Infos
     serialCommand.addCommand("@about", api_about);
@@ -104,14 +103,6 @@ void api_minute()
     int m = atoi(serialCommand.next());
     Serial.println(m);
     corner_minute(m);
-}
-
-void api_brightness()
-{
-    Serial.print("Global brightness: ");
-    Serial.println(brightness);
-    Serial.print("Sensor value: ");
-    Serial.println(analogRead(LDR_PIN));
 }
 
 
