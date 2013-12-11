@@ -3,26 +3,26 @@
 //
 
 #pragma once
-#include <Bounce.h>
 #include <Arduino.h>
 #include "statemachine.h"
 
 // Undefine this to enable logging output
-#define DEBUG
-
-const int LDR_PIN = A0;
+// #define DEBUG
 
 // Clock time
-volatile unsigned char seconds, minutes, hours, day, month;
-volatile unsigned int year;
+volatile uint8_t seconds, minutes, hours, day, month;
+volatile uint16_t year;
 
-// Display dimensions
-const int ROWS    = 10;
-const int COLS    = 11;
-const int CORNERS = 4;
+// Display and corners dimensions
+const uint8_t ROWS    = 10;
+const uint8_t COLS    = 11;
+const uint8_t CORNERS = 4;
+
+volatile uint8_t matrix[ROWS][COLS];
+volatile uint8_t corner[CORNERS];
 
 // Led brightness
-byte brightness = 255;
+uint8_t brightness = 255;
 
 // List of device states
 STATES(
@@ -31,11 +31,3 @@ STATES(
     STATE_TEMPERATURE,
     STATE_STREAM
 );
-
-volatile uint8_t matrix[ROWS][COLS];
-volatile uint8_t corner[CORNERS];
-
-Bounce button1 = Bounce(A5, 50);
-Bounce button2 = Bounce(A4, 50);
-Bounce button3 = Bounce(A3, 50);
-Bounce button4 = Bounce(A2, 50);
