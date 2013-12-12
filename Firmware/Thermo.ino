@@ -53,6 +53,7 @@ void thermo_display(byte temp)
         }
     }
 
+    // degree symbol
     matrix[0][9] = 1;
     matrix[0][10] = 1;
     matrix[1][9] = 1;

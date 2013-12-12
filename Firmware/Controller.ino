@@ -45,17 +45,21 @@ void controller_buttons()
     {
         STATE_SWITCH(STATE_TIMEWORDS);
     }
-    else if (BUTTON_PRESSED(1))
+    if (BUTTON_PRESSED(1))
     {
         STATE_SWITCH(STATE_SECONDS);
     }
-    else if (BUTTON_PRESSED(2))
+    if (BUTTON_PRESSED(2))
     {
         STATE_SWITCH(STATE_TEMPERATURE);
     }
-    else if (BUTTON_PRESSED(3))
+    if (BUTTON_PRESSED(3))
     {
         brightness_next_step();
+    }
+    if (BUTTON_PRESSED(0) && BUTTON_PRESSED(1))
+    {
+        STATE_SWITCH(STATE_ES_LACHT_NE_KUH);
     }
 
     // copy status to last status

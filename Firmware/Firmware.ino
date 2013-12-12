@@ -7,12 +7,12 @@
 // Firmware entry point for the QlockToo, an open-source remake of the QlockTwo
 // Author: Thomas Feldmann
 //
-// Timer1:    1/s   keeps the time
+// Timer1:    1/s   keeps track of the time
 // Timer3: 1000/s   main timer for display / api / controller
 
 #include "globals.h"
 #include <TimerThree.h>
-#define VERSION "0.6"
+#define VERSION "0.7"
 
 
 void setup()
