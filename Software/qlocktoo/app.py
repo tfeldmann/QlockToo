@@ -90,3 +90,10 @@ class QlockToo(QMainWindow):
         self.app = App(device=self.device)
         self.app.exec_()
         self.app = TimeWordsApp(device=self.device)
+
+    def closeEvent(self, event):
+        """
+        Is called when the user exits the application
+        """
+        self.device.disconnect()
+        event.accept()
