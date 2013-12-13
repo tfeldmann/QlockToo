@@ -4,7 +4,8 @@
 
 #include "globals.h"
 
-#define DCF77PIN 4  // The pin the DCF77-module is connected to
+#define DCF77PIN 0  // The pin the DCF77-module is connected to
+#define DCF77INTERRUPT 2
 #define DCF_SPLIT_MILLIS 140  // length of signal before we assume a "1"
 #define DCF_SYNC_MILLIS 1200  // pause to detect a new minute
 
@@ -40,7 +41,7 @@ void dcf77_init()
     bufferPosition = 0;
     dcf_rx_buffer = 0;
     pinMode(DCF77PIN, INPUT);
-    attachInterrupt(1, dcf77_interrupt, CHANGE);
+    attachInterrupt(DCF77INTERRUPT, dcf77_interrupt, CHANGE);
 }
 
 void dcf77_interrupt()
