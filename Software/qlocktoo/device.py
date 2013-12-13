@@ -54,6 +54,7 @@ class Device(QWidget):
         return self.connection is not None
 
     def send(self, cmd):
+        print('<-- %s' % cmd)
         self.connection.write('%s\n' % cmd)
 
     @Slot()
@@ -64,6 +65,7 @@ class Device(QWidget):
                 line = self._buffer.strip()
                 if len(line) > 0:
                     self.signal_linereceived.emit(line)
+                    print('--> %s' % line)
                 self._buffer = ''
 
     def encode_brightness(self, brightness):
