@@ -20,9 +20,13 @@ void api_init()
     serialCommand.addCommand("@c", api_corners);
     serialCommand.addCommand("@disconnect", api_disconnect);
 
+    // Settings
+    serialCommand.addCommand("@settime", api_settime);
+
     // Debug
-    serialCommand.addCommand("@dump", api_dump);
+    serialCommand.addCommand("@dump", matrix_dump);
     serialCommand.addCommand("@temp", api_temp);
+    serialCommand.addCommand("@time", time_dump);
 
     // Infos
     serialCommand.addCommand("@about", api_about);
@@ -117,10 +121,27 @@ void api_disconnect()
 
 
 // ----------------------------------------------------------------------------
-// Debug
-void api_dump()
+// Settings
+
+void api_settime()
 {
-    matrix_dump();
+    year    = atoi(serialCommand.next());
+    month   = atoi(serialCommand.next());
+    day     = atoi(serialCommand.next());
+    hours   = atoi(serialCommand.next());
+    minutes = atoi(serialCommand.next());
+    seconds = atoi(serialCommand.next());
+    time_dump();
+}
+
+
+// ----------------------------------------------------------------------------
+// Debug
+
+void api_temp()
+{
+    Serial.print("@temp ");
+    Serial.println(thermo_celsius());
 }
 
 
@@ -150,12 +171,6 @@ void api_device()
 {
     Serial.print("@device QlockToo ");
     Serial.println(VERSION);
-}
-
-void api_temp()
-{
-    Serial.print("@temp ");
-    Serial.println(thermo_celsius());
 }
 
 void api_unknown(const char *command)

@@ -46,12 +46,15 @@ class Device(QWidget):
 
     def disconnect(self):
         self.timer.stop()
-        self.connection.write('@disconnect\n')
+        self.send('@disconnect')
         self.connection.close()
         self.connection = None
 
     def is_connected(self):
         return self.connection is not None
+
+    def send(self, cmd):
+        self.connection.write('%s\n' % cmd)
 
     @Slot()
     def listen_serial(self):
