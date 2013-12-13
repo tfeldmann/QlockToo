@@ -72,7 +72,6 @@ class ConnectDialog(QDialog):
                 self.connection = serial.Serial(port=port,
                                                 baudrate=115200,
                                                 timeout=5.0)
-                time.sleep(3.0)
                 self.connection.write('@device\n')
                 for i, _line in enumerate(self.connection):
                     line = _line.strip()
