@@ -7,6 +7,7 @@ Die LED-Matrix mit 10~x~11 Pixel wird von einem Mikrocontroller angesteuert. Die
 \textbf{Arduino Mirco}
 
 Als Mikrocontroller wird ein Arduino Micro Board mit dem Atmel Atmega 32U4 Controller verwendet. Der Einsatz eines Arduino Boards vereinfacht die Umsetzung einer seriellen Schnittstelle und verringert durch das bereits vielfach genutzte Board die Fehlerquellen im Layout. Durch die kleine Bauform und die sich aus den Features ergebenden Anforderungen (serielle Kommunikation, $I^{2}C$-Bus, externer Interrupt, 4x Digital Input 2x Analogeingang und 10x Digital Output) fiel die Auswahl auf den Arduino Micro.
+
 \includegraphics[width=\columnwidth]{Abbildungen/ArduinoMicro}
 
 \textbf{LED-Treiber}
@@ -15,15 +16,15 @@ Der TLC59116 LED-Treiber von Texas Instruments hat 16 PWM-Ausgänge mit 8Bit Auf
 
 \textbf{Transistoren}
 
-Die Zeilen werden mit IRF7416 P-FET-Transistoren geschaltet und mit $5V$ versorgt. Die Transistoren werden mit einem Pull-Up Widerstand am Gate beschaltet und mit einem invertierten Signal angesteuert (4 - 13). Die Transistoren haben S0-8 Gehäusebauform. 
+Die Zeilen werden mit IRF7416 P-FET-Transistoren geschaltet und mit $5V$ versorgt. Die Transistoren werden mit einem Pull-Up Widerstand am Gate beschaltet und mit einem invertierten Signal angesteuert (4~-~13). Die Transistoren haben S0-8 Gehäusebauform. 
 
 \textbf{Taster}
 
-Die vier Kurzhubtaster an der rechten Rahmenseite befinden sich auf einer eigenen Platine mit Verbindungskabel. Zur Entprellung befindet sich kurz vor den vier IO-Pins (A2 - A5) des Controllers ein RC-Glied. 
+Die vier Kurzhubtaster an der rechten Rahmenseite befinden sich auf einer eigenen Platine mit Verbindungskabel. Zur Entprellung befindet sich kurz vor den vier IO-Pins (A2~-~A5) des Controllers ein RC-Glied. 
 
 \textbf{Sensoren}
 
-Als Helligkeitssensor wird ein LDR und als Temperatursensor ein NTC verwendet. In beiden Fällen mit einem Trimmpoti als Spannungsteiler an einem Analogeingang (A0 - A1) des Mikrocontrollers.
+Als Helligkeitssensor wird ein LDR und als Temperatursensor ein NTC verwendet. In beiden Fällen mit einem Trimmpoti als Spannungsteiler an einem Analogeingang (A0~-~A1) des Mikrocontrollers.
 
 \textbf{DCF 77}
 
@@ -31,7 +32,7 @@ Das DCF77-Modul empfängt das Mitteleuropäische Zeitsignal und verstärkt es. U
 
 \textbf{Spannungsversorgung}
 
-Die Spannungsversorgung der QlockToo ist auf den Betrieb mit einem Gleichspannungsnetzteil (7~-~18$V$) ausgelegt und in die zwei Bereiche Elektronik und LED aufgeteilt. Die Elektronik wird von dem Spannungsregler auf dem Arduino Board versorgt. Die LEDs haben einen eigenen LM7805 Spannungsregler mit 1,5A Ausgangsstrom. An der Hohlsteckerbuchse am Rahmen kann wahlweise ein Brückengleichrichter eingelötet werden, dieser verhindert die Verpolung des Netzteils und reduziert den Spannungsfall an den Spannungsreglern.
+Die Spannungsversorgung ist auf den Betrieb mit einem Gleichspannungsnetzteil (7~-~18$V$) ausgelegt und in die zwei Bereiche Elektronik und LED aufgeteilt. Der Bereich Elektronik wird von dem Spannungsregler auf dem Arduino Board versorgt. Die LEDs haben einen eigenen LM7805 Spannungsregler mit 1,5A Ausgangsstrom. An der Hohlsteckerbuchse am Rahmen kann alternativ ein Brückengleichrichter eingelötet werden, dieser verhindert die Verpolung des Netzteils und reduziert den Spannungsfall an den Spannungsreglern.
 
 \end{multicols}
 
