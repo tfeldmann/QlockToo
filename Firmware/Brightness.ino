@@ -17,7 +17,7 @@ void brightness_update()
     if (mode == AUTOMATIC)
     {
         uint16_t value = analogRead(LDR_PIN);
-        brightness = map(value, 0, 600, 5, 255);
+        brightness = constrain(map(value, 0, 600, 5, 255), 0, 255);
     }
     else
     {

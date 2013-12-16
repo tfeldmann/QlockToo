@@ -14,52 +14,6 @@ void matrix_clear()
             matrix[y][x] = 0;
 }
 
-void matrix_drawNumber(uint8_t number, byte top, byte left, byte fontheight)
-{
-    // settings
-    byte TOP = top;
-    byte HEIGHT = fontheight;
-    byte WIDTH;
-    byte LEFT = left;
-
-    // select font
-    uint8_t **FONT;
-    switch (fontheight)
-    {
-        case 3:
-            FONT = numbers3x5;
-            WIDTH = 3;
-            break;
-        case 4:
-            FONT = numbers4x6;
-            WIDTH = 6;
-            break;
-        case 5:
-            FONT = numbers5x7;
-            WIDTH = 7;
-            break;
-    }
-
-    for (byte y = 0; y < ROWS; y++)
-    {
-        for (byte x = 0; x < COLS; x++)
-        {
-            // the rows
-            if (y >= TOP && y < TOP + HEIGHT)
-            {
-                // letter
-                if (x >= LEFT_1 && x < LEFT_1 + WIDTH)
-                {
-                    matrix[y][x] = bitRead(FONT[t_1][y - TOP], 7 - x + LEFT_1);
-                }
-                // clear the rest
-                else matrix[y][x] = 0;
-            }
-            else matrix[y][x] = 0;
-        }
-    }
-}
-
 
 void matrix_second(char s)
 {
@@ -93,6 +47,7 @@ void matrix_second(char s)
     }
 }
 
+
 void matrix_dump()
 {
     for (byte y = 0; y < ROWS; y++)
@@ -106,6 +61,7 @@ void matrix_dump()
     }
     Serial.println();
 }
+
 
 void corner_clear()
 {
