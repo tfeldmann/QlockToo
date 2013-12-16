@@ -1,6 +1,6 @@
 # coding: utf-8
 from PySide.QtGui import QWidget, QPainter, QColor, QFont
-from PySide.QtCore import Qt, Slot, Signal, QTimer
+from PySide.QtCore import Qt, Slot, Signal, QTimer, QEventLoop
 from itertools import chain
 
 
@@ -39,10 +39,13 @@ class Device(QWidget):
         self.timer.timeout.connect(self.listen_serial)
         self._buffer = ''
 
+        self.stop_sign = ''
+        self.eventloop = QEventLoop()
+
     def use_connection(self, connection):
         self.connection = connection
         self.connection.timeout = 0
-        self.timer.start(50)  # ms
+        self.timer.start(25)  # ms
 
     def disconnect(self):
         self.timer.stop()
@@ -67,6 +70,7 @@ class Device(QWidget):
                 if len(line) > 0:
                     self.signal_linereceived.emit(line)
                     print('--> %s' % line)
+                    self.eventloop.quit()
                 self._buffer = ''
 
     def encode_brightness(self, brightness):
@@ -88,6 +92,7 @@ class Device(QWidget):
             self.connection.write('@m ')
             self.connection.write(bytearray(data))
             self.connection.write('\n')
+            self.eventloop.exec_()
 
     @property
     def corners(self):
