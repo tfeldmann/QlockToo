@@ -46,9 +46,10 @@ class Device(QWidget):
 
     def disconnect(self):
         self.timer.stop()
-        self.send('@disconnect')
-        self.connection.close()
-        self.connection = None
+        if self.connection:
+            self.send('@disconnect')
+            self.connection.close()
+            self.connection = None
 
     def is_connected(self):
         return self.connection is not None

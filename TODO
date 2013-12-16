@@ -1,19 +1,20 @@
 Firmware:
  ☐ Datum
  ☐ Matrix
+ ☐ Checksumme bei streaming
 
 
 Software:
  ☐ Variable Schriftlänge
  ☐ Einstellungen
- ☐ Pixeltest
 
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ Pixeltest @done (13-12-16 15:38) @project(Software)
  ✔ Temperatur @done (13-12-13 14:32) @project(Firmware)
- ✔ Buttons entprellen @done (13-12-13 14:32) @project(Firmware)
  ✔ Matrix Demo @done (13-12-13 14:32) @project(Software)
+ ✔ Buttons entprellen @done (13-12-13 14:32) @project(Firmware)
  ✔ Bug: ES IST EINS UHR @done (13-12-11 14:13) @project(Firmware)
  ✔ Eck-LED @done (13-12-11 09:57) @project(Firmware)
  ✔ COM-Port Auswahl @done (13-12-04 14:48) @project(Software)
