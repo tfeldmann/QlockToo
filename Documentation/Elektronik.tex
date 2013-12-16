@@ -2,13 +2,17 @@
 \begin{multicols}{2}
 \section{Elektronik}
 \label{sec:Elektronik}
+Während Konstruktion und die Basisfunktionen der Worduhr sich sehr eng am Original orientieren, ist die Umsetzung in der Elektronik komplett selbst entwickelt.
+
+\textbf{LED-Matrix}
+
 Die LED-Matrix mit 10~x~11 Pixel wird von einem Mikrocontroller angesteuert. Dies geschieht zeilenweise im Multiplexing-Verfahren. Hierbei wird die erste Zeile von einem Transistor mit Spannung versorgt. Die 11 Pixel der Zeile werden über einen LED-Treiber simultan angesteuert. Nach einer Millisekunde wird die Zeile ausgeschaltet, es werden neue Daten in den LED-Treiber geschrieben und die nächste Zeile wird eingeschaltet. 
 
 \textbf{Arduino Mirco}
 
 Als Mikrocontroller wird ein Arduino Micro Board mit dem Atmel Atmega 32U4 Controller verwendet. Der Einsatz eines Arduino Boards vereinfacht die Umsetzung einer seriellen Schnittstelle und verringert durch das bereits vielfach genutzte Board die Fehlerquellen im Layout. Durch die kleine Bauform und die sich aus den Features ergebenden Anforderungen (serielle Kommunikation, $I^{2}C$-Bus, externer Interrupt, 4x Digital Input 2x Analogeingang und 10x Digital Output) fiel die Auswahl auf den Arduino Micro.
 
-\includegraphics[width=\columnwidth]{Abbildungen/ArduinoMicro}
+\includegraphics[width=\columnwidth]{Abbildungen/Elektronik/ArduinoMicro}
 
 \textbf{LED-Treiber}
 
@@ -21,6 +25,11 @@ Die Zeilen werden mit IRF7416 P-FET-Transistoren geschaltet und mit $5V$ versorg
 \textbf{Taster}
 
 Die vier Kurzhubtaster an der rechten Rahmenseite befinden sich auf einer eigenen Platine mit Verbindungskabel. Zur Entprellung befindet sich kurz vor den vier IO-Pins (A2~-~A5) des Controllers ein RC-Glied. 
+
+{
+\centering \includegraphics[width=0.8\columnwidth]{Abbildungen/Konstruktion/Taster02} 
+
+}
 
 \textbf{Sensoren}
 
