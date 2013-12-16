@@ -115,18 +115,18 @@ STATEMACHINE
 
     STATE_ENTER(STATE_ES_LACHT_NE_KUH)
         matrix_clear();
-        matrix[0][0] = 1;
-        matrix[0][1] = 1;
-        matrix[7][6] = 1;
-        matrix[7][7] = 1;
-        matrix[7][8] = 1;
-        matrix[7][9] = 1;
+        matrix[0][0]  = 1;
+        matrix[0][1]  = 1;
+        matrix[7][6]  = 1;
+        matrix[7][7]  = 1;
+        matrix[7][8]  = 1;
+        matrix[7][9]  = 1;
         matrix[7][10] = 1;
-        matrix[9][3] = 1;
-        matrix[9][4] = 1;
-        matrix[9][7] = 1;
-        matrix[9][8] = 1;
-        matrix[9][9] = 1;
+        matrix[9][3]  = 1;
+        matrix[9][4]  = 1;
+        matrix[9][7]  = 1;
+        matrix[9][8]  = 1;
+        matrix[9][9]  = 1;
     STATE_LOOP
         brightness_update();
     STATE_LEAVE

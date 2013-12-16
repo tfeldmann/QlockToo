@@ -31,13 +31,13 @@ void matrix_second(char s)
                 // first letter
                 if (x >= 0 && x <= 4)
                 {
-                    matrix[y][x] = bitRead(numbers5x7[s_1][y-1], 7-x);
+                    matrix[y][x] = bitRead(numbers5x7[s_1][y - 1], 7 - x);
                 }
                 // second letter
                 else if (x >= 6 && x <= 10)
                 {
                     byte _x = x - 6;
-                    matrix[y][x] = bitRead(numbers5x7[s_2][y-1], 7-_x);
+                    matrix[y][x] = bitRead(numbers5x7[s_2][y - 1], 7 - _x);
                 }
                 // clear the rest
                 else matrix[y][x] = 0;
