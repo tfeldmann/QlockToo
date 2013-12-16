@@ -89,7 +89,7 @@ void timewords_show()
             row  = matrix_hours[_hour][0];
             mask = matrix_hours[_hour][1];
 
-            // Edgecase "ES IST EINS UHR" => "ES IST EIN UHR"
+            // fix edgecase "ES IST EINS UHR" => "ES IST EIN UHR"
             if (_hour == 1 && _minute == 0)
             {
                 bitClear(mask, 12);  // clear "S"
