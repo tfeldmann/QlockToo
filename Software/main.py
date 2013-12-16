@@ -1,3 +1,4 @@
+#!/bin/env/python2
 import sys
 from PySide.QtGui import QApplication
 from qlocktoo.app import QlockToo

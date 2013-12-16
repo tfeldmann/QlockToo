@@ -78,12 +78,12 @@ STATEMACHINE
         #ifdef DEBUG
             Serial.println("#State: Timewords");
         #endif
-        matrix_timewords(hours, minutes);
+        timewords_show();
     STATE_LOOP
         brightness_update();
         if (minute_has_changed)
         {
-            matrix_timewords(hours, minutes);
+            timewords_show();
         }
     STATE_LEAVE
     END_OF_STATE
