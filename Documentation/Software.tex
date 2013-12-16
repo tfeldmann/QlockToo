@@ -27,7 +27,7 @@ Im ersten Projektschritt zur Entwicklung der Uhr wird eine Desktop-Software, der
 Um eine Lauffähigkeit auf allen gängigen Plattformen (Windows / Mac OS X / Linux) zu realisieren wird die Programmiersprache Python verwendet. Weiterer Vorteil ist die hohe Entwicklungsgeschwindigkeit.
 Das aus der C++ - Welt bekannte Framework Qt wird über die von Digia bereitgestellten PySide-Bindings als GUI-Framework genutzt. Die Software baut somit ausschließlich auf freier Open-Source Software auf.
 
-\subsection{Funktionen}
+\subsection{Simulator}
 Der QlockToo-Manager zeigt nach dem Start den Simulator. Seitlich wird eine Menüleiste zum Starten der Unterprogramme dargestellt.
 Solange kein Unterprogramm ausgewählt ist, wird standardmäßig das Programm \emph{Timewords}, welches für die Anzeige der Zeit in Worten zuständig ist, angezeigt. Der QlockToo-Manager bedient sich dazu der momentanen Systemzeit.
 
@@ -47,26 +47,32 @@ Im Entwicklungsmodus ist eine Konsole integriert, mit der direkt Befehle an die 
 \subsection{Demonstrationsmuster}
 Der zweite Punkt in der Menüleiste sind die Demonstrationsmuster. Zur besseren Sichtbarkeit sind die Muster invertiert dargestellt. Folgende Demonstrationen stehen zur Verfügung:
 
-\textbf{Pulse} \\
+\textbf{Pulse}
+
 Alle LEDs wechseln sanft zwischen minimaler und maximaler Helligkeit.
 
-\textbf{Fade} \\
+\textbf{Fade}
+
 \includegraphics[width=\columnwidth]{Abbildungen/Software/Demo/Fade}
 Ein Farbverlauf bewegt sich sinusförmig von links nach rechts und zurück.
 
-\textbf{Wave} \\
+\textbf{Wave}
+
 \includegraphics[width=\columnwidth]{Abbildungen/Software/Demo/Welle}
 Das Muster Wave zeigt ein pulsierendes Wellenbild, dessen Zentrum mit der Zeit langsam über den Bildschirm wandert.
 
-\textbf{Pong} \\
+\textbf{Pong}
+
 Zwei perfekt spielende Computergegner werden bei einer Partie Pong gezeigt.
 
-\textbf{Helix} \\
+\textbf{Helix}
+
 \includegraphics[width=\columnwidth]{Abbildungen/Software/Demo/Helix}
 Die Helix-Darstellung zeigt die zweidimensionale Projektion einer dreidimensionalen Spirale. Die z-Achse wird dabei über unterschiedliche Helligkeitswerte visualisiert.
 Bedingt durch die Berechnung der Funktionswerte für diskrete Buchstaben auf der Uhr und die geringe Pixelanzahl der Uhr wirkt die Demonstration zunächst sehr dünn und zerstückelt. Durch die Implementierung eines Gauss-Tiefpasses, wird der gewünschte Anti-Alias-Effekt erzielt. Die 3D Darstellung ist so sehr viel deutlicher. 
 
-\textbf{Game Of Life} \\
+\textbf{Game Of Life}
+
 Darstellung von Conways Game of Live, anhand toter (schwarz) und lebender (weiß) Zellen. 
 Grundlage sind folgende vier Regeln, die bei jeder Iteration befolgt werden\footnote{de.wikipedia.org/wiki/Conways\_Spiel\_des\_Lebens}:
 \begin{itemize}
@@ -76,7 +82,8 @@ Grundlage sind folgende vier Regeln, die bei jeder Iteration befolgt werden\foot
 \item Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der Folgegeneration an Überbevölkerung.
 \end{itemize}
 
-\textbf{Matrix} \\
+\textbf{Matrix}
+
 Darstellung des Matrix-Effektes! Der berühmte Effekt aus dem Wachowski-Film \emph{Matrix} bietet sich wegen des Designs der QlockToo besonders an.
 \includegraphics[width=\columnwidth]{Abbildungen/Software/Demo/Matrix}
 
