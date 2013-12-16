@@ -46,7 +46,7 @@ class DemoApp(QDialog):
 
     @Slot()
     def on_pong_clicked(self):
-        self.demo = PongDemo(self.device)
+        self.demo = PixelTest(self.device)
 
     @Slot()
     def on_helix_clicked(self):
@@ -128,52 +128,27 @@ class WaveDemo(Demo):
         self.device.matrix = matrix
 
 
-class PongDemo(Demo):
+class PixelTest(Demo):
 
     def __init__(self, device):
-        Demo.__init__(self, device, framerate=15)
-        self.device.corners = [0] * 4
 
-        self.x, self.y = device.columns / 2, device.rows / 2
-        self.dx, self.dy = 1, 1
-        self.paddles = [device.rows / 2, device.rows / 2]
+        def pixel():
+            while True:
+                for y in range(11):
+                    for x in range(10):
+                        yield (x, y)
+
+        Demo.__init__(self, device, framerate=3)
+        self.device.corners = [0] * 4
+        self.matrix = None
+        self.pos = pixel()
 
     def update(self):
-        self.moveBall()
-        self.movePaddles()
-        self.draw()
-
-    def moveBall(self):
-        self.x += self.dx
-        self.y += self.dy
-        if self.x == self.device.columns - 1:
-            self.dx = -1
-        elif self.x == 0:
-            self.dx = 1
-
-        if self.y == self.device.rows - 1:
-            self.dy = -1
-        elif self.y == 0:
-            self.dy = 1
-
-    def movePaddles(self):
-        if self.dx > 0:
-            self.paddles[1] = self.y
-        else:
-            self.paddles[0] = self.y
-
-    def draw(self):
         self.matrix = [[0] * 11 for _ in range(10)]
+        x, y = next(self.pos)
+        self.matrix[y][x] = 1.0
 
-        self.drawPaddles()
-
-        # ball
-        self.matrix[self.y][self.x] = 1.0
         self.device.matrix = self.matrix
-
-    def drawPaddles(self):
-        self.matrix[self.paddles[0]][0] = 1
-        self.matrix[self.paddles[1]][self.device.columns - 1] = 1
 
 
 class HelixDemo(Demo):
