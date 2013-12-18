@@ -22,12 +22,15 @@ Im ersten Projektschritt zur Entwicklung der Uhr wird eine Desktop-Software, der
 \item Über eine USB-Schnittstelle fungiert die QlockToo als Display der Software. Das notwendige Streaming-Protokoll wird eigens für diese Anwendung entwickelt.
 \item Zur Einstellung der QlockToo über den Computer ist ein Einstellungsdialog implementiert. Dieser ermöglicht zusätzliche Einstellmöglichkeiten über die Funktionen der vier Tasten hinaus.
 \end{itemize}
+\ \\
+\textbf{Aufbau}
 
-\subsection{Aufbau}
 Um eine Lauffähigkeit auf allen gängigen Plattformen (Windows / Mac OS X / Linux) zu realisieren wird die Programmiersprache Python verwendet. Weiterer Vorteil ist die hohe Entwicklungsgeschwindigkeit.
 Das aus der C++ - Welt bekannte Framework Qt wird über die von Digia bereitgestellten PySide-Bindings als GUI-Framework genutzt. Die Software baut somit ausschließlich auf freier Open-Source Software auf.
+\ \\
 
-\subsection{Simulator}
+\textbf{Simulator}
+
 Der QlockToo-Manager zeigt nach dem Start den Simulator. Seitlich wird eine Menüleiste zum Starten der Unterprogramme dargestellt.
 Solange kein Unterprogramm ausgewählt ist, wird standardmäßig das Programm \emph{Timewords}, welches für die Anzeige der Zeit in Worten zuständig ist, angezeigt. Der QlockToo-Manager bedient sich dazu der momentanen Systemzeit.
 
@@ -43,16 +46,22 @@ Im Entwicklungsmodus ist eine Konsole integriert, mit der direkt Befehle an die 
 \includegraphics[width=0.9\columnwidth]{Abbildungen/Software/Linux}
 
 }
+\ \\
+\textbf{Demonstrationsmuster}
 
-
-\subsection{Demonstrationsmuster}
 Der zweite Punkt in der Menüleiste sind die Demonstrationsmuster. Zur besseren Sichtbarkeit sind die Muster invertiert dargestellt. Folgende Demonstrationen stehen zur Verfügung:
 
-\textbf{Pulse}
+\begin{tabbing}  
+ Links \= Mitte \= Rechts \kill
+ \> \textbf{Pulse}
+\end{tabbing}
 
 Alle LEDs wechseln sanft zwischen minimaler und maximaler Helligkeit.
 
-\textbf{Fade}
+\begin{tabbing}  
+ Links \= Mitte \= Rechts \kill
+ \> \textbf{Fade}
+\end{tabbing}
 
 {
     \centering
@@ -60,11 +69,17 @@ Alle LEDs wechseln sanft zwischen minimaler und maximaler Helligkeit.
 }
 Ein Helligkeitsverlauf bewegt sich sinusförmig von links nach rechts und zurück.
 
-\textbf{Pixeltest}
+\begin{tabbing}  
+ Links \= Mitte \= Rechts \kill
+ \> \textbf{Pixeltest}
+\end{tabbing}
 
 Alle Pixel bzw. Buchstaben werden einzeln nacheinander beleuchtet. Diese Demo dient hauptsächlich der Überprüfung der Verkabelung. 
 
-\textbf{Wave}
+\begin{tabbing}  
+ Links \= Mitte \= Rechts \kill
+ \> \textbf{Wave}
+\end{tabbing}
 
 Das Muster Wave zeigt ein pulsierendes Wellenbild, dessen Zentrum mit der Zeit langsam über den Bildschirm wandert.
 
@@ -73,7 +88,10 @@ Das Muster Wave zeigt ein pulsierendes Wellenbild, dessen Zentrum mit der Zeit l
     \includegraphics[width=\columnwidth]{Abbildungen/Software/Demo/Welle}
 }
 
-\textbf{Helix}
+\begin{tabbing}  
+ Links \= Mitte \= Rechts \kill
+ \> \textbf{Helix}
+\end{tabbing}
 
 Die Helix-Darstellung zeigt die zweidimensionale Projektion einer dreidimensionalen Spirale. Die z-Achse wird dabei über unterschiedliche Helligkeitswerte visualisiert. Bedingt durch die Berechnung der Funktionswerte für diskrete Buchstaben auf der Uhr und die geringe Pixelanzahl (110) wirkt die Demonstration zunächst sehr dünn und zerstückelt. Durch die Implementierung eines Gauss-Tiefpasses, wird der gewünschte Anti-Alias-Effekt erzielt. Der 3D~Effekt der Darstellung ist somit sehr viel deutlicher.
 
@@ -82,16 +100,20 @@ Die Helix-Darstellung zeigt die zweidimensionale Projektion einer dreidimensiona
     \includegraphics[width=\columnwidth]{Abbildungen/Software/Demo/Helix}
 }
 
-\textbf{Game Of Life}
+\begin{tabbing}  
+ Links \= Mitte \= Rechts \kill
+ \> \textbf{Game Of Life\footnote{[Con 13]}}
+\end{tabbing}
 
-Darstellung von Conways Game of Life, anhand toter (schwarz) und lebender (weiß) Zellen.
+
+Darstellung von Conways Game of Life\footnote{[Con 13]}, anhand toter (schwarz) und lebender (weiß) Zellen.
 
 {
     \centering
     \includegraphics[width=\columnwidth]{Abbildungen/Software/Demo/Helix}
 }
 
-Grundlage sind die vier folgenden Regeln, die bei jeder Iteration abgefragt werden\footnote{[Con 13]}:
+Grundlage sind die vier folgenden Regeln, die bei jeder Iteration abgefragt werden:
 \begin{itemize}
 \item Eine tote Zelle mit genau drei lebenden Nachbarn wird in der Folgegeneration neu geboren.
 \item Lebende Zellen mit weniger als zwei lebenden Nachbarn sterben in der Folgegeneration an Einsamkeit.
@@ -99,7 +121,10 @@ Grundlage sind die vier folgenden Regeln, die bei jeder Iteration abgefragt werd
 \item Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der Folgegeneration an Überbevölkerung.
 \end{itemize}
 
-\textbf{Matrix}
+\begin{tabbing}  
+ Links \= Mitte \= Rechts \kill
+ \> \textbf{Matrix}
+\end{tabbing}
 
 Der berühmte Animationseffekt aus dem Film \emph{Matrix} bietet sich aufgrund des Designs der QlockToo besonders an.
 
@@ -109,7 +134,8 @@ Der berühmte Animationseffekt aus dem Film \emph{Matrix} bietet sich aufgrund d
     
 }
 
-\subsection{Laufschrift}
+\textbf{Laufschrift}
+
 Der vierte Punkt in der Menüleiste ist die Laufschrift. Über ein Fenster kann ein beliebiger Text eingegeben werden, welcher auf der Uhr als Laufschrift abgespielt werden soll. Zum Abspielen muss ein Häkchen im entsprechenden Kontrollkästchen gesetzt werden. \\
 \\
 {
