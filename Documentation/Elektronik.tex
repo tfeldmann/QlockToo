@@ -24,26 +24,19 @@ Die Zeilen werden mit IRF7416 P-FET-Transistoren geschaltet und mit $5V$ versorg
 
 \textbf{Taster}
 
-<<<<<<< HEAD
 {
 \centering 
 \includegraphics[width=0.9\columnwidth]{Abbildungen/Konstruktion/Taster02} 
 }
-=======
-Die vier Kurzhubtaster an der rechten Rahmenseite befinden sich auf einer eigenen Platine mit Verbindungskabel. Zur Entprellung befindet sich kurz vor den vier IO-Pins (A2~-~A5) des Controllers ein RC-Glied. 
->>>>>>> c0b6d5802f0b8605d6c9ccf214043f87cfc1c9d3
 
 {
 \centering 
-\includegraphics[width=0.8\columnwidth]{Abbildungen/Konstruktion/Taster02} 
+\includegraphics[width=0.8\columnwidth]{Abbildungen/Elektronik/Taster01} 
 
 }
 
-<<<<<<< HEAD
 Die vier Kurzhubtaster an der rechten Rahmenseite befinden sich auf einer eigenen Platine mit Verbindungskabel. Zur Entprellung befindet sich kurz vor den vier IO-Pins (A2~-~A5) des Controllers ein RC-Glied. 
 
-=======
->>>>>>> c0b6d5802f0b8605d6c9ccf214043f87cfc1c9d3
 \textbf{Sensoren}
 
 Als Helligkeitssensor wird ein LDR und als Temperatursensor ein NTC verwendet. In beiden Fällen über Steckverbindung verbunden und einem Trimmpoti als Spannungsteiler an einem Analogeingang (A0~-~A1) des Mikrocontrollers. Der Helligkeitssensor befindet sich mittig oberhalb der Buchstabenmatrix hinter einem Loch in der Folie. Der Temperatursensor befindet sich seitlich am Rahmen um den Einfluss der möglichen Erwärmung der Elektronik auf den Sensor zu verringern. \newline
@@ -68,7 +61,7 @@ Das DCF77-Modul empfängt das Mitteleuropäische Zeitsignal und verstärkt es. U
 \textbf{Spannungsversorgung}
 
 Die Spannungsversorgung ist auf den Betrieb mit einem Gleichspannungsnetzteil (7~-~18$V$) ausgelegt und in die zwei Bereiche Elektronik und LED aufgeteilt. Der Bereich Elektronik wird von dem Spannungsregler auf dem Arduino Board versorgt. Die LEDs haben einen eigenen LM7805 Spannungsregler mit 1,5A Ausgangsstrom. An der Hohlsteckerbuchse am Rahmen kann alternativ ein Brückengleichrichter eingelötet werden, dieser verhindert die Verpolung des Netzteils und reduziert den Spannungsfall an den Spannungsreglern.
-<<<<<<< HEAD
+
 \end{multicols}
 
 {
@@ -84,8 +77,6 @@ Der Arduino Micro wird mit zwei Buchsenleisten auf die Platine aufgesteckt und b
 
 Die Platine wird aus einer zweiseitigen Fotoplatine erstellt. Hierzu werden Top- und Bottom-Film auf der Fotoplatine ausgerichtet und die Platine 3 Minuten mit UV-Licht belichtet. Im Entwicklerbad mit Natriumhydroxid wird der belichtete Fotolack abgewaschen.Die belichteten Stellen auf der Platine werden in einer Ätzanlage mit Eisentrichlorid entfernt. Je nach Güte des Ätzmittels verbleiben nach bereits 2 Minuten im Ätzbad nur noch die unter dem unbelichteten Fotolack liegenden Leiterbahnen. Im Nachgang wird die geätzte Platine nochmals vollständig belichtet, der Fotolack im Entwicklerbad abgewaschen und die Platine mit Kunststofflack beschichtet.
 
-=======
->>>>>>> c0b6d5802f0b8605d6c9ccf214043f87cfc1c9d3
 
 \end{multicols}
 
