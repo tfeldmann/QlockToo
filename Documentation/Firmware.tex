@@ -14,35 +14,22 @@
 Die Firmware der QlockToo ist in C geschrieben und nutzt teilweise Funktionen des Arduino-Cores.
 Im Folgenden werden die einzelnen Module der Firmware kurz erläutert.
 
-\textbf{Firmware}
-
+\subsection{Fimware}
 Die Hauptdatei der Firmware enthält den Einstiegspunkt in das Programm und initialisiert alle Module. Hier wird der Haupttimer (1kHz) gestartet, der das Display anzeigt und Steuerungsaufgaben übernimmt.
 
-\textbf{Display}
-
-Im Display-Modul wird die Verbindung mit dem I2C-LED-Treiber hergestellt und die Ports für die Ansteuerung der Leistungstransistoren konfiguriert.
+\subsection{Display}
+Im Display-Modul wird die Verbindung mit dem I2C-Led-Treiber hergestellt und die Ports für die Ansteuerung der Leistungstransistoren konfiguriert.
 
 In der Display-Update-Routine findet das eigentliche Multiplexing statt. Die nächste LED-Reihe wird eingeschaltet und die darzustellenden Spalten über die I2C-Schnittstelle an den LED-Treiber gesendet.
 Diese Funktion ist besonders zeitkritisch, da ineffiziente Programmierung hier sofort zu einem flimmernden Bild führt.
 Die QlockToo baut das Bild 100 mal pro Sekunde komplett auf (Multiplexing mit 1kHz), mit bloßen Auge ist daher kein Flimmern zu erkennen.
 
-\textbf{Timewords}
-
+\subsection{Timewords}
 In diesem Modul ist die in Abbildung~\ref{fig:Logik} dargestellte Logiktabelle implementiert.
 Welche LEDs für die gewählten Wörter und Stunden zu beleuchten sind, wird für jedes Wort in Form eines Integers für die Reihe und einer Bitmaske für die Spalten definiert.
 
-\textbf{Api}
+\subsection{}
 
-\textbf{Brightness}
-
-\textbf{DCF77}
-
-\textbf{Matrix}
-
-\textbf{Settings}
-
-\textbf{Thermo}
-
-\textbf{Time}
-
+\subsection{Api.ino}
+Die Api
 \end{multicols}
