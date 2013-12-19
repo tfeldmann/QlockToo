@@ -2,13 +2,19 @@
 // Controller.ino
 //
 
+#include <Bounce.h>
 #include "globals.h"
+
+// Buttons
+Bounce btn1 = Bounce(A5, 5);
+Bounce btn2 = Bounce(A4, 5);
+Bounce btn3 = Bounce(A3, 5);
+Bounce btn4 = Bounce(A2, 5);
 
 // the time module will care for setting this flag, just make sure to reset
 // it after you read it.
 extern volatile bool second_has_changed, minute_has_changed, hour_has_changed;
 extern volatile bool brightness_has_changed;
-#define BUTTON_PRESSED(_x_) (!last_status[_x_] && status[_x_])
 
 
 void controller_init()
@@ -30,42 +36,39 @@ void controller_update()
 
 void controller_buttons()
 {
-    // variable declarations
-    const int button[] = {A5, A4, A3, A2};
-    static bool last_status[] = {false, false, false, false};
+    btn1.update();
+    btn2.update();
+    btn3.update();
+    btn4.update();
 
-    // read in current button status
-    bool status[4];
-    for (byte i = 0; i < 4; i++)
-    {
-        status[i] = digitalRead(button[i]);
-    }
-
-    if (BUTTON_PRESSED(0))
+    if (btn1.risingEdge())
     {
         STATE_SWITCH(STATE_TIMEWORDS);
     }
-    if (BUTTON_PRESSED(1))
+    if (btn2.risingEdge())
     {
         STATE_SWITCH(STATE_SECONDS);
     }
-    if (BUTTON_PRESSED(2))
+    if (btn3.risingEdge())
     {
         STATE_SWITCH(STATE_TEMPERATURE);
     }
-    if (BUTTON_PRESSED(3))
+    if (btn4.risingEdge())
     {
         brightness_next_step();
     }
-    if (BUTTON_PRESSED(0) && BUTTON_PRESSED(1))
+
+    if (btn4.read() && btn4.duration() > 1000)
+    {
+        brightness_enable_automatic();
+    }
+    if (btn1.risingEdge() && btn2.risingEdge())
     {
         STATE_SWITCH(STATE_ES_LACHT_NE_KUH);
     }
-
-    // copy status to last status
-    for (byte i = 0; i < 4; i++)
+    if (btn1.read() && btn2.read() && btn3.read() && btn4.read())
     {
-        last_status[i] = status[i];
+        STATE_SWITCH(STATE_WAIT_FOR_DCF);
     }
 }
 
@@ -112,6 +115,16 @@ STATEMACHINE
         thermo_display((int)temp);
     STATE_LEAVE
     END_OF_STATE
+
+    STATE_ENTER(STATE_WAIT_FOR_DCF)
+        #ifdef DEBUG
+            Serial.println("#State: Waiting for DCF Signal");
+        #endif
+    STATE_LOOP
+        brightness = 0;
+    STATE_LEAVE
+    END_OF_STATE
+
 
     STATE_ENTER(STATE_ES_LACHT_NE_KUH)
         matrix_clear();
