@@ -42,7 +42,6 @@ void dcf77_init()
     dcf_rx_buffer = 0;
     pinMode(DCF77PIN, INPUT);
     attachInterrupt(DCF77INTERRUPT, dcf77_interrupt, CHANGE);
-    pinMode(13, OUTPUT);
 }
 
 void dcf77_interrupt()
@@ -131,6 +130,13 @@ void dcf77_parseBuffer(void)
             month = rx_buffer->Month - ((rx_buffer->Month / 16) * 6);
             year = 2000 + rx_buffer->Year - ((rx_buffer->Year / 16) * 6);
             Serial.println("#DCF77 parity check okay");
+
+            // if we are waiting for dcf signal we can switch to the normal
+            // timewords module now.
+            if (STATE_IS_ACTIVE(STATE_WAIT_FOR_DCF))
+            {
+                STATE_SWITCH(STATE_TIMEWORDS);
+            }
         }
         else
         {
