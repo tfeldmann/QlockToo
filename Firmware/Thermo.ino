@@ -10,6 +10,7 @@ const int THERMO_PIN = A1;
 
 float thermo_celsius()
 {
+    // values have been found experimentally
     return analogRead(THERMO_PIN) * 0.1145 - 33.449;
 }
 
