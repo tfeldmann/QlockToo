@@ -42,6 +42,9 @@ void display_init()
  */
 void display_update()
 {
+    // if the LED do not shine, we don't need to update anything.
+    if (brightness == 0) return;
+
     // maps led columns to positions in data array
     const static uint8_t i2c_led_position[COLS] = {
         14, 15, 12, 13, 10, 11, 8, 9, 6, 7, 4
