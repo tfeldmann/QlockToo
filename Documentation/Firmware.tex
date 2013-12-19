@@ -22,7 +22,7 @@ Im Display-Modul wird die Verbindung mit dem I2C-Led-Treiber hergestellt und die
 
 In der Display-Update-Routine findet das eigentliche Multiplexing statt. Die nächste LED-Reihe wird eingeschaltet und die darzustellenden Spalten über die I2C-Schnittstelle an den LED-Treiber gesendet.
 Diese Funktion ist besonders zeitkritisch, da ineffiziente Programmierung hier sofort zu einem flimmernden Bild führt.
-Die QlockToo baut das Bild 100 mal pro Sekunde komplett auf (Multiplexing mit 1kHz), mit bloßen Auge ist daher kein Flimmern zu erkennen.
+Die QlockToo baut das Bild 100 mal pro Sekunde komplett auf (Multiplexing mit 1kHz über zehn Reihen), mit bloßen Auge ist daher kein Flimmern zu erkennen.
 
 \subsection{Timewords}
 In diesem Modul ist die in Abbildung~\ref{fig:Logik} dargestellte Logiktabelle implementiert.
@@ -31,5 +31,6 @@ Welche LEDs für die gewählten Wörter und Stunden zu beleuchten sind, wird fü
 \subsection{}
 
 \subsection{Api.ino}
-Die Api
+Die QlockToo kommuniziert per USB über das UART-Protokoll bei 115200 baud mit der Software.
+Zum Parsen der empfangenen Befehle wird auf Seite der Firmware die Library \emph{SerialCommand} eingesetzt.
 \end{multicols}
