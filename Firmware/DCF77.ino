@@ -42,6 +42,7 @@ void dcf77_init()
     dcf_rx_buffer = 0;
     pinMode(DCF77PIN, INPUT);
     attachInterrupt(DCF77INTERRUPT, dcf77_interrupt, CHANGE);
+    pinMode(13, OUTPUT);
 }
 
 void dcf77_interrupt()
