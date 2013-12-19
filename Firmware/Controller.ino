@@ -26,10 +26,7 @@ void controller_init()
 void controller_update()
 {
     controller_statemachine();
-
-    // reset the second / minute / hour has_updated flags
-    time_resetFlags();
-
+    time_resetFlags();  // reset the second / minute / hour has_updated flags
     controller_buttons();
 }
 
@@ -124,7 +121,6 @@ STATEMACHINE
         brightness = 0;
     STATE_LEAVE
     END_OF_STATE
-
 
     STATE_ENTER(STATE_ES_LACHT_NE_KUH)
         matrix_clear();

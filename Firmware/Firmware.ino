@@ -10,9 +10,9 @@
 // Timer1:    1/s   keeps track of the time
 // Timer3: 1000/s   main timer for display / api / controller
 
-#include "globals.h"
 #include <TimerThree.h>
-#define VERSION "0.7"
+#include "globals.h"
+#define VERSION "0.8"
 
 
 void setup()

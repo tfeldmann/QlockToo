@@ -31,6 +31,7 @@ void brightness_next_step()
     mode = (mode + 1) % STEPS;
 }
 
+
 void brightness_enable_automatic()
 {
     mode = AUTOMATIC;
