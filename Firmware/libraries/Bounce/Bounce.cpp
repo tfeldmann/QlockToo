@@ -1,13 +1,14 @@
 #if defined(ARDUINO) && ARDUINO >= 100
-#include "Arduino.h"
+    #include "Arduino.h"
 #else
-#include "WProgram.h"
+    #include "WProgram.h"
 #endif
 #include "Bounce.h"
 
 
 Bounce::Bounce(uint8_t pin,unsigned long interval_millis)
 {
+    pinMode(pin, INPUT);
     interval(interval_millis);
     previous_millis = millis();
     state = digitalRead(pin);
@@ -28,11 +29,11 @@ void Bounce::interval(unsigned long interval_millis)
     this->rebounce_millis = 0;
 }
 
+
 void Bounce::rebounce(unsigned long interval)
 {
     this->rebounce_millis = interval;
 }
-
 
 
 int Bounce::update()
