@@ -50,6 +50,7 @@ void display_update()
         14, 15, 12, 13, 10, 11, 8, 9, 6, 7, 4
     };
     const static uint8_t i2c_corner_position[CORNERS] = {1, 0, 2, 3};
+    noInterrupts();
 
     static uint8_t row = 0;
     uint8_t data[16];
@@ -74,4 +75,5 @@ void display_update()
 
     // enable next line
     digitalWriteFast(rowpins[row], LOW);
+    interrupts();
 }

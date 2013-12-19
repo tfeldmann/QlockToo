@@ -46,6 +46,7 @@ void dcf77_init()
 
 void dcf77_interrupt()
 {
+    noInterrupts();
     static unsigned long previousFlankTime = 0;
 
     if (digitalRead(DCF77PIN))
@@ -63,6 +64,7 @@ void dcf77_interrupt()
         int difference = millis() - previousFlankTime;
         dcf77_bufferSignal(difference > DCF_SPLIT_MILLIS);
     }
+    interrupts();
 }
 
 /*
