@@ -26,7 +26,7 @@ void setup()
     controller_init();
 
     // start main timer
-    Timer3.initialize(1e6 / 1000);  // fps to us
+    Timer3.initialize(1e6 / 1000);  // 1kHz in µs
     Timer3.attachInterrupt(main_timer);
 }
 

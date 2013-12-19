@@ -7,7 +7,6 @@
 const int THERMO_PIN = A1;
 
 
-
 float thermo_celsius()
 {
     // values have been found experimentally
