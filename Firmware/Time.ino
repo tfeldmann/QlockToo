@@ -42,18 +42,12 @@ void time_addSecond()
 
 void time_dump()
 {
-    Serial.print("#Time: ");
-    Serial.print(hours, DEC);
-    Serial.print(":");
-    Serial.print(minutes, DEC);
-    Serial.print(":");
-    Serial.print(seconds, DEC);
-    Serial.print(" Date: ");
-    Serial.print(day, DEC);
-    Serial.print(".");
-    Serial.print(month, DEC);
-    Serial.print(".");
-    Serial.println(year, DEC);
+    char datetime[21];
+    sprintf(datetime, "%.4i-%.2i-%.2i %.2i:%.2i:%.2i",
+            year, month, day, hours, minutes, seconds);
+
+    Serial.print("#Date and Time: ");
+    Serial.println(datetime);
 }
 
 
