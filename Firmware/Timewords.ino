@@ -49,9 +49,10 @@ void timewords_show()
     matrix_clear();
 
     // Corners show the minutes
+    byte minute_rest = minutes % 5;
     for (byte i = 0; i < CORNERS; i++)
     {
-        corner[i] = (i < minutes % 5);
+        corner[i] = (i < minute_rest);
     }
 
     // Binary mask for 12 columns
