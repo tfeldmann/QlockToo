@@ -9,7 +9,12 @@
 #define LEDDRIVER_ADDRESS (0x60)
 
 // used pins on the uC
-const int8_t rowpins[ROWS] = {13, 12, 11, 10, 9, 8, 7, 6, 5, 4};
+const int8_t ROWPINS[ROWS] = {13, 12, 11, 10, 9, 8, 7, 6, 5, 4};
+
+// maps led columns to positions in data array. This is due to way the
+// cabeling was done and might not be necessary in future versions.
+const uint8_t I2C_LED_POSITION[COLS] = {14, 15, 12, 13, 10, 11, 8, 9, 6, 7, 4};
+const uint8_t I2C_CORNER_POSITION[CORNERS] = {1, 0, 2, 3};
 
 
 void display_init()
@@ -18,14 +23,14 @@ void display_init()
 
     // init row pins (transistors)
     // a HIGH value means that the row is deactivated
-    for (int i = 0; i < ROWS; i++)
+    for (byte i = 0; i < ROWS; i++)
     {
-        pinMode(rowpins[i], OUTPUT);
-        digitalWrite(rowpins[i], HIGH);
+        pinMode(ROWPINS[i], OUTPUT);
+        digitalWrite(ROWPINS[i], HIGH);
     }
 
     I2c.begin();
-    I2c.setSpeed(true);  // fast
+    I2c.setSpeed(true);  // enables fast mode
     I2c.pullup(false);
 
     uint8_t initdata[] = {0x00,0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -42,38 +47,29 @@ void display_init()
  */
 void display_update()
 {
-    // if the LED do not shine, we don't need to update anything.
+    // if the LEDs do not shine, we don't need to update anything.
     if (brightness == 0) return;
 
-    // maps led columns to positions in data array
-    const static uint8_t i2c_led_position[COLS] = {
-        14, 15, 12, 13, 10, 11, 8, 9, 6, 7, 4
-    };
-    const static uint8_t i2c_corner_position[CORNERS] = {1, 0, 2, 3};
     noInterrupts();
 
     static uint8_t row = 0;
     uint8_t data[16];
 
     uint8_t previous_row = row;
-    if (++row >= ROWS) row = 0;
+    if (++row == ROWS) row = 0;
 
     for (uint8_t i = 0; i < COLS; i++)
     {
-        data[i2c_led_position[i]] = matrix[row][i] * brightness;
+        data[I2C_LED_POSITION[i]] = matrix[row][i] * brightness;
     }
     for (uint8_t i = 0; i < CORNERS; i++)
     {
-        data[i2c_corner_position[i]] = corner[i] * brightness;
+        data[I2C_CORNER_POSITION[i]] = corner[i] * brightness;
     }
 
-    // disable current line
-    digitalWriteFast(rowpins[previous_row], HIGH);
+    digitalWriteFast(ROWPINS[previous_row], HIGH);  // disable current line
+    I2c.write(LEDDRIVER_ADDRESS, 0x82, data, 16);   // write data to led driver
+    digitalWriteFast(ROWPINS[row], LOW);            // enable next line
 
-    // write data to led driver
-    I2c.write(LEDDRIVER_ADDRESS, 0x82, data, 16);
-
-    // enable next line
-    digitalWriteFast(rowpins[row], LOW);
     interrupts();
 }
