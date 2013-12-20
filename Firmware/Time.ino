@@ -67,6 +67,7 @@ ISR(TIMER1_OVF_vect)
 {
     noInterrupts();           // disable all interrupts
     time_addSecond();
+    TCNT1 = 3036;
     interrupts();             // enable all interrupts
 }
 
