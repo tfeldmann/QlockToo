@@ -55,6 +55,17 @@ void controller_buttons()
         brightness_next_step();
     }
 
+    // switch through demo modes
+    if (btn1.read() && btn2.risingEdge())
+    {
+        if (STATE_IS_ACTIVE(STATE_TIMEWORDS))
+            STATE_SWITCH(STATE_WHITE);
+        if (STATE_IS_ACTIVE(STATE_WHITE))
+            STATE_SWITCH(STATE_ES_LACHT_NE_KUH);
+        if (STATE_IS_ACTIVE(STATE_ES_LACHT_NE_KUH))
+            STATE_SWITCH(STATE_TIMEWORDS);
+    }
+
     if (btn4.read() && btn4.duration() > 1000)
     {
         brightness_enable_automatic();
@@ -95,6 +106,7 @@ STATEMACHINE
             Serial.println("#State: Seconds");
         #endif
         matrix_second(seconds);
+        corner_clear();
     STATE_LOOP
         brightness_update();
         if (second_has_changed)
@@ -109,6 +121,7 @@ STATEMACHINE
             Serial.println("#State: Temperature");
         #endif
         thermo_display((int)thermo_celsius());
+        corner_clear();
     STATE_LOOP
         brightness_update();
         if (second_has_changed)
@@ -123,6 +136,7 @@ STATEMACHINE
             Serial.println("#State: Waiting for DCF Signal");
         #endif
         matrix_clear();
+        corner_clear();
         matrix[3][3] = 1;
         matrix[3][4] = 1;
         matrix[3][5] = 1;
@@ -132,8 +146,17 @@ STATEMACHINE
     STATE_LEAVE
     END_OF_STATE
 
+    STATE_ENTER(STATE_WHITE)
+        matrix_fill(1);
+        corner_fill(1);
+    STATE_LOOP
+        brightness_update();
+    STATE_LEAVE
+    END_OF_STATE
+
     STATE_ENTER(STATE_ES_LACHT_NE_KUH)
         matrix_clear();
+        corner_clear();
         matrix[0][0]  = 1;
         matrix[0][1]  = 1;
         matrix[7][6]  = 1;
