@@ -48,9 +48,14 @@ void display_init()
 void display_update()
 {
     // if the LEDs do not shine, we don't need to update anything.
-    if (brightness == 0) return;
-
-    noInterrupts();
+    if (brightness == 0)
+    {
+        for (byte i = 0; i < ROWS; i++)
+        {
+            digitalWriteFast(ROWPINS[i], HIGH);
+        }
+        return;
+    }
 
     static uint8_t row = 0;
     uint8_t data[16];
@@ -70,6 +75,4 @@ void display_update()
     digitalWriteFast(ROWPINS[previous_row], HIGH);  // disable current line
     I2c.write(LEDDRIVER_ADDRESS, 0x82, data, 16);   // write data to led driver
     digitalWriteFast(ROWPINS[row], LOW);            // enable next line
-
-    interrupts();
 }

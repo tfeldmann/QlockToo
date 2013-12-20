@@ -33,6 +33,8 @@ void setup()
 
 void main_timer()
 {
+    noInterrupts();
+
     // update display
     display_update();
 
@@ -43,6 +45,7 @@ void main_timer()
         controller_update();
         ms = 0;
     }
+    interrupts();
 }
 
 

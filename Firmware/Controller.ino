@@ -106,10 +106,13 @@ STATEMACHINE
         #ifdef DEBUG
             Serial.println("#State: Temperature");
         #endif
+        thermo_display((int)thermo_celsius());
     STATE_LOOP
         brightness_update();
-        float temp = thermo_celsius();
-        thermo_display((int)temp);
+        if (second_has_changed)
+        {
+            thermo_display((int)thermo_celsius());
+        }
     STATE_LEAVE
     END_OF_STATE
 
