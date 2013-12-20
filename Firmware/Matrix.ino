@@ -9,9 +9,14 @@
 
 void matrix_clear()
 {
+    matrix_fill(0);
+}
+
+void matrix_fill(byte value)
+{
     for (byte y = 0; y < ROWS; y++)
         for (byte x = 0; x < COLS; x++)
-            matrix[y][x] = 0;
+            matrix[y][x] = value;
 }
 
 
@@ -65,8 +70,14 @@ void matrix_dump()
 
 void corner_clear()
 {
+    corner_fill(0);
+}
+
+
+void corner_fill(byte value)
+{
     for (byte i = 0; i < CORNERS; i++)
     {
-        corner[i] = 0;
+        corner[i] = value;
     }
 }
