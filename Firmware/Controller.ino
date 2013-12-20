@@ -159,8 +159,10 @@ STATEMACHINE
     END_OF_STATE
 
     STATE_ENTER(STATE_MATRIX)
-        brightness = 1;
+        brightness = 0;
+        srand(seconds + minutes + hours);
         matrix_clear();
+        corner_clear();
     STATE_LOOP
         brightness = 1;
         static int wait_move = 0;
