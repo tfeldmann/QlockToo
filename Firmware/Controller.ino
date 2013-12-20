@@ -66,14 +66,13 @@ void controller_buttons()
             STATE_SWITCH(STATE_TIMEWORDS);
     }
 
+    // switch to automatic brightness mode
     if (btn4.read() && btn4.duration() > 1000)
     {
         brightness_enable_automatic();
     }
-    if (btn1.risingEdge() && btn2.risingEdge())
-    {
-        STATE_SWITCH(STATE_ES_LACHT_NE_KUH);
-    }
+
+    // wait for dcf signal
     if (btn1.read() && btn1.duration() > 1000 &&
         btn2.read() && btn2.duration() > 1000 &&
         btn3.read() && btn3.duration() > 1000)
