@@ -161,20 +161,14 @@ STATEMACHINE
     STATE_ENTER(STATE_MATRIX)
         brightness = 1;
         matrix_clear();
-        // light first line
-        for (byte x = 0; x < COLS; x++)
-        {
-            matrix[0][x] = 255;
-        }
     STATE_LOOP
         brightness = 1;
-        static int _ovf10 = 0;
-        static int _ovf30 = 0;
+        static int wait_move = 0;
+        static int wait_light = 0;
 
-        // every 10 updates
-        if (++_ovf10 == 10)
+        if (++wait_move == 10)
         {
-            _ovf10 = 0;
+            wait_move = 0;
 
             // move rows one down
             for (byte y = ROWS - 1; y > 0; y--)
@@ -192,10 +186,10 @@ STATEMACHINE
             }
         }
 
-        // every 30 steps add a light
-        if (++_ovf30 == 30)
+        // add a light
+        if (++wait_light == 20)
         {
-            _ovf30 = 0;
+            wait_light = 0;
             byte col = rand() % COLS;
             matrix[0][col] = constrain(matrix[0][col] + rand() % 255, 0, 255);
         }
