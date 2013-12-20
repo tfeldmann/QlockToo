@@ -98,8 +98,6 @@ class MarqueeApp(QDialog):
         self.marquee.setText(text)
         if len(text) > 0:
             self.device.matrix = self.marquee.regionFromLetter(new)
-        else:
-            print "test"
 
     def _frequency(self, speed):
         """

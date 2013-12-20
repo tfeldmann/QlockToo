@@ -55,13 +55,18 @@ void controller_buttons()
         brightness_next_step();
     }
 
-    // switch through demo modes
+    // cycle through demo modes
     if (btn1.read() && btn2.risingEdge())
     {
         if (STATE_IS_ACTIVE(STATE_TIMEWORDS))
             STATE_SWITCH(STATE_WHITE);
+
         if (STATE_IS_ACTIVE(STATE_WHITE))
+            STATE_SWITCH(STATE_MATRIX);
+
+        if (STATE_IS_ACTIVE(STATE_MATRIX))
             STATE_SWITCH(STATE_ES_LACHT_NE_KUH);
+
         if (STATE_IS_ACTIVE(STATE_ES_LACHT_NE_KUH))
             STATE_SWITCH(STATE_TIMEWORDS);
     }
@@ -150,6 +155,50 @@ STATEMACHINE
         corner_fill(1);
     STATE_LOOP
         brightness_update();
+    STATE_LEAVE
+    END_OF_STATE
+
+    STATE_ENTER(STATE_MATRIX)
+        brightness = 1;
+        matrix_clear();
+        // light first line
+        for (byte x = 0; x < COLS; x++)
+        {
+            matrix[0][x] = 255;
+        }
+    STATE_LOOP
+        brightness = 1;
+        static int _ovf10 = 0;
+        static int _ovf30 = 0;
+
+        // every 10 updates
+        if (++_ovf10 == 10)
+        {
+            _ovf10 = 0;
+
+            // move rows one down
+            for (byte y = ROWS - 1; y > 0; y--)
+            {
+                for (byte x = 0; x < COLS; x++)
+                {
+                    matrix[y][x] = matrix[y-1][x];
+                }
+            }
+
+            // darken first line
+            for (byte x = 0; x < COLS; x++)
+            {
+                matrix[0][x] = 0.8 * matrix[0][x];
+            }
+        }
+
+        // every 30 steps add a light
+        if (++_ovf30 == 30)
+        {
+            _ovf30 = 0;
+            byte col = rand() % COLS;
+            matrix[0][col] = constrain(matrix[0][col] + rand() % 255, 0, 255);
+        }
     STATE_LEAVE
     END_OF_STATE
 
