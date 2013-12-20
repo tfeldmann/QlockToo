@@ -122,8 +122,13 @@ STATEMACHINE
         #ifdef DEBUG
             Serial.println("#State: Waiting for DCF Signal");
         #endif
+        matrix_clear();
+        matrix[3][3] = 1;
+        matrix[3][4] = 1;
+        matrix[3][5] = 1;
+        matrix[3][6] = 1;
     STATE_LOOP
-        brightness = 0;
+        brightness_update();
     STATE_LEAVE
     END_OF_STATE
 
