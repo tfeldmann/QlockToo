@@ -58,11 +58,10 @@ void display_update()
     }
 
     static uint8_t row = 0;
-    uint8_t data[16];
-
     uint8_t previous_row = row;
     if (++row == ROWS) row = 0;
 
+    uint8_t data[16];
     for (uint8_t i = 0; i < COLS; i++)
     {
         data[I2C_LED_POSITION[i]] = matrix[row][i] * brightness;
