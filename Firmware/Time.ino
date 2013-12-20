@@ -54,20 +54,20 @@ void time_dump()
 void time_startTimer()
 {
     // initialize timer1 to fire with 1 Hz
-    noInterrupts();           // disable all interrupts
     TCCR1A = 0;
     TCCR1B = 0;
 
     TCNT1 = 3036;             // preload timer 65536-16000000Hz/256/1Hz
     TCCR1B |= (1 << CS12);    // 256 prescaler
     TIMSK1 |= (1 << TOIE1);   // enable timer overflow interrupt
-    interrupts();             // enable all interrupts
 }
 
 
 ISR(TIMER1_OVF_vect)
 {
+    noInterrupts();           // disable all interrupts
     time_addSecond();
+    interrupts();             // enable all interrupts
 }
 
 
