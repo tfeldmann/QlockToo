@@ -63,7 +63,9 @@ void controller_buttons()
     {
         STATE_SWITCH(STATE_ES_LACHT_NE_KUH);
     }
-    if (btn1.read() && btn2.read() && btn3.read() && btn4.read())
+    if (btn1.read() && btn1.duration() > 1000 &&
+        btn2.read() && btn2.duration() > 1000 &&
+        btn3.read() && btn3.duration() > 1000)
     {
         STATE_SWITCH(STATE_WAIT_FOR_DCF);
     }
