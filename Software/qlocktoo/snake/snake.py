@@ -34,8 +34,8 @@ class SnakeApp(QDialog):
         self.snake = SnakeModel(
             width=self.device.columns,
             height=self.device.rows,
-            gameOverCallback=self.gameOver,
-            ateFoodCallback=self.ateFood)
+            gameover_callback=self.gameOver,
+            atefood_callback=self.ateFood)
         self.highscore = 0
         self.pause = False
 
@@ -49,13 +49,13 @@ class SnakeApp(QDialog):
             self.snake.reset()
             self.stepTimer.start(1000 / self.stepFrequency)
         elif key == Qt.Key_Left:
-            self.snake.setSnakeDirection(-1, 0)
+            self.snake.set_snake_direction(-1, 0)
         elif key == Qt.Key_Right:
-            self.snake.setSnakeDirection(1, 0)
+            self.snake.set_snake_direction(1, 0)
         elif key == Qt.Key_Down:
-            self.snake.setSnakeDirection(0, 1)
+            self.snake.set_snake_direction(0, 1)
         elif key == Qt.Key_Up:
-            self.snake.setSnakeDirection(0, -1)
+            self.snake.set_snake_direction(0, -1)
         else:
             QDialog.keyPressEvent(self, event)
 

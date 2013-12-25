@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file './qlocktoo/demo/demo.ui'
 #
-# Created: Wed Dec  4 14:09:58 2013
+# Created: Wed Dec 25 18:46:36 2013
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -70,7 +70,7 @@ class Ui_demoapp(object):
         self.pong.setSizePolicy(sizePolicy)
         self.pong.setFocusPolicy(QtCore.Qt.ClickFocus)
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap(":/icons/black32/fa-gamepad.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap(":/icons/black32/fa-qrcode.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pong.setIcon(icon3)
         self.pong.setIconSize(QtCore.QSize(32, 32))
         self.pong.setAutoDefault(False)
@@ -161,7 +161,7 @@ class Ui_demoapp(object):
         self.fade.setText(QtGui.QApplication.translate("demoapp", "Verlauf", None, QtGui.QApplication.UnicodeUTF8))
         self.helix.setText(QtGui.QApplication.translate("demoapp", "Helix", None, QtGui.QApplication.UnicodeUTF8))
         self.wave.setText(QtGui.QApplication.translate("demoapp", "Welle", None, QtGui.QApplication.UnicodeUTF8))
-        self.pong.setText(QtGui.QApplication.translate("demoapp", "Pong", None, QtGui.QApplication.UnicodeUTF8))
+        self.pong.setText(QtGui.QApplication.translate("demoapp", "Pixeltest", None, QtGui.QApplication.UnicodeUTF8))
         self.pulse.setText(QtGui.QApplication.translate("demoapp", "Puls", None, QtGui.QApplication.UnicodeUTF8))
         self.white.setText(QtGui.QApplication.translate("demoapp", "Weiß", None, QtGui.QApplication.UnicodeUTF8))
         self.black.setText(QtGui.QApplication.translate("demoapp", "Schwarz", None, QtGui.QApplication.UnicodeUTF8))

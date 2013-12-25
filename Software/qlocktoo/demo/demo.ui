@@ -128,11 +128,11 @@
       <enum>Qt::ClickFocus</enum>
      </property>
      <property name="text">
-      <string>Pong</string>
+      <string>Pixeltest</string>
      </property>
      <property name="icon">
       <iconset resource="../assets/assets.qrc">
-       <normaloff>:/icons/black32/fa-gamepad.png</normaloff>:/icons/black32/fa-gamepad.png</iconset>
+       <normaloff>:/icons/black32/fa-qrcode.png</normaloff>:/icons/black32/fa-qrcode.png</iconset>
      </property>
      <property name="iconSize">
       <size>

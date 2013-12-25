@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file './qlocktoo/settings/settings.ui'
 #
-# Created: Wed Dec  4 14:09:58 2013
+# Created: Wed Dec 25 18:46:36 2013
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!

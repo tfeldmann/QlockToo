@@ -1,6 +1,5 @@
 ﻿Firmware:
- ☐ Datum
- ☐ Matrix
+ ☐ Datum Laufschrift
  ☐ Checksumme bei streaming
  ☐ Blockierender Stream
 
@@ -16,11 +15,11 @@ Wünsche von Marlene:
 
 Carsti und Manu´s Wünsche:
  ☐ GoL direkt auf der Uhr
- ☐ Matrix direkt auf der Uhr
  ☐ Malprogramm - Simulator
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ Matrix direkt auf der Uhr @done (13-12-22 22:43) @project(Carsti und Manu´s Wünsche)
  ✔ Pixeltest @done (13-12-16 15:38) @project(Software)
  ✔ Temperatur @done (13-12-13 14:32) @project(Firmware)
  ✔ Matrix Demo @done (13-12-13 14:32) @project(Software)
