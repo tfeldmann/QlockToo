@@ -9,12 +9,12 @@
 #define LEDDRIVER_ADDRESS (0x60)
 
 // used pins on the uC
-const int8_t ROWPINS[ROWS] = {13, 12, 11, 10, 9, 8, 7, 6, 5, 4};
+static const int8_t ROWPINS[ROWS] = {13, 12, 11, 10, 9, 8, 7, 6, 5, 4};
 
 // maps led columns to positions in data array. This is due to way the
 // cabeling was done and might not be necessary in future versions.
-const uint8_t I2C_LED_POSITION[COLS] = {14, 15, 12, 13, 10, 11, 8, 9, 6, 7, 4};
-const uint8_t I2C_CORNER_POSITION[CORNERS] = {1, 0, 2, 3};
+static const uint8_t I2C_LED_POSITION[COLS] = {14, 15, 12, 13, 10, 11, 8, 9, 6, 7, 4};
+static const uint8_t I2C_CORNER_POSITION[CORNERS] = {1, 0, 2, 3};
 
 
 void display_init()
@@ -61,7 +61,7 @@ void display_update()
     uint8_t previous_row = row;
     if (++row == ROWS) row = 0;
 
-    uint8_t data[16];
+    static uint8_t data[16];
     for (uint8_t i = 0; i < COLS; i++)
     {
         data[I2C_LED_POSITION[i]] = matrix[row][i] * brightness;

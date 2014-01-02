@@ -141,10 +141,10 @@ STATEMACHINE
         #endif
         matrix_clear();
         corner_clear();
-        matrix[3][3] = 1;
-        matrix[3][4] = 1;
-        matrix[3][5] = 1;
-        matrix[3][6] = 1;
+        matrix[3][3] = 1;  // F
+        matrix[3][4] = 1;  // U
+        matrix[3][5] = 1;  // N
+        matrix[3][6] = 1;  // K
     STATE_LOOP
         brightness_update();
     STATE_LEAVE
@@ -201,18 +201,18 @@ STATEMACHINE
     STATE_ENTER(STATE_ES_LACHT_NE_KUH)
         matrix_clear();
         corner_clear();
-        matrix[0][0]  = 1;
-        matrix[0][1]  = 1;
-        matrix[7][6]  = 1;
-        matrix[7][7]  = 1;
-        matrix[7][8]  = 1;
-        matrix[7][9]  = 1;
-        matrix[7][10] = 1;
-        matrix[9][3]  = 1;
-        matrix[9][4]  = 1;
-        matrix[9][7]  = 1;
-        matrix[9][8]  = 1;
-        matrix[9][9]  = 1;
+        matrix[0][0]  = 1;  // E
+        matrix[0][1]  = 1;  // S
+        matrix[7][6]  = 1;  // L
+        matrix[7][7]  = 1;  // A
+        matrix[7][8]  = 1;  // C
+        matrix[7][9]  = 1;  // H
+        matrix[7][10] = 1;  // T
+        matrix[9][3]  = 1;  // N
+        matrix[9][4]  = 1;  // E
+        matrix[9][7]  = 1;  // K
+        matrix[9][8]  = 1;  // U
+        matrix[9][9]  = 1;  // H
     STATE_LOOP
         brightness_update();
     STATE_LEAVE

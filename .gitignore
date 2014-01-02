@@ -4,5 +4,6 @@
 *.aux
 *.log
 QlockToo.pdf
+*_ui.py
 *.gz
 *.toc

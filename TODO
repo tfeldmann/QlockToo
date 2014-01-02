@@ -2,6 +2,7 @@
  ☐ Datum Laufschrift
  ☐ Checksumme bei streaming
  ☐ Blockierender Stream
+ ☐ Automatische Helligkeit bei langem Tastendruck, sonst nur Stufen
 
 Software:
  ☐ Variable Schriftlänge

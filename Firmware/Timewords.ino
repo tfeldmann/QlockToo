@@ -13,7 +13,7 @@
 //  Z E H N E U N K U H R
 
 
-const uint16_t matrix_words[][2] = {
+static const uint16_t matrix_words[][2] = {
     // row, mask
     {0, 0b1100000000000000},  // ES
     {0, 0b0001110000000000},  // IST
@@ -27,7 +27,7 @@ const uint16_t matrix_words[][2] = {
     {9, 0b0000000011100000}   // UHR
 };
 
-const uint16_t matrix_hours[][2] = {
+static const uint16_t matrix_hours[][2] = {
     // row, mask
     {8, 0b0000001111100000},  // ZWOELF
     {5, 0b1111000000000000},  // EINS

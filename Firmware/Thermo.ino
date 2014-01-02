@@ -4,7 +4,7 @@
 
 #include "font.h"
 
-const int THERMO_PIN = A1;
+static const int THERMO_PIN = A1;
 
 
 float thermo_celsius()
