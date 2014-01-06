@@ -1,9 +1,9 @@
 % !TEX root = QlockToo.tex
-% Firmware
 
 \begin{figure}
     \includegraphics[width=\columnwidth]{Abbildungen/Firmware/Logik}
-   
+    \caption{Für die Anzeige der Zeit in Sätzen wird die dargestellte Logiktabelle für die deutsche Sprache in der Firmware hinterlegt. \emph{Stunde} und \emph{Stunde + 1} sind Platzhalter für die aktuelle und die nächste Stunde.}
+    \label{fig:Logik}
 \end{figure}
 
 \section{Firmware}
@@ -27,8 +27,8 @@ Im Controller-Modul befindet sich ein Zustandsautomat, welcher den Betriebsmodus
 Der Betriebsmodus der Uhr kann über die Taster eingestellt werden. Das dazu notwendige Abfragen der Taster findet ebenfalls in diesem Modul statt.
 
 \textbf{Timewords}
-In diesem Modul ist die dargestellte Logiktabelle für die Anzeige der Zeit in Sätzen in deutscher Sprache implementiert.
-Welche LEDs für die gewählten Wörter und Stunden zu beleuchten sind, wird für jedes Wort in Form eines Integers für die Reihe und einer Bitmaske für die Spalten definiert. \emph{Stunde} und \emph{Stunde + 1} sind Platzhalter für die aktuelle und die nächste Stunde.
+In diesem Modul ist die in Abbildung~\ref{fig:Logik} dargestellte Logiktabelle implementiert.
+Welche LEDs für die gewählten Wörter und Stunden zu beleuchten sind, wird für jedes Wort in Form eines Integers für die Reihe und einer Bitmaske für die Spalten definiert.
 
 \textbf{Api}
 Die QlockToo kommuniziert per USB über das UART-Protokoll bei 115200 baud mit der Software.
@@ -38,7 +38,7 @@ Zum Parsen der empfangenen Befehle wird auf Seite der Firmware die Library \emph
 Das Modul Brightness beinhaltet die Steuerung der Helligkeit der QlockToo. Neben dem Automatikmodus, welcher die Helligkeit der Abhängigkeit von den gemessenen Werten des Helligkeitssensors steuert, besteht die Möglichkeit einer manuellen Steuerung. Dabei stehen verschiedene Abstufungen zur Verfügung.
 
 \textbf{DCF77}
-In diesem Modul ist der Parser für das DCF77 Signal implementiert. Das DCF77-Signal ist zeitkritisch und wird daher in Interrupts bearbeitet.
+In diesem Modul ist der Parser für das DCF77 Signal implementiert. Das DCF77-Signal ist zeitkritisch und wird daher in einem dedizierten Interrupt bearbeitet.
 Sobald alle notwendigen Daten vorhanden sind -- was mindestens eine Minute dauert -- und der Paritätscheck erfolgreich ist, wird die globale interne Uhrzeit eingestellt.
 
 \textbf{Matrix}
