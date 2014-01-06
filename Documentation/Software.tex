@@ -23,22 +23,17 @@ Im ersten Projektschritt zur Entwicklung der Uhr wird eine Desktop-Software, der
 \item Zur Einstellung der QlockToo über den Computer ist ein Einstellungsdialog implementiert. Dieser ermöglicht zusätzliche Einstellmöglichkeiten über die Funktionen der vier Tasten hinaus.
 \end{itemize}
 \ \\
-\textbf{Aufbau}
-
-Um eine Lauffähigkeit auf allen gängigen Plattformen (Windows / Mac OS X / Linux) zu realisieren wird die Programmiersprache Python verwendet. Weiterer Vorteil ist die hohe Entwicklungsgeschwindigkeit.
+\textbf{Aufbau} Um eine Lauffähigkeit auf allen gängigen Plattformen (Windows / Mac OS X / Linux) zu realisieren wird die Programmiersprache Python verwendet. Weiterer Vorteil ist die hohe Entwicklungsgeschwindigkeit.
 Das aus der C++ - Welt bekannte Framework Qt wird über die von Digia bereitgestellten PySide-Bindings als GUI-Framework genutzt. Die Software baut somit ausschließlich auf freier Open-Source Software auf.
 \ \\
 
-\textbf{Simulator}
-
-Der QlockToo-Manager zeigt nach dem Start den Simulator. Seitlich wird eine Menüleiste zum Starten der Unterprogramme dargestellt.
+\textbf{Simulator} Der QlockToo-Manager zeigt nach dem Start den Simulator. Seitlich wird eine Menüleiste zum Starten der Unterprogramme dargestellt.
 Solange kein Unterprogramm ausgewählt ist, wird standardmäßig das Programm \emph{Timewords}, welches für die Anzeige der Zeit in Worten zuständig ist, angezeigt. Der QlockToo-Manager bedient sich dazu der momentanen Systemzeit.
 
 Die Unterprogramme sind jeweils einzelne, voneinander unabhängige Python-Module. Eine Erweiterung ist somit jederzeit möglich.
 
 Der Simulator besitzt die gleiche API wie die Hardware. Die Ausgabe der Programme kann somit ohne Anpassungen auf die Hardware gestreamt oder im Simulator angezeigt werden. Auch eine parallele Darstellung ist möglich.
 \includegraphics[width=\columnwidth]{Abbildungen/Software/ConnectDialog}
-
 Im Entwicklungsmodus ist eine Konsole integriert, mit der direkt Befehle an die API der QlockToo gesendet werden können. Kommandos und Rückgabewerte werden zur einfacheren optischen Erfassung farblich hervorgehoben.
 
 {
@@ -47,34 +42,19 @@ Im Entwicklungsmodus ist eine Konsole integriert, mit der direkt Befehle an die 
 
 }
 \ \\
-\textbf{Demonstrationsmuster}
+\textbf{Demonstrationsmuster} Der zweite Punkt in der Menüleiste sind die Demonstrationsmuster. Zur besseren Sichtbarkeit sind die Muster invertiert dargestellt. Folgende Demonstrationen stehen zur Verfügung:
 
-Der zweite Punkt in der Menüleiste sind die Demonstrationsmuster. Zur besseren Sichtbarkeit sind die Muster invertiert dargestellt. Folgende Demonstrationen stehen zur Verfügung:
+\textbf{Pulse} Alle LEDs wechseln sanft zwischen minimaler und maximaler Helligkeit.
 
-\begin{tabbing}
- Links \= Mitte \= Rechts \kill
- \> \textbf{Pulse}
-\end{tabbing}
-
-Alle LEDs wechseln sanft zwischen minimaler und maximaler Helligkeit.
-
-\begin{tabbing}
- Links \= Mitte \= Rechts \kill
- \> \textbf{Fade}
-\end{tabbing}
+\textbf{Fade} Ein Helligkeitsverlauf bewegt sich sinusförmig von links nach rechts und zurück.
 
 {
     \centering
     \includegraphics[width=\columnwidth]{Abbildungen/Software/Demo/Fade}
 }
-Ein Helligkeitsverlauf bewegt sich sinusförmig von links nach rechts und zurück.
 
-\begin{tabbing}
- Links \= Mitte \= Rechts \kill
- \> \textbf{Pixeltest}
-\end{tabbing}
 
-Alle Pixel bzw. Buchstaben werden einzeln nacheinander beleuchtet. Diese Demo dient hauptsächlich der Überprüfung der Verkabelung.
+\textbf{Pixeltest} Alle Pixel bzw. Buchstaben werden einzeln nacheinander beleuchtet. Diese Demo dient hauptsächlich der Überprüfung der Verkabelung.
 
 \begin{tabbing}
  Links \= Mitte \= Rechts \kill
