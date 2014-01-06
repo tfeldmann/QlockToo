@@ -1,5 +1,4 @@
 % !TEX root = QlockToo.tex
-% Firmware
 
 \begin{figure}
     \includegraphics[width=\columnwidth]{Abbildungen/Firmware/Logik}
@@ -39,7 +38,7 @@ Zum Parsen der empfangenen Befehle wird auf Seite der Firmware die Library \emph
 Das Modul Brightness beinhaltet die Steuerung der Helligkeit der QlockToo. Neben dem Automatikmodus, welcher die Helligkeit der Abhängigkeit von den gemessenen Werten des Helligkeitssensors steuert, besteht die Möglichkeit einer manuellen Steuerung. Dabei stehen verschiedene Abstufungen zur Verfügung.
 
 \textbf{DCF77}
-In diesem Modul ist der Parser für das DCF77 Signal implementiert. Das DCF77-Signal ist zeitkritisch und wird daher in Interrupts bearbeitet.
+In diesem Modul ist der Parser für das DCF77 Signal implementiert. Das DCF77-Signal ist zeitkritisch und wird daher in einem dedizierten Interrupt bearbeitet.
 Sobald alle notwendigen Daten vorhanden sind -- was mindestens eine Minute dauert -- und der Paritätscheck erfolgreich ist, wird die globale interne Uhrzeit eingestellt.
 
 \textbf{Matrix}
