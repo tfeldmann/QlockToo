@@ -36,7 +36,7 @@ Die QlockToo kommuniziert per USB über das UART-Protokoll bei 115200 baud mit d
 Zum Parsen der empfangenen Befehle wird auf Seite der Firmware die Library \emph{SerialCommand}\footnote{https://github.com/kroimon/Arduino-SerialCommand} eingesetzt.
 
 \textbf{Brightness}
-Das Modul Brightness beinhaltet die Steuerung der Helligkeit der QlockToo. Neben dem Automatikmodus, welcher die Helligkeit der Abhängigkeit von den gemessenen Werten des Helligkeitssensors steuert, besteht die Möglichkeit einer manuellen Steuerung. Dabei stehen sechs Abstufungen zur Verfügung.
+Das Modul Brightness beinhaltet die Steuerung der Helligkeit der QlockToo. Neben dem Automatikmodus, welcher die Helligkeit der Abhängigkeit von den gemessenen Werten des Helligkeitssensors steuert, besteht die Möglichkeit einer manuellen Steuerung. Dabei stehen verschiedene Abstufungen zur Verfügung.
 
 \textbf{DCF77}
 In diesem Modul ist der Parser für das DCF77 Signal implementiert. Das DCF77-Signal ist zeitkritisch und wird daher in Interrupts bearbeitet.
@@ -54,6 +54,5 @@ Für die Anzeige der Temperatur wird eine kleinere Schriftart (3x5) genutzt als 
 Die QlockToo nutzt den internen 16-Bit Timer1 dazu, die Zeit einzuhalten.
 Der Timer wird mit einem Prescaler von 256 Overflow-Betrieb genutzt und mit dem Wert 3036 vorgeladen.
 Dadurch feuert der Timer exakt sekündlich und zählt Minuten und Stunden hoch.
-
 
 \end{multicols}
