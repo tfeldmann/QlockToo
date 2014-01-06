@@ -3,8 +3,7 @@
 
 \begin{figure}
     \includegraphics[width=\columnwidth]{Abbildungen/Firmware/Logik}
-    \caption{Für die Anzeige der Zeit in Sätzen wird die dargestellte Logiktabelle für die deutsche Sprache in der Firmware hinterlegt. \emph{Stunde} und \emph{Stunde + 1} sind Platzhalter für die aktuelle und die nächste Stunde.}
-    \label{fig:Logik}
+   
 \end{figure}
 
 \section{Firmware}
@@ -28,8 +27,8 @@ Im Controller-Modul befindet sich ein Zustandsautomat, welcher den Betriebsmodus
 Der Betriebsmodus der Uhr kann über die Taster eingestellt werden. Das dazu notwendige Abfragen der Taster findet ebenfalls in diesem Modul statt.
 
 \textbf{Timewords}
-In diesem Modul ist die in Abbildung~\ref{fig:Logik} dargestellte Logiktabelle implementiert.
-Welche LEDs für die gewählten Wörter und Stunden zu beleuchten sind, wird für jedes Wort in Form eines Integers für die Reihe und einer Bitmaske für die Spalten definiert.
+In diesem Modul ist die dargestellte Logiktabelle für die Anzeige der Zeit in Sätzen in deutscher Sprache implementiert.
+Welche LEDs für die gewählten Wörter und Stunden zu beleuchten sind, wird für jedes Wort in Form eines Integers für die Reihe und einer Bitmaske für die Spalten definiert. \emph{Stunde} und \emph{Stunde + 1} sind Platzhalter für die aktuelle und die nächste Stunde.
 
 \textbf{Api}
 Die QlockToo kommuniziert per USB über das UART-Protokoll bei 115200 baud mit der Software.
