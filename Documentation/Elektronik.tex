@@ -16,9 +16,6 @@ Als Mikrocontroller wird ein Arduino Micro Board mit dem Atmel Atmega 32U4 Contr
 
 Der TLC59116 LED-Treiber von Texas Instruments hat 16 PWM-Ausgänge mit 8Bit Auflösung - 255 Helligkeitsstufen - und eine Stromregelung, die es ermöglicht auf Vorwiderstände an den LED zu verzichten. Der IC wird über $I^{2}C$ angesteuert. Die Adresse kann hardwareseitig in den letzten 4Bit eingestellt werden und ist auf der Platine hart mit 0b1100 000[R/W] adressiert. Der LED-Treiber ist in der SMD TSSOP-28 Bauform.
 
-\textbf{Transistoren}
-
-
 \textbf{Transistoren} Die Zeilen werden mit IRF7416 P-FET-Transistoren geschaltet und mit $5V$ versorgt. Die Transistoren werden mit einem Pull-Up Widerstand am Gate beschaltet und mit einem invertierten Signal angesteuert (4~-~13). Die Transistoren haben S0-8 Gehäusebauform. 
 
 \textbf{Taster} Die vier Kurzhubtaster an der rechten Rahmenseite befinden sich auf einer eigenen Platine mit Verbindungskabel. Zur Entprellung befindet sich kurz vor den vier IO-Pins (A2~-~A5) des Controllers ein RC-Glied. 
@@ -40,6 +37,7 @@ Die vier Kurzhubtaster an der rechten Rahmenseite befinden sich auf einer eigene
 \textbf{Sensoren}
 
 Als Helligkeitssensor wird ein LDR und als Temperatursensor ein NTC verwendet, in beiden Fällen über Steckverbindung verbunden und einem Trimmpoti als Spannungsteiler an einem Analogeingang (A0~-~A1) des Mikrocontrollers. Der Helligkeitssensor befindet sich mittig oberhalb der Buchstabenmatrix hinter einem Loch in der Folie. Der Temperatursensor befindet sich seitlich am Rahmen um den Einfluss der möglichen Erwärmung der Elektronik auf den Sensor zu verringern. \newline
+
 {
 \centering 
 \includegraphics[width=0.9\columnwidth]{Abbildungen/Elektronik/LDR} 
@@ -77,3 +75,12 @@ Die Platine wird aus einer zweiseitigen Fotoplatine erstellt. Hierzu werden Top-
 \centering 
 \includegraphics[width=\textwidth]{Abbildungen/Elektronik/Platine_bestueckt} 
 }
+
+
+\begin{landscape}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=22cm]{Abbildungen/QlockToo_Schaltplan}
+		
+	\end{figure}
+\end{landscape}
