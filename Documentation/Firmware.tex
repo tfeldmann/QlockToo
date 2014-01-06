@@ -56,4 +56,26 @@ Die QlockToo nutzt den internen 16-Bit Timer1 dazu, die Zeit einzuhalten.
 Der Timer wird mit einem Prescaler von 256 Overflow-Betrieb genutzt und mit dem Wert 3036 vorgeladen.
 Dadurch feuert der Timer exakt sekündlich und zählt Minuten und Stunden hoch.
 
+\subsection*{Tastenbelegung}
+Neben der Darstellung der Uhrzeit in Worten verfügt die \emph{QlockToo} über zahlreiche weitere Funktionen.
+Während einige Funktionen und Demonstrationsmuster nur über die Software gestreamt werden können\footnote{Die Modi, welche über die Software auf die Uhr gestreamt werden können, sind im Kapitel~\ref{sec:Software} beschrieben.
+Zur Übertragung muss die Uhr über die USB-Schnittstelle direkt an einen PC angeschlossen sein.}, so sind die wichtigsten Funktionen bereits in die Uhr integriert.
+Sie können über vier Taster, welche sich seitlich am Rahmen befinden, ausgewählt werden.
+
+Die Tastenbelegung ist dabei wie folgt:
+\begin{description}
+    \item[Taster 1:] Anzeige der Uhrzeit in Worten.
+    \item[Taster 2:] Anzeige der Sekunden.
+    \item[Taster 3:] Anzeige der Raumtemperatur in $^\circ$C.
+    \item[Taster 4:] Ein kurzer Druck auf den Taster 4 wechselt zwischen den vordefinierten Helligkeitsstufen.
+    Nach einem langen Druck (> 1 Sekunde) befindet sich die Uhr im automatischen Helligkeitsmodus.
+    Die Displayhelligkeit ist hier abhängig vom Umgebungslicht.
+    \item[Taster 1 \& 2:] Wird der erste Taster gedrückt gehalten, können durch mehrmaliges Tippen auf den zweiten Taster weitere Demonstrationsmuster durchgeschaltet werden.
+    So ist es beispielsweise möglich, alle LEDs einzuschalten oder den aus dem Kapitel~\ref{sec:Software} bekannten Matrix-Effekt zu aktivieren.
+    \item[Taster 1-3 lang:] Werden die oberen drei Taster länger als eine Sekunde gehalten, schaltet die Uhr in den DCF-Empfangsmodus.
+    Dabei ist das Multiplexing deaktiviert, um mögliche Empfangsstörungen zu minimieren. Lediglich das Wort \emph{FUNK} wird in der Mitte der Uhr angezeigt.
+    Nach Empfang des vollständigen Zeitsignals schaltet die Uhr automatisch in den Modus \emph{Zeitwörter}.
+\end{description}
+
+
 \end{multicols}
