@@ -21,11 +21,11 @@ Im ersten Projektschritt zur Entwicklung der Uhr wird eine Desktop-Software, der
     \item Zur Einstellung der QlockToo über den Computer ist ein Einstellungsdialog implementiert.
 \end{itemize}
 
-\subsection{Aufbau}
+\subsection*{Aufbau}
 Um eine Lauffähigkeit auf allen gängigen Plattformen (Windows / Mac OS X / Linux) zu realisieren wird die Programmiersprache Python verwendet. Weiterer Vorteil ist die hohe Entwicklungsgeschwindigkeit.
 Das aus der C++ - Welt bekannte Framework Qt wird über die von Digia bereitgestellten PySide-Bindings als GUI-Framework genutzt. Die Software baut somit ausschließlich auf freier Open-Source Software auf.
 
-\subsection{Simulator}
+\subsection*{Simulator}
 Der QlockToo-Manager zeigt nach dem Start den Simulator. Seitlich wird eine Menüleiste zum Starten der Unterprogramme dargestellt.
 Solange kein Unterprogramm ausgewählt ist, wird standardmäßig das Programm \emph{Timewords}, welches für die Anzeige der Zeit in Worten zuständig ist, angezeigt. Der QlockToo-Manager bedient sich dazu der momentanen Systemzeit.
 Die Unterprogramme sind jeweils einzelne, voneinander unabhängige Python-Module. Eine Erweiterung ist somit jederzeit möglich.
@@ -57,7 +57,8 @@ Diese Demo zeigt ein pulsierendes Wellenbild, dessen Zentrum mit der Zeit langsa
 
 \textbf{Helix}
 Die Helix-Darstellung zeigt die zweidimensionale Projektion einer dreidimensionalen Spirale. Die z-Achse wird dabei über unterschiedliche Helligkeitswerte visualisiert. Bedingt durch die Berechnung der Funktionswerte für diskrete Buchstaben auf der Uhr und die geringe Pixelanzahl (110) wirkt die Demonstration zunächst sehr dünn und zerstückelt. Durch die Implementierung eines Gauss-Tiefpasses, wird der gewünschte Anti-Alias-Effekt erzielt. Der 3D~Effekt der Darstellung ist somit sehr viel deutlicher.
-\includegraphics[width=\columnwidth]{Abbildungen/Software/Demo/Helix}
+\includegraphics[width=\columnwidth]{Abbildungen/Software/Demo/Helix-ohne-TP}
+\includegraphics[width=\columnwidth]{Abbildungen/Software/Demo/Helix2}
 
 \textbf{Game Of Life}
 Darstellung von Conways Game of Life\footnote{[Con 13]}, anhand toter (schwarz) und lebender (weiß) Zellen.
@@ -68,7 +69,6 @@ Grundlage sind die vier folgenden Regeln, die bei jeder Iteration abgefragt werd
     \item Eine lebende Zelle mit zwei oder drei lebenden Nachbarn bleibt in der Folgegeneration lebend.
     \item Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der Folgegeneration an Überbevölkerung.
 \end{itemize}
-\includegraphics[width=\columnwidth]{Abbildungen/Software/Demo/Helix}
 
 \textbf{Matrix}
 Der berühmte Animationseffekt aus dem Film \emph{Matrix} bietet sich aufgrund des Designs der QlockToo besonders an.
