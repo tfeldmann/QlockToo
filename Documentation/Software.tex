@@ -2,7 +2,7 @@
 \section{Software}
 \label{sec:Software}
 
-\begin{figure}[t]
+\begin{figure}[t!]
     \centering
     \includegraphics[width=.8\textwidth]{Abbildungen/Software/Hauptfenster}
     \caption[QlockToo-Manager]{Der QlockToo-Manager}
@@ -18,37 +18,41 @@ Im ersten Projektschritt zur Entwicklung der Uhr wird eine Desktop-Software, der
     \item Mit Hilfe einer Laufschrift können frei wählbare Texte angezeigt werden.
     \item Das Handyspiel Snake kann auf dem Uhrenschirm gespielt werden. Die Steuerung erfolgt über die Pfeiltasten am Computer.
     \item Über eine USB-Schnittstelle fungiert die QlockToo als Display der Software. Das notwendige Streaming-Protokoll wird eigens für diese Anwendung entwickelt.
-    \item Zur Einstellung der QlockToo über den Computer ist ein Einstellungsdialog implementiert. Dieser ermöglicht zusätzliche Einstellmöglichkeiten über die Funktionen der vier Tasten hinaus.
+    \item Zur Einstellung der QlockToo über den Computer ist ein Einstellungsdialog implementiert.
 \end{itemize}
 
-\textbf{Aufbau}
+\subsection{Aufbau}
 Um eine Lauffähigkeit auf allen gängigen Plattformen (Windows / Mac OS X / Linux) zu realisieren wird die Programmiersprache Python verwendet. Weiterer Vorteil ist die hohe Entwicklungsgeschwindigkeit.
 Das aus der C++ - Welt bekannte Framework Qt wird über die von Digia bereitgestellten PySide-Bindings als GUI-Framework genutzt. Die Software baut somit ausschließlich auf freier Open-Source Software auf.
 
-\textbf{Simulator}
+\subsection{Simulator}
 Der QlockToo-Manager zeigt nach dem Start den Simulator. Seitlich wird eine Menüleiste zum Starten der Unterprogramme dargestellt.
 Solange kein Unterprogramm ausgewählt ist, wird standardmäßig das Programm \emph{Timewords}, welches für die Anzeige der Zeit in Worten zuständig ist, angezeigt. Der QlockToo-Manager bedient sich dazu der momentanen Systemzeit.
 Die Unterprogramme sind jeweils einzelne, voneinander unabhängige Python-Module. Eine Erweiterung ist somit jederzeit möglich.
 Der Simulator besitzt die gleiche API wie die Hardware. Die Ausgabe der Programme kann somit ohne Anpassungen auf die Hardware gestreamt oder im Simulator angezeigt werden. Auch eine parallele Darstellung ist möglich.
 \includegraphics[width=\columnwidth]{Abbildungen/Software/ConnectDialog}
 Im Entwicklungsmodus ist eine Konsole integriert, mit der direkt Befehle an die API der QlockToo gesendet werden können. Kommandos und Rückgabewerte werden zur einfacheren optischen Erfassung farblich hervorgehoben.
-\includegraphics[width=\columnwidth]{Abbildungen/Software/Linux}
+\includegraphics[width=\columnwidth]{Abbildungen/Software/Einstellungen}
+\includegraphics[width=\columnwidth]{Abbildungen/Software/Konsole}
 
-\textbf{Demonstrationsmuster}
-Der zweite Punkt in der Menüleiste sind die Demonstrationsmuster. Zur besseren Sichtbarkeit sind die Muster invertiert dargestellt. Folgende Demonstrationen stehen zur Verfügung:
+\subsubsection{Demonstrationsmuster}
+Der zweite Punkt in der Menüleiste sind die Demonstrationsmuster.
+Zur besseren Sichtbarkeit sind die Muster invertiert dargestellt.
+Folgende Demonstrationen stehen zur Verfügung:
+\includegraphics[width=\columnwidth]{Abbildungen/Software/Demos}
 
-\textbf{Pulse}
+\textbf{Puls}
 Alle LEDs wechseln sanft zwischen minimaler und maximaler Helligkeit.
-
-\textbf{Fade}
-Ein Helligkeitsverlauf bewegt sich sinusförmig von links nach rechts und zurück.
-\includegraphics[width=\columnwidth]{Abbildungen/Software/Demo/Fade}
 
 \textbf{Pixeltest}
 Alle Pixel bzw. Buchstaben werden einzeln nacheinander beleuchtet. Diese Demo dient hauptsächlich der Überprüfung der Verkabelung.
 
-\textbf{Wave}
-Das Muster Wave zeigt ein pulsierendes Wellenbild, dessen Zentrum mit der Zeit langsam über den Bildschirm wandert.
+\textbf{Verlauf}
+Ein Helligkeitsverlauf bewegt sich sinusförmig von links nach rechts und zurück.
+\includegraphics[width=\columnwidth]{Abbildungen/Software/Demo/Fade}
+
+\textbf{Welle}
+Diese Demo zeigt ein pulsierendes Wellenbild, dessen Zentrum mit der Zeit langsam über den Bildschirm wandert.
 \includegraphics[width=\columnwidth]{Abbildungen/Software/Demo/Welle}
 
 \textbf{Helix}
@@ -57,8 +61,6 @@ Die Helix-Darstellung zeigt die zweidimensionale Projektion einer dreidimensiona
 
 \textbf{Game Of Life}
 Darstellung von Conways Game of Life\footnote{[Con 13]}, anhand toter (schwarz) und lebender (weiß) Zellen.
-\includegraphics[width=\columnwidth]{Abbildungen/Software/Demo/Helix}
-
 Grundlage sind die vier folgenden Regeln, die bei jeder Iteration abgefragt werden:
 \begin{itemize}
     \item Eine tote Zelle mit genau drei lebenden Nachbarn wird in der Folgegeneration neu geboren.
@@ -66,6 +68,7 @@ Grundlage sind die vier folgenden Regeln, die bei jeder Iteration abgefragt werd
     \item Eine lebende Zelle mit zwei oder drei lebenden Nachbarn bleibt in der Folgegeneration lebend.
     \item Lebende Zellen mit mehr als drei lebenden Nachbarn sterben in der Folgegeneration an Überbevölkerung.
 \end{itemize}
+\includegraphics[width=\columnwidth]{Abbildungen/Software/Demo/Helix}
 
 \textbf{Matrix}
 Der berühmte Animationseffekt aus dem Film \emph{Matrix} bietet sich aufgrund des Designs der QlockToo besonders an.
