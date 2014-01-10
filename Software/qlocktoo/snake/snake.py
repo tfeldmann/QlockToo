@@ -94,7 +94,7 @@ class SnakeApp(QDialog):
             matrix[y][x] = value
 
     def _empty_matrix(self):
-        return [[0.1] * self.device.columns for _ in range(self.device.rows)]
+        return [[0] * self.device.columns for _ in range(self.device.rows)]
 
     def reject(self):
         # this fixes a bug where the snake app would not be
