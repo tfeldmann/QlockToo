@@ -35,7 +35,8 @@ class QlockToo(QMainWindow):
 
         self.device = Device()
         self.simulator = self.ui.simulator
-        self.app = TimeWordsApp(device=self.simulator)
+        self.app = TimeWordsApp(simulator=self.simulator,
+                                device=self.device)
 
     @Slot()
     def on_actionConnect_triggered(self):
