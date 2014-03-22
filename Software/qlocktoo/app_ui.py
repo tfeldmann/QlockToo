@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file './qlocktoo/app.ui'
 #
-# Created: Wed Dec 25 18:46:36 2013
+# Created: Sat Mar 22 16:17:01 2014
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -19,14 +19,14 @@ class Ui_qlocktoo(object):
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.centralwidget)
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.simulator = Device(self.centralwidget)
+        self.simulator = Simulator(self.centralwidget)
         self.simulator.setObjectName("simulator")
         self.verticalLayout_3.addWidget(self.simulator)
         qlocktoo.setCentralWidget(self.centralwidget)
         self.toolBar = QtGui.QToolBar(qlocktoo)
         self.toolBar.setStyleSheet("QToolButton {\n"
 "    width: 80px;\n"
-"}ss")
+"}")
         self.toolBar.setMovable(True)
         self.toolBar.setAllowedAreas(QtCore.Qt.AllToolBarAreas)
         self.toolBar.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
@@ -84,5 +84,5 @@ class Ui_qlocktoo(object):
         self.actionDemo.setText(QtGui.QApplication.translate("qlocktoo", "Demo", None, QtGui.QApplication.UnicodeUTF8))
         self.actionConnect.setText(QtGui.QApplication.translate("qlocktoo", "Verbinden", None, QtGui.QApplication.UnicodeUTF8))
 
-from device import Device
+from simulator import Simulator
 from . import assets_rc

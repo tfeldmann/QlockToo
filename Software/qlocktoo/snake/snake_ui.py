@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file './qlocktoo/snake/snake.ui'
 #
-# Created: Wed Dec 25 18:46:36 2013
+# Created: Sat Mar 22 16:17:01 2014
 #      by: pyside-uic 0.2.15 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!

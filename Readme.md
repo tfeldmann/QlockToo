@@ -19,6 +19,32 @@ License
 -------
 MIT-License - please refer to the License.txt in this repository.
 
+Api
+---
+    @set_brightness
+        min                     int 0 - 255
+        max                     int 0 - 255
+
+    @set_nightmode
+        enabled                 int 0, 1
+        hour_from               int 0 - 23
+        minute_from             int 0 - 59
+        hour_to                 int 0 - 23
+        minute_to               int 0 - 59
+        brightness              int 0 - 255
+
+    @set_kioskmode
+        enabled                 int 0, 1
+        duration_words          int, minutes
+        duration_seconds        int, minutes
+        duration_temperature    int, minutes
+
+Errors
+------
+
+    !001 Unknown Command
+    !002 Incorrect parameters
+
 Authors
 -------
 - Thomas Feldmann

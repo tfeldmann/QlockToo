@@ -72,14 +72,14 @@ class ConnectDialog(QDialog):
                 self.connection = serial.Serial(port=port,
                                                 baudrate=115200,
                                                 timeout=5.0)
-                self.connection.write('@device\n')
+                self.connection.write('@get_device\n')
                 for i, _line in enumerate(self.connection):
                     line = _line.strip()
                     print line
                     if i == 10:
                         # wait for maximum ten lines
                         break
-                    if line.startswith('@device'):
+                    if line.startswith('@get_device'):
                         _line = line.split(' ')
                         self.device = _line[1]
                         self.firmware = _line[2:]

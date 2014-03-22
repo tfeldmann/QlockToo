@@ -7,9 +7,12 @@ from qlocktoo.marquee import MarqueeApp
 from qlocktoo.settings import SettingsApp
 from qlocktoo.demo import DemoApp
 from qlocktoo.timewords import TimeWordsApp
+
+from qlocktoo.device import Device
+
 from app_ui import Ui_qlocktoo as Ui
 
-__version__ = '1.1'
+__version__ = '1.2'
 
 
 class QlockToo(QMainWindow):
@@ -30,32 +33,26 @@ class QlockToo(QMainWindow):
         self.ui.setupUi(self)
         self.setWindowTitle('QlockToo v{0}'.format(__version__))
 
-        self.device = self.ui.simulator
-        self.device.signal_linereceived.connect(self.brop)
-        self.app = TimeWordsApp(device=self.device)
+        self.device = Device()
+        self.simulator = self.ui.simulator
+        self.app = TimeWordsApp(device=self.simulator)
 
     @Slot()
     def on_actionConnect_triggered(self):
-        """
-        Show ConnectionDialog
-        """
-        if self.device.is_connected():
+        """ Show ConnectionDialog """
+        if self.device.connection:
             self.device.disconnect()
             self.ui.actionConnect.setIcon(
                 QIcon(':icons/black32/fa-compress.png'))
             self.ui.actionConnect.setText('Verbinden')
         else:
-            dialog = ConnectDialog(self)
+            dialog = ConnectDialog(parent=self)
             if dialog.exec_() == QDialog.Accepted:
                 # take over connection from dialog and assign it to the device
-                self.device.use_connection(dialog.connection)
+                self.device.connection = dialog.connection
                 self.ui.actionConnect.setIcon(
                     QIcon(':icons/black32/fa-eject.png'))
                 self.ui.actionConnect.setText("Trennen")
-
-    @Slot(str)
-    def brop(self, s):
-        print s
 
     @Slot()
     def on_actionConsole_triggered(self):
@@ -87,9 +84,11 @@ class QlockToo(QMainWindow):
         Given a QlockTooApp Class, this method will instanciate and execute the
         app. After execution, the standard timewords app is shown.
         """
-        self.app = App(device=self.device)
+        self.app = App(device=self.device,
+                       simulator=self.simulator)
         self.app.exec_()
-        self.app = TimeWordsApp(device=self.device)
+        self.app = TimeWordsApp(device=self.device,
+                                simulator=self.simulator)
 
     def closeEvent(self, event):
         """

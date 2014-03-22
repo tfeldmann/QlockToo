@@ -57,10 +57,11 @@ void matrix_dump()
 {
     for (byte y = 0; y < ROWS; y++)
     {
+        Serial.print('#');
         for (byte x = 0; x < COLS; x++)
         {
             Serial.print(matrix[y][x]);
-            Serial.print(" ");
+            Serial.print(' ');
         }
         Serial.println();
     }

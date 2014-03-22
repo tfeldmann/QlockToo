@@ -11,8 +11,10 @@ class TimeWordsApp(object):
     Shows the time as words (lit letters) and minutes (lit corners)
     """
 
-    def __init__(self, device=None):
+    def __init__(self, device=None, simulator=None):
         super(TimeWordsApp, self).__init__()
+
+        self.simulator = simulator
         self.device = device
 
         self.stepTimer = QTimer()
@@ -22,21 +24,22 @@ class TimeWordsApp(object):
 
     def update(self):
         # abort if not connected to a device
-        if not self.device:
+        if not self.simulator:
             return
 
         t = time.localtime()
         hour, minute, second = t.tm_hour, t.tm_min, t.tm_sec
 
-        matrix = [[0] * self.device.columns for _ in range(self.device.rows)]
+        matrix = [[0] * self.simulator.columns
+                  for _ in range(self.simulator.rows)]
         for start, end in self.litLetters(hour, minute):
             for x in range(end - start + 1):
-                row = start // self.device.columns
-                column = start - row * self.device.columns
+                row = start // self.simulator.columns
+                column = start - row * self.simulator.columns
                 matrix[row][column + x] = 1
 
-        self.device.corners = self.litCorners(minute)
-        self.device.matrix = matrix
+        self.simulator.corners = self.litCorners(minute)
+        self.simulator.matrix = matrix
 
     @classmethod
     def litCorners(self, minute):

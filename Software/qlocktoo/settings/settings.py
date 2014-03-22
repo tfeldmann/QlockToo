@@ -1,26 +1,28 @@
-from PySide.QtGui import QDialog
+from PySide import QtCore, QtGui
 from settings_ui import Ui_settings as Ui
 import time
 
 
-class SettingsApp(QDialog):
+class SettingsApp(QtGui.QDialog):
 
-    def __init__(self, device):
+    def __init__(self, simulator, device):
         super(SettingsApp, self).__init__()
-        self.device = device
         self.ui = Ui()
         self.ui.setupUi(self)
-        self.ui.syncTime.clicked.connect(self.syncTime)
 
-    def syncTime(self):
-        """
-        Syncs the clock time with the pc time
-        """
-        localtime = time.localtime()
-        cmd = "@settime %d %d %d %d %d %d" % (localtime.tm_year,
-                                              localtime.tm_mon,
-                                              localtime.tm_mday,
-                                              localtime.tm_hour,
-                                              localtime.tm_min,
-                                              localtime.tm_sec)
-        self.device.send(cmd)
+        self.simulator = simulator
+        self.device = device
+
+    @QtCore.Slot()
+    def on_btnSyncTime_clicked(self):
+        self.device.set_time(time.localtime())
+
+    @QtCore.Slot()
+    def on_btnLoad_clicked(self):
+        brightness_min, brightness_max = self.device.get_brightness()
+        self.ui.brightnessMin.setValue(brightness_min)
+        self.ui.brightnessMax.setValue(brightness_max)
+
+    @QtCore.Slot()
+    def on_btnSave_clicked(self):
+        self.device.set_brightness(min=0, max=255)

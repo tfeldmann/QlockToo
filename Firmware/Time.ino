@@ -46,7 +46,7 @@ void time_dump()
     sprintf(datetime, "%.4i-%.2i-%.2i %.2i:%.2i:%.2i",
             year, month, day, hours, minutes, seconds);
 
-    Serial.print("#Date and Time: ");
+    Serial.print('#');
     Serial.println(datetime);
 }
 

@@ -18,11 +18,20 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
-    <property name="margin">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
      <number>0</number>
     </property>
     <item>
-     <widget class="Device" name="simulator" native="true"/>
+     <widget class="Simulator" name="simulator" native="true"/>
     </item>
    </layout>
   </widget>
@@ -33,7 +42,7 @@
    <property name="styleSheet">
     <string notr="true">QToolButton {
 	width: 80px;
-}ss</string>
+}</string>
    </property>
    <property name="movable">
     <bool>true</bool>
@@ -118,9 +127,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Device</class>
+   <class>Simulator</class>
    <extends>QWidget</extends>
-   <header>device.h</header>
+   <header>simulator.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
