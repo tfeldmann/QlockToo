@@ -1,5 +1,5 @@
 import logging
-logger = logging.getLogger('DEVICE')
+logger = logging.getLogger('device')
 from itertools import chain
 
 
@@ -13,7 +13,7 @@ class Device(object):
         self.connection = None
         self.observers = []
 
-    def request(self, cmd, args=[]):
+    def request(self, cmd, *args):
         if self.connection is None:
             raise IOError('No device connected')
         else:
@@ -25,7 +25,7 @@ class Device(object):
             # receive answer
             while True:
                 try:
-                    answer = self.connection.readline().strip()
+                    answer = self.connection.readline().decode('utf-8').strip()
                 except:
                     raise IOError('Device did not answer in time')
                 logger.debug('--> %s', answer.strip())
@@ -51,13 +51,16 @@ class Device(object):
         return (device, firmware)
 
     def get_brightness(self):
-        min, max = self.request('@get_brightness')
-        return int(min), int(max)
+        minimum, maximum = self.request('@get_brightness')
+        return (int(minimum), int(maximum))
+
+    def set_brightness(self, minimum, maximum):
+        self.request('@set_brightness', minimum, maximum)
 
     def set_time(self, time):
-        args = [time.tm_year, time.tm_mon, time.tm_mday,
-                time.tm_hour, time.tm_min, time.tm_sec]
-        return self.request('@set_time', args)
+        return self.request('@set_time',
+                            time.tm_year, time.tm_mon, time.tm_mday,
+                            time.tm_hour, time.tm_min, time.tm_sec)
 
     def set_matrix(self, matrix):
         flat_matrix = list(chain.from_iterable(self.matrix))

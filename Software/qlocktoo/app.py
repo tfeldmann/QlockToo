@@ -57,29 +57,29 @@ class QlockToo(QMainWindow):
     @Slot()
     def on_actionConsole_triggered(self):
         """Start the console app"""
-        self.startApp(ConsoleApp)
+        self.start_app(ConsoleApp)
 
     @Slot()
     def on_actionSnake_triggered(self):
         """Start Snake"""
-        self.startApp(SnakeApp)
+        self.start_app(SnakeApp)
 
     @Slot()
     def on_actionMarquee_triggered(self):
         """Start the marquee app"""
-        self.startApp(MarqueeApp)
+        self.start_app(MarqueeApp)
 
     @Slot()
     def on_actionSettings_triggered(self):
         """Starts the settings panel"""
-        self.startApp(SettingsApp)
+        self.start_app(SettingsApp)
 
     @Slot()
     def on_actionDemo_triggered(self):
         """Start the demo app"""
-        self.startApp(DemoApp)
+        self.start_app(DemoApp)
 
-    def startApp(self, App):
+    def start_app(self, App):
         """
         Given a QlockTooApp Class, this method will instanciate and execute the
         app. After execution, the standard timewords app is shown.

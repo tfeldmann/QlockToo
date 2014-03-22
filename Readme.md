@@ -39,6 +39,11 @@ Api
         duration_seconds        int, minutes
         duration_temperature    int, minutes
 
+    # matrix stream
+    @m
+        row     int 0 - 10
+        values  bytearray
+
 Errors
 ------
 

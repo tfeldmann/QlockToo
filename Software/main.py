@@ -1,12 +1,13 @@
 #!/usr/bin/env python2
-import logging
 import sys
-from PySide.QtGui import QApplication
+import logging
+from PySide import QtGui
 from qlocktoo.app import QlockToo
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
-    application = QApplication(sys.argv)
+    application = QtGui.QApplication(sys.argv)
     app = QlockToo()
     app.show()
     app.raise_()

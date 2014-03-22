@@ -13,16 +13,29 @@ class SettingsApp(QtGui.QDialog):
         self.simulator = simulator
         self.device = device
 
+        self.on_btnLoad_clicked()
+
     @QtCore.Slot()
     def on_btnSyncTime_clicked(self):
         self.device.set_time(time.localtime())
 
     @QtCore.Slot()
     def on_btnLoad_clicked(self):
-        brightness_min, brightness_max = self.device.get_brightness()
-        self.ui.brightnessMin.setValue(brightness_min)
-        self.ui.brightnessMax.setValue(brightness_max)
+        minimum, maximum = self.device.get_brightness()
+        self.ui.brightnessMin.setValue(minimum)
+        self.ui.brightnessMax.setValue(maximum)
 
     @QtCore.Slot()
     def on_btnSave_clicked(self):
-        self.device.set_brightness(min=0, max=255)
+        self.device.set_brightness(minimum=self.ui.brightnessMin.value(),
+                                   maximum=self.ui.brightnessMax.value())
+
+    @QtCore.Slot(int)
+    def on_brightnessMin_sliderMoved(self, value):
+        if self.ui.brightnessMax.value() < value:
+            self.ui.brightnessMax.setValue(value)
+
+    @QtCore.Slot(int)
+    def on_brightnessMax_sliderMoved(self, value):
+        if self.ui.brightnessMin.value() > value:
+            self.ui.brightnessMin.setValue(value)

@@ -1,12 +1,9 @@
 ﻿Firmware:
  ☐ Datum Laufschrift
- ☐ Checksumme bei streaming
- ☐ Blockierender Stream
- ☐ Automatische Helligkeit bei langem Tastendruck, sonst nur Stufen
+ ☐ Differentielles Streaming
 
 Software:
  ☐ Variable Schriftlänge
- ☐ Einstellungen
 
 Carsti und Manu´s Wünsche:
  ☐ GoL direkt auf der Uhr
@@ -14,10 +11,13 @@ Carsti und Manu´s Wünsche:
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
- ✔ Bild "Laufschrift" @done (14-03-12 20:11) @project(Wünsche von Marlene)
+ ✔ Einstellungen @done (14-03-22 17:06) @project(Software)
+ ✔ Blockierender Stream @done (14-03-22 17:06) @project(Firmware)
+ ✔ Automatische Helligkeit bei langem Tastendruck, sonst nur Stufen @done (14-03-22 17:06) @project(Firmware)
  ✔ Eingabe Kontrolle "Laufschrift" @done (14-03-12 20:11) @project(Wünsche von Marlene)
- ✔ Bild "Game of Life" @done (14-03-12 20:11) @project(Wünsche von Marlene)
  ✔ Bilder der Tastaturbelegung @done (14-03-12 20:11) @project(Wünsche von Marlene)
+ ✔ Bild "Laufschrift" @done (14-03-12 20:11) @project(Wünsche von Marlene)
+ ✔ Bild "Game of Life" @done (14-03-12 20:11) @project(Wünsche von Marlene)
  ✔ Matrix direkt auf der Uhr @done (13-12-22 22:43) @project(Carsti und Manu´s Wünsche)
  ✔ Pixeltest @done (13-12-16 15:38) @project(Software)
  ✔ Temperatur @done (13-12-13 14:32) @project(Firmware)
