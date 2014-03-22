@@ -251,6 +251,7 @@ void api_about()
     Serial.println("#    Manuel Fehmer");
     Serial.println("#    Carsten Hussmann");
     Serial.println("#===========================================");
+    Serial.println("@dump_about");
 }
 
 void api_device()

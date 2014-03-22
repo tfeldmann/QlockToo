@@ -65,7 +65,7 @@ void matrix_dump()
         }
         Serial.println();
     }
-    Serial.println();
+    Serial.println("@dump_matrix");
 }
 
 

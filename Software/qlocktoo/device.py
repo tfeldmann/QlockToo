@@ -11,6 +11,7 @@ class Device(object):
 
     def __init__(self):
         self.connection = None
+        self.observers = []
 
     def request(self, cmd, args=[]):
         if self.connection is None:
@@ -18,13 +19,20 @@ class Device(object):
         else:
             # send
             msg = cmd + ' ' + ' '.join(str(arg) for arg in args) + '\n'
-            self.connection.write(msg)
+            self.connection.write(msg.encode('utf-8'))
             logger.debug('<-- %s', msg.strip())
 
             # receive answer
             while True:
-                answer = self.connection.readline().strip()
+                try:
+                    answer = self.connection.readline().strip()
+                except:
+                    raise IOError('Device did not answer in time')
                 logger.debug('--> %s', answer.strip())
+
+                # notify observers
+                for observer in self.observers:
+                    observer.notify_serial_receive(answer)
 
                 if answer[0] == '@':
                     _answer = answer.split(' ')

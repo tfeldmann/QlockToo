@@ -69,12 +69,14 @@ class MarqueeApp(QDialog):
     direction, speed and style.
     """
 
-    def __init__(self, device):
+    def __init__(self, device=None, simulator=None):
         super(MarqueeApp, self).__init__()
-        self.device = device
         self.ui = Ui()
         self.ui.setupUi(self)
-        self.setAttribute(Qt.WA_DeleteOnClose)
+
+        self.device = device
+        self.simulator = simulator
+
         self.ui.text.cursorPositionChanged.connect(self.cursorPositionChanged)
 
         # create the update timer
@@ -83,12 +85,12 @@ class MarqueeApp(QDialog):
 
         # marquee
         self.marquee = MarqueeMatrix(self.font)
-        self.startposition = - self.device.columns
+        self.startposition = - self.simulator.columns
         self.speed = 50  # this is the initial dial position
 
         # init device with a black screen
-        self.device.matrix = [[0] * 11] * 10
-        self.device.corners = [0] * 4
+        self.simulator.matrix = [[0] * 11] * 10
+        self.simulator.corners = [0] * 4
 
     def cursorPositionChanged(self, old, new):
         """
@@ -97,7 +99,7 @@ class MarqueeApp(QDialog):
         text = self.ui.text.text()
         self.marquee.setText(text)
         if len(text) > 0:
-            self.device.matrix = self.marquee.regionFromLetter(new)
+            self.simulator.matrix = self.marquee.regionFromLetter(new)
 
     def _frequency(self, speed):
         """
@@ -139,4 +141,4 @@ class MarqueeApp(QDialog):
             self.x -= 1
             if self.x < self.startposition:
                 self.x = self.marquee.width
-        self.device.matrix = self.marquee.regionFromPosition(self.x)
+        self.simulator.matrix = self.marquee.regionFromPosition(self.x)

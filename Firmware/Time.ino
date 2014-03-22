@@ -48,6 +48,7 @@ void time_dump()
 
     Serial.print('#');
     Serial.println(datetime);
+    Serial.println("@dump_time");
 }
 
 

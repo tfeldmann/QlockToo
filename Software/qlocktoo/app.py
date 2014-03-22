@@ -12,7 +12,7 @@ from qlocktoo.device import Device
 
 from app_ui import Ui_qlocktoo as Ui
 
-__version__ = '1.2'
+__version__ = '1.3'
 
 
 class QlockToo(QMainWindow):

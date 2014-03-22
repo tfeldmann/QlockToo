@@ -7,11 +7,13 @@ from snake_model import SnakeModel
 
 class SnakeApp(QDialog):
 
-    def __init__(self, device):
+    def __init__(self, device=None, simulator=None):
         super(SnakeApp, self).__init__()
-        self.device = device
         self.ui = Ui()
         self.ui.setupUi(self)
+
+        self.device = device
+        self.simulator = simulator
 
         # initial welcome screen
         welcomeScreen = [
@@ -26,14 +28,14 @@ class SnakeApp(QDialog):
             [0.0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.0],
             [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         ]
-        self.device.matrix = welcomeScreen
-        self.device.corners = [0] * 4
+        self.simulator.matrix = welcomeScreen
+        self.simulator.corners = [0] * 4
         self.stepFrequency = 5
 
         # init the game model
         self.snake = SnakeModel(
-            width=self.device.columns,
-            height=self.device.rows,
+            width=self.simulator.columns,
+            height=self.simulator.rows,
             gameover_callback=self.gameOver,
             atefood_callback=self.ateFood)
         self.highscore = 0
@@ -87,14 +89,14 @@ class SnakeApp(QDialog):
             self._set_matrix_element(matrix, *element,
                                      value=0.7 - 0.4 * pos / len(tail))
         self._set_matrix_element(matrix, *head, value=1)
-        self.device.matrix = matrix
+        self.simulator.matrix = matrix
 
     def _set_matrix_element(self, matrix, x, y, value):
         if 0 <= y < len(matrix) and 0 <= x < len(matrix[0]):
             matrix[y][x] = value
 
     def _empty_matrix(self):
-        return [[0] * self.device.columns for _ in range(self.device.rows)]
+        return [[0] * self.simulator.columns for _ in range(self.device.rows)]
 
     def reject(self):
         # this fixes a bug where the snake app would not be

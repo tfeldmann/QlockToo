@@ -13,52 +13,54 @@ class DemoApp(QDialog):
     Features various graphical demos to show off the QlockToo
     """
 
-    def __init__(self, device):
+    def __init__(self, device=None, simulator=None):
         QDialog.__init__(self)
-        self.device = device
-        self.demo = None
         self.ui = Ui()
         self.ui.setupUi(self)
+
+        self.device = device
+        self.simulator = simulator
+        self.demo = None
 
     @Slot()
     def on_black_clicked(self):
         self.demo = None
-        self.device.matrix = [[0] * 11] * 10
-        self.device.corners = [0] * 4
+        self.simulator.matrix = [[0] * 11] * 10
+        self.simulator.corners = [0] * 4
 
     @Slot()
     def on_white_clicked(self):
         self.demo = None
-        self.device.matrix = [[1] * 11] * 10
-        self.device.corners = [1] * 4
+        self.simulator.matrix = [[1] * 11] * 10
+        self.simulator.corners = [1] * 4
 
     @Slot()
     def on_pulse_clicked(self):
-        self.demo = PulseDemo(self.device)
+        self.demo = PulseDemo(self.simulator)
 
     @Slot()
     def on_fade_clicked(self):
-        self.demo = FadeDemo(self.device)
+        self.demo = FadeDemo(self.simulator)
 
     @Slot()
     def on_wave_clicked(self):
-        self.demo = WaveDemo(self.device)
+        self.demo = WaveDemo(self.simulator)
 
     @Slot()
     def on_pong_clicked(self):
-        self.demo = PixelTest(self.device)
+        self.demo = PixelTest(self.simulator)
 
     @Slot()
     def on_helix_clicked(self):
-        self.demo = HelixDemo(self.device)
+        self.demo = HelixDemo(self.simulator)
 
     @Slot()
     def on_gameoflife_clicked(self):
-        self.demo = GameOfLifeDemo(self.device)
+        self.demo = GameOfLifeDemo(self.simulator)
 
     @Slot()
     def on_matrix_clicked(self):
-        self.demo = MatrixDemo(self.device)
+        self.demo = MatrixDemo(self.simulator)
 
 
 class Demo(object):
