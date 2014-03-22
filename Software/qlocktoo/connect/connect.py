@@ -1,5 +1,4 @@
 import os
-import time
 import serial
 from serial.tools import list_ports
 from PySide.QtCore import Slot
@@ -71,11 +70,10 @@ class ConnectDialog(QDialog):
                 port = self.ui.cmbPorts.currentText()
                 self.connection = serial.Serial(port=port,
                                                 baudrate=115200,
-                                                timeout=5.0)
+                                                timeout=1.0)
                 self.connection.write('@get_device\n')
                 for i, _line in enumerate(self.connection):
                     line = _line.strip()
-                    print line
                     if i == 10:
                         # wait for maximum ten lines
                         break

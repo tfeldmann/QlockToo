@@ -25,12 +25,13 @@ class Device(object):
             # receive answer
             while True:
                 try:
-                    answer = self.connection.readline().decode('utf-8').strip()
+                    answer = (self.connection.readline().decode('utf-8')
+                              .rstrip())
                 except:
                     raise IOError('Device did not answer in time')
-                logger.debug('--> %s', answer.strip())
+                logger.debug('--> %s', answer)
 
-                # notify observers
+                # notify registered observers
                 for observer in self.observers:
                     observer.notify_serial_receive(answer)
 

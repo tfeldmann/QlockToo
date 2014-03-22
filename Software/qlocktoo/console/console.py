@@ -40,11 +40,9 @@ class ConsoleApp(QDialog):
                 self.ui.command.clear()
 
     def notify_serial_receive(self, msg):
-        if msg[0] == '#':
-            self.ui.log.append(
-                '<pre><font color=blue>' + msg + '</font></pre>')
-        elif msg[0] == '!':
+        if msg[0] == '!':
             self.ui.log.append(
                 '<pre><font color=red>' + msg + '</font></pre>')
         else:
-            self.ui.log.append(msg)
+            self.ui.log.append(
+                '<font color=blue><pre>' + msg + '</pre></font>')

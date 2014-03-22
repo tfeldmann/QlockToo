@@ -10,8 +10,8 @@ class SettingsApp(QtGui.QDialog):
         self.ui = Ui()
         self.ui.setupUi(self)
 
-        self.simulator = simulator
         self.device = device
+        self.simulator = simulator
 
         self.on_btnLoad_clicked()
 
