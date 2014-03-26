@@ -5,11 +5,11 @@
 #include "globals.h"
 
 #define LDR_PIN A0
-static const uint8_t STEPS = 8;
-static const uint8_t STEP[STEPS] = {-1, 255, 220, 200, 150, 100, 50, 0};
+static const uint8_t STEPS = 7;
+static const uint8_t STEP[STEPS] = {255, 220, 200, 150, 100, 50, 0};
 
-#define AUTOMATIC 0
-static uint8_t mode = 1;
+#define AUTOMATIC -1
+static int8_t mode = 0;
 
 
 void brightness_update()
@@ -17,7 +17,10 @@ void brightness_update()
     if (mode == AUTOMATIC)
     {
         uint16_t value = analogRead(LDR_PIN);
-        brightness = constrain(map(value, 0, 600, 5, 255), 0, 255);
+        brightness = constrain(map(value, 0, 600,
+                                   configuration.brightness_min,
+                                   configuration.brightness_max),
+                               0, 255);
     }
     else
     {
@@ -29,10 +32,16 @@ void brightness_update()
 void brightness_next_step()
 {
     mode = (mode + 1) % STEPS;
+    Serial.print("# Brightness mode: ");
+    Serial.println(mode);
 }
 
 
 void brightness_enable_automatic()
 {
-    mode = AUTOMATIC;
+    if (mode != AUTOMATIC)
+    {
+        mode = AUTOMATIC;
+        Serial.println("# Automatic Brightness");
+    }
 }

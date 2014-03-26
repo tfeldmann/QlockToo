@@ -51,6 +51,13 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QPushButton" name="btnDefault">
+        <property name="text">
+         <string>Standardeinstellungen laden</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -125,7 +132,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox_2">
+    <widget class="QGroupBox" name="grpNightMode">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
        <horstretch>0</horstretch>
@@ -134,6 +141,9 @@
      </property>
      <property name="title">
       <string>Nachtschaltung</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="1" column="0">
@@ -235,9 +245,12 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox_4">
+    <widget class="QGroupBox" name="grpKioskmode">
      <property name="title">
-      <string>Anzeigedauer</string>
+      <string>Kiosk-Modus</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="2" column="0">
@@ -255,12 +268,15 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QTimeEdit" name="secondViewDuration">
+       <widget class="QTimeEdit" name="durationSeconds">
         <property name="focusPolicy">
          <enum>Qt::ClickFocus</enum>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="displayFormat">
+         <string>mm:ss</string>
         </property>
        </widget>
       </item>
@@ -272,7 +288,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QTimeEdit" name="wordclockViewDuration">
+       <widget class="QTimeEdit" name="durationWords">
         <property name="focusPolicy">
          <enum>Qt::ClickFocus</enum>
         </property>
@@ -295,12 +311,15 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QTimeEdit" name="temperatureViewDuration">
+       <widget class="QTimeEdit" name="durationTemperature">
         <property name="focusPolicy">
          <enum>Qt::ClickFocus</enum>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="displayFormat">
+         <string>mm:ss</string>
         </property>
         <property name="time">
          <time>
@@ -327,6 +346,9 @@
       <widget class="QPushButton" name="btnSave">
        <property name="text">
         <string>Speichern</string>
+       </property>
+       <property name="default">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

@@ -13,7 +13,8 @@ def _naming_convetion_ui(pydir, pyfile):
 
 
 def convert_ui(path):
-    pysideuic.compileUiDir(path, recurse=True, map=_naming_convetion_ui, from_imports=True)
+    pysideuic.compileUiDir(path, recurse=True,
+                           map=_naming_convetion_ui, from_imports=True)
 
 
 def convert_rcc(args, dirname, filenames):

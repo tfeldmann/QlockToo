@@ -9,22 +9,24 @@
 // enables logging output
 volatile bool DEBUG = 0;
 
-// Clock configuration (in eeprom)
+// Clock configuration (will be saved in eeprom)
 struct Config {
+    int8_t is_initialized;
+
     uint8_t brightness_min;
     uint8_t brightness_max;
 
     uint8_t nightmode_enabled;
     uint8_t nightmode_brightness;
-    uint8_t nightmode_start_hour;
-    uint8_t nightmode_start_minute;
-    uint8_t nightmode_end_hour;
-    uint8_t nightmode_end_minute;
+    uint8_t nightmode_hour_start;
+    uint8_t nightmode_hour_end;
+    uint8_t nightmode_minute_start;
+    uint8_t nightmode_minute_end;
 
     uint8_t kiosk_enabled;
-    uint8_t kiosk_duration_words;
-    uint8_t kiosk_duration_seconds;
-    uint8_t kiosk_duration_temperature;
+    uint16_t kiosk_duration_words;
+    uint16_t kiosk_duration_seconds;
+    uint16_t kiosk_duration_temperature;
 } configuration;
 
 // Clock time

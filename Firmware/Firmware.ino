@@ -10,12 +10,10 @@
 // Timer1:    1/s   keeps track of the time
 // Timer3: 1000/s   main timer for display / api / controller
 
-#include <EEPROM.h>
-#include <EEPROMAnything.h>
 #include <TimerThree.h>
 #include "globals.h"
 
-#define VERSION "0.9"
+#define VERSION "1.0b"
 
 
 void setup()
@@ -23,7 +21,7 @@ void setup()
     Serial.begin(115200);
 
     // load configuration
-    EEPROM_readAnything(0, configuration);
+    configuration_load();
 
     // initialize components
     api_init();
@@ -42,9 +40,9 @@ void main_timer()
     // update display
     display_update();
 
-    // update controller every 100ms
+    // update controller every 10ms
     static uint8_t ms = 0;
-    if (++ms == 100)
+    if (++ms == 10)
     {
         controller_update();
         ms = 0;

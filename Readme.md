@@ -21,20 +21,18 @@ MIT-License - please refer to the License.txt in this repository.
 
 Api
 ---
-    @set_brightness
+    @(get|set)brightness
         min                     int 0 - 255
         max                     int 0 - 255
 
-    @set_nightmode
-        enabled                 int 0, 1
-        hour_from               int 0 - 23
-        minute_from             int 0 - 59
-        hour_to                 int 0 - 23
-        minute_to               int 0 - 59
-        brightness              int 0 - 255
+    @(get|set)_nightmode
+        brightness               int 0 - 255
+        hour_start               int 0 - 23
+        hour_end                 int 0 - 23
+        minute_start             int 0 - 59
+        minute_end               int 0 - 59
 
-    @set_kioskmode
-        enabled                 int 0, 1
+    @(get|set)kioskmode
         duration_words          int, minutes
         duration_seconds        int, minutes
         duration_temperature    int, minutes

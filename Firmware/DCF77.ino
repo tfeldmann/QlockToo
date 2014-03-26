@@ -74,6 +74,7 @@ void dcf77_interrupt()
  */
 void dcf77_bufferSignal(unsigned char signal)
 {
+    Serial.println("# dcf77_bufferSignal");
     dcf_rx_buffer =
         dcf_rx_buffer | ((unsigned long long)signal << bufferPosition);
 
