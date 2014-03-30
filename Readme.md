@@ -9,7 +9,7 @@ Software
 --------
 The QlockToo Software Suite is written in PySide.
 
-<img src="Documentation/Abbildungen/Software/Manager.png" alt="Software">
+<img src="Documentation/Abbildungen/Software/Hauptfenster.png" alt="Software">
 
 Firmware
 --------
