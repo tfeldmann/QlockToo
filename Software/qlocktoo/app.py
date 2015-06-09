@@ -10,7 +10,7 @@ from qlocktoo.timewords import TimeWordsApp
 
 from qlocktoo.device import Device
 
-from app_ui import Ui_qlocktoo as Ui
+from .app_ui import Ui_qlocktoo as Ui
 
 __version__ = '1.3'
 

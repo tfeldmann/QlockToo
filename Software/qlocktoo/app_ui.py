@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file './qlocktoo/app.ui'
+# Form implementation generated from reading ui file 'qlocktoo/app.ui'
 #
-# Created: Wed Mar 26 21:51:37 2014
-#      by: pyside-uic 0.2.15 running on PySide 1.2.1
+# Created: Sat May 16 18:47:23 2015
+#      by: pyside-uic 0.2.15 running on PySide 1.2.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -84,5 +84,5 @@ class Ui_qlocktoo(object):
         self.actionDemo.setText(QtGui.QApplication.translate("qlocktoo", "Demo", None, QtGui.QApplication.UnicodeUTF8))
         self.actionConnect.setText(QtGui.QApplication.translate("qlocktoo", "Verbinden", None, QtGui.QApplication.UnicodeUTF8))
 
-from simulator import Simulator
+from qlocktoo.simulator import Simulator
 from . import assets_rc

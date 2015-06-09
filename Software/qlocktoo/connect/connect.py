@@ -3,7 +3,7 @@ import serial
 from serial.tools import list_ports
 from PySide.QtCore import Slot
 from PySide.QtGui import QDialog, QMessageBox
-from connect_ui import Ui_ConnectDialog as Ui
+from .connect_ui import Ui_ConnectDialog as Ui
 
 
 class ConnectDialog(QDialog):

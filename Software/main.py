@@ -6,8 +6,8 @@ from qlocktoo.app import QlockToo
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
-    application = QtGui.QApplication(sys.argv)
-    app = QlockToo()
-    app.show()
-    app.raise_()
-    application.exec_()
+    app = QtGui.QApplication(sys.argv)
+    qlocktoo = QlockToo()
+    qlocktoo.show()
+    qlocktoo.raise_()
+    sys.exit(app.exec_())

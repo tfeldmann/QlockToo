@@ -1,8 +1,8 @@
 from PySide.QtGui import QDialog
 from PySide.QtCore import Slot, QTimer
-from demo_ui import Ui_demoapp as Ui
+from .demo_ui import Ui_demoapp as Ui
 import itertools
-import lowpass
+from . import lowpass
 import math
 import random
 

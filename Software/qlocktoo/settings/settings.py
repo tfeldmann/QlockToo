@@ -1,5 +1,5 @@
 from PySide import QtCore, QtGui
-from settings_ui import Ui_settings as Ui
+from .settings_ui import Ui_settings as Ui
 import time
 
 

@@ -5,6 +5,10 @@ Run with:
 
 
 ## Changelog
+
+### WIP
+- Restructured project to MVC
+
 ### v1.0 (2013-08-15)
 - Initial release with timewords app, snake, marquee, demo and console but without a connection to the actual device.
 
