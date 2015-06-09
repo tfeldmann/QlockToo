@@ -15,11 +15,6 @@ void api_init()
     serialCommand.addCommand("@show_seconds", api_seconds);
     serialCommand.addCommand("@show_temperature", api_temperature);
 
-    // Streaming
-    serialCommand.addCommand("@m", api_matrix);
-    serialCommand.addCommand("@c", api_corners);
-    serialCommand.addCommand("@disconnect", api_disconnect);
-
     // Settings
     serialCommand.addCommand("@load_default", api_load_default);
 
@@ -71,65 +66,6 @@ void api_temperature()
 {
     STATE_SWITCH(STATE_TEMPERATURE);
     Serial.println("@show_temperature");
-}
-
-
-// ----------------------------------------------------------------------------
-// Streaming
-void api_matrix()
-{
-    char *m = serialCommand.next();
-    if (strlen(m) != 110)
-    {
-        Serial.println("!002 Incorrect parameters");
-        return;
-    }
-    else
-    {
-        noInterrupts();
-        STATE_SWITCH(STATE_STREAM);
-        for (byte y = 0; y < ROWS; y++)
-        {
-            for (byte x = 0; x < COLS; x++)
-            {
-                // be careful to only use chars that have no control function
-                matrix[y][x] = LUT[*m - 33];
-                m++;
-            }
-        }
-        Serial.println("@m");
-        interrupts();
-    }
-}
-
-void api_corners()
-{
-    char *m = serialCommand.next();
-    if (strlen(m) != 4)
-    {
-        Serial.println("!002 Incorrect parameters");
-        return;
-    }
-    else
-    {
-        noInterrupts();
-        STATE_SWITCH(STATE_STREAM);
-        for (byte i = 0; i < CORNERS; i++)
-        {
-            // be careful to only use chars that have no control function
-            corner[i] = LUT[*m - 33];
-            m++;
-        }
-        Serial.println("@c");
-        interrupts();
-    }
-}
-
-
-void api_disconnect()
-{
-    STATE_SWITCH(STATE_TIMEWORDS);
-    Serial.println("@disconnect");
 }
 
 

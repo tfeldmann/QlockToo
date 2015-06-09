@@ -13,7 +13,7 @@
 #include <TimerThree.h>
 #include "globals.h"
 
-#define VERSION "1.0b"
+#define VERSION "1.1"
 
 
 void setup()
@@ -30,7 +30,7 @@ void setup()
     controller_init();
 
     // start main timer
-    Timer3.initialize(1e6 / 1000);  // 1kHz in µs
+    Timer3.initialize(1000);  // 1e6 / 1000 = 1kHz in µs
     Timer3.attachInterrupt(main_timer);
 }
 

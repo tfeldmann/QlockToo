@@ -10,6 +10,7 @@ static const uint8_t STEP[STEPS] = {255, 220, 200, 150, 100, 50, 0};
 
 #define AUTOMATIC -1
 static int8_t mode = 0;
+static uint8_t target_brightness = FULL_BRIGHTNESS;
 
 
 void brightness_update()
@@ -17,15 +18,17 @@ void brightness_update()
     if (mode == AUTOMATIC)
     {
         uint16_t value = analogRead(LDR_PIN);
-        brightness = constrain(map(value, 0, 600,
-                                   configuration.brightness_min,
-                                   configuration.brightness_max),
-                               0, 255);
+        target_brightness = constrain(map(value, 0, 600,
+                                          configuration.brightness_min,
+                                          configuration.brightness_max),
+                                      0, 255);
     }
     else
     {
-        brightness = STEP[mode];
+        target_brightness = STEP[mode];
     }
+    int8_t delta = constrain(target_brightness - brightness, -10, 10);
+    brightness += delta;
 }
 
 

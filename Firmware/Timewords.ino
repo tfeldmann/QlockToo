@@ -14,7 +14,7 @@
 
 
 static const uint16_t matrix_words[][2] = {
-    // row, mask
+    // format: {row, mask}
     {0, 0b1100000000000000},  // ES
     {0, 0b0001110000000000},  // IST
     {0, 0b0000000111100000},  // FÜNF
@@ -28,7 +28,7 @@ static const uint16_t matrix_words[][2] = {
 };
 
 static const uint16_t matrix_hours[][2] = {
-    // row, mask
+    // format: {row, mask}
     {8, 0b0000001111100000},  // ZWOELF
     {5, 0b1111000000000000},  // EINS
     {5, 0b0000000111100000},  // ZWEI
@@ -52,7 +52,7 @@ void timewords_show()
     byte minute_rest = minutes % 5;
     for (byte i = 0; i < CORNERS; i++)
     {
-        corner[i] = (i < minute_rest);
+        corner[i] = (i < minute_rest) ? FULL_BRIGHTNESS : 0;
     }
 
     // Binary mask for 12 columns
@@ -76,15 +76,15 @@ void timewords_show()
     byte _minute = minutes / 5;
     uint16_t action = selector[_minute];
 
-    for (byte i = 0; i < 12; i++)  // 12 selector columns
+    for (byte col = 0; col < 12; col++)  // 12 selector columns
     {
         // read from leftmost position
-        if (!bitRead(action, 15 - i)) continue;  // selector doesn't apply
+        if (!bitRead(action, 15 - col)) continue;  // selector doesn't apply
 
         uint8_t row = 0;
         uint16_t mask = 0;
 
-        if (i == 10)  // the current hour
+        if (col == 10)  // show the current hour
         {
             byte _hour = hours % 12;
             row  = matrix_hours[_hour][0];
@@ -96,7 +96,7 @@ void timewords_show()
                 bitClear(mask, 12);  // clear "S"
             }
         }
-        else if (i == 11)  // the next hour
+        else if (col == 11)  // show the next hour
         {
             byte _hour = (hours + 1) % 12;
             row  = matrix_hours[_hour][0];
@@ -104,14 +104,16 @@ void timewords_show()
         }
         else  // first nine selectors mask words
         {
-            row  = matrix_words[i][0];
-            mask = matrix_words[i][1];
+            row  = matrix_words[col][0];
+            mask = matrix_words[col][1];
         }
 
         // apply mask
         for (byte x = 0; x < 16; x++)
         {
-            matrix[row][x] |= bitRead(mask, 15 - x);
+            if bitRead(mask, 15 - x) {
+                matrix[row][x] = FULL_BRIGHTNESS;
+            }
         }
     }
 }

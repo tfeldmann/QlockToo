@@ -25,6 +25,7 @@ void controller_init()
 
 void controller_update()
 {
+    brightness_update();
     controller_statemachine();
     time_resetFlags();  // reset the second / minute / hour has_updated flags
     controller_buttons();
@@ -62,6 +63,9 @@ void controller_buttons()
             STATE_SWITCH(STATE_WHITE);
 
         if (STATE_IS_ACTIVE(STATE_WHITE))
+            STATE_SWITCH(STATE_FADE);
+
+        if (STATE_IS_ACTIVE(STATE_FADE))
             STATE_SWITCH(STATE_MATRIX);
 
         if (STATE_IS_ACTIVE(STATE_MATRIX))
@@ -97,7 +101,6 @@ STATEMACHINE
         #endif
         timewords_show();
     STATE_LOOP
-        brightness_update();
         if (minute_has_changed)
         {
             timewords_show();
@@ -112,7 +115,6 @@ STATEMACHINE
         matrix_second(seconds);
         corner_clear();
     STATE_LOOP
-        brightness_update();
         if (second_has_changed)
         {
             matrix_second(seconds);
@@ -127,7 +129,6 @@ STATEMACHINE
         thermo_display((int)thermo_celsius());
         corner_clear();
     STATE_LOOP
-        brightness_update();
         if (second_has_changed)
         {
             thermo_display((int)thermo_celsius());
@@ -141,30 +142,38 @@ STATEMACHINE
         #endif
         matrix_clear();
         corner_clear();
-        matrix[3][3] = 1;  // F
-        matrix[3][4] = 1;  // U
-        matrix[3][5] = 1;  // N
-        matrix[3][6] = 1;  // K
+        matrix[3][3] = FULL_BRIGHTNESS;  // F
+        matrix[3][4] = FULL_BRIGHTNESS;  // U
+        matrix[3][5] = FULL_BRIGHTNESS;  // N
+        matrix[3][6] = FULL_BRIGHTNESS;  // K
     STATE_LOOP
-        brightness_update();
     STATE_LEAVE
     END_OF_STATE
 
     STATE_ENTER(STATE_WHITE)
-        matrix_fill(1);
-        corner_fill(1);
+        matrix_fill(FULL_BRIGHTNESS);
+        corner_fill(FULL_BRIGHTNESS);
     STATE_LOOP
-        brightness_update();
+    STATE_LEAVE
+    END_OF_STATE
+
+    STATE_ENTER(STATE_FADE)
+        matrix_clear();
+        corner_clear();
+        for (int row = 0; row < ROWS; row++) {
+            for (int col = 0; col < COLS; col++) {
+                matrix[row][col] = 255 - 255 * (row / (float)ROWS);
+            }
+        }
+    STATE_LOOP
     STATE_LEAVE
     END_OF_STATE
 
     STATE_ENTER(STATE_MATRIX)
-        brightness = 0;
         srand(seconds + minutes + hours);
         matrix_clear();
         corner_clear();
     STATE_LOOP
-        brightness = 1;
         static int wait_move = 0;
         static int wait_light = 0;
 
@@ -201,31 +210,19 @@ STATEMACHINE
     STATE_ENTER(STATE_ES_LACHT_NE_KUH)
         matrix_clear();
         corner_clear();
-        matrix[0][0]  = 1;  // E
-        matrix[0][1]  = 1;  // S
-        matrix[7][6]  = 1;  // L
-        matrix[7][7]  = 1;  // A
-        matrix[7][8]  = 1;  // C
-        matrix[7][9]  = 1;  // H
-        matrix[7][10] = 1;  // T
-        matrix[9][3]  = 1;  // N
-        matrix[9][4]  = 1;  // E
-        matrix[9][7]  = 1;  // K
-        matrix[9][8]  = 1;  // U
-        matrix[9][9]  = 1;  // H
+        matrix[0][0]  = FULL_BRIGHTNESS;  // E
+        matrix[0][1]  = FULL_BRIGHTNESS;  // S
+        matrix[7][6]  = FULL_BRIGHTNESS;  // L
+        matrix[7][7]  = FULL_BRIGHTNESS;  // A
+        matrix[7][8]  = FULL_BRIGHTNESS;  // C
+        matrix[7][9]  = FULL_BRIGHTNESS;  // H
+        matrix[7][10] = FULL_BRIGHTNESS;  // T
+        matrix[9][3]  = FULL_BRIGHTNESS;  // N
+        matrix[9][4]  = FULL_BRIGHTNESS;  // E
+        matrix[9][7]  = FULL_BRIGHTNESS;  // K
+        matrix[9][8]  = FULL_BRIGHTNESS;  // U
+        matrix[9][9]  = FULL_BRIGHTNESS;  // H
     STATE_LOOP
-        brightness_update();
-    STATE_LEAVE
-    END_OF_STATE
-
-    STATE_ENTER(STATE_STREAM)
-        #ifdef DEBUG
-            Serial.println("#State: Stream");
-        #endif
-    STATE_LOOP
-        brightness = 1;
-        // global brightness must be 1 because the pc already
-        // sends brightness values from 0-255
     STATE_LEAVE
     END_OF_STATE
 

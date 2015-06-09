@@ -37,14 +37,20 @@ void thermo_display(byte temp)
                 // first letter
                 if (x >= LEFT_1 && x < LEFT_1 + WIDTH)
                 {
-                    matrix[y][x] = bitRead(numbers4x6[t_1][y - TOP],
-                                           7 - x + LEFT_1);
+                    if bitRead(numbers4x6[t_1][y - TOP], 7 - x + LEFT_1) {
+                        matrix[y][x] = FULL_BRIGHTNESS;
+                    } else {
+                        matrix[y][x] = 0;
+                    }
                 }
                 // second letter
                 else if (x >= LEFT_2 && x < LEFT_2 + WIDTH)
                 {
-                    matrix[y][x] = bitRead(numbers4x6[t_2][y-TOP],
-                                           7 - x + LEFT_2);
+                    if bitRead(numbers4x6[t_2][y-TOP], 7 - x + LEFT_2) {
+                        matrix[y][x] = FULL_BRIGHTNESS;
+                    } else {
+                        matrix[y][x] = 0;
+                    }
                 }
                 // clear the rest
                 else matrix[y][x] = 0;
@@ -54,8 +60,8 @@ void thermo_display(byte temp)
     }
 
     // degree symbol
-    matrix[0][9] = 1;
-    matrix[0][10] = 1;
-    matrix[1][9] = 1;
-    matrix[1][10] = 1;
+    matrix[0][9] = FULL_BRIGHTNESS;
+    matrix[0][10] = FULL_BRIGHTNESS;
+    matrix[1][9] = FULL_BRIGHTNESS;
+    matrix[1][10] = FULL_BRIGHTNESS;
 }
