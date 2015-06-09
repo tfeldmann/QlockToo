@@ -127,18 +127,31 @@ void dcf77_parseBuffer(void)
         {
             // parity check is ok
             // convert the received bits from BCD
-            minutes = rx_buffer->Min - ((rx_buffer->Min / 16) * 6);
-            hours = rx_buffer->Hour - ((rx_buffer->Hour / 16) * 6);
-            day = rx_buffer->Day - ((rx_buffer->Day / 16) * 6);
-            month = rx_buffer->Month - ((rx_buffer->Month / 16) * 6);
-            year = 2000 + rx_buffer->Year - ((rx_buffer->Year / 16) * 6);
-            Serial.println("#DCF77 parity check okay");
+            uint8_t _minutes = rx_buffer->Min - ((rx_buffer->Min / 16) * 6);
+            uint8_t _hours = rx_buffer->Hour - ((rx_buffer->Hour / 16) * 6);
+            uint8_t _day = rx_buffer->Day - ((rx_buffer->Day / 16) * 6);
+            uint8_t _month = rx_buffer->Month - ((rx_buffer->Month / 16) * 6);
+            uint16_t _year = 2000 + rx_buffer->Year - ((rx_buffer->Year / 16) * 6);
+            if (_minutes >= 0 && _minutes <= 59
+                    && _hours >= 0 && _hours <= 23
+                    && _day >= 1 && _day <= 31
+                    && _month >= 1 && _month <= 12
+                    && _year >= 2000) {
+                seconds = 0;
+                minutes = _minutes;
+                hours = _hours;
+                day = _day;
+                month = _month;
+                year = _year;
 
-            // if we are waiting for dcf signal we can switch to the normal
-            // timewords module now.
-            if (STATE_IS_ACTIVE(STATE_WAIT_FOR_DCF))
-            {
-                STATE_SWITCH(STATE_TIMEWORDS);
+                Serial.println("#DCF77 parity check okay");
+
+                // if we are waiting for dcf signal we can switch to the normal
+                // timewords module now.
+                if (STATE_IS_ACTIVE(STATE_WAIT_FOR_DCF))
+                {
+                    STATE_SWITCH(STATE_TIMEWORDS);
+                }
             }
         }
         else
