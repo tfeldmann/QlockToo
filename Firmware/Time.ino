@@ -8,14 +8,12 @@ volatile bool second_has_changed = false;
 volatile bool minute_has_changed = false;
 volatile bool hour_has_changed = false;
 
-
 void time_init()
 {
     seconds = minutes = hours = day = month = year = 0;
     dcf77_init();
     time_startTimer();
 }
-
 
 void time_addSecond()
 {
@@ -39,7 +37,6 @@ void time_addSecond()
     }
 };
 
-
 void time_dump()
 {
     char datetime[21];
@@ -50,27 +47,24 @@ void time_dump()
     Serial.println("@dump_time");
 }
 
-
 void time_startTimer()
 {
     // initialize timer1 to fire with 1 Hz
     TCCR1A = 0;
     TCCR1B = 0;
 
-    TCNT1 = 3036;             // preload timer 65536-16000000Hz/256/1Hz
-    TCCR1B |= (1 << CS12);    // 256 prescaler
-    TIMSK1 |= (1 << TOIE1);   // enable timer overflow interrupt
+    TCNT1 = 3036;           // preload timer 65536-16000000Hz/256/1Hz
+    TCCR1B |= (1 << CS12);  // 256 prescaler
+    TIMSK1 |= (1 << TOIE1); // enable timer overflow interrupt
 }
-
 
 ISR(TIMER1_OVF_vect)
 {
-    noInterrupts();    // disable all interrupts
+    noInterrupts(); // disable all interrupts
     time_addSecond();
-    TCNT1 = 3036;      // preload timer
-    interrupts();      // enable all interrupts
+    TCNT1 = 3036; // preload timer
+    interrupts(); // enable all interrupts
 }
-
 
 void time_resetFlags()
 {

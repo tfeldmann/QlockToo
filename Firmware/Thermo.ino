@@ -6,13 +6,11 @@
 
 static const int THERMO_PIN = A1;
 
-
 float thermo_celsius()
 {
     // values have been found experimentally
     return analogRead(THERMO_PIN) * 0.1145 - 33.449;
 }
-
 
 void thermo_display(byte temp)
 {
@@ -37,25 +35,33 @@ void thermo_display(byte temp)
                 // first letter
                 if (x >= LEFT_1 && x < LEFT_1 + WIDTH)
                 {
-                    if bitRead(numbers4x6[t_1][y - TOP], 7 - x + LEFT_1) {
+                    if (bitRead(numbers4x6[t_1][y - TOP], 7 - x + LEFT_1))
+                    {
                         matrix[y][x] = FULL_BRIGHTNESS;
-                    } else {
+                    }
+                    else
+                    {
                         matrix[y][x] = 0;
                     }
                 }
                 // second letter
                 else if (x >= LEFT_2 && x < LEFT_2 + WIDTH)
                 {
-                    if bitRead(numbers4x6[t_2][y-TOP], 7 - x + LEFT_2) {
+                    if (bitRead(numbers4x6[t_2][y - TOP], 7 - x + LEFT_2))
+                    {
                         matrix[y][x] = FULL_BRIGHTNESS;
-                    } else {
+                    }
+                    else
+                    {
                         matrix[y][x] = 0;
                     }
                 }
                 // clear the rest
-                else matrix[y][x] = 0;
+                else
+                    matrix[y][x] = 0;
             }
-            else matrix[y][x] = 0;
+            else
+                matrix[y][x] = 0;
         }
     }
 

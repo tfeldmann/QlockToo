@@ -15,7 +15,6 @@
 
 #define VERSION "1.1"
 
-
 void setup()
 {
     Serial.begin(115200);
@@ -30,10 +29,9 @@ void setup()
     controller_init();
 
     // start main timer
-    Timer3.initialize(1000);  // 1e6 / 1000 = 1kHz in µs
+    Timer3.initialize(1000); // 1e6 / 1000 = 1kHz in µs
     Timer3.attachInterrupt(main_timer);
 }
-
 
 void main_timer()
 {
@@ -48,7 +46,6 @@ void main_timer()
         ms = 0;
     }
 }
-
 
 void loop()
 {
