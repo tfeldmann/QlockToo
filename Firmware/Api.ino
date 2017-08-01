@@ -15,22 +15,10 @@ void api_init()
     serialCommand.addCommand("@show_seconds", api_seconds);
     serialCommand.addCommand("@show_temperature", api_temperature);
 
-    // Settings
-    serialCommand.addCommand("@load_default", api_load_default);
-
-    serialCommand.addCommand("@set_time", api_settime);
-    serialCommand.addCommand("@set_brightness", api_set_brightness);
-    serialCommand.addCommand("@set_nightmode", api_set_nightmode);
-    serialCommand.addCommand("@set_kioskmode", api_set_kioskmode);
-
-    serialCommand.addCommand("@get_time", api_get_time);
-    serialCommand.addCommand("@get_brightness", api_get_brightness);
-    serialCommand.addCommand("@get_nightmode", api_get_nightmode);
-    serialCommand.addCommand("@get_kioskmode", api_get_kioskmode);
-
-
     // Debug functions
-    serialCommand.addCommand("@dump_matrix", matrix_dump);
+    serialCommand.addCommand("@set_time", api_settime);
+    serialCommand.addCommand("@get_time", api_get_time);
+    serialCommand.addCommand("@dump_display", display_dump);
     serialCommand.addCommand("@dump_temp", api_temp);
     serialCommand.addCommand("@dump_time", time_dump);
     serialCommand.addCommand("@dump_about", api_about);
@@ -72,13 +60,6 @@ void api_temperature()
 // ----------------------------------------------------------------------------
 // Settings
 
-void api_load_default()
-{
-    configuration_default();
-    Serial.println("@load_default");
-}
-
-
 void api_settime()
 {
     year    = atoi(serialCommand.next());
@@ -101,77 +82,13 @@ void api_get_time()
 }
 
 
-void api_set_brightness()
-{
-    configuration.brightness_min = atoi(serialCommand.next());
-    configuration.brightness_max = atoi(serialCommand.next());
-    configuration_save();
-    Serial.println("@set_brightness");
-}
-
-void api_get_brightness()
-{
-    Serial.print("@get_brightness ");
-    Serial.print(configuration.brightness_min);
-    Serial.print(' ');
-    Serial.println(configuration.brightness_max);
-}
-
-
-void api_set_nightmode()
-{
-    configuration.nightmode_enabled      = atoi(serialCommand.next());
-    configuration.nightmode_brightness   = atoi(serialCommand.next());
-    configuration.nightmode_hour_start   = atoi(serialCommand.next());
-    configuration.nightmode_hour_end     = atoi(serialCommand.next());
-    configuration.nightmode_minute_start = atoi(serialCommand.next());
-    configuration.nightmode_minute_end   = atoi(serialCommand.next());
-    configuration_save();
-    Serial.println("@set_nightmode");
-}
-
-void api_get_nightmode()
-{
-    Serial.print("@get_nightmode");
-    Serial.print(' '); Serial.print(configuration.nightmode_enabled);
-    Serial.print(' '); Serial.print(configuration.nightmode_brightness);
-    Serial.print(' '); Serial.print(configuration.nightmode_hour_start);
-    Serial.print(' '); Serial.print(configuration.nightmode_hour_end);
-    Serial.print(' '); Serial.print(configuration.nightmode_minute_start);
-    Serial.print(' '); Serial.print(configuration.nightmode_minute_end);
-    Serial.println();
-}
-
-
-void api_set_kioskmode()
-{
-    configuration.kiosk_enabled              = atoi(serialCommand.next());
-    configuration.kiosk_duration_words       = atoi(serialCommand.next());
-    configuration.kiosk_duration_seconds     = atoi(serialCommand.next());
-    configuration.kiosk_duration_temperature = atoi(serialCommand.next());
-    configuration_save();
-    Serial.println("@set_kioskmode");
-}
-
-void api_get_kioskmode()
-{
-    Serial.print("@get_kioskmode");
-    Serial.print(' '); Serial.print(configuration.kiosk_enabled);
-    Serial.print(' '); Serial.print(configuration.kiosk_duration_words);
-    Serial.print(' '); Serial.print(configuration.kiosk_duration_seconds);
-    Serial.print(' '); Serial.print(configuration.kiosk_duration_temperature);
-    Serial.println();
-}
-
-
-
 // ----------------------------------------------------------------------------
 // Debug
 
 void api_temp()
 {
     Serial.print("@temp ");
-    Serial.println(thermo_celsius());
+    Serial.println(temperature_read_celsius());
 }
 
 
@@ -190,9 +107,6 @@ void api_about()
     Serial.println("Creators: ");
     Serial.println("    Stephan Dahmen");
     Serial.println("    Thomas Feldmann");
-    Serial.println("    Marlene Feldmann");
-    Serial.println("    Manuel Fehmer");
-    Serial.println("    Carsten Hussmann");
     Serial.println("===========================================");
     Serial.println("@dump_about");
 }

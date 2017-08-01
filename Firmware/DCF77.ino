@@ -4,37 +4,35 @@
 
 #include "globals.h"
 
-#define DCF77PIN 0  // The pin the DCF77-module is connected to
+#define DCF77PIN 0 // The pin the DCF77-module is connected to
 #define DCF77INTERRUPT 2
-#define DCF_SPLIT_MILLIS 140  // length of signal before we assume a "1"
-#define DCF_SYNC_MILLIS 1200  // pause to detect a new minute
-
+#define DCF_SPLIT_MILLIS 140 // length of signal before we assume a "1"
+#define DCF_SYNC_MILLIS 1200 // pause to detect a new minute
 
 struct DCF77Buffer
 {
-    unsigned long long prefix: 21;
-    unsigned long long Min: 7;      // minutes
-    unsigned long long P1: 1;       // parity minutes
-    unsigned long long Hour: 6;     // hours
-    unsigned long long P2: 1;       // parity hours
-    unsigned long long Day: 6;      // day
-    unsigned long long Weekday: 3;  // day of week
-    unsigned long long Month: 5;    // month
-    unsigned long long Year: 8;     // year (5 -> 2005)
-    unsigned long long P3: 1;       // parity
+    unsigned long long prefix : 21;
+    unsigned long long Min : 7;     // minutes
+    unsigned long long P1 : 1;      // parity minutes
+    unsigned long long Hour : 6;    // hours
+    unsigned long long P2 : 1;      // parity hours
+    unsigned long long Day : 6;     // day
+    unsigned long long Weekday : 3; // day of week
+    unsigned long long Month : 5;   // month
+    unsigned long long Year : 8;    // year (5 -> 2005)
+    unsigned long long P3 : 1;      // parity
 };
 
 struct
 {
-    unsigned char parity_flag: 1;
-    unsigned char parity_min: 1;
-    unsigned char parity_hour: 1;
-    unsigned char parity_date: 1;
+    unsigned char parity_flag : 1;
+    unsigned char parity_min : 1;
+    unsigned char parity_hour : 1;
+    unsigned char parity_date : 1;
 } flags;
 
 int bufferPosition;
 unsigned long long dcf_rx_buffer;
-
 
 void dcf77_init()
 {
@@ -101,7 +99,7 @@ void dcf77_bufferSignal(unsigned char signal)
     // When we received a 1, toggle the parity flag
     if (signal == 1)
     {
-        flags.parity_flag = flags.parity_flag^1;
+        flags.parity_flag = flags.parity_flag ^ 1;
     }
 
     bufferPosition++;
@@ -121,9 +119,7 @@ void dcf77_parseBuffer(void)
     {
         struct DCF77Buffer *rx_buffer;
         rx_buffer = (struct DCF77Buffer *)(unsigned long long)&dcf_rx_buffer;
-        if (flags.parity_min == rx_buffer->P1
-            && flags.parity_hour == rx_buffer->P2
-            && flags.parity_date == rx_buffer->P3)
+        if (flags.parity_min == rx_buffer->P1 && flags.parity_hour == rx_buffer->P2 && flags.parity_date == rx_buffer->P3)
         {
             // parity check is ok
             // convert the received bits from BCD
@@ -132,11 +128,8 @@ void dcf77_parseBuffer(void)
             uint8_t _day = rx_buffer->Day - ((rx_buffer->Day / 16) * 6);
             uint8_t _month = rx_buffer->Month - ((rx_buffer->Month / 16) * 6);
             uint16_t _year = 2000 + rx_buffer->Year - ((rx_buffer->Year / 16) * 6);
-            if (_minutes >= 0 && _minutes <= 59
-                    && _hours >= 0 && _hours <= 23
-                    && _day >= 1 && _day <= 31
-                    && _month >= 1 && _month <= 12
-                    && _year >= 2000) {
+            if (_minutes <= 59 && _hours <= 23 && _day >= 1 && _day <= 31 && _month >= 1 && _month <= 12 && _year >= 2017)
+            {
                 seconds = 0;
                 minutes = _minutes;
                 hours = _hours;

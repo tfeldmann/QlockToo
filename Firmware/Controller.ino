@@ -99,12 +99,9 @@ STATEMACHINE
         #ifdef DEBUG
             Serial.println("#State: Timewords");
         #endif
-        timewords_show();
+        timewords_setup();
     STATE_LOOP
-        if (minute_has_changed)
-        {
-            timewords_show();
-        }
+        timewords_loop();
     STATE_LEAVE
     END_OF_STATE
 
@@ -112,13 +109,9 @@ STATEMACHINE
         #ifdef DEBUG
             Serial.println("#State: Seconds");
         #endif
-        matrix_second(seconds);
-        corner_clear();
+        seconds_setup();
     STATE_LOOP
-        if (second_has_changed)
-        {
-            matrix_second(seconds);
-        }
+        seconds_loop();
     STATE_LEAVE
     END_OF_STATE
 
@@ -126,13 +119,9 @@ STATEMACHINE
         #ifdef DEBUG
             Serial.println("#State: Temperature");
         #endif
-        thermo_display((int)thermo_celsius());
-        corner_clear();
+        temperature_setup();
     STATE_LOOP
-        if (second_has_changed)
-        {
-            thermo_display((int)thermo_celsius());
-        }
+        temperature_loop();
     STATE_LEAVE
     END_OF_STATE
 
@@ -140,25 +129,25 @@ STATEMACHINE
         #ifdef DEBUG
             Serial.println("#State: Waiting for DCF Signal");
         #endif
-        matrix_clear();
+        display_clear();
         corner_clear();
-        matrix[3][3] = FULL_BRIGHTNESS;  // F
-        matrix[3][4] = FULL_BRIGHTNESS;  // U
-        matrix[3][5] = FULL_BRIGHTNESS;  // N
-        matrix[3][6] = FULL_BRIGHTNESS;  // K
+        matrix[3][3] = BRIGHTNESS_FULL;  // F
+        matrix[3][4] = BRIGHTNESS_FULL;  // U
+        matrix[3][5] = BRIGHTNESS_FULL;  // N
+        matrix[3][6] = BRIGHTNESS_FULL;  // K
     STATE_LOOP
     STATE_LEAVE
     END_OF_STATE
 
     STATE_ENTER(STATE_WHITE)
-        matrix_fill(FULL_BRIGHTNESS);
-        corner_fill(FULL_BRIGHTNESS);
+        display_fill(BRIGHTNESS_FULL);
+        corner_fill(BRIGHTNESS_FULL);
     STATE_LOOP
     STATE_LEAVE
     END_OF_STATE
 
     STATE_ENTER(STATE_FADE)
-        matrix_clear();
+        display_clear();
         corner_clear();
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLS; col++) {
@@ -170,58 +159,27 @@ STATEMACHINE
     END_OF_STATE
 
     STATE_ENTER(STATE_MATRIX)
-        srand(seconds + minutes + hours);
-        matrix_clear();
-        corner_clear();
+        matrixscreen_setup();
     STATE_LOOP
-        static int wait_move = 0;
-        static int wait_light = 0;
-
-        if (++wait_move == 10)
-        {
-            wait_move = 0;
-
-            // move rows one down
-            for (byte y = ROWS - 1; y > 0; y--)
-            {
-                for (byte x = 0; x < COLS; x++)
-                {
-                    matrix[y][x] = matrix[y-1][x];
-                }
-            }
-
-            // darken first line
-            for (byte x = 0; x < COLS; x++)
-            {
-                matrix[0][x] = 0.8 * matrix[0][x];
-            }
-        }
-
-        // add a light
-        if (++wait_light == 20)
-        {
-            wait_light = 0;
-            byte col = rand() % COLS;
-            matrix[0][col] = constrain(matrix[0][col] + rand() % 255, 0, 255);
-        }
+        matrixscreen_loop();
     STATE_LEAVE
     END_OF_STATE
 
     STATE_ENTER(STATE_ES_LACHT_NE_KUH)
-        matrix_clear();
+        display_clear();
         corner_clear();
-        matrix[0][0]  = FULL_BRIGHTNESS;  // E
-        matrix[0][1]  = FULL_BRIGHTNESS;  // S
-        matrix[7][6]  = FULL_BRIGHTNESS;  // L
-        matrix[7][7]  = FULL_BRIGHTNESS;  // A
-        matrix[7][8]  = FULL_BRIGHTNESS;  // C
-        matrix[7][9]  = FULL_BRIGHTNESS;  // H
-        matrix[7][10] = FULL_BRIGHTNESS;  // T
-        matrix[9][3]  = FULL_BRIGHTNESS;  // N
-        matrix[9][4]  = FULL_BRIGHTNESS;  // E
-        matrix[9][7]  = FULL_BRIGHTNESS;  // K
-        matrix[9][8]  = FULL_BRIGHTNESS;  // U
-        matrix[9][9]  = FULL_BRIGHTNESS;  // H
+        matrix[0][0]  = BRIGHTNESS_FULL;  // E
+        matrix[0][1]  = BRIGHTNESS_FULL;  // S
+        matrix[7][6]  = BRIGHTNESS_FULL;  // L
+        matrix[7][7]  = BRIGHTNESS_FULL;  // A
+        matrix[7][8]  = BRIGHTNESS_FULL;  // C
+        matrix[7][9]  = BRIGHTNESS_FULL;  // H
+        matrix[7][10] = BRIGHTNESS_FULL;  // T
+        matrix[9][3]  = BRIGHTNESS_FULL;  // N
+        matrix[9][4]  = BRIGHTNESS_FULL;  // E
+        matrix[9][7]  = BRIGHTNESS_FULL;  // K
+        matrix[9][8]  = BRIGHTNESS_FULL;  // U
+        matrix[9][9]  = BRIGHTNESS_FULL;  // H
     STATE_LOOP
     STATE_LEAVE
     END_OF_STATE

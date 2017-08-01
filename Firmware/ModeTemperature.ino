@@ -1,18 +1,27 @@
-//
-// Thermo.ino
-//
-
+#include "globals.h"
 #include "font.h"
 
-static const int THERMO_PIN = A1;
+void temperature_setup()
+{
+    temperature_display((int)temperature_read_celsius());
+    corner_clear();
+}
 
-float thermo_celsius()
+void temperature_loop()
+{
+    if (second_has_changed)
+    {
+        temperature_display((int)temperature_read_celsius());
+    }
+}
+
+float temperature_read_celsius()
 {
     // values have been found experimentally
     return analogRead(THERMO_PIN) * 0.1145 - 33.449;
 }
 
-void thermo_display(byte temp)
+void temperature_display(byte temp)
 {
     // settings
     const byte TOP = 2;
@@ -33,11 +42,11 @@ void thermo_display(byte temp)
             if (y >= TOP && y < TOP + HEIGHT)
             {
                 // first letter
-                if (x >= LEFT_1 && x < LEFT_1 + WIDTH)
+                if (x < LEFT_1 + WIDTH)
                 {
                     if (bitRead(numbers4x6[t_1][y - TOP], 7 - x + LEFT_1))
                     {
-                        matrix[y][x] = FULL_BRIGHTNESS;
+                        matrix[y][x] = BRIGHTNESS_FULL;
                     }
                     else
                     {
@@ -49,7 +58,7 @@ void thermo_display(byte temp)
                 {
                     if (bitRead(numbers4x6[t_2][y - TOP], 7 - x + LEFT_2))
                     {
-                        matrix[y][x] = FULL_BRIGHTNESS;
+                        matrix[y][x] = BRIGHTNESS_FULL;
                     }
                     else
                     {
@@ -66,8 +75,8 @@ void thermo_display(byte temp)
     }
 
     // degree symbol
-    matrix[0][9] = FULL_BRIGHTNESS;
-    matrix[0][10] = FULL_BRIGHTNESS;
-    matrix[1][9] = FULL_BRIGHTNESS;
-    matrix[1][10] = FULL_BRIGHTNESS;
+    matrix[0][9] = BRIGHTNESS_FULL;
+    matrix[0][10] = BRIGHTNESS_FULL;
+    matrix[1][9] = BRIGHTNESS_FULL;
+    matrix[1][10] = BRIGHTNESS_FULL;
 }

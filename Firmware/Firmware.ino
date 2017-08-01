@@ -1,15 +1,15 @@
-//    ____    __           __  ______
-//   / __ \  / /___  _____/ /_/_  __/___  ____
-//  / / / / / / __ \/ ___/ //_// / / __ \/ __ \
-// / /_/ / / / /_/ / /__/ ,<  / / / /_/ / /_/ /
-// \___\_\/_/\____/\___/_/|_|/_/  \____/\____/
-//
-// Firmware entry point for the QlockToo, an open-source remake of the QlockTwo
-// Author: Thomas Feldmann
-//
-// Timer1:    1/s   keeps track of the time
-// Timer3: 1000/s   main timer for display / api / controller
-
+/*     ____    __           __  ______
+ *    / __ \  / /___  _____/ /_/_  __/___  ____
+ *   / / / / / / __ \/ ___/ //_// / / __ \/ __ \
+ *  / /_/ / / / /_/ / /__/ ,<  / / / /_/ / /_/ /
+ *  \___\_\/_/\____/\___/_/|_|/_/  \____/\____/
+ *
+ *  Firmware entry point for the QlockToo, an open-source remake of the QlockTwo
+ *  Author: Thomas Feldmann
+ *
+ *  Timer1:    1/s   keeps track of the time
+ *  Timer3: 1000/s   main timer for display / api / controller
+ */
 #include <TimerThree.h>
 #include "globals.h"
 
@@ -18,9 +18,6 @@
 void setup()
 {
     Serial.begin(115200);
-
-    // load configuration
-    configuration_load();
 
     // initialize components
     api_init();

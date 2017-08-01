@@ -12,6 +12,21 @@
 //  S I E B E N Z W Ö L F
 //  Z E H N E U N K U H R
 
+#include "globals.h"
+
+void timewords_setup()
+{
+    timewords_display();
+}
+
+void timewords_loop()
+{
+    if (minute_has_changed)
+    {
+        timewords_display();
+    }
+}
+
 static const uint16_t matrix_words[][2] = {
     // format: {row, mask}
     {0, 0b1100000000000000}, // ES
@@ -42,15 +57,15 @@ static const uint16_t matrix_hours[][2] = {
     {4, 0b0000011100000000}  // ELF
 };
 
-void timewords_show()
+void timewords_display()
 {
-    matrix_clear();
+    display_clear();
 
     // Corners show the minutes
     byte minute_rest = minutes % 5;
     for (byte i = 0; i < CORNERS; i++)
     {
-        corner[i] = (i < minute_rest) ? FULL_BRIGHTNESS : 0;
+        corner[i] = (i < minute_rest) ? BRIGHTNESS_FULL : 0;
     }
 
     // Binary mask for 12 columns
@@ -111,7 +126,7 @@ void timewords_show()
         {
             if (bitRead(mask, 15 - x))
             {
-                matrix[row][x] = FULL_BRIGHTNESS;
+                matrix[row][x] = BRIGHTNESS_FULL;
             }
         }
     }
