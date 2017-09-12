@@ -13,7 +13,7 @@
 #include <TimerThree.h>
 #include "globals.h"
 
-#define VERSION "1.1"
+#define VERSION "1.2"
 
 void setup()
 {

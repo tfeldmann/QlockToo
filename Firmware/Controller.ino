@@ -63,6 +63,9 @@ void controller_buttons()
             STATE_SWITCH(STATE_WHITE);
 
         if (STATE_IS_ACTIVE(STATE_WHITE))
+            STATE_SWITCH(STATE_GRADIENT);
+
+        if (STATE_IS_ACTIVE(STATE_GRADIENT))
             STATE_SWITCH(STATE_FADE);
 
         if (STATE_IS_ACTIVE(STATE_FADE))
@@ -146,7 +149,7 @@ STATEMACHINE
     STATE_LEAVE
     END_OF_STATE
 
-    STATE_ENTER(STATE_FADE)
+    STATE_ENTER(STATE_GRADIENT)
         display_clear();
         corner_clear();
         for (int row = 0; row < ROWS; row++) {
@@ -158,10 +161,17 @@ STATEMACHINE
     STATE_LEAVE
     END_OF_STATE
 
-    STATE_ENTER(STATE_MATRIX)
-        matrixscreen_setup();
+    STATE_ENTER(STATE_FADE)
+        demo_fade_setup();
     STATE_LOOP
-        matrixscreen_loop();
+        demo_fade_loop();
+    STATE_LEAVE
+    END_OF_STATE
+
+    STATE_ENTER(STATE_MATRIX)
+        demo_matrix_setup();
+    STATE_LOOP
+        demo_matrix_loop();
     STATE_LEAVE
     END_OF_STATE
 

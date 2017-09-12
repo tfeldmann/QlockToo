@@ -4,14 +4,14 @@
 
 #include "globals.h"
 
-void matrixscreen_setup()
+void demo_matrix_setup()
 {
     srand(seconds + minutes + hours);
     display_clear();
     corner_clear();
 }
 
-void matrixscreen_loop()
+void demo_matrix_loop()
 {
     static int wait_move = 0;
     static int wait_light = 0;
